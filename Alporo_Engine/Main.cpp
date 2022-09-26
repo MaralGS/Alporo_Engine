@@ -1,8 +1,6 @@
 #include <stdlib.h>
 #include "Application.h"
 #include "Globals.h"
-#include "imgui.h"
-#include "imgui_impl_opengl3.h"
 
 
 #include "SDL/include/SDL.h"

@@ -1,6 +1,4 @@
 #include "Application.h"
-#include "SDL/include/SDL.h"
-#include "SDL/include/SDL_syswm.h"
 
 Application::Application()
 {
@@ -17,7 +15,7 @@ Application::Application()
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-
+	
 
 	// Renderer last!
 	AddModule(renderer3D);
