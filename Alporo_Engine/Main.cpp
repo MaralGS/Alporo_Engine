@@ -2,7 +2,6 @@
 #include "Application.h"
 #include "Globals.h"
 #include "imgui.h"
-#include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
 
@@ -85,12 +84,12 @@ int main(int argc, char ** argv)
 
 		}
 	}
-	IMGUI_CHECKVERSION();
+	/*IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io; 
 	ImGui::StyleColorsDark();
 	//ImGui_ImplSDL2_InitForOpenGL(App->window, true);
-	ImGui_ImplOpenGL3_Init("#version 120");
+	ImGui_ImplOpenGL3_Init("#version 120");*/
 	delete App;
 	LOG("Exiting game '%s'...\n", TITLE);
 	return main_return;
