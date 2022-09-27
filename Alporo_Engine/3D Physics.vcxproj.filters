@@ -93,9 +93,6 @@
     <ClInclude Include="imgui\imgui_impl_opengl3_loader.h">
       <Filter>Sources\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -154,9 +151,6 @@
     </ClCompile>
     <ClCompile Include="imgui\imgui_impl_sdl.cpp">
       <Filter>Sources\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleAudio.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
