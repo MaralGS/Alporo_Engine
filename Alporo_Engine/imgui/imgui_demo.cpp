@@ -315,7 +315,6 @@ void ImGui::ShowDemoWindow(bool* p_open)
     static bool unsaved_document = false;
 
     ImGuiWindowFlags window_flags = 0;
-    if (no_titlebar)        window_flags |= ImGuiWindowFlags_NoTitleBar;
     if (no_scrollbar)       window_flags |= ImGuiWindowFlags_NoScrollbar;
     if (!no_menu)           window_flags |= ImGuiWindowFlags_MenuBar;
     if (no_move)            window_flags |= ImGuiWindowFlags_NoMove;
@@ -350,6 +349,13 @@ void ImGui::ShowDemoWindow(bool* p_open)
     // Menu Bar
     if (ImGui::BeginMenuBar())
     {
+        /*if (ImGui::BeginMenu("Exit"))
+        {
+            IMGUI_DEMO_MARKER("Menu/File");
+            ShowExampleMenuFile();
+            ImGui::EndMenu();
+        }*/
+
         if (ImGui::BeginMenu("Menu"))
         {
             IMGUI_DEMO_MARKER("Menu/File");
