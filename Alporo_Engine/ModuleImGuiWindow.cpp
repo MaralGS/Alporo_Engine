@@ -1,4 +1,4 @@
-/*#include "Globals.h"
+#include "Globals.h"
 #include "Application.h"
 #include "ModuleImGuiWindow.h"
 
@@ -46,4 +46,13 @@ bool ModuleImguiWindow::CleanUp()
 	LOG("Cleaning Module");
 
 	return true;
-}*/
+}
+
+void ShowWindow(bool* p_open = NULL) {
+	static bool show_app_main_menu_bar = false;
+	if (show_app_main_menu_bar)   ShowAppMainMenuBar();
+}
+
+void ShowAppMainMenuBar() {
+
+}

@@ -1,4 +1,5 @@
-/*#include "Module.h"
+#pragma once
+#include "Module.h"
 #include "Globals.h"
 #include "imgui.h"
 
@@ -14,8 +15,9 @@ public:
 	update_status PreUpdate(float dt);
 	bool CleanUp();
 
+	IMGUI_API void ShowWindow(bool* p_open = NULL);
+	void ShowAppMainMenuBar();
 private:
 
 };
 
-*/
