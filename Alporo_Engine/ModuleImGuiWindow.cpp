@@ -48,11 +48,3 @@ bool ModuleImguiWindow::CleanUp()
 	return true;
 }
 
-void ShowWindow(bool* p_open = NULL) {
-	static bool show_app_main_menu_bar = false;
-	if (show_app_main_menu_bar)   ShowAppMainMenuBar();
-}
-
-void ShowAppMainMenuBar() {
-
-}
