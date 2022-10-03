@@ -10,6 +10,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleImGuiWindow.h"
+#include "imgui.h"
 
 class Application
 {
@@ -19,8 +20,8 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleSceneIntro* scene;
-	ModuleImguiWindow* imgui;
-
+	ModuleImguiWindow* imguiwindows;
+	
 private:
 
 	Timer	ms_timer;

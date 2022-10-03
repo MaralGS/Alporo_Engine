@@ -107,7 +107,7 @@ update_status ModuleImguiWindow::PreUpdate(float dt) {
 update_status ModuleImguiWindow::Update(float dt)
 {
 	
-
+   
 	return UPDATE_CONTINUE;
 }
 
@@ -117,8 +117,9 @@ void ImGui::ShowWindow(bool* p_open)
     // Most functions would normally just crash if the context is missing.
     IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
-    // Examples Apps (accessible from the "Examples" menu)
+    // Et mostra les opcions del Example (Example Menu)
     static bool show_app_main_menu_bar = true;
+    static bool show_app_ImGui_Demo_menu_bar = false;
     static bool show_app_documents = false;
     static bool show_app_console = false;
     static bool show_app_log = false;
@@ -219,7 +220,8 @@ void ImGui::ShowWindow(bool* p_open)
         if (ImGui::BeginMenu("Exit"))
         {
             //IMGUI_DEMO_MARKER("Menu/File");
-            //ShowExampleMenuFile();
+            
+            ShowExitMenu();
             ImGui::EndMenu();
         }
 
@@ -232,8 +234,12 @@ void ImGui::ShowWindow(bool* p_open)
         if (ImGui::BeginMenu("Examples"))
         {
             //IMGUI_DEMO_MARKER("Menu/Examples");
+            if (ImGui::MenuItem("Show ImGui Demo Menu", NULL, &show_app_ImGui_Demo_menu_bar))
+            {
+                ActiveDemo = true;
+            }
             ImGui::MenuItem("Main menu bar", NULL, &show_app_main_menu_bar);
-           /* ImGui::MenuItem("Console", NULL, &show_app_console);
+            ImGui::MenuItem("Console", NULL, &show_app_console);
             ImGui::MenuItem("Log", NULL, &show_app_log);
             ImGui::MenuItem("Simple layout", NULL, &show_app_layout);
             ImGui::MenuItem("Property editor", NULL, &show_app_property_editor);
@@ -244,7 +250,7 @@ void ImGui::ShowWindow(bool* p_open)
             ImGui::MenuItem("Fullscreen window", NULL, &show_app_fullscreen);
             ImGui::MenuItem("Manipulating window titles", NULL, &show_app_window_titles);
             ImGui::MenuItem("Custom rendering", NULL, &show_app_custom_rendering);
-            ImGui::MenuItem("Documents", NULL, &show_app_documents);*/
+            ImGui::MenuItem("Documents", NULL, &show_app_documents);
             ImGui::EndMenu();
         }
         //if (ImGui::MenuItem("MenuItem")) {} // You can also use MenuItem() inside a menu bar!
@@ -340,6 +346,7 @@ void ImGui::ShowWindow(bool* p_open)
         //  IMGUI_DEMO_MARKER("Configuration/Backend Flags");
         if (ImGui::TreeNode("Backend Flags"))
         {
+            
            /* HelpMarker(
                 "Those flags are set by the backends (imgui_impl_xxx files) to specify their capabilities.\n"
                 "Here we expose them as read-only fields to avoid breaking interactions with your backend.");*/
@@ -383,6 +390,7 @@ void ImGui::ShowWindow(bool* p_open)
             ImGui::TreePop();
         }
     }
+    
 
     // IMGUI_DEMO_MARKER("Window options");
     if (ImGui::CollapsingHeader("Window options"))
@@ -417,11 +425,16 @@ void ImGui::ShowWindow(bool* p_open)
 }
 
 
-update_status ModuleImguiWindow::PostUpdate(float dt)
+bool ModuleImguiWindow::PostUpdate()
 {
-	
+    bool ret = true;
+    if (CloseApp == true) ret = false;
+    if (ActiveDemo == true)
+    {
+        ImGui::ShowDemoWindow();
+    }
 
-	return UPDATE_CONTINUE;
+	return ret;
 }
 
 bool ModuleImguiWindow::CleanUp()
@@ -431,3 +444,89 @@ bool ModuleImguiWindow::CleanUp()
 	return true;
 }
 
+static void ImGui::ShowExitMenu()
+{
+    ImGui::MenuItem("Exit Menu", NULL, false, false);
+    if (ImGui::MenuItem("Close Aplication")){
+       // SDL_DestroyWindow(window);
+    }
+    if (ImGui::MenuItem("Cancel")) {}
+   
+    /*
+   IMGUI_DEMO_MARKER("Examples/Menu");
+   ImGui::MenuItem("(demo menu)", NULL, false, false);
+   if (ImGui::MenuItem("New")) {}
+   if (ImGui::MenuItem("Open", "Ctrl+O")) {}
+   if (ImGui::BeginMenu("Open Recent"))
+   {
+       ImGui::MenuItem("fish_hat.c");
+       ImGui::MenuItem("fish_hat.inl");
+       ImGui::MenuItem("fish_hat.h");
+       if (ImGui::BeginMenu("More.."))
+       {
+           ImGui::MenuItem("Hello");
+           ImGui::MenuItem("Sailor");
+           if (ImGui::BeginMenu("Recurse.."))
+           {
+               ShowExampleMenuFile();
+               ImGui::EndMenu();
+           }
+           ImGui::EndMenu();
+       }
+       ImGui::EndMenu();
+   }
+   if (ImGui::MenuItem("Save", "Ctrl+S")) {}
+   if (ImGui::MenuItem("Save As..")) {}
+
+   ImGui::Separator();
+   IMGUI_DEMO_MARKER("Examples/Menu/Options");
+   if (ImGui::BeginMenu("Options"))
+   {
+       static bool enabled = true;
+       ImGui::MenuItem("Enabled", "", &enabled);
+       ImGui::BeginChild("child", ImVec2(0, 60), true);
+       for (int i = 0; i < 10; i++)
+           ImGui::Text("Scrolling Text %d", i);
+       ImGui::EndChild();
+       static float f = 0.5f;
+       static int n = 0;
+       ImGui::SliderFloat("Value", &f, 0.0f, 1.0f);
+       ImGui::InputFloat("Input", &f, 0.1f);
+       ImGui::Combo("Combo", &n, "Yes\0No\0Maybe\0\0");
+       ImGui::EndMenu();
+   }
+
+   IMGUI_DEMO_MARKER("Examples/Menu/Colors");
+   if (ImGui::BeginMenu("Colors"))
+   {
+       float sz = ImGui::GetTextLineHeight();
+       for (int i = 0; i < ImGuiCol_COUNT; i++)
+       {
+           const char* name = ImGui::GetStyleColorName((ImGuiCol)i);
+           ImVec2 p = ImGui::GetCursorScreenPos();
+           ImGui::GetWindowDrawList()->AddRectFilled(p, ImVec2(p.x + sz, p.y + sz), ImGui::GetColorU32((ImGuiCol)i));
+           ImGui::Dummy(ImVec2(sz, sz));
+           ImGui::SameLine();
+           ImGui::MenuItem(name);
+       }
+       ImGui::EndMenu();
+   }
+
+   // Here we demonstrate appending again to the "Options" menu (which we already created above)
+   // Of course in this demo it is a little bit silly that this function calls BeginMenu("Options") twice.
+   // In a real code-base using it would make senses to use this feature from very different code locations.
+   if (ImGui::BeginMenu("Options")) // <-- Append!
+   {
+       IMGUI_DEMO_MARKER("Examples/Menu/Append to an existing menu");
+       static bool b = true;
+       ImGui::Checkbox("SomeOption", &b);
+       ImGui::EndMenu();
+   }
+
+   if (ImGui::BeginMenu("Disabled", false)) // Disabled
+   {
+       IM_ASSERT(0);
+   }
+   if (ImGui::MenuItem("Checked", NULL, true)) {}
+   if (ImGui::MenuItem("Quit", "Alt+F4")) {}*/
+}

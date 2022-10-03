@@ -349,12 +349,12 @@ void ImGui::ShowDemoWindow(bool* p_open)
     // Menu Bar
     if (ImGui::BeginMenuBar())
     {
-        /*if (ImGui::BeginMenu("Exit"))
+        if (ImGui::BeginMenu("Exit"))
         {
             IMGUI_DEMO_MARKER("Menu/File");
             ShowExampleMenuFile();
             ImGui::EndMenu();
-        }*/
+        }
 
         if (ImGui::BeginMenu("Menu"))
         {

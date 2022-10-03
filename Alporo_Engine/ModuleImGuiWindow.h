@@ -13,11 +13,13 @@ public:
 	~ModuleImguiWindow();
 
 	bool Start();
-	update_status PostUpdate(float dt);
+	bool PostUpdate();
 	update_status Update(float dt);
 	update_status PreUpdate(float dt);
 	bool CleanUp();
+	bool ActiveDemo = false;
 
+	bool CloseApp = false;
 private:
 
 };
