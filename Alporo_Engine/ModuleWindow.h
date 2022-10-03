@@ -20,6 +20,8 @@ public:
 
 	void SetTitle(const char* title);
 
+	int width = 0;
+	int height = 0;
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;

@@ -303,7 +303,7 @@ void ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::Text("dear imgui says hello! (%s) (%d)", IMGUI_VERSION, IMGUI_VERSION_NUM);
     ImGui::Spacing();
 
-    //IMGUI_DEMO_MARKER("Configuration");
+    //Confiration options
     if (ImGui::CollapsingHeader("Configuration"))
     {
         ImGuiIO& io = ImGui::GetIO();
@@ -395,14 +395,21 @@ void ModuleImguiWindow::ShowWindow(bool* p_open)
             ImGui::TreePop();
         }
     }
-    
-   
-   
-
-    // IMGUI_DEMO_MARKER("Window options");
+    //Hardware Applcation
+    if (ImGui::CollapsingHeader("Application"))
+    {
+        /*char title[25];
+        //fps
+        sprintf_s(title, 25, "Framrate %.1f", fps_log[fps_log.size() - 1]);
+        ImGui::PlotHistogram("##framrate", &fps_log[0], fps_log.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+        //miliseconds
+        sprintf_s(title, 25, "Milliseconds %0.1f", ms_log[ms_log.size()-1]);
+        ImGui::PlotHistogram("##framrate", &ms_log[0], ms_log.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));*/
+    }
+   //Windows Options
     if (ImGui::CollapsingHeader("Window options"))
     {
-        
+        //Windows options
         if (ImGui::Checkbox("Active Fullscreen", &FullScreenEnable))
         {
             if (FullScreenEnable == true)
@@ -420,31 +427,51 @@ void ModuleImguiWindow::ShowWindow(bool* p_open)
        if (ImGui::SliderFloat("Brightness", &BrightnessStart, BrightnessMin, BrightnessMax)) {
            SDL_SetWindowBrightness(App->window->window, BrightnessStart);
         }
-       if (ImGui::SliderInt("Width", &WidthStart, WidthMin, WidthMax)) {
-           SDL_SetWindowSize(App->window->window, SCREEN_WIDTH, SCREEN_HEIGHT);
+       if (ImGui::SliderInt("Width", &App->window->width, WidthMin, WidthMax)) {
+           SDL_SetWindowSize(App->window->window, App->window->width, SCREEN_HEIGHT);
         }
-       if (ImGui::SliderInt("Height", &WidthStart, WidthMin, WidthMax)) {
-           SDL_SetWindowSize(App->window->window, SCREEN_WIDTH, SCREEN_HEIGHT);
+       if (ImGui::SliderInt("Height", &App->window->height, WidthMin, WidthMax)) {
+           SDL_SetWindowSize(App->window->window, SCREEN_WIDTH, App->window->height);
         }
 
+       //refresh
        ImGui::BulletText("Refresh rate: %d");
-
-       ImGui::SameLine();
        if (ImGui::Checkbox("Active Fullscreen", &FullScreenEnable))
        {
 
        }
-      
+       ImGui::SameLine();
+       if (ImGui::Checkbox("Resizable", &FullScreenEnable))
+       {
+
+       }
+            //2n line
+       if (ImGui::Checkbox("Borderless", &FullScreenEnable))
+       {
+
+       }
+       ImGui::SameLine();
+       if (ImGui::Checkbox("Full Desktop", &FullScreenEnable))
+
+
+       {
+
+       }
     }
 
-    // All demo contents
- /*   ShowDemoWindowWidgets();
-    ShowDemoWindowLayout();
-    ShowDemoWindowPopups();
-    ShowDemoWindowTables();
-    ShowDemoWindowInputs();*/
+    //Hardware Detection
+    if (ImGui::CollapsingHeader("Hardware"))
+    {
+        if (ImGui::Checkbox("Active", &Dummy))
+        {
+            
+        }
+        ImGui::BulletText("CPUs: ");
+        ImGui::SameLine(); 
+       // ImGui::TextColored(CPU); ;
+    }
 
-    // End of ShowDemoWindow()
+
     ImGui::PopItemWidth();
     ImGui::End();
 }
