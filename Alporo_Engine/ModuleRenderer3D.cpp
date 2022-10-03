@@ -2,9 +2,13 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "SDL\include\SDL_opengl.h"
+#include "Primitive.h"
+
+//#include "Glew/include/glew.h"
+#include "SDL/include/SDL_opengl.h"
+
 #include <gl/GL.h>
 #include <gl/GLU.h>
-
 
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_sdl.h"
@@ -13,7 +17,7 @@
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <SDL_opengles2.h>
 #else
-#include "SDL/include/SDL_opengl.h"
+
 #endif
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
@@ -105,6 +109,7 @@ bool ModuleRenderer3D::Init()
 		lights[0].Active(true);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_COLOR_MATERIAL);
+
 	}
 
 	// Projection matrix for
