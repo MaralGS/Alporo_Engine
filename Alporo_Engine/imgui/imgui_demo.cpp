@@ -81,7 +81,6 @@ Index of this file:
 #if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
-
 #include "imgui.h"
 #ifndef IMGUI_DISABLE
 
@@ -153,6 +152,7 @@ Index of this file:
 #define IM_PRId64   "lld"
 #define IM_PRIu64   "llu"
 #endif
+
 
 // Helpers macros
 // We normally try to not use many helpers in imgui_demo.cpp in order to make code easier to copy and paste,
