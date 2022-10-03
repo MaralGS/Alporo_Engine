@@ -416,9 +416,24 @@ void ModuleImguiWindow::ShowWindow(bool* p_open)
             }
         }
 
+        ImGui::BulletText("Icon: *default*");
        if (ImGui::SliderFloat("Brightness", &BrightnessStart, BrightnessMin, BrightnessMax)) {
            SDL_SetWindowBrightness(App->window->window, BrightnessStart);
         }
+       if (ImGui::SliderInt("Width", &WidthStart, WidthMin, WidthMax)) {
+           SDL_SetWindowSize(App->window->window, SCREEN_WIDTH, SCREEN_HEIGHT);
+        }
+       if (ImGui::SliderInt("Height", &WidthStart, WidthMin, WidthMax)) {
+           SDL_SetWindowSize(App->window->window, SCREEN_WIDTH, SCREEN_HEIGHT);
+        }
+
+       ImGui::BulletText("Refresh rate: %d");
+
+       ImGui::SameLine();
+       if (ImGui::Checkbox("Active Fullscreen", &FullScreenEnable))
+       {
+
+       }
       
     }
 

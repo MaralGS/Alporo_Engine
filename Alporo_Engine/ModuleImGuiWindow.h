@@ -29,6 +29,10 @@ public:
 	float BrightnessStart = 1.f;
 	float BrightnessMin = 0.f;
 	float BrightnessMax = 1.f;
+	
+	int WidthStart = 1280;
+	int WidthMin = 0;
+	int WidthMax = 2040;
 private:
 
 };

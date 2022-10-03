@@ -1517,7 +1517,7 @@ extern DECLSPEC int SDLCALL SDL_SetWindowBrightness(SDL_Window * window, float b
  *
  * \sa SDL_SetWindowBrightness
  */
-extern DECLSPEC float SDLCALL SDL_GetWindowBrightness(SDL_Window * window);
+extern DECLSPEC float SDLCALL SDL_GetWindowBrightness(SDL_Window * window, float brightness);
 
 /**
  * Set the opacity for a window.
