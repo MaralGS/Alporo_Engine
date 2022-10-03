@@ -13,13 +13,22 @@ public:
 	~ModuleImguiWindow();
 
 	bool Start();
+	IMGUI_API void          ShowWindow(bool* p_open = NULL);
 	bool PostUpdate();
-	update_status Update(float dt);
+
 	update_status PreUpdate(float dt);
 	bool CleanUp();
-	bool ActiveDemo = false;
-
+	
+	//bools
+	bool ActiveDemoWindows = true;
+	bool AboutTxt = false;
+	bool FullScreenEnable = false;
 	bool CloseApp = false;
+
+	//ints
+	float BrightnessStart = 1.f;
+	float BrightnessMin = 0.f;
+	float BrightnessMax = 1.f;
 private:
 
 };

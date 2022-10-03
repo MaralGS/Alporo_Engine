@@ -104,19 +104,11 @@ update_status ModuleImguiWindow::PreUpdate(float dt) {
 }
 
 // -----------------------------------------------------------------
-update_status ModuleImguiWindow::Update(float dt)
-{
-	
-   
-	return UPDATE_CONTINUE;
-}
 
-void ImGui::ShowWindow(bool* p_open)
-{
-    // Exceptionally add an extra assert here for people confused about initial Dear ImGui setup
-    // Most functions would normally just crash if the context is missing.
-    IM_ASSERT(ImGui::GetCurrentContext() != NULL && "Missing dear imgui context. Refer to examples app!");
 
+void ModuleImguiWindow::ShowWindow(bool* p_open)
+{
+    
     // Et mostra les opcions del Example (Example Menu)
     static bool show_app_main_menu_bar = true;
     static bool show_app_ImGui_Demo_menu_bar = false;
@@ -217,18 +209,54 @@ void ImGui::ShowWindow(bool* p_open)
     // Menu Bar
     if (ImGui::BeginMenuBar())
     {
+        if (ImGui::BeginMenu("Help"))
+        {
+            if (ImGui::MenuItem("Gui Demo"))
+            {
+                ActiveDemoWindows = !ActiveDemoWindows;
+            }
+            
+            if (ImGui::MenuItem("Documentation"))
+            {
+                SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/wiki");
+            }
+            
+            if (ImGui::MenuItem("Download lastest"))
+            {
+                SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/releases");
+            }
+            
+            if (ImGui::MenuItem("Report a bug"))
+            {
+                SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/issues");
+            }
+            
+            if (ImGui::MenuItem("About"))
+            {
+                AboutTxt = !AboutTxt;
+            }
+
+            if (AboutTxt == true)
+            {
+                ImGui::BulletText("Alporo_Engine");
+            }
+
+            ImGui::EndMenu();
+        }
+        
         if (ImGui::BeginMenu("Exit"))
         {
             //IMGUI_DEMO_MARKER("Menu/File");
             
-            ShowExitMenu();
+            ImGui::ShowExitMenu();
             ImGui::EndMenu();
         }
 
-        if (ImGui::BeginMenu("Menu"))
+
+      /*  if (ImGui::BeginMenu("Menu"))
         {
-           /* IMGUI_DEMO_MARKER("Menu/File");
-            ShowExampleMenuFile();*/
+            IMGUI_DEMO_MARKER("Menu/File");
+            ImGui::ShowDemoWindow();
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("Examples"))
@@ -236,7 +264,7 @@ void ImGui::ShowWindow(bool* p_open)
             //IMGUI_DEMO_MARKER("Menu/Examples");
             if (ImGui::MenuItem("Show ImGui Demo Menu", NULL, &show_app_ImGui_Demo_menu_bar))
             {
-                ActiveDemo = true;
+                //ActiveDemo = true;
             }
             ImGui::MenuItem("Main menu bar", NULL, &show_app_main_menu_bar);
             ImGui::MenuItem("Console", NULL, &show_app_console);
@@ -268,35 +296,12 @@ void ImGui::ShowWindow(bool* p_open)
             ImGui::MenuItem("Style Editor", NULL, &show_app_style_editor);
             ImGui::MenuItem("About Dear ImGui", NULL, &show_app_about);
             ImGui::EndMenu();
-        }
+        }*/
         ImGui::EndMenuBar();
     }
 
     ImGui::Text("dear imgui says hello! (%s) (%d)", IMGUI_VERSION, IMGUI_VERSION_NUM);
     ImGui::Spacing();
-
-    //IMGUI_DEMO_MARKER("Help");
-    if (ImGui::CollapsingHeader("Help"))
-    {
-        ImGui::Text("ABOUT THIS DEMO:");
-        ImGui::BulletText("Sections below are demonstrating many aspects of the library.");
-        ImGui::BulletText("The \"Examples\" menu above leads to more demo contents.");
-        ImGui::BulletText("The \"Tools\" menu above gives access to: About Box, Style Editor,\n"
-            "and Metrics/Debugger (general purpose Dear ImGui debugging tool).");
-        ImGui::Separator();
-
-        ImGui::Text("PROGRAMMER GUIDE:");
-        ImGui::BulletText("See the ShowDemoWindow() code in imgui_demo.cpp. <- you are here!");
-        ImGui::BulletText("See comments in imgui.cpp.");
-        ImGui::BulletText("See example applications in the examples/ folder.");
-        ImGui::BulletText("Read the FAQ at http://www.dearimgui.org/faq/");
-        ImGui::BulletText("Set 'io.ConfigFlags |= NavEnableKeyboard' for keyboard controls.");
-        ImGui::BulletText("Set 'io.ConfigFlags |= NavEnableGamepad' for gamepad controls.");
-        ImGui::Separator();
-
-        ImGui::Text("USER GUIDE:");
-        ImGui::ShowUserGuide();
-    }
 
     //IMGUI_DEMO_MARKER("Configuration");
     if (ImGui::CollapsingHeader("Configuration"))
@@ -391,25 +396,30 @@ void ImGui::ShowWindow(bool* p_open)
         }
     }
     
+   
+   
 
     // IMGUI_DEMO_MARKER("Window options");
     if (ImGui::CollapsingHeader("Window options"))
     {
-        if (ImGui::BeginTable("split", 3))
+        
+        if (ImGui::Checkbox("Active Fullscreen", &FullScreenEnable))
         {
-            ImGui::TableNextColumn(); ImGui::Checkbox("No titlebar", &no_titlebar);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No scrollbar", &no_scrollbar);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No menu", &no_menu);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No move", &no_move);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No resize", &no_resize);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No collapse", &no_collapse);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No close", &no_close);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No nav", &no_nav);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No background", &no_background);
-            ImGui::TableNextColumn(); ImGui::Checkbox("No bring to front", &no_bring_to_front);
-            ImGui::TableNextColumn(); ImGui::Checkbox("Unsaved document", &unsaved_document);
-            ImGui::EndTable();
+            if (FullScreenEnable == true)
+            {
+                SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_FULLSCREEN);
+            }
+
+            else
+            {
+                SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_MAXIMIZED);
+            }
         }
+
+       if (ImGui::SliderFloat("Brightness", &BrightnessStart, BrightnessMin, BrightnessMax)) {
+           SDL_SetWindowBrightness(App->window->window, BrightnessStart);
+        }
+      
     }
 
     // All demo contents
@@ -429,10 +439,6 @@ bool ModuleImguiWindow::PostUpdate()
 {
     bool ret = true;
     if (CloseApp == true) ret = false;
-    if (ActiveDemo == true)
-    {
-        ImGui::ShowDemoWindow();
-    }
 
 	return ret;
 }
