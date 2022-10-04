@@ -98,15 +98,15 @@ bool ModuleImguiWindow::Start()
 	return ret;
 }
 
-update_status ModuleImguiWindow::PreUpdate(float dt) {
+bool ModuleImguiWindow::PreUpdate() {
 
-	return UPDATE_CONTINUE;
+	return true;
 }
 
 // -----------------------------------------------------------------
 
 
-update_status ModuleImguiWindow::ShowWindow(bool* p_open)
+bool ModuleImguiWindow::ShowWindow(bool* p_open)
 {
     
     // Et mostra les opcions del Example (Example Menu)
@@ -247,58 +247,12 @@ update_status ModuleImguiWindow::ShowWindow(bool* p_open)
         if (ImGui::BeginMenu("Exit"))
         {
            if(ImGui::MenuItem("Close Aplication")) {
-                CloseApp = !CloseApp;
-                PostUpdate();
+              
+               return false;
             }
             if (ImGui::MenuItem("Cancel")) {}
             ImGui::EndMenu();
         }
-
-
-      /*  if (ImGui::BeginMenu("Menu"))
-        {
-            IMGUI_DEMO_MARKER("Menu/File");
-            ImGui::ShowDemoWindow();
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("Examples"))
-        {
-            //IMGUI_DEMO_MARKER("Menu/Examples");
-            if (ImGui::MenuItem("Show ImGui Demo Menu", NULL, &show_app_ImGui_Demo_menu_bar))
-            {
-                //ActiveDemo = true;
-            }
-            ImGui::MenuItem("Main menu bar", NULL, &show_app_main_menu_bar);
-            ImGui::MenuItem("Console", NULL, &show_app_console);
-            ImGui::MenuItem("Log", NULL, &show_app_log);
-            ImGui::MenuItem("Simple layout", NULL, &show_app_layout);
-            ImGui::MenuItem("Property editor", NULL, &show_app_property_editor);
-            ImGui::MenuItem("Long text display", NULL, &show_app_long_text);
-            ImGui::MenuItem("Auto-resizing window", NULL, &show_app_auto_resize);
-            ImGui::MenuItem("Constrained-resizing window", NULL, &show_app_constrained_resize);
-            ImGui::MenuItem("Simple overlay", NULL, &show_app_simple_overlay);
-            ImGui::MenuItem("Fullscreen window", NULL, &show_app_fullscreen);
-            ImGui::MenuItem("Manipulating window titles", NULL, &show_app_window_titles);
-            ImGui::MenuItem("Custom rendering", NULL, &show_app_custom_rendering);
-            ImGui::MenuItem("Documents", NULL, &show_app_documents);
-            ImGui::EndMenu();
-        }
-        //if (ImGui::MenuItem("MenuItem")) {} // You can also use MenuItem() inside a menu bar!
-        if (ImGui::BeginMenu("Tools"))
-        {
-           // IMGUI_DEMO_MARKER("Menu/Tools");
-#ifndef IMGUI_DISABLE_DEBUG_TOOLS
-            const bool has_debug_tools = true;
-#else
-            const bool has_debug_tools = false;
-#endif
-            ImGui::MenuItem("Metrics/Debugger", NULL, &show_app_metrics, has_debug_tools);
-            ImGui::MenuItem("Debug Log", NULL, &show_app_debug_log, has_debug_tools);
-            ImGui::MenuItem("Stack Tool", NULL, &show_app_stack_tool, has_debug_tools);
-            ImGui::MenuItem("Style Editor", NULL, &show_app_style_editor);
-            ImGui::MenuItem("About Dear ImGui", NULL, &show_app_about);
-            ImGui::EndMenu();
-        }*/
         ImGui::EndMenuBar();
     }
 
@@ -400,6 +354,15 @@ update_status ModuleImguiWindow::ShowWindow(bool* p_open)
     //Hardware Applcation
     if (ImGui::CollapsingHeader("Application"))
     {
+        ImGui::Button("Alporo Engine"); ImGui::SameLine(); ImGui::Text("App name"); 
+        ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization"); 
+        ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization"); 
+        if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
+            
+        }
+        static float arr[] = { 100.f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f };
+        ImGui::PlotHistogram("##framrate", arr, IM_ARRAYSIZE(arr), 0, NULL, 0.0f, 100.0f, ImVec2(310, 100));
+        //miliseconds
         /*char title[25];
         //fps
         sprintf_s(title, 25, "Framrate %.1f", fps_log[fps_log.size() - 1]);
@@ -468,8 +431,12 @@ update_status ModuleImguiWindow::ShowWindow(bool* p_open)
         {
             
         }
-        ImGui::BulletText("CPUs: ");
-        ImGui::SameLine(); 
+        ImGui::BulletText("SDL Version: 2.0.4");
+        ImGui::Separator();
+        ImGui::BulletText("CPUs: %d (Cache %dKb)", SDL_GetCPUCount(),SDL_GetCPUCacheLineSize());
+        ImGui::BulletText("System RAM: %dGb)", SDL_GetSystemRAM()/1000);
+        ImGui::Separator();
+     
        // ImGui::TextColored(CPU); ;
     }
 
@@ -477,16 +444,13 @@ update_status ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::PopItemWidth();
     ImGui::End();
 
-    return UPDATE_CONTINUE;
+    return true;
 }
 
 
 bool ModuleImguiWindow::PostUpdate()
 {
     bool ret = true;
-    if (CloseApp == true) { 
-        ret = false; 
-    }
 
 	return ret;
 }

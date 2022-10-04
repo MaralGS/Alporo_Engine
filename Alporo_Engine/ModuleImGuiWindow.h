@@ -3,9 +3,6 @@
 #include "Globals.h"
 #include "imgui.h"
 
-
-
-
 class ModuleImguiWindow : public Module
 {
 public:
@@ -13,10 +10,10 @@ public:
 	~ModuleImguiWindow();
 
 	bool Start();
-	IMGUI_API update_status          ShowWindow(bool* p_open = NULL);
+	IMGUI_API bool          ShowWindow(bool* p_open = NULL);
 	bool PostUpdate();
 
-	update_status PreUpdate(float dt);
+	bool PreUpdate();
 	bool CleanUp();
 	
 
@@ -34,11 +31,14 @@ public:
 	float BrightnessStart = 1.f;
 	float BrightnessMin = 0.f;
 	float BrightnessMax = 1.f;
+	
 	//ints
-
 	int WidthMin = 0;
 	int WidthMax = 2040;
-	int CPU = SDL_GetCPUCount();
+	int FPSStart = 0;
+	int FPSMin = 0;
+	int FPSMax = 120;
+
 private:
 
 };
