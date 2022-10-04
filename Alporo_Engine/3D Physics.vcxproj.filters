@@ -481,5 +481,6 @@
     <None Include="MathGeoLib\include\Math\Matrix.inl">
       <Filter>Sources\MathGeoLib\Include\Math</Filter>
     </None>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
