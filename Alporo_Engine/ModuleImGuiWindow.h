@@ -13,7 +13,7 @@ public:
 	~ModuleImguiWindow();
 
 	bool Start();
-	IMGUI_API void          ShowWindow(bool* p_open = NULL);
+	IMGUI_API update_status          ShowWindow(bool* p_open = NULL);
 	bool PostUpdate();
 
 	update_status PreUpdate(float dt);
@@ -28,14 +28,14 @@ public:
 	bool Dummy = false;
 	bool CloseApp = false;
 
-	const char fps_log[60];
-	const char ms_log[60];
+	//const char fps_log[60];
+	//const char ms_log[60];
 	//float
 	float BrightnessStart = 1.f;
 	float BrightnessMin = 0.f;
 	float BrightnessMax = 1.f;
 	//ints
-	int WidthStart = 1280;
+
 	int WidthMin = 0;
 	int WidthMax = 2040;
 	int CPU = SDL_GetCPUCount();
