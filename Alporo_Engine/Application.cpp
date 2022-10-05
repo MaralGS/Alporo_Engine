@@ -8,6 +8,7 @@ Application::Application()
 	camera = new ModuleCamera3D(this);
 	scene = new ModuleSceneIntro(this);
 	imguiwindows = new ModuleImguiWindow(this);
+	OpenGLPrimitives = new ModuleOPGPrimitives(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -19,6 +20,7 @@ Application::Application()
 	AddModule(input);
 	AddModule(scene);
 	AddModule(imguiwindows);
+	AddModule(OpenGLPrimitives);
 	
 
 	// Renderer last!

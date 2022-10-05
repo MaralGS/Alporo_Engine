@@ -10,6 +10,7 @@
 #include "ModuleCamera3D.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleImGuiWindow.h"
+#include "ModuleOPGPrimitives.h"
 #include "imgui.h"
 
 class Application
@@ -21,6 +22,7 @@ public:
 	ModuleCamera3D* camera;
 	ModuleSceneIntro* scene;
 	ModuleImguiWindow* imguiwindows;
+	ModuleOPGPrimitives* OpenGLPrimitives;
 	
 private:
 
