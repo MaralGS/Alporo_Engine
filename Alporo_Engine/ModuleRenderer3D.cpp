@@ -149,6 +149,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
+
 	return UPDATE_CONTINUE;
 }
 
@@ -191,7 +192,7 @@ bool ModuleRenderer3D::CleanUp()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
-
+	glDisable(GL_DEPTH_TEST);
 	SDL_GL_DeleteContext(context);
 
 	return true;
