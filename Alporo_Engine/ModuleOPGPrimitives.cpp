@@ -40,22 +40,60 @@ update_status ModuleOPGPrimitives::Update(float dt)
     //glLineWidth(6.0f);
 	*/
     
-    float Quad[] = { 0.f,0.5f,0.f, //Y
-                     0.f,0.f,0.f,//X Cara1
-                     0.f,0.f,0.5f,//Z
-                     0.0f,0.5f,0.5f,//X Cara2
-                     0.f,0.5f,0.f, //Y 
+    float Quad[] = { 0.f,1.f,0.f, //X Cara1 
+                     0.f,0.f,0.f,//Y 
+                     0.f,0.f,1.f,//Z
 
-                     0.f,0.f,0.5f,
-                     0.f,0.5f,0.f, //Y Cara3
-                     0.0f,0.5f,0.5f,//X
-                     0.f,0.f,0.5f, }; 
-    
+                     0.0f,1.f,1.f,// Cara2
+                     0.f,1.f,0.f, 
+                     0.f,0.f,1.f,
+
+                     1.f,1.f,0.f, //Cara3 
+                     0.f,1.f,0.f,
+                     0.f,1.f,1.f, 
+                     
+                     1.f,1.f,0.f, 
+                     0.f,1.f,1.f,
+                     1.f,1.f,1.f,
+                        
+                     0.f,0.f,1.f, // Cara4 
+                     1.f,0.f,1.f,
+                     0.f,1.f,1.f,
+        
+                     1.f,0.f,1.f,
+                     1.f,1.f,1.f,
+                     0.f,1.f,1.f,
+                    
+                     1.f, 0.f, 1.f,// Cara5
+                     1.f, 0.f, 0.f,
+                     1.f, 1.f, 0.f,
+                     
+                     1.f, 0.f, 1.f,
+                     1.f, 1.f, 0.f,
+                     1.f, 1.f, 1.f,
+        
+                     0.f, 0.f, 0.f, // cara6
+                     0.f, 1.f, 0.f,
+                     1.f, 1.f, 0.f,
+                     
+                     0.f, 0.f, 0.f,
+                     1.f, 1.f, 0.f,
+                     1.f, 0.f, 0.f,
+        
+                     0.f, 0.f, 0.f, // cara7
+                     1.f, 0.f, 0.f,
+                     1.f, 0.f, 1.f,
+                     
+                     1.f, 0.f, 1.f,
+                     0.f, 0.f, 1.f,
+                     0.f, 0.f, 0.f,
+    };
+       
  
  
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0, Quad);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
     glDisableClientState(GL_VERTEX_ARRAY);
     // front face =================
    
