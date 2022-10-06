@@ -1,3 +1,4 @@
+#pragma once
 #include "Module.h"
 #include "Globals.h"
 
@@ -14,5 +15,14 @@ public:
 	bool CleanUp();
 
 private:
+	/*
+	GLfloat v0;
+	GLfloat v1;
+	GLfloat v2;
+	GLfloat v3;
+	GLfloat v4;
+	GLfloat v5;
+	GLfloat v6;
+	*/
 
 };
