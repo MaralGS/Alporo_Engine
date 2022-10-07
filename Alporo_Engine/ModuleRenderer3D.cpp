@@ -166,11 +166,15 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	{
 			ImGui::ShowDemoWindow();
 	}
-
-
-	App->imguiwindows->ShowWindow();
-
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+
+	//Close Application
+	bool Close = App->imguiwindows->ShowWindow(NULL);
+	if (!Close)
+	{
+		return UPDATE_STOP;
+	}
 
 
 	// Rendering
