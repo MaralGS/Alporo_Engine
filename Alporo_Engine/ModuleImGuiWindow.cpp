@@ -78,6 +78,8 @@
 #endif
 #endif
 
+#include<vector>
+
 
 ModuleImguiWindow::ModuleImguiWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -361,8 +363,11 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
         }
-        static float arr[] = { 100.f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f };
-        ImGui::PlotHistogram("##framrate", arr, IM_ARRAYSIZE(arr), 0, NULL, 0.0f, 100.0f, ImVec2(310, 100));
+        
+        static std::vector<float> Test;
+
+        Test.push_back(1.0f);
+        ImGui::PlotHistogram("##framrate", Test.data(), Test.size(), 0, NULL, 0.0f, 2.f, ImVec2(310, 100));
         //miliseconds
         /*char title[25];
         //fps
