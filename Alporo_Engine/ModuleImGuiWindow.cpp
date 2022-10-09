@@ -84,7 +84,7 @@
 
 ModuleImguiWindow::ModuleImguiWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	
+
 }
 
 ModuleImguiWindow::~ModuleImguiWindow()
@@ -111,7 +111,7 @@ bool ModuleImguiWindow::PreUpdate() {
 
 bool ModuleImguiWindow::ShowWindow(bool* p_open)
 {
-    
+
     // Et mostra les opcions del Example (Example Menu)
     static bool show_app_main_menu_bar = true;
     static bool show_app_ImGui_Demo_menu_bar = false;
@@ -218,22 +218,22 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
             {
                 ActiveDemoWindows = !ActiveDemoWindows;
             }
-            
+
             if (ImGui::MenuItem("Documentation"))
             {
                 SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/wiki");
             }
-            
+
             if (ImGui::MenuItem("Download lastest"))
             {
                 SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/releases");
             }
-            
+
             if (ImGui::MenuItem("Report a bug"))
             {
                 SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/issues");
             }
-            
+
             if (ImGui::MenuItem("About"))
             {
                 AboutTxt = !AboutTxt;
@@ -246,11 +246,11 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
 
             ImGui::EndMenu();
         }
-        
+
         if (ImGui::BeginMenu("Exit"))
         {
            if(ImGui::MenuItem("Close Aplication")) {
-              
+
                return false;
             }
             if (ImGui::MenuItem("Cancel")) {}
@@ -311,7 +311,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         //  IMGUI_DEMO_MARKER("Configuration/Backend Flags");
         if (ImGui::TreeNode("Backend Flags"))
         {
-            
+
            /* HelpMarker(
                 "Those flags are set by the backends (imgui_impl_xxx files) to specify their capabilities.\n"
                 "Here we expose them as read-only fields to avoid breaking interactions with your backend.");*/
@@ -358,13 +358,13 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     //Hardware Applcation
     if (ImGui::CollapsingHeader("Application"))
     {
-        ImGui::Button("Alporo Engine"); ImGui::SameLine(); ImGui::Text("App name"); 
-        ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization"); 
-        ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization"); 
+        ImGui::Button("Alporo Engine"); ImGui::SameLine(); ImGui::Text("App name");
+        ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
+        ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
         if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
         }
-        
+
 
         Uint32 start_time, frame_time;
         float fps;
@@ -424,7 +424,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         ImGui::Separator();
         //ImGui::BulletText("System RAM: %dGb", SDL_GetGPU()/1000);
 
-     
+
        // ImGui::TextColored(CPU); ;
     }
 
@@ -449,4 +449,3 @@ bool ModuleImguiWindow::CleanUp()
 
 	return true;
 }
-

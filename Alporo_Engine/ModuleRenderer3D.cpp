@@ -102,7 +102,6 @@ bool ModuleRenderer3D::Init()
 
 		GLfloat MaterialDiffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, MaterialDiffuse);
-
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 		lights[0].Active(true);
@@ -160,7 +159,42 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
-
+	//Depth Test 
+	if (App->imguiwindows->DepthTest == true)
+	{
+		glEnable(GL_DEPTH_TEST);
+	}
+	else 
+	{
+		glDisable(GL_DEPTH_TEST);
+	}
+	//Cull Face
+	if (App->imguiwindows->CullFace == true)
+	{
+		glEnable(GL_CULL_FACE);
+	}
+	else
+	{
+		glDisable(GL_CULL_FACE);
+	}
+	//Lighting
+	if (App->imguiwindows->Lighting == true)
+	{
+		glDisable(GL_LIGHTING);
+	}
+	else
+	{
+		glEnable(GL_LIGHTING);
+	}
+	//Color Material
+	if (App->imguiwindows->ColorMaterial == true)
+	{
+		glEnable(GL_COLOR_MATERIAL);
+	}
+	else
+	{
+		glDisable(GL_COLOR_MATERIAL);
+	}
 	// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
 	if (App->imguiwindows->ActiveDemoWindows == false)
 	{
