@@ -38,6 +38,7 @@ update_status ModuleOPGPrimitives::Update(float dt)
 
 bool ModuleOPGPrimitives::PostUpdate() {
 
+	
 
 	return true;
 }
@@ -51,7 +52,11 @@ bool ModuleOPGPrimitives::CleanUp()
 
 void ModuleOPGPrimitives::DrawQuad()
 {
-
+	if (App->imguiwindows->Wireframe == true) {
+		//Wireframe Mode
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glLineWidth(2);
+	}
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0,Quad);
     glDrawArrays(GL_TRIANGLES, 0, 36);

@@ -365,6 +365,11 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
         }
 
+        ImGui::Checkbox("WireFrame", &Wireframe);
+        ImGui::Checkbox("Depth Test", &DepthTest);
+        ImGui::Checkbox("Cull Face", &CullFace);
+        ImGui::Checkbox("Lighting", &Lighting);
+        ImGui::Checkbox("Color Material", &ColorMaterial);
 
         Uint32 start_time, frame_time;
         float fps;
