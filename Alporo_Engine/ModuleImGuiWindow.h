@@ -15,15 +15,13 @@ public:
 
 	bool PreUpdate();
 	bool CleanUp();
-	
-
 
 	//bools
 	bool ActiveDemoWindows = true;
 
 	bool AboutTxt = false;
 	bool FullScreenEnable = false;
-	bool Dummy = false;
+	bool FullDesktop = false;
 	bool CloseApp = false;
 
 	//const char fps_log[60];
@@ -32,6 +30,8 @@ public:
 	float BrightnessStart = 1.f;
 	float BrightnessMin = 0.f;
 	float BrightnessMax = 1.f;
+
+
 	
 	//ints
 	int WidthMin = 0;

@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleImGuiWindow.h"
 
+
 #if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -364,10 +365,15 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
         }
         
-        static std::vector<float> Test;
 
-        Test.push_back(1.0f);
-        ImGui::PlotHistogram("##framrate", Test.data(), Test.size(), 0, NULL, 0.0f, 2.f, ImVec2(310, 100));
+        Uint32 start_time, frame_time;
+        float fps;
+
+        start_time = SDL_GetTicks();
+
+        /*static std::vector<float> FPS;
+        FPS.push_back(1.0f);
+        ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 2.f, ImVec2(310, 100));*/
         //miliseconds
         /*char title[25];
         //fps
@@ -381,20 +387,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     if (ImGui::CollapsingHeader("Window options"))
     {
         //Windows options
-        if (ImGui::Checkbox("Active Fullscreen", &FullScreenEnable))
-        {
-            if (FullScreenEnable == true)
-            {
-                SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_FULLSCREEN);
-            }
-
-            else
-            {
-                SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_MAXIMIZED);
-            }
-        }
-
-        ImGui::BulletText("Icon: *default*");
+       ImGui::BulletText("Icon: *default*");
        if (ImGui::SliderFloat("Brightness", &BrightnessStart, BrightnessMin, BrightnessMax)) {
            SDL_SetWindowBrightness(App->window->window, BrightnessStart);
         }
@@ -406,42 +399,31 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         }
 
        //refresh
-       ImGui::BulletText("Refresh rate: %d");
+      // ImGui::BulletText("Refresh rate: %d", SDL_GetNumVideoDisplays());
        if (ImGui::Checkbox("Active Fullscreen", &FullScreenEnable))
        {
+           if (FullScreenEnable == true)
+           {
+               SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_FULLSCREEN);
+           }
 
-       }
-       ImGui::SameLine();
-       if (ImGui::Checkbox("Resizable", &FullScreenEnable))
-       {
-
-       }
-            //2n line
-       if (ImGui::Checkbox("Borderless", &FullScreenEnable))
-       {
-
-       }
-       ImGui::SameLine();
-       if (ImGui::Checkbox("Full Desktop", &FullScreenEnable))
-
-
-       {
-
+           else
+           {
+               SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_MAXIMIZED);
+           }
        }
     }
 
     //Hardware Detection
     if (ImGui::CollapsingHeader("Hardware"))
     {
-        if (ImGui::Checkbox("Active", &Dummy))
-        {
-            
-        }
         ImGui::BulletText("SDL Version: 2.0.4");
         ImGui::Separator();
         ImGui::BulletText("CPUs: %d (Cache %dKb)", SDL_GetCPUCount(),SDL_GetCPUCacheLineSize());
-        ImGui::BulletText("System RAM: %dGb)", SDL_GetSystemRAM()/1000);
+        ImGui::BulletText("System RAM: %dGb", SDL_GetSystemRAM()/1000);
         ImGui::Separator();
+        ImGui::BulletText("System RAM: %dGb", SDL_GetGPU()/1000);
+
      
        // ImGui::TextColored(CPU); ;
     }
@@ -467,3 +449,4 @@ bool ModuleImguiWindow::CleanUp()
 
 	return true;
 }
+
