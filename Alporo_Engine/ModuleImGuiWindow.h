@@ -25,6 +25,11 @@ public:
 	bool FullScreenEnable = false;
 	bool Dummy = false;
 	bool CloseApp = false;
+	bool Wireframe = false;
+	bool DepthTest = true;
+	bool CullFace = true;
+	bool Lighting = true;
+	bool ColorMaterial = true;
 
 	//const char fps_log[60];
 	//const char ms_log[60];

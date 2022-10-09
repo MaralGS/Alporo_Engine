@@ -89,10 +89,11 @@ update_status ModuleOPGPrimitives::Update(float dt)
                      0.f, 0.f, 0.f,
     };
        
-    /*Wireframe Mode
-      glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-      glLineWidth(2);*/
- 
+    if (App->imguiwindows->Wireframe == true) {
+        //Wireframe Mode
+          glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+          glLineWidth(2);
+    }
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0, Quad);
     glDrawArrays(GL_TRIANGLES, 0, 36);

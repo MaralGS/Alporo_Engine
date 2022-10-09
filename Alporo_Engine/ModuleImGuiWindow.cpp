@@ -361,6 +361,11 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
         }
+        ImGui::Checkbox("WireFrame", &Wireframe);
+        ImGui::Checkbox("Depth Test", &DepthTest);
+        ImGui::Checkbox("Cull Face", &CullFace);
+        ImGui::Checkbox("Lighting", &Lighting);
+        ImGui::Checkbox("Color Material", &ColorMaterial);
         static float arr[] = { 100.f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f };
         ImGui::PlotHistogram("##framrate", arr, IM_ARRAYSIZE(arr), 0, NULL, 0.0f, 100.0f, ImVec2(310, 100));
         //miliseconds
