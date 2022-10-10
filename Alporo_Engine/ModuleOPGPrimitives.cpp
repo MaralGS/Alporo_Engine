@@ -31,9 +31,18 @@ bool ModuleOPGPrimitives::PreUpdate() {
 
 update_status ModuleOPGPrimitives::Update(float dt)
 {
-    //DrawCircle(2);
-    //DrawQuad();
-	DrawPiramid();
+	if (DrawQuadra == true)
+	{
+		DrawQuad();
+	}
+
+	if (DrawPiramide == true)
+	{
+		DrawPiramid();
+	}
+
+	//DrawCircle(2);
+
 	return UPDATE_CONTINUE;
 }
 
@@ -113,7 +122,9 @@ void ModuleOPGPrimitives::DrawPiramid()
 	}
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, Triangle);
-	glDrawArrays(GL_TRIANGLES, 0, 9);
+	glDrawArrays(GL_TRIANGLES, 0, 12);
+	glVertexPointer(3, GL_FLOAT, 0, TriangleBase);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 	// front face =================
 	glEnd();
 }

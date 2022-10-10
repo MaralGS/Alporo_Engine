@@ -263,7 +263,13 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::Text("dear imgui says hello! (%s) (%d)", IMGUI_VERSION, IMGUI_VERSION_NUM);
     ImGui::Spacing();
 
-    //Confiration options
+    //Configuration options
+    if (ImGui::CollapsingHeader("Configuration"))
+    {
+        if (ImGui::Checkbox("Draw Cube", &App->OpenGLPrimitives->DrawQuadra));
+        if (ImGui::Checkbox("Draw Piramide", &App->OpenGLPrimitives->DrawPiramide));
+    }
+    /*
     if (ImGui::CollapsingHeader("Configuration"))
     {
         ImGuiIO& io = ImGui::GetIO();
@@ -314,7 +320,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
 
            /* HelpMarker(
                 "Those flags are set by the backends (imgui_impl_xxx files) to specify their capabilities.\n"
-                "Here we expose them as read-only fields to avoid breaking interactions with your backend.");*/
+                "Here we expose them as read-only fields to avoid breaking interactions with your backend.");
 
             // Make a local copy to avoid modifying actual backend flags.
             // FIXME: We don't use BeginDisabled() to keep label bright, maybe we need a BeginReadonly() equivalent..
@@ -342,7 +348,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
           /*  HelpMarker(
                 "The logging API redirects all text output so you can easily capture the content of "
                 "a window or a block. Tree nodes can be automatically expanded.\n"
-                "Try opening any of the contents below in this window and then click one of the \"Log To\" button.");*/
+                "Try opening any of the contents below in this window and then click one of the \"Log To\" button.");
             ImGui::LogButtons();
 
             // HelpMarker("You can also call ImGui::LogText() to output directly to the log without a visual output.");
@@ -354,7 +360,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
             }
             ImGui::TreePop();
         }
-    }
+    } */
     //Hardware Applcation
     if (ImGui::CollapsingHeader("Application"))
     {
