@@ -3,6 +3,12 @@
 #include "Module.h"
 #include "Globals.h"
 
+struct Cilindre
+{
+    bool DrawCilindre = false;
+    float Leght = 3;
+    float Radius = 1;
+};
 
 class ModuleOPGPrimitives : public Module
 {
@@ -21,10 +27,8 @@ public:
 
     bool DrawQuadra = false;
     bool DrawPiramide = false;
-    bool DrawCilindre = true;
 
-    float Leght = 3;
-    float Radius = 1;
+    Cilindre CilindreStats;
 private:
 
     float Quad[108] = { 0.f,1.f,0.f, //X Cara1 

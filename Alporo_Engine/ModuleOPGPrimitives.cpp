@@ -41,9 +41,9 @@ update_status ModuleOPGPrimitives::Update(float dt)
 		DrawPiramid();
 	}
 	
-	if (DrawCilindre == true)
+	if (CilindreStats.DrawCilindre == true)
 	{
-		DrawCilind(Radius,Leght);
+		DrawCilind(CilindreStats.Radius, CilindreStats.Leght);
 	}
 
 
