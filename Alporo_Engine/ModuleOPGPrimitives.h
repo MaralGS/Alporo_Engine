@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Module.h"
 #include "Globals.h"
 
@@ -15,6 +16,7 @@ public:
 	bool PreUpdate();
 	bool CleanUp();
     void DrawQuad();
+    void DrawCircle(float radius);
 
 	float Quad[108] = { 0.f,1.f,0.f, //X Cara1 
                      0.f,0.f,0.f,//Y 
@@ -66,15 +68,7 @@ public:
     };
 
 private:
-	/*
-	GLfloat v0;
-	GLfloat v1;
-	GLfloat v2;
-	GLfloat v3;
-	GLfloat v4;
-	GLfloat v5;
-	GLfloat v6;
-	*/
+
 
 
 };

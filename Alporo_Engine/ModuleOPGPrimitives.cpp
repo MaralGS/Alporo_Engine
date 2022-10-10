@@ -31,8 +31,8 @@ bool ModuleOPGPrimitives::PreUpdate() {
 
 update_status ModuleOPGPrimitives::Update(float dt)
 {
-
-    DrawQuad();
+    DrawCircle(2);
+    //DrawQuad();
 	return UPDATE_CONTINUE;
 }
 
@@ -63,4 +63,42 @@ void ModuleOPGPrimitives::DrawQuad()
     // front face =================
     glEnd();
 
+}
+
+
+void ModuleOPGPrimitives::DrawCircle(float radius)
+{
+
+	int n = 30;
+
+	// Cylinder Bottom
+	glBegin(GL_POLYGON);
+
+	for (int i = 360; i >= 0; i -= (360 / n))
+	{
+		float a = i * M_PI / 180; // degrees to radians
+		glVertex3f(-10 * 0.5f, radius * cos(a), radius * sin(a));
+	}
+	glEnd();
+
+	// Cylinder Top
+	glBegin(GL_POLYGON);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	for (int i = 0; i <= 360; i += (360 / n))
+	{
+		float a = i * M_PI / 180; // degrees to radians
+		glVertex3f(10 * 0.5f, radius * cos(a), radius * sin(a));
+	}
+	glEnd();
+
+	// Cylinder "Cover"
+	glBegin(GL_QUAD_STRIP);
+	for (int i = 0; i < 480; i += (360 / n))
+	{
+		float a = i * M_PI / 180; // degrees to radians
+
+		glVertex3f(10 * 0.5f, radius * cos(a), radius * sin(a));
+		glVertex3f(-10 * 0.5f, radius * cos(a), radius * sin(a));
+	}
+	glEnd();
 }
