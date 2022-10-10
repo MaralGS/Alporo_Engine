@@ -40,8 +40,13 @@ update_status ModuleOPGPrimitives::Update(float dt)
 	{
 		DrawPiramid();
 	}
+	
+	if (DrawCilindre == true)
+	{
+		DrawCilind(Radius,Leght);
+	}
 
-	//DrawCircle(2);
+
 
 	return UPDATE_CONTINUE;
 }
@@ -76,7 +81,7 @@ void ModuleOPGPrimitives::DrawQuad()
 }
 
 
-void ModuleOPGPrimitives::DrawCircle(float radius)
+void ModuleOPGPrimitives::DrawCilind(float radius, float leght)
 {
 
 	int n = 30;
@@ -87,17 +92,22 @@ void ModuleOPGPrimitives::DrawCircle(float radius)
 	for (int i = 360; i >= 0; i -= (360 / n))
 	{
 		float a = i * M_PI / 180; // degrees to radians
-		glVertex3f(-10 * 0.5f, radius * cos(a), radius * sin(a));
+		float X = -leght * 0.5f;
+		float Y = radius * cos(a);
+		float Z = radius * sin(a);
+		glVertex3f(X, Y, Z);
 	}
 	glEnd();
-
 	// Cylinder Top
 	glBegin(GL_POLYGON);
 	glNormal3f(0.0f, 0.0f, 1.0f);
-	for (int i = 0; i <= 360; i += (360 / n))
+	for (int i = 360; i >= 0; i -= (360 / n))
 	{
 		float a = i * M_PI / 180; // degrees to radians
-		glVertex3f(10 * 0.5f, radius * cos(a), radius * sin(a));
+		float X = leght * 0.5f;
+		float Y = radius * cos(a);
+		float Z = -radius * sin(a);
+		glVertex3f(X, Y, Z);
 	}
 	glEnd();
 
@@ -107,8 +117,8 @@ void ModuleOPGPrimitives::DrawCircle(float radius)
 	{
 		float a = i * M_PI / 180; // degrees to radians
 
-		glVertex3f(10 * 0.5f, radius * cos(a), radius * sin(a));
-		glVertex3f(-10 * 0.5f, radius * cos(a), radius * sin(a));
+		glVertex3f(leght * 0.5f, radius * cos(a), radius * sin(a));
+		glVertex3f(-leght * 0.5f, radius * cos(a), radius * sin(a));
 	}
 	glEnd();
 }

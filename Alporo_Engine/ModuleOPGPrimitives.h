@@ -16,12 +16,15 @@ public:
 	bool PreUpdate();
 	bool CleanUp();
     void DrawQuad();
-    void DrawCircle(float radius);
+    void DrawCilind(float radius, float leght);
     void DrawPiramid();
 
     bool DrawQuadra = false;
     bool DrawPiramide = false;
+    bool DrawCilindre = true;
 
+    float Leght = 3;
+    float Radius = 1;
 private:
 
     float Quad[108] = { 0.f,1.f,0.f, //X Cara1 

@@ -268,6 +268,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     {
         if (ImGui::Checkbox("Draw Cube", &App->OpenGLPrimitives->DrawQuadra));
         if (ImGui::Checkbox("Draw Piramide", &App->OpenGLPrimitives->DrawPiramide));
+        if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->DrawCilindre));
     }
     /*
     if (ImGui::CollapsingHeader("Configuration"))
