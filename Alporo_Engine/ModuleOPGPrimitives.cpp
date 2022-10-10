@@ -46,8 +46,6 @@ update_status ModuleOPGPrimitives::Update(float dt)
 		DrawCilind(CilindreStats.Radius, CilindreStats.Leght);
 	}
 
-
-
 	return UPDATE_CONTINUE;
 }
 
@@ -79,7 +77,6 @@ void ModuleOPGPrimitives::DrawQuad()
     glEnd();
 
 }
-
 
 void ModuleOPGPrimitives::DrawCilind(float radius, float leght)
 {
@@ -137,4 +134,9 @@ void ModuleOPGPrimitives::DrawPiramid()
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	// front face =================
 	glEnd();
+}
+
+void ModuleOPGPrimitives::DrawSphere(float radius)
+{
+	//glutSolidSphere(radius, 25, 25);
 }
