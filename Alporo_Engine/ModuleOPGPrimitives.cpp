@@ -31,8 +31,9 @@ bool ModuleOPGPrimitives::PreUpdate() {
 
 update_status ModuleOPGPrimitives::Update(float dt)
 {
-    DrawCircle(2);
+    //DrawCircle(2);
     //DrawQuad();
+	DrawPiramid();
 	return UPDATE_CONTINUE;
 }
 
@@ -100,5 +101,19 @@ void ModuleOPGPrimitives::DrawCircle(float radius)
 		glVertex3f(10 * 0.5f, radius * cos(a), radius * sin(a));
 		glVertex3f(-10 * 0.5f, radius * cos(a), radius * sin(a));
 	}
+	glEnd();
+}
+
+void ModuleOPGPrimitives::DrawPiramid()
+{
+	if (App->imguiwindows->Wireframe == true) {
+		//Wireframe Mode
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glLineWidth(2);
+	}
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, Triangle);
+	glDrawArrays(GL_TRIANGLES, 0, 9);
+	// front face =================
 	glEnd();
 }

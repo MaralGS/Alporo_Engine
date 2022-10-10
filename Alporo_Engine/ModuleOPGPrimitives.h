@@ -17,6 +17,7 @@ public:
 	bool CleanUp();
     void DrawQuad();
     void DrawCircle(float radius);
+    void DrawPiramid();
 
 	float Quad[108] = { 0.f,1.f,0.f, //X Cara1 
                      0.f,0.f,0.f,//Y 
@@ -65,6 +66,20 @@ public:
                      1.f, 0.f, 1.f,
                      0.f, 0.f, 1.f,
                      0.f, 0.f, 0.f,
+    };
+    
+    float Triangle[27] = { 0.f,0.f,0.f, //X Cara1 
+                     2.f,0.f,0.f,//Y 
+                     1.f,2.f,-2.f,//Z
+
+        /*
+                     1.f,1.f,0.f, //Cara2
+                     0.f,1.f,0.f,
+                     0.f,1.f,1.f,
+
+                     0.f,0.f,1.f, // Cara3 
+                     1.f,0.f,1.f,
+                     0.f,1.f,1.f,*/
     };
 
 private:
