@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "scene.h"
 
 
 class ModuleLoadFBX : public Module
