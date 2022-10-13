@@ -81,7 +81,7 @@ void Application::FinishUpdate()
 {
 	if (lastSecFrameTime.Read() > 1000)
 	{
-		lastSecFrameTime.Start();
+		//lastSecFrameTime.Start();
 		prevLastSecFrameCount = lastSecFrameCount;
 		lastSecFrameCount = 0;
 	}
