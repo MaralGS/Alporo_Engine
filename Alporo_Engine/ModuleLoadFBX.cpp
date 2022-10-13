@@ -32,15 +32,15 @@ bool ModuleLoadFBX::Start()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 	
-	scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
-	if (scene != nullptr && scene->HasMeshes())
+	//scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
+	/*if (scene != nullptr && scene->HasMeshes())
 	{
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		aiReleaseImport(scene);
-	}
-	else {
+	}*/
+	/*else {
 		//LOG(“Error loading scene %s”, file_path);
-	}
+	}*/
 	return ret;
 }
 

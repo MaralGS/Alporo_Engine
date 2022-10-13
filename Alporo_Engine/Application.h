@@ -36,6 +36,11 @@ public:
 
 	Application();
 	~Application();
+	Timer lastSecFrameTime;
+	Timer startupTime;
+	Uint32 lastSecFrameCount = 0;
+	Uint32 prevLastSecFrameCount = 0;
+	Uint64 frameCount = 0;
 
 	bool Init();
 	update_status Update();

@@ -24,6 +24,7 @@ public:
     void DrawQuad();
     void DrawCilind(float radius, float leght);
     void DrawPiramid();
+    void DrawSphere(float radius);
 
     bool DrawQuadra = false;
     bool DrawPiramide = false;
