@@ -86,8 +86,8 @@ void Application::FinishUpdate()
 		lastSecFrameCount = 0;
 	}
 
-	Uint32 averageFps = prevLastSecFrameCount;
-	LOG("FPS3: %d ", averageFps);
+
+	//LOG("FPS3: %d ", averageFps);
 
 }
 

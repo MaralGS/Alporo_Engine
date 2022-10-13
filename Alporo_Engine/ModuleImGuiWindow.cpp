@@ -379,18 +379,21 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         ImGui::Checkbox("Color Material", &ColorMaterial);
 
 
-  
-        Uint32 start_time, frame_time;
-        float fps;
+     
+       
+      /*  static std::vector<float> FPS;
+        for (int i = 0; i < 5; i++)
+        {
+            App->averageFps[i] = App->prevLastSecFrameCount;
+            FPS.push_back(App->averageFps[i]);
+            
 
-        start_time = SDL_GetTicks();
+            LOG("FPS: %d", i);
 
-
-        static std::vector<float> FPS;
-        FPS.push_back(1.0f);
+        }
         SDL_GetPerformanceCounter();
-
-        ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 2.f, ImVec2(310, 100));
+      
+        ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 2.f, ImVec2(310, 100));  */
         //miliseconds
         /*char title[25];
         //fps

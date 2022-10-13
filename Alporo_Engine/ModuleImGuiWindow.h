@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "imgui.h"
 
+#include <vector>
 class ModuleImguiWindow : public Module
 {
 public:
@@ -45,6 +46,7 @@ public:
 	int FPSMin = 0;
 	int FPSMax = 120;
 
+	
 private:
 
 };
