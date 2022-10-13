@@ -1,12 +1,12 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleImGuiWindow.h"
-
-
-#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
+#include "imgui.h"
+#include<vector>
+/*#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
-#include "imgui.h"
+
 #ifndef IMGUI_DISABLE
 
 // System includes
@@ -77,10 +77,7 @@
 #define IM_PRId64   "lld"
 #define IM_PRIu64   "llu"
 #endif
-#endif
-
-#include<vector>
-
+#endif*/
 
 ModuleImguiWindow::ModuleImguiWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -111,60 +108,7 @@ bool ModuleImguiWindow::PreUpdate() {
 
 bool ModuleImguiWindow::ShowWindow(bool* p_open)
 {
-
-    // Et mostra les opcions del Example (Example Menu)
-    static bool show_app_main_menu_bar = true;
-    static bool show_app_ImGui_Demo_menu_bar = false;
-    static bool show_app_documents = false;
-    static bool show_app_console = false;
-    static bool show_app_log = false;
-    static bool show_app_layout = false;
-    static bool show_app_property_editor = false;
-    static bool show_app_long_text = false;
-    static bool show_app_auto_resize = false;
-    static bool show_app_constrained_resize = false;
-    static bool show_app_simple_overlay = false;
-    static bool show_app_fullscreen = false;
-    static bool show_app_window_titles = false;
-    static bool show_app_custom_rendering = false;
-
-    /*if (show_app_main_menu_bar)       ShowExampleAppMainMenuBar();
-    if (show_app_documents)           ShowExampleAppDocuments(&show_app_documents);
-    if (show_app_console)             ShowExampleAppConsole(&show_app_console);
-    if (show_app_log)                 ShowExampleAppLog(&show_app_log);
-    if (show_app_layout)              ShowExampleAppLayout(&show_app_layout);
-    if (show_app_property_editor)     ShowExampleAppPropertyEditor(&show_app_property_editor);
-    if (show_app_long_text)           ShowExampleAppLongText(&show_app_long_text);
-    if (show_app_auto_resize)         ShowExampleAppAutoResize(&show_app_auto_resize);
-    if (show_app_constrained_resize)  ShowExampleAppConstrainedResize(&show_app_constrained_resize);
-    if (show_app_simple_overlay)      ShowExampleAppSimpleOverlay(&show_app_simple_overlay);
-    if (show_app_fullscreen)          ShowExampleAppFullscreen(&show_app_fullscreen);
-    if (show_app_window_titles)       ShowExampleAppWindowTitles(&show_app_window_titles);
-    if (show_app_custom_rendering)    ShowExampleAppCustomRendering(&show_app_custom_rendering);*/
-
-    // Dear ImGui Tools/Apps (accessible from the "Tools" menu)
-    static bool show_app_metrics = false;
-    static bool show_app_debug_log = false;
-    static bool show_app_stack_tool = false;
-    static bool show_app_about = false;
-    static bool show_app_style_editor = false;
-
-    if (show_app_metrics)
-        ImGui::ShowMetricsWindow(&show_app_metrics);
-    if (show_app_debug_log)
-        ImGui::ShowDebugLogWindow(&show_app_debug_log);
-    if (show_app_stack_tool)
-        ImGui::ShowStackToolWindow(&show_app_stack_tool);
-    if (show_app_about)
-        ImGui::ShowAboutWindow(&show_app_about);
-    if (show_app_style_editor)
-    {
-        ImGui::Begin("Dear ImGui Style Editor", &show_app_style_editor);
-        ImGui::ShowStyleEditor();
-        ImGui::End();
-    }
-
-    // Demonstrate the various window flags. Typically you would just use the default!
+   // Main body of the Demo window starts here.
     static bool no_titlebar = false;
     static bool no_scrollbar = false;
     static bool no_menu = false;
@@ -195,14 +139,13 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_FirstUseEver);
 
-    // Main body of the Demo window starts here.
     if (!ImGui::Begin("ImGui Menu", p_open, window_flags))
     {
         // Early out if the window is collapsed, as an optimization.
         ImGui::End();
         return UPDATE_CONTINUE;
     }
-
+  
     // Most "big" widgets share a common width settings by default. See 'Demo->Layout->Widgets Width' for details.
     // e.g. Use 2/3 of the space for widgets and 1/3 for labels (right align)
     //ImGui::PushItemWidth(-ImGui::GetWindowWidth() * 0.35f);
