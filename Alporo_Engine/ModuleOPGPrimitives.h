@@ -10,6 +10,20 @@ struct Cilindre
     float Radius = 1;
 };
 
+struct Quad
+{
+    float v0[3] = { 0.f, 1.f, 0.f };
+    float v1[3] = { 0.f, 0.f, 0.f };
+    float v2[3] = { 0.f, 0.f, 1.f };
+    float v3[3] = { 0.f, 1.f, 1.f };
+    float v4[3] = { 1.f, 1.f, 0.f };
+    float v5[3] = { 1.f, 1.f, 1.f, };
+    float v6[3] = { 1.f, 0.f, 1.f, };
+    float v7[3] = { 1.f, 0.f, 0.f, };
+
+
+};
+
 class ModuleOPGPrimitives : public Module
 {
 public:
@@ -31,8 +45,8 @@ public:
 
     Cilindre CilindreStats;
 private:
-
-    float Quad[108] = { 0.f,1.f,0.f, //X Cara1 
+    //Quad posant el vertex a cada lloc
+   /* float Quad[108] = {0.f,1.f,0.f, //X Cara1 
                      0.f,0.f,0.f,//Y 
                      0.f,0.f,1.f,//Z
 
@@ -79,7 +93,7 @@ private:
                      1.f, 0.f, 1.f,
                      0.f, 0.f, 1.f,
                      0.f, 0.f, 0.f,
-    };
+    };*/
 
     float Triangle[36] = { 0.f,0.f,0.f, //X Cara1 
                      2.f,0.f,0.f,//Y 

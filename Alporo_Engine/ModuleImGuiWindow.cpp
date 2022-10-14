@@ -1,12 +1,12 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleImGuiWindow.h"
-
-
-#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
+#include "imgui.h"
+#include<vector>
+/*#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
 #define _CRT_SECURE_NO_WARNINGS
 #endif
-#include "imgui.h"
+
 #ifndef IMGUI_DISABLE
 
 // System includes
@@ -77,10 +77,7 @@
 #define IM_PRId64   "lld"
 #define IM_PRIu64   "llu"
 #endif
-#endif
-
-#include<vector>
-
+#endif*/
 
 ModuleImguiWindow::ModuleImguiWindow(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -111,60 +108,7 @@ bool ModuleImguiWindow::PreUpdate() {
 
 bool ModuleImguiWindow::ShowWindow(bool* p_open)
 {
-
-    // Et mostra les opcions del Example (Example Menu)
-    static bool show_app_main_menu_bar = true;
-    static bool show_app_ImGui_Demo_menu_bar = false;
-    static bool show_app_documents = false;
-    static bool show_app_console = false;
-    static bool show_app_log = false;
-    static bool show_app_layout = false;
-    static bool show_app_property_editor = false;
-    static bool show_app_long_text = false;
-    static bool show_app_auto_resize = false;
-    static bool show_app_constrained_resize = false;
-    static bool show_app_simple_overlay = false;
-    static bool show_app_fullscreen = false;
-    static bool show_app_window_titles = false;
-    static bool show_app_custom_rendering = false;
-
-    /*if (show_app_main_menu_bar)       ShowExampleAppMainMenuBar();
-    if (show_app_documents)           ShowExampleAppDocuments(&show_app_documents);
-    if (show_app_console)             ShowExampleAppConsole(&show_app_console);
-    if (show_app_log)                 ShowExampleAppLog(&show_app_log);
-    if (show_app_layout)              ShowExampleAppLayout(&show_app_layout);
-    if (show_app_property_editor)     ShowExampleAppPropertyEditor(&show_app_property_editor);
-    if (show_app_long_text)           ShowExampleAppLongText(&show_app_long_text);
-    if (show_app_auto_resize)         ShowExampleAppAutoResize(&show_app_auto_resize);
-    if (show_app_constrained_resize)  ShowExampleAppConstrainedResize(&show_app_constrained_resize);
-    if (show_app_simple_overlay)      ShowExampleAppSimpleOverlay(&show_app_simple_overlay);
-    if (show_app_fullscreen)          ShowExampleAppFullscreen(&show_app_fullscreen);
-    if (show_app_window_titles)       ShowExampleAppWindowTitles(&show_app_window_titles);
-    if (show_app_custom_rendering)    ShowExampleAppCustomRendering(&show_app_custom_rendering);*/
-
-    // Dear ImGui Tools/Apps (accessible from the "Tools" menu)
-    static bool show_app_metrics = false;
-    static bool show_app_debug_log = false;
-    static bool show_app_stack_tool = false;
-    static bool show_app_about = false;
-    static bool show_app_style_editor = false;
-
-    if (show_app_metrics)
-        ImGui::ShowMetricsWindow(&show_app_metrics);
-    if (show_app_debug_log)
-        ImGui::ShowDebugLogWindow(&show_app_debug_log);
-    if (show_app_stack_tool)
-        ImGui::ShowStackToolWindow(&show_app_stack_tool);
-    if (show_app_about)
-        ImGui::ShowAboutWindow(&show_app_about);
-    if (show_app_style_editor)
-    {
-        ImGui::Begin("Dear ImGui Style Editor", &show_app_style_editor);
-        ImGui::ShowStyleEditor();
-        ImGui::End();
-    }
-
-    // Demonstrate the various window flags. Typically you would just use the default!
+   // Main body of the Demo window starts here.
     static bool no_titlebar = false;
     static bool no_scrollbar = false;
     static bool no_menu = false;
@@ -195,14 +139,13 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_FirstUseEver);
 
-    // Main body of the Demo window starts here.
     if (!ImGui::Begin("ImGui Menu", p_open, window_flags))
     {
         // Early out if the window is collapsed, as an optimization.
         ImGui::End();
         return UPDATE_CONTINUE;
     }
-
+  
     // Most "big" widgets share a common width settings by default. See 'Demo->Layout->Widgets Width' for details.
     // e.g. Use 2/3 of the space for widgets and 1/3 for labels (right align)
     //ImGui::PushItemWidth(-ImGui::GetWindowWidth() * 0.35f);
@@ -269,99 +212,14 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         if (ImGui::Checkbox("Draw Cube", &App->OpenGLPrimitives->DrawQuadra));
         if (ImGui::Checkbox("Draw Piramide", &App->OpenGLPrimitives->DrawPiramide));
         if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
+
+        ImGui::Checkbox("WireFrame", &Wireframe);
+        ImGui::Checkbox("Depth Test", &DepthTest);
+        ImGui::Checkbox("Cull Face", &CullFace);
+        ImGui::Checkbox("Lighting", &Lighting);
+        ImGui::Checkbox("Color Material", &ColorMaterial);
+
     }
-    /*
-    if (ImGui::CollapsingHeader("Configuration"))
-    {
-        ImGuiIO& io = ImGui::GetIO();
-
-        if (ImGui::TreeNode("Configuration##2"))
-        {
-            ImGui::CheckboxFlags("io.ConfigFlags: NavEnableKeyboard", &io.ConfigFlags, ImGuiConfigFlags_NavEnableKeyboard);
-            ImGui::SameLine(); //HelpMarker("Enable keyboard controls.");
-            ImGui::CheckboxFlags("io.ConfigFlags: NavEnableGamepad", &io.ConfigFlags, ImGuiConfigFlags_NavEnableGamepad);
-            ImGui::SameLine(); //HelpMarker("Enable gamepad controls. Require backend to set io.BackendFlags |= ImGuiBackendFlags_HasGamepad.\n\nRead instructions in imgui.cpp for details.");
-            ImGui::CheckboxFlags("io.ConfigFlags: NavEnableSetMousePos", &io.ConfigFlags, ImGuiConfigFlags_NavEnableSetMousePos);
-            ImGui::SameLine(); //HelpMarker("Instruct navigation to move the mouse cursor. See comment for ImGuiConfigFlags_NavEnableSetMousePos.");
-            ImGui::CheckboxFlags("io.ConfigFlags: NoMouse", &io.ConfigFlags, ImGuiConfigFlags_NoMouse);
-            if (io.ConfigFlags & ImGuiConfigFlags_NoMouse)
-            {
-                // The "NoMouse" option can get us stuck with a disabled mouse! Let's provide an alternative way to fix it:
-                if (fmodf((float)ImGui::GetTime(), 0.40f) < 0.20f)
-                {
-                    ImGui::SameLine();
-                    ImGui::Text("<<PRESS SPACE TO DISABLE>>");
-                }
-                if (ImGui::IsKeyPressed(ImGuiKey_Space))
-                    io.ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
-            }
-            ImGui::CheckboxFlags("io.ConfigFlags: NoMouseCursorChange", &io.ConfigFlags, ImGuiConfigFlags_NoMouseCursorChange);
-            ImGui::SameLine(); //HelpMarker("Instruct backend to not alter mouse cursor shape and visibility.");
-            ImGui::Checkbox("io.ConfigInputTrickleEventQueue", &io.ConfigInputTrickleEventQueue);
-            ImGui::SameLine(); //HelpMarker("Enable input queue trickling: some types of events submitted during the same frame (e.g. button down + up) will be spread over multiple frames, improving interactions with low framerates.");
-            ImGui::Checkbox("io.ConfigInputTextCursorBlink", &io.ConfigInputTextCursorBlink);
-            ImGui::SameLine();// HelpMarker("Enable blinking cursor (optional as some users consider it to be distracting).");
-            ImGui::Checkbox("io.ConfigInputTextEnterKeepActive", &io.ConfigInputTextEnterKeepActive);
-            ImGui::SameLine();// HelpMarker("Pressing Enter will keep item active and select contents (single-line only).");
-            ImGui::Checkbox("io.ConfigDragClickToInputText", &io.ConfigDragClickToInputText);
-            ImGui::SameLine(); //HelpMarker("Enable turning DragXXX widgets into text input with a simple mouse click-release (without moving).");
-            ImGui::Checkbox("io.ConfigWindowsResizeFromEdges", &io.ConfigWindowsResizeFromEdges);
-            ImGui::SameLine(); //HelpMarker("Enable resizing of windows from their edges and from the lower-left corner.\nThis requires (io.BackendFlags & ImGuiBackendFlags_HasMouseCursors) because it needs mouse cursor feedback.");
-            ImGui::Checkbox("io.ConfigWindowsMoveFromTitleBarOnly", &io.ConfigWindowsMoveFromTitleBarOnly);
-            ImGui::Checkbox("io.MouseDrawCursor", &io.MouseDrawCursor);
-            ImGui::SameLine();// HelpMarker("Instruct Dear ImGui to render a mouse cursor itself. Note that a mouse cursor rendered via your application GPU rendering path will feel more laggy than hardware cursor, but will be more in sync with your other visuals.\n\nSome desktop applications may use both kinds of cursors (e.g. enable software cursor only when resizing/dragging something).");
-            ImGui::Text("Also see Style->Rendering for rendering options.");
-            ImGui::TreePop();
-            ImGui::Separator();
-        }
-
-        //  IMGUI_DEMO_MARKER("Configuration/Backend Flags");
-        if (ImGui::TreeNode("Backend Flags"))
-        {
-
-           /* HelpMarker(
-                "Those flags are set by the backends (imgui_impl_xxx files) to specify their capabilities.\n"
-                "Here we expose them as read-only fields to avoid breaking interactions with your backend.");
-
-            // Make a local copy to avoid modifying actual backend flags.
-            // FIXME: We don't use BeginDisabled() to keep label bright, maybe we need a BeginReadonly() equivalent..
-            ImGuiBackendFlags backend_flags = io.BackendFlags;
-            ImGui::CheckboxFlags("io.BackendFlags: HasGamepad", &backend_flags, ImGuiBackendFlags_HasGamepad);
-            ImGui::CheckboxFlags("io.BackendFlags: HasMouseCursors", &backend_flags, ImGuiBackendFlags_HasMouseCursors);
-            ImGui::CheckboxFlags("io.BackendFlags: HasSetMousePos", &backend_flags, ImGuiBackendFlags_HasSetMousePos);
-            ImGui::CheckboxFlags("io.BackendFlags: RendererHasVtxOffset", &backend_flags, ImGuiBackendFlags_RendererHasVtxOffset);
-            ImGui::TreePop();
-            ImGui::Separator();
-        }
-
-        // IMGUI_DEMO_MARKER("Configuration/Style");
-        if (ImGui::TreeNode("Style"))
-        {
-            //  HelpMarker("The same contents can be accessed in 'Tools->Style Editor' or by calling the ShowStyleEditor() function.");
-            ImGui::ShowStyleEditor();
-            ImGui::TreePop();
-            ImGui::Separator();
-        }
-
-        //IMGUI_DEMO_MARKER("Configuration/Capture, Logging");
-        if (ImGui::TreeNode("Capture/Logging"))
-        {
-          /*  HelpMarker(
-                "The logging API redirects all text output so you can easily capture the content of "
-                "a window or a block. Tree nodes can be automatically expanded.\n"
-                "Try opening any of the contents below in this window and then click one of the \"Log To\" button.");
-            ImGui::LogButtons();
-
-            // HelpMarker("You can also call ImGui::LogText() to output directly to the log without a visual output.");
-            if (ImGui::Button("Copy \"Hello, world!\" to clipboard"))
-            {
-                ImGui::LogToClipboard();
-                ImGui::LogText("Hello, world!");
-                ImGui::LogFinish();
-            }
-            ImGui::TreePop();
-        }
-    } */
     //Hardware Applcation
     if (ImGui::CollapsingHeader("Application"))
     {
@@ -372,25 +230,27 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
         }
 
-        ImGui::Checkbox("WireFrame", &Wireframe);
-        ImGui::Checkbox("Depth Test", &DepthTest);
-        ImGui::Checkbox("Cull Face", &CullFace);
-        ImGui::Checkbox("Lighting", &Lighting);
-        ImGui::Checkbox("Color Material", &ColorMaterial);
 
-
+        ImGui::BulletText("FPS: ");
+        if (FPS.size() < 45)
+        {
+            App->averageFps[45] = App->prevLastSecFrameCount;
+            FPS.push_back(App->averageFps[45]);
+        }
+        else if (FPS.size() >= 45)
+        {
+            for (int i = 0; i <= 43; i++)
+            {
+                FPS[i] = FPS[i+1];
+            }
+            FPS[44] = App->averageFps[45];
   
-        Uint32 start_time, frame_time;
-        float fps;
-
-        start_time = SDL_GetTicks();
-
-
-        static std::vector<float> FPS;
-        FPS.push_back(1.0f);
+        }
+           
+   
         SDL_GetPerformanceCounter();
-
-        ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 2.f, ImVec2(310, 100));
+      
+        ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 240, ImVec2(310, 100));
         //miliseconds
         /*char title[25];
         //fps
