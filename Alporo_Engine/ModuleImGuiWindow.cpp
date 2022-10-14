@@ -223,6 +223,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     //Hardware Applcation
     if (ImGui::CollapsingHeader("Application"))
     {
+        FPSStart = App->prevLastSecFrameCount;
         ImGui::Button("Alporo Engine"); ImGui::SameLine(); ImGui::Text("App name");
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
@@ -232,19 +233,20 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
 
 
         ImGui::BulletText("FPS: ");
-        if (FPS.size() < 45)
+        if (FPS.size() <= 45)
         {
-            App->averageFps[45] = App->prevLastSecFrameCount;
-            FPS.push_back(App->averageFps[45]);
+            App->averageFps[44] = App->prevLastSecFrameCount;
+            FPS.push_back(App->averageFps[44]);
         }
+       
         else if (FPS.size() >= 45)
         {
             for (int i = 0; i <= 43; i++)
             {
                 FPS[i] = FPS[i+1];
+              
             }
-            FPS[44] = App->averageFps[45];
-  
+            FPS.pop_back();
         }
            
    
