@@ -323,20 +323,43 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
 
 
      
-       
-      /*  static std::vector<float> FPS;
-        for (int i = 0; i < 5; i++)
-        {
-            App->averageFps[i] = App->prevLastSecFrameCount;
-            FPS.push_back(App->averageFps[i]);
-            
+       /*
+       static std::vector<float> FPS;
 
-            LOG("FPS: %d", i);
+           for (int i = 0; i < 45; i++)
+           {
+               App->averageFps[i] = App->prevLastSecFrameCount;
+               FPS.push_back(App->averageFps[i]);
 
-        }
+               if (i == 44)
+               {
+                   i = 0;
+                   FPS.clear();
+               }
+               LOG("FPS: %d", i);
+
+           }
+       */
+       /*if (FpsActive == false)
+       {
+           for (int i = 0; i < 5; i++)
+           {
+               
+               App->averageFps[i] = App->prevLastSecFrameCount;
+               FPS.push_back(App->averageFps[i]);
+
+               if (i == 4)
+               {
+                   FpsActive = true;
+               }
+               LOG("FPS: %d", i);
+
+           }
+       }
+        
         SDL_GetPerformanceCounter();
       
-        ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 2.f, ImVec2(310, 100));  */
+        ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 2.f, ImVec2(310, 100)); */ 
         //miliseconds
         /*char title[25];
         //fps
