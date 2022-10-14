@@ -244,6 +244,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
                 FPS[i] = FPS[i+1];
             }
             FPS[44] = App->averageFps[45];
+  
         }
            
    

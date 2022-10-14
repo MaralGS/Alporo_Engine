@@ -85,10 +85,6 @@ void Application::FinishUpdate()
 		prevLastSecFrameCount = lastSecFrameCount;
 		lastSecFrameCount = 0;
 	}
-
-
-	//LOG("FPS3: %d ", averageFps);
-
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
