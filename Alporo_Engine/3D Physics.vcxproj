@@ -54,7 +54,7 @@
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalLibraryDirectories>$(SolutionDir)MathGeoLib\libx86\Debug;$(SolutionDir)Glew\libx86;$(SolutionDir)Assimp\include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)DevIL\libx86;$(SolutionDir)MathGeoLib\libx86\Debug;$(SolutionDir)Glew\libx86;$(SolutionDir)Assimp\include;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -111,6 +111,14 @@
     <ClInclude Include="Assimp\include\vector3.h" />
     <ClInclude Include="Assimp\include\version.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="DevIL\include\devil_cpp_wrapper.hpp" />
+    <ClInclude Include="DevIL\include\devil_internal_exports.h" />
+    <ClInclude Include="DevIL\include\il.h" />
+    <ClInclude Include="DevIL\include\ilu.h" />
+    <ClInclude Include="DevIL\include\ilut.h" />
+    <ClInclude Include="DevIL\include\ilut_config.h" />
+    <ClInclude Include="DevIL\include\ilu_region.h" />
+    <ClInclude Include="DevIL\include\il_wrap.h" />
     <ClInclude Include="Glew\include\eglew.h" />
     <ClInclude Include="Glew\include\glew.h" />
     <ClInclude Include="Glew\include\glxew.h" />
@@ -205,6 +213,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="DevIL\include\luadevil.c" />
     <ClCompile Include="glmath.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
