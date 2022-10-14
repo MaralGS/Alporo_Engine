@@ -75,11 +75,10 @@ void ModuleOPGPrimitives::DrawQuad()
     glDrawArrays(GL_TRIANGLES, 0, 36);
     // front face =================
     glEnd();*/
-
-	QUad Q;
+	 
+	Quad Q;
 	glBegin(GL_TRIANGLES);  // draw a cube with 12 triangles
 
-// front face =================
 	glVertex3fv(Q.v0);    //Cara1
 	glVertex3fv(Q.v1);
 	glVertex3fv(Q.v2);

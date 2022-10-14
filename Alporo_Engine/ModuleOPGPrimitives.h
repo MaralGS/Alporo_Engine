@@ -10,7 +10,7 @@ struct Cilindre
     float Radius = 1;
 };
 
-struct QUad
+struct Quad
 {
     float v0[3] = { 0.f, 1.f, 0.f };
     float v1[3] = { 0.f, 0.f, 0.f };
@@ -45,8 +45,8 @@ public:
 
     Cilindre CilindreStats;
 private:
-
-    float Quad[108] = { 0.f,1.f,0.f, //X Cara1 
+    //Quad posant el vertex a cada lloc
+   /* float Quad[108] = {0.f,1.f,0.f, //X Cara1 
                      0.f,0.f,0.f,//Y 
                      0.f,0.f,1.f,//Z
 
@@ -93,7 +93,7 @@ private:
                      1.f, 0.f, 1.f,
                      0.f, 0.f, 1.f,
                      0.f, 0.f, 0.f,
-    };
+    };*/
 
     float Triangle[36] = { 0.f,0.f,0.f, //X Cara1 
                      2.f,0.f,0.f,//Y 
