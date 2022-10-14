@@ -212,6 +212,13 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         if (ImGui::Checkbox("Draw Cube", &App->OpenGLPrimitives->DrawQuadra));
         if (ImGui::Checkbox("Draw Piramide", &App->OpenGLPrimitives->DrawPiramide));
         if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
+
+        ImGui::Checkbox("WireFrame", &Wireframe);
+        ImGui::Checkbox("Depth Test", &DepthTest);
+        ImGui::Checkbox("Cull Face", &CullFace);
+        ImGui::Checkbox("Lighting", &Lighting);
+        ImGui::Checkbox("Color Material", &ColorMaterial);
+
     }
     //Hardware Applcation
     if (ImGui::CollapsingHeader("Application"))
@@ -223,15 +230,11 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
         }
 
-        ImGui::Checkbox("WireFrame", &Wireframe);
-        ImGui::Checkbox("Depth Test", &DepthTest);
-        ImGui::Checkbox("Cull Face", &CullFace);
-        ImGui::Checkbox("Lighting", &Lighting);
-        ImGui::Checkbox("Color Material", &ColorMaterial);
-       
-     
+
+        ImGui::BulletText("FPS: ");
         if (FPS.size() < 45)
         {
+            App->averageFps[45] = App->prevLastSecFrameCount;
             FPS.push_back(App->averageFps[45]);
         }
         else if (FPS.size() >= 45)
