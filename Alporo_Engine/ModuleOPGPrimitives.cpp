@@ -128,8 +128,6 @@ void ModuleOPGPrimitives::DrawQuad()
 	glVertex3fv(Q.v7);
 	glVertex3fv(Q.v6);
 
-
-
 	glEnd();
 
 }
