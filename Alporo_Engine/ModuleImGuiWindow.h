@@ -16,6 +16,7 @@ public:
 
 	bool PreUpdate();
 	bool CleanUp();
+	void Histogram();
 
 	//bools
 	bool ActiveDemoWindows = true;
@@ -29,7 +30,6 @@ public:
 	bool CullFace = true;
 	bool Lighting = true;
 	bool ColorMaterial = true;
-	bool FpsActive = false;
 	//const char fps_log[60];
 	//const char ms_log[60];
 	//float

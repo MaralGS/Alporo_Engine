@@ -220,7 +220,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         ImGui::Checkbox("Color Material", &ColorMaterial);
 
     }
-    //Hardware Applcation
+    //Hardware Application
     if (ImGui::CollapsingHeader("Application"))
     {
         FPSStart = App->prevLastSecFrameCount;
@@ -230,37 +230,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
         }
-
-
-        ImGui::BulletText("FPS: ");
-        if (FPS.size() <= 45)
-        {
-            App->averageFps[44] = App->prevLastSecFrameCount;
-            FPS.push_back(App->averageFps[44]);
-        }
-       
-        else if (FPS.size() >= 45)
-        {
-            for (int i = 0; i <= 43; i++)
-            {
-                FPS[i] = FPS[i+1];
-              
-            }
-            FPS.pop_back();
-        }
-           
-   
-        SDL_GetPerformanceCounter();
-      
-        ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 240, ImVec2(310, 100));
-        //miliseconds
-        /*char title[25];
-        //fps
-        sprintf_s(title, 25, "Framrate %.1f", fps_log[fps_log.size() - 1]);
-        ImGui::PlotHistogram("##framrate", &fps_log[0], fps_log.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
-        //miliseconds
-        sprintf_s(title, 25, "Milliseconds %0.1f", ms_log[ms_log.size()-1]);
-        ImGui::PlotHistogram("##framrate", &ms_log[0], ms_log.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));*/
+        Histogram();
     }
    //Windows Options
     if (ImGui::CollapsingHeader("Window options"))
@@ -327,4 +297,34 @@ bool ModuleImguiWindow::CleanUp()
 	LOG("Cleaning Module");
 
 	return true;
+}
+
+void ModuleImguiWindow::Histogram()
+{
+    //FPS
+    {
+    ImGui::BulletText("FPS: ");
+    if (FPS.size() <= 45)
+    {
+        App->averageFps[44] = App->prevLastSecFrameCount;
+        FPS.push_back(App->averageFps[44]);
+    }
+
+    else if (FPS.size() >= 45)
+    {
+        for (int i = 0; i <= 43; i++)
+        {
+            FPS[i] = FPS[i + 1];
+
+        }
+        FPS.pop_back();
+    }
+
+    SDL_GetPerformanceCounter();
+
+    ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 240, ImVec2(310, 100));
+    }
+    //miliseconds
+    /*sprintf_s(title, 25, "Milliseconds %0.1f", ms_log[ms_log.size() - 1]);
+    ImGui::PlotHistogram("##framrate", &ms_log[0], ms_log.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));*/
 }
