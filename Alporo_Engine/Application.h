@@ -29,11 +29,10 @@ public:
 private:
 
 	Timer	ms_timer;
-	float	dt;
 	p2List<Module*> list_modules;
 
 public:
-
+	float	dt;
 	Application();
 	~Application();
 	Timer lastSecFrameTime;
@@ -41,7 +40,9 @@ public:
 	Uint32 lastSecFrameCount = 0;
 	Uint32 prevLastSecFrameCount = 0;
 	Uint64 frameCount = 0;
+	Uint32 Milisecods[44];
 	Uint32 averageFps[];
+
 	bool Init();
 	update_status Update();
 	bool CleanUp();
