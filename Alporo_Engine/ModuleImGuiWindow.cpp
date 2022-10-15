@@ -227,9 +227,9 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         ImGui::Button("Alporo Engine"); ImGui::SameLine(); ImGui::Text("App name");
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
-        if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
+        /*if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
-        }
+        }*/
         Histogram();
     }
    //Windows Options
