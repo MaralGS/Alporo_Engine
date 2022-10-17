@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "imgui.h"
 
+#include <vector>
 class ModuleImguiWindow : public Module
 {
 public:
@@ -15,6 +16,7 @@ public:
 
 	bool PreUpdate();
 	bool CleanUp();
+	void Histogram();
 
 	//bools
 	bool ActiveDemoWindows = true;
@@ -28,7 +30,6 @@ public:
 	bool CullFace = true;
 	bool Lighting = true;
 	bool ColorMaterial = true;
-
 	//const char fps_log[60];
 	//const char ms_log[60];
 	//float
@@ -45,7 +46,10 @@ public:
 	int FPSMin = 0;
 	int FPSMax = 120;
 
+	
 private:
 
+	std::vector<float> FPS;
+	std::vector<float> Miliseconds;
 };
 

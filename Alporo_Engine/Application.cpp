@@ -74,6 +74,7 @@ void Application::PrepareUpdate()
 	ms_timer.Start();
 	frameCount++;
 	lastSecFrameCount++;
+	LOG("DT: %.3f", dt);
 }
 
 // ---------------------------------------------
@@ -81,14 +82,10 @@ void Application::FinishUpdate()
 {
 	if (lastSecFrameTime.Read() > 1000)
 	{
-		//lastSecFrameTime.Start();
+		lastSecFrameTime.Start();
 		prevLastSecFrameCount = lastSecFrameCount;
 		lastSecFrameCount = 0;
 	}
-
-	Uint32 averageFps = prevLastSecFrameCount;
-	LOG("FPS3: %d ", averageFps);
-
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
