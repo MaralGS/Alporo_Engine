@@ -19,8 +19,9 @@ public:
 	update_status Update(float dt);
 	bool PreUpdate();
 	bool CleanUp();
+	void LoadMesh(aiMesh* MyMesh);
 	const vector<ModuleLoadFBX*> MyMesh;
-
+	
 private:
 	uint id_index = 0; // index in VRAM
 	uint num_index = 0;
