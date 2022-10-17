@@ -32,15 +32,15 @@ bool ModuleLoadFBX::Start()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 	
-	//scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
-	/*if (scene != nullptr && scene->HasMeshes())
+	scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
+	if (scene != nullptr && scene->HasMeshes())
 	{
-		// Use scene->mNumMeshes to iterate on scene->mMeshes array
+		
 		aiReleaseImport(scene);
-	}*/
-	/*else {
-		//LOG(“Error loading scene %s”, file_path);
-	}*/
+	}
+	else{
+		
+	}
 	return ret;
 }
 
@@ -63,9 +63,17 @@ bool ModuleLoadFBX::PostUpdate() {
 	return true;
 }
 
+void ModuleLoadFBX::LoadMesh(aiMesh* MyMesh)
+{
+	MyMesh->mNumVertices = scene->mMeshes->mNumVertices;
+	mymesh->mVertices = new aiVector3D[mymesh->mNumVertices * 3];
+	memcpy(mymesh->mVertices, mesh->mVertices, sizeof(aiVector3D) * mymesh->mNumVertices * 3);
+}
+
 bool ModuleLoadFBX::CleanUp()
 {
 	aiDetachAllLogStreams();
 	LOG("Unloading Intro scene");
 	return true;
 }
+
