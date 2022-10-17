@@ -456,6 +456,9 @@
     <ClInclude Include="DevIL\include\devil_cpp_wrapper.hpp">
       <Filter>External_Libraries\Devil\Include</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleTexture.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -621,6 +624,9 @@
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleLoadFBX.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTexture.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>

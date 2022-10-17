@@ -10,6 +10,7 @@ Application::Application()
 	imguiwindows = new ModuleImguiWindow(this);
 	OpenGLPrimitives = new ModuleOPGPrimitives(this);
 	LoadFbx = new ModuleLoadFBX(this);
+	MTextures = new ModuleTexture(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -23,6 +24,7 @@ Application::Application()
 	AddModule(imguiwindows);
 	AddModule(OpenGLPrimitives);
 	AddModule(LoadFbx);
+	AddModule(MTextures);
 	
 
 	// Renderer last!
