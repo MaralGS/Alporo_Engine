@@ -227,9 +227,9 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         ImGui::Button("Alporo Engine"); ImGui::SameLine(); ImGui::Text("App name");
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
-        /*if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
+        if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
-        }*/
+        }
         Histogram();
     }
    //Windows Options
@@ -325,28 +325,26 @@ void ModuleImguiWindow::Histogram()
     ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 240, ImVec2(310, 100));
     }
     //miliseconds
-    /* {
-        ImGui::BulletText("miliseconds: ");
-        if (Mls.size() <= 45)
+  /* {
+        ImGui::BulletText("Miliseconds: ");
+        if (Miliseconds.size() <= 45)
         {
-            App->averageMls[44] = App->dt*1000;
-            Mls.push_back(App->averageMls[44]);
+            App->Milisecods[44] = App->dt * 1000;
+            Miliseconds.push_back(App->Milisecods[44]);
         }
 
-        else if (Mls.size() >= 45)
+        else if (Miliseconds.size() >= 45)
         {
             for (int i = 0; i <= 43; i++)
             {
-                Mls[i] = Mls[i + 1];
+                Miliseconds[i] = Miliseconds[i + 1];
 
             }
-            Mls.pop_back();
+            Miliseconds.pop_back();
         }
 
         SDL_GetPerformanceCounter();
 
-        ImGui::PlotHistogram("##framrate", Mls.data(), Mls.size(), 0, NULL, 0.0f, 80, ImVec2(310, 100));
+        ImGui::PlotHistogram("##Milisecods", Miliseconds.data(), Miliseconds.size(), 0, NULL, 0.f, 80.f, ImVec2(310, 100));
     }*/
-    /*sprintf_s(title, 25, "Milliseconds %0.1f", ms_log[ms_log.size() - 1]);
-    ImGui::PlotHistogram("##framrate", &ms_log[0], ms_log.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));*/
 }

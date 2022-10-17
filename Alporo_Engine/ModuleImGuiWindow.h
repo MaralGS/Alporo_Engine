@@ -50,6 +50,6 @@ public:
 private:
 
 	std::vector<float> FPS;
-	std::vector<float> Mls;
+	std::vector<float> Miliseconds;
 };
 
