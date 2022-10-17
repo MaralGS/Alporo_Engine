@@ -20,8 +20,15 @@ struct Quad
     float v5[3] = { 1.f, 1.f, 1.f, };
     float v6[3] = { 1.f, 0.f, 1.f, };
     float v7[3] = { 1.f, 0.f, 0.f, };
+};
 
-
+struct Triangle
+{
+    float v0[3] = { 0.f,0.f,0.f };
+    float v1[3] = { 2.f,0.f,0.f };
+    float v2[3] = { 1.f,2.f,-1.f};
+    float v3[3] = { 2.f, 0.f, -2.f };
+    float v4[3] = { 0.f, 0.f, -2.f };
 };
 
 class ModuleOPGPrimitives : public Module
@@ -94,8 +101,8 @@ private:
                      0.f, 0.f, 1.f,
                      0.f, 0.f, 0.f,
     };*/
-
-    float Triangle[36] = { 0.f,0.f,0.f, //X Cara1 
+    //Triangle posant el vertex a cada lloc
+   /*float Triangl[36] = {0.f,0.f,0.f, //X Cara1 
                      2.f,0.f,0.f,//Y 
                      1.f,2.f,-1.f,//Z
 
@@ -113,7 +120,7 @@ private:
                      1.f,2.f,-1.f,
     };
 
-    float TriangleBase[18] = {
+    float TriangleBas[18] = {
 
                      0.f, 0.f, -2.f,
                      2.f, 0.f, -2.f,
@@ -122,7 +129,7 @@ private:
                      0.f, 0.f, -2.f,
                      2.f, 0.f, 0.f,
                      0.f, 0.f, 0.f,
-    };
+    };*/
 
 
 };

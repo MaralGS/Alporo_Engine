@@ -304,20 +304,21 @@ void ModuleImguiWindow::Histogram()
     //FPS
     {
     ImGui::BulletText("FPS: ");
-    if (FPS.size() <= 45)
+    if (FPS.size() < 45)
     {
-        App->averageFps[44] = App->prevLastSecFrameCount;
-        FPS.push_back(App->averageFps[44]);
+        FPS.push_back(App->prevLastSecFrameCount);
     }
 
-    else if (FPS.size() >= 45)
+    else if (FPS.size() == 45)
     {
         for (int i = 0; i <= 43; i++)
         {
             FPS[i] = FPS[i + 1];
 
         }
-        FPS.pop_back();
+        FPS[44] = App->prevLastSecFrameCount;
+
+        //FPS.pop_back();
     }
 
     SDL_GetPerformanceCounter();
@@ -325,26 +326,25 @@ void ModuleImguiWindow::Histogram()
     ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 240, ImVec2(310, 100));
     }
     //miliseconds
-  /* {
+   {
         ImGui::BulletText("Miliseconds: ");
-        if (Miliseconds.size() <= 45)
+        if (Miliseconds.size() < 45)
         {
-            App->Milisecods[44] = App->dt * 1000;
-            Miliseconds.push_back(App->Milisecods[44]);
+            Miliseconds.push_back(App->dt * 1000);
         }
 
-        else if (Miliseconds.size() >= 45)
+        else if (Miliseconds.size() == 45)
         {
             for (int i = 0; i <= 43; i++)
             {
                 Miliseconds[i] = Miliseconds[i + 1];
 
             }
-            Miliseconds.pop_back();
+            Miliseconds[44] = App->dt*1000;
         }
 
         SDL_GetPerformanceCounter();
 
         ImGui::PlotHistogram("##Milisecods", Miliseconds.data(), Miliseconds.size(), 0, NULL, 0.f, 80.f, ImVec2(310, 100));
-    }*/
+    }
 }

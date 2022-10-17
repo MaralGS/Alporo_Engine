@@ -77,6 +77,7 @@ void ModuleOPGPrimitives::DrawQuad()
     glEnd();*/
 	 
 	Quad Q;
+	
 	glBegin(GL_TRIANGLES);  // draw a cube with 12 triangles
 
 	glVertex3fv(Q.v0);    //Cara1
@@ -181,15 +182,35 @@ void ModuleOPGPrimitives::DrawPiramid()
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glLineWidth(2);
 	}
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, Triangle);
-	glDrawArrays(GL_TRIANGLES, 0, 12);
-	glVertexPointer(3, GL_FLOAT, 0, TriangleBase);
-	glDrawArrays(GL_TRIANGLES, 0, 6);
-	// front face =================
+	Triangle T;
+
+	glBegin(GL_TRIANGLES);  // draw a triangle
+
+	glVertex3fv(T.v0);    //Cara1
+	glVertex3fv(T.v1);
+	glVertex3fv(T.v2);
+
+	glVertex3fv(T.v3);    //Cara2
+	glVertex3fv(T.v2);
+	glVertex3fv(T.v1);
+
+	glVertex3fv(T.v3);    //Cara3
+	glVertex3fv(T.v4);
+	glVertex3fv(T.v2);
+
+	glVertex3fv(T.v4);    //Cara4
+	glVertex3fv(T.v0);
+	glVertex3fv(T.v2);
+	
+	glVertex3fv(T.v4);    //Base
+	glVertex3fv(T.v3);
+	glVertex3fv(T.v1);
+	
+	glVertex3fv(T.v4);    
+	glVertex3fv(T.v1);
+	glVertex3fv(T.v0);
+
 	glEnd();
-
-
 }
 
 void ModuleOPGPrimitives::DrawSphere(float radius)
