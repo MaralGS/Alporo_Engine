@@ -40,8 +40,6 @@ public:
 	Uint32 lastSecFrameCount = 0;
 	Uint32 prevLastSecFrameCount = 0;
 	Uint64 frameCount = 0;
-	Uint32 Milisecods[44];
-	Uint32 averageFps[44];
 
 	bool Init();
 	update_status Update();

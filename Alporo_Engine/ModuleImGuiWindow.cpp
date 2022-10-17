@@ -306,8 +306,7 @@ void ModuleImguiWindow::Histogram()
     ImGui::BulletText("FPS: ");
     if (FPS.size() < 45)
     {
-        App->averageFps[44] = App->prevLastSecFrameCount;
-        FPS.push_back(App->averageFps[44]);
+        FPS.push_back(App->prevLastSecFrameCount);
     }
 
     else if (FPS.size() == 45)
@@ -331,8 +330,7 @@ void ModuleImguiWindow::Histogram()
         ImGui::BulletText("Miliseconds: ");
         if (Miliseconds.size() < 45)
         {
-            App->Milisecods[44] = App->dt * 1000;
-            Miliseconds.push_back(App->Milisecods[44]);
+            Miliseconds.push_back(App->dt * 1000);
         }
 
         else if (Miliseconds.size() == 45)
@@ -342,7 +340,7 @@ void ModuleImguiWindow::Histogram()
                 Miliseconds[i] = Miliseconds[i + 1];
 
             }
-            Miliseconds.pop_back();
+            Miliseconds[44] = App->dt*1000;
         }
 
         SDL_GetPerformanceCounter();
