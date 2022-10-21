@@ -8,13 +8,13 @@
 #include <string>
 using namespace std;
 struct MyMesh {
+	MyMesh();
 	~MyMesh();
-	MyMesh() {}
 
-	uint id_indices = 1; // index in VRAM
+	uint id_indices = 0; // index in VRAM
 	uint num_indices = 0;
 	uint* indices = nullptr;
-	uint id_vertices = 1; // unique vertex in VRAM
+	uint id_vertices = 0; // unique vertex in VRAM
 	uint num_vertices = 0;
 	float* vertices = nullptr;
 
