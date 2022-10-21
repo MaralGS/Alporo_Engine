@@ -76,7 +76,7 @@ void Application::PrepareUpdate()
 	ms_timer.Start();
 	frameCount++;
 	lastSecFrameCount++;
-	LOG("DT: %.3f", dt);
+
 }
 
 // ---------------------------------------------
