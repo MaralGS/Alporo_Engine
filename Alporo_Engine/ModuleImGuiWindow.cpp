@@ -139,12 +139,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::SetNextWindowPos(ImVec2(main_viewport->WorkPos.x + 650, main_viewport->WorkPos.y + 20), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_FirstUseEver);
 
-    if (!ImGui::Begin("ImGui Menu", p_open, window_flags))
-    {
-        // Early out if the window is collapsed, as an optimization.
-        ImGui::End();
-        return UPDATE_CONTINUE;
-    }
+    ImGui::Begin("ImGui Menu", p_open, window_flags);
   
     // Most "big" widgets share a common width settings by default. See 'Demo->Layout->Widgets Width' for details.
     // e.g. Use 2/3 of the space for widgets and 1/3 for labels (right align)
@@ -226,10 +221,9 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         FPSStart = App->prevLastSecFrameCount;
         ImGui::Button("Alporo Engine"); ImGui::SameLine(); ImGui::Text("App name");
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
-        ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
-        if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
+        /*if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
-        }
+        }*/
         Histogram();
     }
    //Windows Options
