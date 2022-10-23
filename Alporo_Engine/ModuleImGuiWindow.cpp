@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleImGuiWindow.h"
+#include "HMenuWindows.h"
 #include "imgui.h"
 #include<vector>
 /*#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
@@ -103,12 +104,20 @@ bool ModuleImguiWindow::PreUpdate() {
 	return true;
 }
 
+update_status ModuleImguiWindow::Update(float dt)
+{
+    update_status ret = UPDATE_CONTINUE;
+
+
+    return ret;
+}
+
 // -----------------------------------------------------------------
 
 
-bool ModuleImguiWindow::ShowWindow(bool* p_open)
+/* bool ModuleImguiWindow::ShowWindow(bool* p_open)
 {
-   // Main body of the Demo window starts here.
+  // Main body of the Demo window starts here.
     static bool no_titlebar = false;
     static bool no_scrollbar = false;
     static bool no_menu = false;
@@ -223,7 +232,7 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
         /*if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
-        }*/
+        }
         Histogram();
     }
    //Windows Options
@@ -276,13 +285,14 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::End();
 
     return true;
-}
+}*/
 
 
 bool ModuleImguiWindow::PostUpdate()
 {
     bool ret = true;
 
+    HMenu::PrintMenu();
 	return ret;
 }
 
