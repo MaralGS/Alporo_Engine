@@ -14,7 +14,6 @@ ModuleLoadFBX::ModuleLoadFBX(Application* app, bool start_enabled) : Module(app,
 bool ModuleLoadFBX::Start()
 {
 	bool ret = true;
-	LoadFile("Assets/Ganivet.fbx");
 	return ret;
 }
 
@@ -126,6 +125,11 @@ update_status ModuleLoadFBX::PostUpdate(float dt)
 }
 bool ModuleLoadFBX::CleanUp()
 {
+	for (int i = 0; i < meshes.size(); i++) {
+		delete meshes[i];
+		meshes[i] = nullptr;
+	}
+	meshes.clear();
 	aiDetachAllLogStreams();
 	return true;
 }
