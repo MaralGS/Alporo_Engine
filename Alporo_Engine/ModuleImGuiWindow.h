@@ -11,8 +11,8 @@ public:
 	~ModuleImguiWindow();
 
 	bool Start();
-	//IMGUI_API bool          ShowWindow(bool* p_open = NULL);
-	bool PostUpdate();
+	IMGUI_API bool          ShowWindow(bool* p_open = NULL);
+	update_status PostUpdate();
 
 	bool PreUpdate();
 	update_status Update(float dt);

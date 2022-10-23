@@ -115,7 +115,7 @@ update_status ModuleImguiWindow::Update(float dt)
 // -----------------------------------------------------------------
 
 
-/* bool ModuleImguiWindow::ShowWindow(bool* p_open)
+bool ModuleImguiWindow::ShowWindow(bool* p_open)
 {
   // Main body of the Demo window starts here.
     static bool no_titlebar = false;
@@ -232,7 +232,7 @@ update_status ModuleImguiWindow::Update(float dt)
         ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
         /*if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
             //SDL_SetWindowBrightness(App->window->window, FPSStart);
-        }
+        }*/
         Histogram();
     }
    //Windows Options
@@ -285,14 +285,14 @@ update_status ModuleImguiWindow::Update(float dt)
     ImGui::End();
 
     return true;
-}*/
+}
 
 
-bool ModuleImguiWindow::PostUpdate()
+update_status ModuleImguiWindow::PostUpdate()
 {
-    bool ret = true;
+    update_status ret = UPDATE_CONTINUE;
 
-    HMenu::PrintMenu();
+    //HMenu::PrintMenu();
 	return ret;
 }
 

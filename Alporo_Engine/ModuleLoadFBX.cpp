@@ -1,4 +1,4 @@
-#include "Globals.h"
+/*#include "Globals.h"
 #include "Application.h"
 #include "ModuleLoadFBX.h"
 
@@ -40,7 +40,7 @@ bool ModuleLoadFBX::Start()
 	}*/
 	/*else {
 		//LOG(“Error loading scene %s”, file_path);
-	}*/
+	}
 	return ret;
 }
 
@@ -69,3 +69,4 @@ bool ModuleLoadFBX::CleanUp()
 	LOG("Unloading Intro scene");
 	return true;
 }
+*/

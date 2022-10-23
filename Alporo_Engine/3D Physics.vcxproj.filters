@@ -429,9 +429,6 @@
     <ClInclude Include="Assimp\include\cexport.h">
       <Filter>External_Libraries\Assimp</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleLoadFBX.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="DevIL\include\devil_internal_exports.h">
       <Filter>External_Libraries\Devil\Include</Filter>
     </ClInclude>
@@ -467,6 +464,9 @@
     </ClInclude>
     <ClInclude Include="SDL\include\SDL_vulkan.h">
       <Filter>External_Libraries\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLoadFBX.h">
+      <Filter>Sources\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -632,9 +632,6 @@
     <ClCompile Include="ModuleOPGPrimitives.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLoadFBX.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleTexture.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
@@ -642,6 +639,9 @@
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="HMenuWindows.h">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLoadFBX.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
