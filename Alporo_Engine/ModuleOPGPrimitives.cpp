@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleOPGPrimitives.h"
 #include "Primitive.h"
+#include <glew.h>
 #include <gl/GL.h>
 
 ModuleOPGPrimitives::ModuleOPGPrimitives(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -217,5 +218,5 @@ void ModuleOPGPrimitives::DrawPiramid()
 
 void ModuleOPGPrimitives::DrawSphere(float radius)
 {
-	//glutSolidSphere(radius, 25, 25);
+
 }
