@@ -49,14 +49,14 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)ImGui;$(SolutionDir)Glew\include;$(SolutionDir)Assimp\include;$(SolutionDir)DevIL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ImGui;$(SolutionDir)Glew\include;$(SolutionDir)Assimp\include;$(SolutionDir)DevIL\include;$(SolutionDir)SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalLibraryDirectories>$(SolutionDir)DevIL\libx86;$(SolutionDir)MathGeoLib\libx86\Debug;$(SolutionDir)Glew\libx86;$(SolutionDir)Assimp\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)DevIL\libx86;$(SolutionDir)MathGeoLib\libx86\Debug;$(SolutionDir)Glew\libx86;$(SolutionDir)Assimp\libx86;D:\documentos\GitHub\Motor_CITM\Alporo_Engine\SDL\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -215,12 +215,16 @@
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="ModuleOPGPrimitives.h" />
+    <ClInclude Include="SDL\include\begin_code.h" />
+    <ClInclude Include="SDL\include\SDL_vulkan.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="glmath.cpp" />
+    <ClCompile Include="HMenuWindows.cpp" />
+    <ClCompile Include="HMenuWindows.h" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />

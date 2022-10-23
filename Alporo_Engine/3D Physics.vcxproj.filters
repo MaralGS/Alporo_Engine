@@ -462,6 +462,12 @@
     <ClInclude Include="MemLeaks.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="SDL\include\begin_code.h">
+      <Filter>External_Libraries\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="SDL\include\SDL_vulkan.h">
+      <Filter>External_Libraries\Assimp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -630,6 +636,12 @@
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleTexture.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="HMenuWindows.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="HMenuWindows.h">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
