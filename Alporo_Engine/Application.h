@@ -27,6 +27,7 @@ public:
 	ModuleOPGPrimitives* OpenGLPrimitives;
 	ModuleLoadFBX* LoadFbx;
 	ModuleTexture* MTextures;
+
 	
 private:
 

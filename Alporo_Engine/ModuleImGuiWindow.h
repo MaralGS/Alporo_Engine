@@ -11,10 +11,11 @@ public:
 	~ModuleImguiWindow();
 
 	bool Start();
-	IMGUI_API bool          ShowWindow(bool* p_open = NULL);
+	//IMGUI_API bool          ShowWindow(bool* p_open = NULL);
 	bool PostUpdate();
 
 	bool PreUpdate();
+	update_status Update(float dt);
 	bool CleanUp();
 	void Histogram();
 
