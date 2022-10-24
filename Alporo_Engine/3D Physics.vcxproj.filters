@@ -635,12 +635,6 @@
     <ClCompile Include="ModuleTexture.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="HMenuWindows.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="HMenuWindows.h">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleLoadFBX.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>

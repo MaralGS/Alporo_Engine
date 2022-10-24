@@ -6,6 +6,10 @@
 
 #include "glew.h"
 
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_sdl.h"
+#include "imGui/imgui_impl_opengl3.h"
+
 #define MAX_LIGHTS 8
 
 class ModuleRenderer3D : public Module
@@ -22,6 +26,7 @@ public:
 	void OnResize(int width, int height);
 
 public:
+	ImGuiIO* io = nullptr;
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;

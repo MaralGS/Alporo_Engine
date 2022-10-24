@@ -11,11 +11,10 @@ public:
 	~ModuleImguiWindow();
 
 	bool Start();
-	IMGUI_API bool          ShowWindow(bool* p_open = NULL);
-	update_status PostUpdate();
-
-	bool PreUpdate();
+	//IMGUI_API bool          ShowWindow(bool* p_open = NULL);
+	update_status PreUpdate(float dt);
 	update_status Update(float dt);
+	update_status PostUpdate();
 	bool CleanUp();
 	void Histogram();
 
@@ -43,9 +42,8 @@ public:
 	//ints
 	int WidthMin = 0;
 	int WidthMax = 2040;
-	int FPSStart = 0;
-	int FPSMin = 0;
-	int FPSMax = 120;
+	int CurrentFrame;
+	int CurrentMilisecond;
 
 	
 private:
