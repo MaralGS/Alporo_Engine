@@ -285,8 +285,8 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::End();
 
 
-    //HMenu HM;
-    //HM.PrintMenu();
+    HMenu HM;
+    HM.PrintMenu();
 
     return true;
 }
