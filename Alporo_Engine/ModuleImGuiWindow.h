@@ -12,9 +12,10 @@ public:
 
 	bool Start();
 	IMGUI_API bool          ShowWindow(bool* p_open = NULL);
-	bool PostUpdate();
+	update_status PostUpdate();
 
 	bool PreUpdate();
+	update_status Update(float dt);
 	bool CleanUp();
 	void Histogram();
 
@@ -48,6 +49,8 @@ public:
 
 	
 private:
+
+
 
 	std::vector<float> FPS;
 	std::vector<float> Miliseconds;

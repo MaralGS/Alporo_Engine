@@ -25,8 +25,9 @@ public:
 	ModuleSceneIntro* scene;
 	ModuleImguiWindow* imguiwindows;
 	ModuleOPGPrimitives* OpenGLPrimitives;
-	ModuleLoadFBX* LoadFbx;
+	//ModuleLoadFBX* LoadFbx;
 	ModuleTexture* MTextures;
+
 	
 private:
 
