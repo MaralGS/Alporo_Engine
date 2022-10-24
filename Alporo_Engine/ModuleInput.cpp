@@ -18,9 +18,17 @@ ModuleInput::~ModuleInput()
 	delete[] keyboard;
 }
 
+
 // Called before render is available
 bool ModuleInput::Init()
 {
+	/*
+	SDL_bool done;
+	SDL_Window* window;
+	SDL_Event event;                        // Declare event handle
+	char* dropped_filedir;                  // Pointer for directory of dropped file
+             // SDL2 initialization
+	*/
 	LOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
@@ -30,7 +38,23 @@ bool ModuleInput::Init()
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-
+	/*
+	window = SDL_CreateWindow(  // Create a window
+		"SDL_DropEvent usage, please drop the file on window",
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		640,
+		480,
+		SDL_WINDOW_OPENGL
+	);
+	
+	if (window == NULL) {
+		// In the event that the window could not be made...
+		SDL_Log("Could not create window: %s", SDL_GetError());
+		SDL_Quit();
+		return 1;
+	}
+	*/
 	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 
 	return ret;
@@ -104,18 +128,17 @@ update_status ModuleInput::PreUpdate(float dt)
 					App->camera->Z += App->camera->Z * speed;
 				}	
 			break;*/
-		case (SDL_DROPFILE):
-		{
-			App->LoadFbx->LoadFile(e.drop.file);
-			SDL_free(e.drop.file);   
+			case SDL_DROPFILE:
+			App->LoadFbx->LoadFile(e.drop.file); 
 			SDL_ShowSimpleMessageBox(
 				SDL_MESSAGEBOX_INFORMATION,
 				"File dropped on window",
 				e.drop.file,
 				App->window->window
 			);
+			SDL_free(e.drop.file);
 			break;
-		}
+		
 			case SDL_MOUSEMOTION:
 			mouse_x = e.motion.x / SCREEN_SIZE;
 			mouse_y = e.motion.y / SCREEN_SIZE;
