@@ -5,8 +5,6 @@
 #include <vector>
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
-#pragma comment (lib, "Glew/libx86/glew32.lib")
-#pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
 
 ModuleLoadFBX::ModuleLoadFBX(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
