@@ -31,6 +31,8 @@ bool ModuleInput::Init()
 		ret = false;
 	}
 
+	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
+
 	return ret;
 }
 
@@ -102,7 +104,18 @@ update_status ModuleInput::PreUpdate(float dt)
 					App->camera->Z += App->camera->Z * speed;
 				}	
 			break;*/
-
+		case (SDL_DROPFILE):
+		{
+			App->LoadFbx->LoadFile(e.drop.file);
+			SDL_free(e.drop.file);   
+			SDL_ShowSimpleMessageBox(
+				SDL_MESSAGEBOX_INFORMATION,
+				"File dropped on window",
+				e.drop.file,
+				App->window->window
+			);
+			break;
+		}
 			case SDL_MOUSEMOTION:
 			mouse_x = e.motion.x / SCREEN_SIZE;
 			mouse_y = e.motion.y / SCREEN_SIZE;
