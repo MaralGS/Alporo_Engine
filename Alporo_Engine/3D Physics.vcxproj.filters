@@ -55,6 +55,9 @@
     <Filter Include="External_Libraries\Devil\Include">
       <UniqueIdentifier>{cbedb60d-0e13-4cc3-85a7-042fe99a8563}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Objects">
+      <UniqueIdentifier>{f41537a8-cc1f-4212-a58b-d4f76a9dba00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -468,6 +471,12 @@
     <ClInclude Include="ModuleLoadFBX.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Sources\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Sources\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -637,6 +646,12 @@
     </ClCompile>
     <ClCompile Include="ModuleLoadFBX.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Sources\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Sources\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
