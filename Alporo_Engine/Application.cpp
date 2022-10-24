@@ -9,7 +9,7 @@ Application::Application()
 	scene = new ModuleSceneIntro(this);
 	imguiwindows = new ModuleImguiWindow(this);
 	OpenGLPrimitives = new ModuleOPGPrimitives(this);
-	//LoadFbx = new ModuleLoadFBX(this);
+	LoadFbx = new ModuleLoadFBX(this);
 	MTextures = new ModuleTexture(this);
 
 	// The order of calls is very important!
@@ -23,7 +23,7 @@ Application::Application()
 	AddModule(scene);
 	AddModule(imguiwindows);
 	AddModule(OpenGLPrimitives);
-	//AddModule(LoadFbx);
+	AddModule(LoadFbx);
 	AddModule(MTextures);
 
 

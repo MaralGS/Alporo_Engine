@@ -32,7 +32,7 @@ MyMesh::~MyMesh() {
 }
 void MyMesh::Render()
 {
-	
+
 	//Binding buffers
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
@@ -45,7 +45,7 @@ void MyMesh::Render()
 
 	// Unbind buffers
 	glDisableClientState(GL_VERTEX_ARRAY);
-	
+
 }
 
 void ModuleLoadFBX::LoadFile(string file_path)
@@ -96,7 +96,7 @@ void ModuleLoadFBX::LoadFile(string file_path)
 
 
 void ModuleLoadFBX::LoadMesh(MyMesh* mesh) {
-	
+
 	glGenBuffers(1, (GLuint*)&(mesh->id_vertices));
 	glGenBuffers(1, (GLuint*)&(mesh->id_indices));
 
