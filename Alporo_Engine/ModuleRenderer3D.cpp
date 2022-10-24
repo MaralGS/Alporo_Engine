@@ -22,6 +22,7 @@
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
 #pragma comment (lib, "opengl32.lib") /* link Microsoft OpenGL lib   */
+#pragma comment (lib, "Glew/libx86/glew32.lib")
 
 ModuleRenderer3D::ModuleRenderer3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -44,6 +45,17 @@ bool ModuleRenderer3D::Init()
 		LOG("OpenGL context could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+
+	GLenum error = glewInit();
+	//if (error != GL_NO_ERROR)
+	//{
+	//	LOG(LogType::L_ERROR, "Error initializing glew library! %s", SDL_GetError());
+	//	ret = false;
+	//}
+	//else
+	//{
+	//	LOG(LogType::L_NORMAL, "Init: Glew %s", glewGetString(GLEW_VERSION));
+	//}
 	
 	if (ret == true)
 	{
@@ -111,7 +123,6 @@ bool ModuleRenderer3D::Init()
 		SDL_WINDOW_OPENGL;
 		SDL_GL_CreateContext(App->window->window);
 		SDL_GL_SwapWindow(App->window->window);
-		App->LoadFbx->LoadFile("Assets/Ganivet.fbx");
 	}
 
 	// Projection matrix for
