@@ -284,6 +284,10 @@ bool ModuleImguiWindow::ShowWindow(bool* p_open)
     ImGui::PopItemWidth();
     ImGui::End();
 
+
+
+    HM.PrintMenu();
+
     return true;
 }
 
@@ -292,7 +296,6 @@ update_status ModuleImguiWindow::PostUpdate()
 {
     update_status ret = UPDATE_CONTINUE;
 
-    //HMenu::PrintMenu();
 	return ret;
 }
 

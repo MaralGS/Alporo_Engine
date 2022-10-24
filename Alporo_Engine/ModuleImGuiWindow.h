@@ -50,6 +50,8 @@ public:
 	
 private:
 
+	HMenu HM;
+
 	std::vector<float> FPS;
 	std::vector<float> Miliseconds;
 };

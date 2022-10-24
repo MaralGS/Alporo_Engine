@@ -6,9 +6,9 @@ class HMenu
 {
 public:
 
-	static void PrintMenu();
+	void PrintMenu();
 
-	static bool quit;
+	bool quit = false;
 
 private:
 

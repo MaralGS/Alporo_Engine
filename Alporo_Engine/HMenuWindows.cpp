@@ -2,13 +2,13 @@
 #include "imgui.h"
 #include "SDL.h"
 
-bool HMenu::quit = false;
 
 void HMenu::PrintMenu()
 {
-	ImGui::Begin("Menus", false, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize); //| ImGuiWindowFlags_NoDocking 
+	ImGui::Begin("Menus", false, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar); //| ImGuiWindowFlags_NoDocking 
 
-	if (ImGui::BeginMenuBar())
+	ImGui::TextColored({0,255,0,255}, "HOLA");
+	/*if (ImGui::BeginMenuBar())
 	{
 		if (ImGui::BeginMenu("File"))
 		{
@@ -35,7 +35,7 @@ void HMenu::PrintMenu()
 		}
 
 		ImGui::EndMenuBar();
-	}
+	}*/
 
 	ImGui::End();
 }

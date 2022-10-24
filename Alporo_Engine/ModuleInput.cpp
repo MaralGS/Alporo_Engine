@@ -84,17 +84,24 @@ update_status ModuleInput::PreUpdate(float dt)
 	}
 
 	mouse_x_motion = mouse_y_motion = 0;
-
-	bool quit = false;
 	SDL_Event e;
+	bool quit = false;
+	float speed = 5.0f * dt;
 	while(SDL_PollEvent(&e))
 	{
 		ImGui_ImplSDL2_ProcessEvent(&e);
 		switch(e.type)
 		{
-			case SDL_MOUSEWHEEL:
-			mouse_z = e.wheel.y;
-			break;
+			/*case SDL_MOUSEWHEEL:
+				if (e.wheel.y > 0) // Up
+				{
+					App->camera->Z -= App->camera->Z * speed;
+				}
+				if (e.wheel.y < 0) // Up
+				{
+					App->camera->Z += App->camera->Z * speed;
+				}	
+			break;*/
 
 			case SDL_MOUSEMOTION:
 			mouse_x = e.motion.x / SCREEN_SIZE;
