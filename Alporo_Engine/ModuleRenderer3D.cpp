@@ -123,7 +123,6 @@ bool ModuleRenderer3D::Init()
 		SDL_WINDOW_OPENGL;
 		SDL_GL_CreateContext(App->window->window);
 		SDL_GL_SwapWindow(App->window->window);
-		App->LoadFbx->LoadFile("Assets/Ganivet.fbx");
 	}
 
 	// Projection matrix for
