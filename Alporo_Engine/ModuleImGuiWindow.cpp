@@ -85,8 +85,41 @@ update_status ModuleImguiWindow::Update(float dt)
         //Configuration options
         if (ImGui::CollapsingHeader("Configuration"))
         {
-            if (ImGui::Checkbox("Draw Cube", &App->OpenGLPrimitives->DrawQuadra));
-            if (ImGui::Checkbox("Draw Piramide", &App->OpenGLPrimitives->DrawPiramide));
+            if (ImGui::BeginMenu("Cube"))
+            {
+                if (ImGui::Button("Generate Cube")) {
+                    Quad* Q = new Quad();
+                    App->OpenGLPrimitives->Cub.push_back(Q);
+                    App->OpenGLPrimitives->NumQuads++;
+                }
+                if (ImGui::Button("Delete Cube")) {
+                    if (App->OpenGLPrimitives->NumQuads >= 1)
+                    {
+                        App->OpenGLPrimitives->Cub.pop_back();
+                        App->OpenGLPrimitives->NumQuads--;
+                    }
+                }
+                ImGui::EndMenu();
+            }
+           
+            //generate and delete a Piramide
+            if (ImGui::BeginMenu("Piramide"))
+            {
+                if (ImGui::Button("Generate Piramid")) {
+                    Triangle* Q = new Triangle();
+                    App->OpenGLPrimitives->Piramid.push_back(Q);
+                    App->OpenGLPrimitives->NumPiramid++;
+                }
+                if (ImGui::Button("Delete Piramid")) {
+                    if (App->OpenGLPrimitives->NumPiramid >= 1)
+                    {
+                        App->OpenGLPrimitives->Piramid.pop_back();
+                        App->OpenGLPrimitives->NumPiramid--;
+                    }
+
+                }
+                ImGui::EndMenu();
+            }
             if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
 
             ImGui::Checkbox("WireFrame", &Wireframe);
@@ -102,9 +135,6 @@ update_status ModuleImguiWindow::Update(float dt)
 
             ImGui::Button("Alporo Engine"); ImGui::SameLine(); ImGui::Text("App name");
             ImGui::Button("UPC CITM"); ImGui::SameLine(); ImGui::Text("Organization");
-            /*if (ImGui::SliderInt("Max FPS", &FPSStart, FPSMin, FPSMax)) {
-                //SDL_SetWindowBrightness(App->window->window, FPSStart);
-            }*/
             Histogram();
         }
        //Windows Options
@@ -193,7 +223,7 @@ void ModuleImguiWindow::Histogram()
         }
         FPS[44] = App->prevLastSecFrameCount;
 
-        //FPS.pop_back();
+
     }
 
     SDL_GetPerformanceCounter();
