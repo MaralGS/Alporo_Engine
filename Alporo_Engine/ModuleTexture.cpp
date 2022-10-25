@@ -17,7 +17,7 @@ ModuleTexture::~ModuleTexture()
 
 bool ModuleTexture::Start()
 {
-	LOG("Loading Intro Textures");
+	LOG(LogType::LOGS, "Loading Intro Textures");
 	bool ret = true;
 
 	return ret;

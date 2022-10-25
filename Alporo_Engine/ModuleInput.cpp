@@ -18,18 +18,44 @@ ModuleInput::~ModuleInput()
 	delete[] keyboard;
 }
 
+
 // Called before render is available
 bool ModuleInput::Init()
 {
-	LOG("Init SDL input event system");
+	/*
+	SDL_bool done;
+	SDL_Window* window;
+	SDL_Event event;                        // Declare event handle
+	char* dropped_filedir;                  // Pointer for directory of dropped file
+             // SDL2 initialization
+	*/
+	LOG(LogType::LOGS, "Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
 
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
-		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
+		LOG(LogType::LOGS, "SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+	/*
+	window = SDL_CreateWindow(  // Create a window
+		"SDL_DropEvent usage, please drop the file on window",
+		SDL_WINDOWPOS_CENTERED,
+		SDL_WINDOWPOS_CENTERED,
+		640,
+		480,
+		SDL_WINDOW_OPENGL
+	);
+
+	if (window == NULL) {
+		// In the event that the window could not be made...
+		SDL_Log("Could not create window: %s", SDL_GetError());
+		SDL_Quit();
+		return 1;
+	}
+	*/
+	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 
 	return ret;
 }
@@ -40,7 +66,7 @@ update_status ModuleInput::PreUpdate(float dt)
 	SDL_PumpEvents();
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
-	
+
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
 		if(keys[i] == 1)
@@ -92,8 +118,25 @@ update_status ModuleInput::PreUpdate(float dt)
 		ImGui_ImplSDL2_ProcessEvent(&e);
 		switch(e.type)
 		{
-			case SDL_MOUSEWHEEL:
-			mouse_z = e.wheel.y;
+			/*case SDL_MOUSEWHEEL:
+				if (e.wheel.y > 0) // Up
+				{
+					App->camera->Z -= App->camera->Z * speed;
+				}
+				if (e.wheel.y < 0) // Up
+				{
+					App->camera->Z += App->camera->Z * speed;
+				}
+			break;*/
+			case SDL_DROPFILE:
+			App->LoadFbx->LoadFile(e.drop.file);
+			SDL_ShowSimpleMessageBox(
+				SDL_MESSAGEBOX_INFORMATION,
+				"File dropped on window",
+				e.drop.file,
+				App->window->window
+			);
+			SDL_free(e.drop.file);
 			break;
 
 			case SDL_MOUSEMOTION:
@@ -125,7 +168,7 @@ update_status ModuleInput::PreUpdate(float dt)
 // Called before quitting
 bool ModuleInput::CleanUp()
 {
-	LOG("Quitting SDL input event subsystem");
+	LOG(LogType::LOGS, "Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }

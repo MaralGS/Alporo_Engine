@@ -20,6 +20,7 @@ public:
 
 	//bools
 	bool ActiveDemoWindows = true;
+	bool openConsole = true;
 
 	bool AboutTxt = false;
 	bool FullScreenEnable = false;

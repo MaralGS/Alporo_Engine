@@ -18,7 +18,7 @@ ModuleOPGPrimitives::~ModuleOPGPrimitives()
 
 bool ModuleOPGPrimitives::Start()
 {
-	LOG("Loading Intro primitive");
+	LOG(LogType::LOGS, "Loading Intro primitive");
 	bool ret = true;
 
 	return ret;
@@ -64,7 +64,7 @@ bool ModuleOPGPrimitives::PostUpdate() {
 
 bool ModuleOPGPrimitives::CleanUp()
 {
-	LOG("Unloading Intro scene");
+	LOG(LogType::LOGS, "Unloading Intro scene");
 	glDisableClientState(GL_TRIANGLES);
 	glDisableClientState(GL_POLYGON);
 	glDisableClientState(GL_QUAD_STRIP);

@@ -18,14 +18,14 @@ ModuleImguiWindow::~ModuleImguiWindow()
 // -----------------------------------------------------------------
 bool ModuleImguiWindow::Start()
 {
-	LOG("Started ImGuiWindow");
+	LOG(LogType::LOGS, "Started ImGuiWindow");
 	bool ret = true;
 
 	return ret;
 }
 
 update_status ModuleImguiWindow::PreUpdate(float dt) {
-  
+
 
 	return UPDATE_CONTINUE;
 }
@@ -41,7 +41,10 @@ update_status ModuleImguiWindow::Update(float dt)
             {
                 ActiveDemoWindows = !ActiveDemoWindows;
             }
-
+            if (ImGui::RadioButton(" Console  ", openConsole))
+            {
+                openConsole = !openConsole;
+            }
             if (ImGui::MenuItem("Documentation"))
             {
                 SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/wiki");
@@ -80,7 +83,7 @@ update_status ModuleImguiWindow::Update(float dt)
         }
         ImGui::EndMainMenuBar();
     }
-    
+
     if (ImGui::Begin("Options")) {
         //Configuration options
         if (ImGui::CollapsingHeader("Configuration"))
@@ -101,7 +104,7 @@ update_status ModuleImguiWindow::Update(float dt)
                 }
                 ImGui::EndMenu();
             }
-           
+
             //generate and delete a Piramide
             if (ImGui::BeginMenu("Piramide"))
             {
@@ -193,7 +196,7 @@ update_status ModuleImguiWindow::Update(float dt)
 
            // ImGui::TextColored(CPU); ;
         }
-      
+
     }
     ImGui::End();
     if (ImGui::Begin("Inspector")) {
@@ -203,7 +206,7 @@ update_status ModuleImguiWindow::Update(float dt)
             ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->v0[3]);
             ImGui::Separator();
         }
-        
+
         for (int i = 0; i < App->OpenGLPrimitives->NumPiramid; i++)
         {
             ImGui::BulletText("Piramid  %d:", i + 1 );
@@ -211,7 +214,7 @@ update_status ModuleImguiWindow::Update(float dt)
             ImGui::Separator();
         }
     }
-    
+
     ImGui::End();
     return UPDATE_CONTINUE;
 }
@@ -225,7 +228,7 @@ update_status ModuleImguiWindow::PostUpdate()
 
 bool ModuleImguiWindow::CleanUp()
 {
-	LOG("Cleaning Module");
+	LOG(LogType::LOGS, "Cleaning Module");
 
 	return true;
 }
@@ -236,7 +239,7 @@ void ModuleImguiWindow::Histogram()
     {
     CurrentFrame = App->prevLastSecFrameCount;
     ImGui::BulletText("FPS: %d", CurrentFrame);
-    
+
     if (FPS.size() < 45)
     {
         FPS.push_back(App->prevLastSecFrameCount);
@@ -259,7 +262,7 @@ void ModuleImguiWindow::Histogram()
     ImGui::PlotHistogram("##framrate", FPS.data(), FPS.size(), 0, NULL, 0.0f, 240, ImVec2(310, 100));
     }
     //miliseconds
-   { 
+   {
         CurrentMilisecond = (App->dt*1000);
         ImGui::BulletText("hrz Speed: %d ms", CurrentMilisecond);
         if (Miliseconds.size() < 45)
