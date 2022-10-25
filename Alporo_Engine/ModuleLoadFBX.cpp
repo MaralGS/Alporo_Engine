@@ -12,7 +12,7 @@ ModuleLoadFBX::ModuleLoadFBX(Application* app, bool start_enabled) : Module(app,
 bool ModuleLoadFBX::Start()
 {
 	bool ret = true;
-	LoadFile("Assets/BakerHouse.fbx");
+	//LoadFile("Assets/BakerHouse.fbx");
 	return ret;
 }
 

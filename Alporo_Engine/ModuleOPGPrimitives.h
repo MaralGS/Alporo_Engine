@@ -11,14 +11,15 @@ struct Cilindre
 
 struct Quad
 {
-    float v0[3] = { 0.f, 1.f, 0.f };
-    float v1[3] = { 0.f, 0.f, 0.f };
-    float v2[3] = { 0.f, 0.f, 1.f };
-    float v3[3] = { 0.f, 1.f, 1.f };
-    float v4[3] = { 1.f, 1.f, 0.f };
-    float v5[3] = { 1.f, 1.f, 1.f, };
-    float v6[3] = { 1.f, 0.f, 1.f, };
-    float v7[3] = { 1.f, 0.f, 0.f, };
+    vec3 Pos;
+    float v0[3] = { 0.f + Pos.x, 1.f + Pos.y, 0.f + Pos.z };
+    float v1[3] = { 0.f + Pos.x, 0.f + Pos.y, 0.f + Pos.z };
+    float v2[3] = { 0.f + Pos.x, 0.f + Pos.y, 1.f + Pos.z };
+    float v3[3] = { 0.f + Pos.x, 1.f + Pos.y, 1.f + Pos.z };
+    float v4[3] = { 1.f + Pos.x, 1.f + Pos.y, 0.f + Pos.z };
+    float v5[3] = { 1.f + Pos.x, 1.f + Pos.y, 1.f + Pos.z };
+    float v6[3] = { 1.f + Pos.x, 0.f + Pos.y, 1.f + Pos.z };
+    float v7[3] = { 1.f + Pos.x, 0.f + Pos.y, 0.f + Pos.z };
 };
 
 struct Triangle
@@ -50,6 +51,7 @@ public:
     bool DrawPiramide = false;
 
     Cilindre CilindreStats;
+    Quad Q;
 private:
     //Quad posant el vertex a cada lloc
    /* float Quad[108] = {0.f,1.f,0.f, //X Cara1 
