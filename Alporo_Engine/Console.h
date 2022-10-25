@@ -7,21 +7,15 @@
 
 using namespace std;
 
-enum class LogsType
-{
-	WARNINGLOG,
-	SYSTEMLOG,
-	MSGLOG,
-};
 
 struct DebugLogs
 {
-	DebugLogs(string st, string f, LogsType ty) : st(st), repts(1), type(ty), file(f) {};
+	DebugLogs(string st, string f, LogType ty) : st(st), repts(1), type(ty), file(f) {};
 
 	string st;
 	string file;
 	int repts;
-	LogsType type;
+	LogType type;
 };
 
 class Logs
@@ -29,10 +23,9 @@ class Logs
 public:
 
 	static void PrintDebug();
-	static void DebugLog(string format, string file, LogsType type = LogsType::MSGLOG);
-	static void CollapseDebug();
+	static void DebugLog(string format, string file, LogType type = LogType::LOGS);
 	static void UnCollapseDebug();
-	static void ButtonsTypeLogs();
+
 
 private:
 

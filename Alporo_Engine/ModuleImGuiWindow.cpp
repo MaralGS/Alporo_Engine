@@ -18,7 +18,7 @@ ModuleImguiWindow::~ModuleImguiWindow()
 // -----------------------------------------------------------------
 bool ModuleImguiWindow::Start()
 {
-	LOG("Started ImGuiWindow");
+	LOG(LogType::LOGS, "Started ImGuiWindow");
 	bool ret = true;
 
 	return ret;
@@ -170,7 +170,7 @@ update_status ModuleImguiWindow::PostUpdate()
 
 bool ModuleImguiWindow::CleanUp()
 {
-	LOG("Cleaning Module");
+	LOG(LogType::LOGS, "Cleaning Module");
 
 	return true;
 }

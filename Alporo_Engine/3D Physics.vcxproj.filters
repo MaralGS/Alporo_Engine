@@ -659,6 +659,7 @@
     <ClCompile Include="Console.cpp">
       <Filter>Sources\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="Globals.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeoLib\include\Geometry\QuadTree.inl">
