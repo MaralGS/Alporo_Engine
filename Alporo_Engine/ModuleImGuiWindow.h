@@ -23,7 +23,8 @@ public:
 
 	bool AboutTxt = false;
 	bool FullScreenEnable = false;
-	bool FullDesktop = false;
+	SDL_bool Resizable = SDL_FALSE;
+	bool ActiveResizable = true;
 	bool CloseApp = false;
 	bool Wireframe = false;
 	bool DepthTest = true;

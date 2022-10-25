@@ -166,6 +166,18 @@ update_status ModuleImguiWindow::Update(float dt)
                    SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_MAXIMIZED);
                }
            }
+           //RESIZABLE WINDOWS (Si la pots escalar o no amb el cursor)
+           if (ImGui::Checkbox("Resizable Windows", &ActiveResizable));
+           if (ActiveResizable == true)
+           {
+               Resizable = SDL_TRUE;
+           }
+           if (ActiveResizable == false)
+           {
+               Resizable = SDL_FALSE;
+           }
+           SDL_SetWindowResizable(App->window->window, Resizable);
+
         }
 
         //Hardware Detection
@@ -182,6 +194,22 @@ update_status ModuleImguiWindow::Update(float dt)
            // ImGui::TextColored(CPU); ;
         }
       
+    }
+    ImGui::End();
+    if (ImGui::Begin("Inspector")) {
+        for (int i = 0; i < App->OpenGLPrimitives->NumQuads; i++)
+        {
+            ImGui::BulletText("Cube %d:", i + 1 );
+            ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->v0[3]);
+            ImGui::Separator();
+        }
+        
+        for (int i = 0; i < App->OpenGLPrimitives->NumPiramid; i++)
+        {
+            ImGui::BulletText("Piramid  %d:", i + 1 );
+            ImGui::BulletText("X: %.2f\nY: %.2d\nZ: %.2d", App->OpenGLPrimitives->Piramid[i]->v0[3]);
+            ImGui::Separator();
+        }
     }
     
     ImGui::End();
