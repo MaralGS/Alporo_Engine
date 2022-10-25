@@ -92,16 +92,9 @@ update_status ModuleInput::PreUpdate(float dt)
 		ImGui_ImplSDL2_ProcessEvent(&e);
 		switch(e.type)
 		{
-			/*case SDL_MOUSEWHEEL:
-				if (e.wheel.y > 0) // Up
-				{
-					App->camera->Z -= App->camera->Z * speed;
-				}
-				if (e.wheel.y < 0) // Up
-				{
-					App->camera->Z += App->camera->Z * speed;
-				}	
-			break;*/
+			case SDL_MOUSEWHEEL:
+			mouse_z = e.wheel.y;
+			break;
 
 			case SDL_MOUSEMOTION:
 			mouse_x = e.motion.x / SCREEN_SIZE;

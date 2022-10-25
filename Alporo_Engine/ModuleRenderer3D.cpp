@@ -238,13 +238,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	}
 
 
-	//Close Application
-	/*bool Close = App->imguiwindows->ShowWindow(NULL);
-	if (!Close)
-	{
-	  return UPDATE_STOP;
-	}*/
-
 
 	// Rendering
 	ImGui::Render();
