@@ -46,6 +46,7 @@ public:
     void DrawCilind(float radius, float leght);
     void DrawPiramid();
     void DrawSphere(float radius);
+    void QuadKeys(float dt);
 
     bool DrawQuadra = false;
     bool DrawPiramide = false;

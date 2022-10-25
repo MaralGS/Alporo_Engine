@@ -37,72 +37,7 @@ update_status ModuleOPGPrimitives::Update(float dt)
 	if (DrawQuadra == true)
 	{
 		DrawQuad();
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_RIGHT) != KEY_REPEAT)
-		{
-			Q.Pos.x = (Q.Pos.x + 0.1)* (5.0f * dt);
-		}
-		
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_RIGHT) != KEY_REPEAT)
-		{
-			Q.Pos.y = (Q.Pos.y + 0.1)* (5.0f * dt);
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_RIGHT) != KEY_REPEAT)
-		{
-			Q.Pos.z = (Q.Pos.z + 0.1)* (5.0f * dt);
-		}
-		
-		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
-		{
-			Q.Pos.x = 0;
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
-		{
-			Q.Pos.y = 0;
-		}
-
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
-		{
-			Q.Pos.z = 0;
-		}
-		for (int i = 0; i < 3; i++)
-		{
-			if (i == 0)
-			{
-				Q.v0[i] += Q.Pos.x;
-				Q.v1[i] += Q.Pos.x;
-				Q.v2[i] += Q.Pos.x;
-				Q.v3[i] += Q.Pos.x;
-				Q.v4[i] += Q.Pos.x;
-				Q.v5[i] += Q.Pos.x;
-				Q.v6[i] += Q.Pos.x;
-				Q.v7[i] += Q.Pos.x;
-			}
-			if (i == 1)
-			{
-				Q.v0[i] += Q.Pos.y;
-				Q.v1[i] += Q.Pos.y;
-				Q.v2[i] += Q.Pos.y;
-				Q.v3[i] += Q.Pos.y;
-				Q.v4[i] += Q.Pos.y;
-				Q.v5[i] += Q.Pos.y;
-				Q.v6[i] += Q.Pos.y;
-				Q.v7[i] += Q.Pos.y;
-			}
-			if (i == 2)
-			{
-				Q.v0[i] += Q.Pos.z;
-				Q.v1[i] += Q.Pos.z;
-				Q.v2[i] += Q.Pos.z;
-				Q.v3[i] += Q.Pos.z;
-				Q.v4[i] += Q.Pos.z;
-				Q.v5[i] += Q.Pos.z;
-				Q.v6[i] += Q.Pos.z;
-				Q.v7[i] += Q.Pos.z;
-			}
-
-		}
+		QuadKeys(dt);
 	}
 
 	if (DrawPiramide == true)
@@ -286,4 +221,74 @@ void ModuleOPGPrimitives::DrawPiramid()
 void ModuleOPGPrimitives::DrawSphere(float radius)
 {
 
+}
+
+void ModuleOPGPrimitives::QuadKeys(float dt)
+{
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_RIGHT) != KEY_REPEAT)
+		{
+			Q.Pos.x = (Q.Pos.x + 0.1)* (5.0f * dt);
+		}
+		
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_RIGHT) != KEY_REPEAT)
+		{
+			Q.Pos.y = (Q.Pos.y + 0.1)* (5.0f * dt);
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_RIGHT) != KEY_REPEAT)
+		{
+			Q.Pos.z = (Q.Pos.z + 0.1)* (5.0f * dt);
+		}
+		
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP)
+		{
+			Q.Pos.x = 0;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+		{
+			Q.Pos.y = 0;
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+		{
+			Q.Pos.z = 0;
+		}
+		for (int i = 0; i < 3; i++)
+		{
+			if (i == 0)
+			{
+				Q.v0[i] += Q.Pos.x;
+				Q.v1[i] += Q.Pos.x;
+				Q.v2[i] += Q.Pos.x;
+				Q.v3[i] += Q.Pos.x;
+				Q.v4[i] += Q.Pos.x;
+				Q.v5[i] += Q.Pos.x;
+				Q.v6[i] += Q.Pos.x;
+				Q.v7[i] += Q.Pos.x;
+			}
+			if (i == 1)
+			{
+				Q.v0[i] += Q.Pos.y;
+				Q.v1[i] += Q.Pos.y;
+				Q.v2[i] += Q.Pos.y;
+				Q.v3[i] += Q.Pos.y;
+				Q.v4[i] += Q.Pos.y;
+				Q.v5[i] += Q.Pos.y;
+				Q.v6[i] += Q.Pos.y;
+				Q.v7[i] += Q.Pos.y;
+			}
+			if (i == 2)
+			{
+				Q.v0[i] += Q.Pos.z;
+				Q.v1[i] += Q.Pos.z;
+				Q.v2[i] += Q.Pos.z;
+				Q.v3[i] += Q.Pos.z;
+				Q.v4[i] += Q.Pos.z;
+				Q.v5[i] += Q.Pos.z;
+				Q.v6[i] += Q.Pos.z;
+				Q.v7[i] += Q.Pos.z;
+			}
+
+		}
 }
