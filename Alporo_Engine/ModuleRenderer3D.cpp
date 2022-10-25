@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleLoadFBX.h"
+#include "Console.h"
+#include "ModuleImGuiWindow.h"
 #include "Glew/include/glew.h"
 #include "SDL\include\SDL_opengl.h"
 #include "Primitive.h"
@@ -236,7 +238,8 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	{
 			ImGui::ShowDemoWindow();
 	}
-
+	if (App->imguiwindows->openConsole)
+		Logs::PrintDebug();
 
 	//Close Application
 	/*bool Close = App->imguiwindows->ShowWindow(NULL);

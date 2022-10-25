@@ -41,7 +41,10 @@ update_status ModuleImguiWindow::Update(float dt)
             {
                 ActiveDemoWindows = !ActiveDemoWindows;
             }
-
+            if (ImGui::RadioButton(" Console  ", openConsole))
+            {
+                openConsole = !openConsole;
+            }
             if (ImGui::MenuItem("Documentation"))
             {
                 SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/wiki");
