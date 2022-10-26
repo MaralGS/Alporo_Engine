@@ -23,8 +23,7 @@ class Logs
 public:
 
 	static void PrintDebug();
-	static void DebugLog(string format, string file, LogType type = LogType::LOGS);
-	static void UnCollapseDebug();
+	static void DebugLog(string format, string file, LogType type);
 
 
 private:

@@ -74,25 +74,16 @@ void Logs::PrintDebug()
 		}
 	}
 
-	if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY() - 20)
-	{
-		ImGui::SetScrollY(ImGui::GetScrollMaxY());
-	}
-
-	//ImGui::PopStyleColor(1);
-	//ImGui::PopStyleColor(1);
 	ImGui::End();
 }
 
 
-
-
-
-void Logs::UnCollapseDebug()
+void Logs::DebugLog(string format, string file, LogType type)
 {
-	logs.clear();
-	logs = logsCopy;
-	logsCopy.clear();
+	logs.push_back(DebugLogs(format, file, type));
 }
+
+
+
 
 

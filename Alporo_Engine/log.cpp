@@ -42,5 +42,5 @@ void log(const char file[], int line, LogType type, const char* format, ...)
 			file_string[i + 2] = 0; //	'\0'
 		}
 	}
-
+	Logs::DebugLog(tmp_string, file_string, type);
 }
