@@ -239,7 +239,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 			ImGui::ShowDemoWindow();
 	}
 	if (App->imguiwindows->openConsole)
-		Logs::PrintDebug();
+		Console::PrintDebug();
 
 
 	// Rendering

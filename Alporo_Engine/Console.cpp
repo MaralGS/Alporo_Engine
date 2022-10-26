@@ -3,22 +3,12 @@
 #include "Globals.h"
 #include "ModuleImGuiWindow.h"
 
-vector<DebugLogs> Logs::logs;
-vector<DebugLogs> Logs::logsCopy;
+vector<DebugConsole> Console::logs;
+vector<DebugConsole> Console::logsCopy;
 
-int Logs::countDebug = 0;
-int Logs::countSyst = 0;
-int Logs::countWarn = 0;
 
-bool Logs::showPath = false;
 
-bool Logs::warnignDebug = true;
-bool Logs::systemDebug = true;
-bool Logs::msgDebug = true;
-
-float Logs::colorEdit[3] = { 0.4f, 0.7f, 0.0f };
-
-void Logs::PrintDebug()
+void Console::PrintDebug()
 {
 	ImGui::Begin("Console", 0, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar);
 
@@ -30,9 +20,6 @@ void Logs::PrintDebug()
 		{
 			logs.clear();
 			logsCopy.clear();
-			countDebug = 0;
-			countSyst = 0;
-			countWarn = 0;
 		}
 
 		ImGui::EndMenuBar();
@@ -40,37 +27,34 @@ void Logs::PrintDebug()
 
 	for (size_t i = 0; i < logs.size(); i++)
 	{
-		DebugLogs l = logs[i];
-		string s = "";
 
-
-		if (msgDebug && l.type == LogType::LOGS)
+		if (logs[i].type == LogType::LOGS)
 		{
 		
 			ImGui::Text("LOG |");
 			ImGui::SameLine();
-			ImGui::Text(l.file.c_str());
+			ImGui::Text(logs[i].file.c_str());
 			ImGui::SameLine();
-			ImGui::Text(l.st.c_str());
+			ImGui::Text(logs[i].st.c_str());
 			
 		}
-		else if (systemDebug && logs[i].type == LogType::ERRORS)
+		else if (logs[i].type == LogType::ERRORS)
 		{
 		
 			ImGui::Text("ERROR |");
 			ImGui::SameLine();
-			ImGui::Text(l.file.c_str());
+			ImGui::Text(logs[i].file.c_str());
 			ImGui::SameLine();
-			ImGui::Text(l.st.c_str());
+			ImGui::Text(logs[i].st.c_str());
 		}
-		else if (warnignDebug && logs[i].type == LogType::WARNING)
+		else if (logs[i].type == LogType::WARNING)
 		{
 	
 			ImGui::Text("WARNING |");
 			ImGui::SameLine();
-			ImGui::Text(l.file.c_str());
+			ImGui::Text(logs[i].file.c_str());
 			ImGui::SameLine();
-			ImGui::Text(l.st.c_str());
+			ImGui::Text(logs[i].st.c_str());
 		}
 	}
 
@@ -78,9 +62,9 @@ void Logs::PrintDebug()
 }
 
 
-void Logs::DebugLog(string format, string file, LogType type)
+void Console::DebugConsole(string format, string file, LogType type)
 {
-	logs.push_back(DebugLogs(format, file, type));
+	logs.push_back(struct DebugConsole(format, file, type));
 }
 
 

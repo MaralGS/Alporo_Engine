@@ -8,9 +8,9 @@
 using namespace std;
 
 
-struct DebugLogs
+struct DebugConsole
 {
-	DebugLogs(string st, string f, LogType ty) : st(st), repts(1), type(ty), file(f) {};
+	DebugConsole(string st, string f, LogType ty) : st(st), repts(1), type(ty), file(f) {};
 
 	string st;
 	string file;
@@ -18,18 +18,18 @@ struct DebugLogs
 	LogType type;
 };
 
-class Logs
+class Console
 {
 public:
 
 	static void PrintDebug();
-	static void DebugLog(string format, string file, LogType type);
+	static void DebugConsole(string format, string file, LogType type);
 
 
 private:
 
-	static vector<DebugLogs> logs;
-	static vector<DebugLogs> logsCopy;
+	static vector<struct DebugConsole> logs;
+	static vector<struct DebugConsole> logsCopy;
 
 	static float colorEdit[3];
 
