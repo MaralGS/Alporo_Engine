@@ -98,9 +98,17 @@ update_status ModuleImguiWindow::Update(float dt)
                 if (ImGui::Button("Delete Cube")) {
                     if (App->OpenGLPrimitives->NumQuads >= 1)
                     {
-                        App->OpenGLPrimitives->Cub.pop_back();
-                        App->OpenGLPrimitives->NumQuads--;
+
+                        /* App->OpenGLPrimitives->Cub.pop_back();
+                         App->OpenGLPrimitives->NumQuads--;*/
+                        /*
+                        for (int i = picked; i <= App->OpenGLPrimitives->Cub.size(); i++)
+                        {
+                            App->OpenGLPrimitives->Cub[i] = App->OpenGLPrimitives->Cub[picked];
+                        }
+                        App->OpenGLPrimitives->Cub.pop_back();*/
                     }
+                
                 }
                 ImGui::EndMenu();
             }

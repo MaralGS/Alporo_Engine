@@ -46,7 +46,12 @@ update_status ModuleCamera3D::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 10.0f * dt;
 
-	if(App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT) newPos.y -= speed;
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
+		Position.x = App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.x;
+		newPos.y = App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.y;
+		newPos.z = App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.z;
+		//Look(newPos, { App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.x, App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.y, App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.z });
+	}
 
 	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
