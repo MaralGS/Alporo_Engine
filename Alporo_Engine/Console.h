@@ -10,11 +10,9 @@ using namespace std;
 
 struct DebugConsole
 {
-	DebugConsole(string st, string f, LogType ty) : st(st), repts(1), type(ty), file(f) {};
-
-	string st;
+	DebugConsole(string msg, string f, LogType ty) : msg(msg), type(ty), file(f) {};
+	string msg;
 	string file;
-	int repts;
 	LogType type;
 };
 
@@ -30,17 +28,4 @@ private:
 
 	static vector<struct DebugConsole> logs;
 	static vector<struct DebugConsole> logsCopy;
-
-	static float colorEdit[3];
-
-	static int countWarn;
-	static int countSyst;
-	static int countDebug;
-
-	static bool isCollapsed;
-	static bool showPath;
-
-	static bool warnignDebug;
-	static bool systemDebug;
-	static bool msgDebug;
 };

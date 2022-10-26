@@ -35,7 +35,7 @@ void Console::PrintDebug()
 			ImGui::SameLine();
 			ImGui::Text(logs[i].file.c_str());
 			ImGui::SameLine();
-			ImGui::Text(logs[i].st.c_str());
+			ImGui::Text(logs[i].msg.c_str());
 			
 		}
 		else if (logs[i].type == LogType::ERRORS)
@@ -45,7 +45,7 @@ void Console::PrintDebug()
 			ImGui::SameLine();
 			ImGui::Text(logs[i].file.c_str());
 			ImGui::SameLine();
-			ImGui::Text(logs[i].st.c_str());
+			ImGui::Text(logs[i].msg.c_str());
 		}
 		else if (logs[i].type == LogType::WARNING)
 		{
@@ -54,7 +54,7 @@ void Console::PrintDebug()
 			ImGui::SameLine();
 			ImGui::Text(logs[i].file.c_str());
 			ImGui::SameLine();
-			ImGui::Text(logs[i].st.c_str());
+			ImGui::Text(logs[i].msg.c_str());
 		}
 	}
 
