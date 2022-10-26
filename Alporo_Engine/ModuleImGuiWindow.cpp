@@ -98,17 +98,25 @@ update_status ModuleImguiWindow::Update(float dt)
                 if (ImGui::Button("Delete Cube")) {
                     if (App->OpenGLPrimitives->NumQuads >= 1)
                     {
-
-                        /* App->OpenGLPrimitives->Cub.pop_back();
-                         App->OpenGLPrimitives->NumQuads--;*/
-                        /*
-                        for (int i = picked; i <= App->OpenGLPrimitives->Cub.size(); i++)
+                        if (App->OpenGLPrimitives->Cub.size() == App->OpenGLPrimitives->NumQuads)
                         {
-                            App->OpenGLPrimitives->Cub[i] = App->OpenGLPrimitives->Cub[picked];
+                            if (picked != App->OpenGLPrimitives->NumQuads)
+                            {
+                                for (int i = picked; i < App->OpenGLPrimitives->NumQuads - 1; i++)
+                                {
+                                    App->OpenGLPrimitives->Cub[i] = App->OpenGLPrimitives->Cub[i + 1];
+
+                                }
+                            }
+
+                            App->OpenGLPrimitives->Cub.pop_back();
+                            App->OpenGLPrimitives->NumQuads--;
+                            if (picked != 0)
+                            {
+                                picked--;
+                            }
                         }
-                        App->OpenGLPrimitives->Cub.pop_back();*/
                     }
-                
                 }
                 ImGui::EndMenu();
             }
@@ -124,6 +132,26 @@ update_status ModuleImguiWindow::Update(float dt)
                 if (ImGui::Button("Delete Piramid")) {
                     if (App->OpenGLPrimitives->NumPiramid >= 1)
                     {
+                        if (FPS.size() < 45)
+    {
+        FPS.push_back(App->prevLastSecFrameCount);
+    }
+
+    else if (FPS.size() == 45)
+    {
+        for (int i = 0; i <= 43; i++)
+        {
+            FPS[i] = FPS[i + 1];
+
+        }
+        FPS[44] = App->prevLastSecFrameCount;
+
+
+    }
+                        /*for (int i = 0; i == App->OpenGLPrimitives->NumPiramid; i++)
+                        {
+                            App->OpenGLPrimitives->NumPiramid
+                        }*/
                         App->OpenGLPrimitives->Piramid.pop_back();
                         App->OpenGLPrimitives->NumPiramid--;
                     }
