@@ -47,9 +47,9 @@ update_status ModuleCamera3D::Update(float dt)
 		speed = 10.0f * dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		Position.x = App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.x;
-		newPos.y = App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.y;
-		newPos.z = App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.z;
+		Position.x = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos.x;
+		newPos.y = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos.y;
+		newPos.z = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos.z;
 		//Look(newPos, { App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.x, App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.y, App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.z });
 	}
 

@@ -17,6 +17,8 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void Histogram();
+	void GeneratePrimitives();
+	void Inspector();
 
 	//bools
 	bool ActiveDemoWindows = true;
@@ -47,7 +49,8 @@ public:
 	int WidthMax = 2040;
 	int CurrentFrame;
 	int CurrentMilisecond;
-	int picked = NULL;
+	int CubPicked = NULL;
+	int PiramidPicked = NULL;
 	
 private:
 

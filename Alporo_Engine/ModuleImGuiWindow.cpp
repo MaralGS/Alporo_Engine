@@ -88,78 +88,7 @@ update_status ModuleImguiWindow::Update(float dt)
         //Configuration options
         if (ImGui::CollapsingHeader("Configuration"))
         {
-            if (ImGui::BeginMenu("Cube"))
-            {
-                if (ImGui::Button("Generate Cube")) {
-                    Quad* Q = new Quad();
-                    App->OpenGLPrimitives->Cub.push_back(Q);
-                    App->OpenGLPrimitives->NumQuads++;
-                }
-                if (ImGui::Button("Delete Cube")) {
-                    if (App->OpenGLPrimitives->NumQuads >= 1)
-                    {
-                        if (App->OpenGLPrimitives->Cub.size() == App->OpenGLPrimitives->NumQuads)
-                        {
-                            if (picked != App->OpenGLPrimitives->NumQuads)
-                            {
-                                for (int i = picked; i < App->OpenGLPrimitives->NumQuads - 1; i++)
-                                {
-                                    App->OpenGLPrimitives->Cub[i] = App->OpenGLPrimitives->Cub[i + 1];
-
-                                }
-                            }
-
-                            App->OpenGLPrimitives->Cub.pop_back();
-                            App->OpenGLPrimitives->NumQuads--;
-                            if (picked != 0)
-                            {
-                                picked--;
-                            }
-                        }
-                    }
-                }
-                ImGui::EndMenu();
-            }
-
-            //generate and delete a Piramide
-            if (ImGui::BeginMenu("Piramide"))
-            {
-                if (ImGui::Button("Generate Piramid")) {
-                    Triangle* Q = new Triangle();
-                    App->OpenGLPrimitives->Piramid.push_back(Q);
-                    App->OpenGLPrimitives->NumPiramid++;
-                }
-                if (ImGui::Button("Delete Piramid")) {
-                    if (App->OpenGLPrimitives->NumPiramid >= 1)
-                    {
-                        if (FPS.size() < 45)
-    {
-        FPS.push_back(App->prevLastSecFrameCount);
-    }
-
-    else if (FPS.size() == 45)
-    {
-        for (int i = 0; i <= 43; i++)
-        {
-            FPS[i] = FPS[i + 1];
-
-        }
-        FPS[44] = App->prevLastSecFrameCount;
-
-
-    }
-                        /*for (int i = 0; i == App->OpenGLPrimitives->NumPiramid; i++)
-                        {
-                            App->OpenGLPrimitives->NumPiramid
-                        }*/
-                        App->OpenGLPrimitives->Piramid.pop_back();
-                        App->OpenGLPrimitives->NumPiramid--;
-                    }
-
-                }
-                ImGui::EndMenu();
-            }
-            if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
+            GeneratePrimitives();
 
             ImGui::Checkbox("WireFrame", &Wireframe);
             ImGui::Checkbox("Depth Test", &DepthTest);
@@ -239,29 +168,7 @@ update_status ModuleImguiWindow::Update(float dt)
     }
     ImGui::End();
     if (ImGui::Begin("Inspector")) {
-        for (int i = 0; i < App->OpenGLPrimitives->NumQuads; i++)
-        {
-            char Name[32];
-            sprintf(Name, "Cube %d", i);
-
-            if (ImGui::Selectable(Name, i == picked, 0)) {
-                picked = i;
-            }
-            if (i == picked)
-            {
-                ImGui::BulletText("Cube %d:", i + 1);
-                ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->v0[3]);
-                ImGui::Separator();
-            }
-        
-        }
-
-        for (int i = 0; i < App->OpenGLPrimitives->NumPiramid; i++)
-        {
-            ImGui::BulletText("Piramid  %d:", i + 1 );
-            ImGui::BulletText("X: %.2f\nY: %.2d\nZ: %.2d", App->OpenGLPrimitives->Piramid[i]->v0[3]);
-            ImGui::Separator();
-        }
+        Inspector();
     }
 
     ImGui::End();
@@ -332,5 +239,118 @@ void ModuleImguiWindow::Histogram()
         SDL_GetPerformanceCounter();
 
         ImGui::PlotHistogram("##Milisecods", Miliseconds.data(), Miliseconds.size(), 0, NULL, 0.f, 80.f, ImVec2(310, 100));
+    }
+}
+
+void ModuleImguiWindow::GeneratePrimitives()
+{
+    if (ImGui::BeginMenu("Cube"))
+    {
+        if (ImGui::Button("Generate Cube")) {
+            Quad* Q = new Quad();
+            App->OpenGLPrimitives->Cub.push_back(Q);
+            App->OpenGLPrimitives->NumQuads++;
+        }
+        if (ImGui::Button("Delete Cube")) {
+            if (App->OpenGLPrimitives->NumQuads >= 1)
+            {
+                if (App->OpenGLPrimitives->Cub.size() == App->OpenGLPrimitives->NumQuads)
+                {
+                    if (CubPicked != App->OpenGLPrimitives->NumQuads)
+                    {
+                        for (int i = CubPicked; i < App->OpenGLPrimitives->NumQuads - 1; i++)
+                        {
+                            App->OpenGLPrimitives->Cub[i] = App->OpenGLPrimitives->Cub[i + 1];
+
+                        }
+                    }
+
+                    App->OpenGLPrimitives->Cub.pop_back();
+                    App->OpenGLPrimitives->NumQuads--;
+                    if (CubPicked != 0)
+                    {
+                        CubPicked--;
+                    }
+                }
+            }
+        }
+        ImGui::EndMenu();
+    }
+
+    //generate and delete a Piramide
+    if (ImGui::BeginMenu("Piramide"))
+    {
+        if (ImGui::Button("Generate Piramid")) {
+            Triangle* Q = new Triangle();
+            App->OpenGLPrimitives->Piramid.push_back(Q);
+            App->OpenGLPrimitives->NumPiramid++;
+        }
+        if (ImGui::Button("Delete Piramid")) {
+            if (App->OpenGLPrimitives->NumPiramid >= 1)
+            {
+                if (App->OpenGLPrimitives->Piramid.size() == App->OpenGLPrimitives->NumPiramid)
+                {
+                    if (PiramidPicked != App->OpenGLPrimitives->NumPiramid)
+                    {
+                        for (int i = PiramidPicked; i < App->OpenGLPrimitives->NumPiramid - 1; i++)
+                        {
+                            App->OpenGLPrimitives->Piramid[i] = App->OpenGLPrimitives->Piramid[i + 1];
+
+                        }
+                    }
+
+                    App->OpenGLPrimitives->Piramid.pop_back();
+                    App->OpenGLPrimitives->NumPiramid--;
+                    if (PiramidPicked != 0)
+                    {
+                        PiramidPicked--;
+                    }
+                }
+            }
+
+        }
+
+        if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
+
+        ImGui::EndMenu();
+    }
+}
+
+void ModuleImguiWindow::Inspector()
+{
+    for (int i = 0; i < App->OpenGLPrimitives->NumQuads; i++)
+    {
+        char Name[32];
+        sprintf(Name, "Cube %d", i + 1);
+
+        if (ImGui::Selectable(Name, i == CubPicked, 0)) {
+            CubPicked = i;
+            PiramidPicked = NULL;
+
+        }
+        if (i == CubPicked)
+        {
+            ImGui::BulletText("Cube %d:", i + 1);
+            ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->v0[3]);
+            ImGui::Separator();
+        }
+
+    }
+
+    for (int i = 0; i < App->OpenGLPrimitives->NumPiramid; i++)
+    {
+        char Name[32];
+        sprintf(Name, "Piramid %d", i + 1);
+
+        if (ImGui::Selectable(Name, i == PiramidPicked, 0)) {
+            PiramidPicked = i;
+            CubPicked = NULL;
+        }
+        if (i == PiramidPicked)
+        {
+            ImGui::BulletText("Piramid  %d:", i + 1);
+            ImGui::BulletText("X: %.2f\nY: %.2d\nZ: %.2d", App->OpenGLPrimitives->Piramid[i]->v0[3]);
+            ImGui::Separator();
+        }
     }
 }
