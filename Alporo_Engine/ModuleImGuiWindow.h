@@ -17,6 +17,8 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void Histogram();
+	void GeneratePrimitives();
+	void Inspector();
 
 	//bools
 	bool ActiveDemoWindows = true;
@@ -25,6 +27,7 @@ public:
 	bool AboutTxt = false;
 	bool FullScreenEnable = false;
 	SDL_bool Resizable = SDL_FALSE;
+	SDL_bool Borderless = SDL_FALSE;
 	bool ActiveResizable = true;
 	bool CloseApp = false;
 	bool Wireframe = false;
@@ -46,7 +49,8 @@ public:
 	int WidthMax = 2040;
 	int CurrentFrame;
 	int CurrentMilisecond;
-
+	int CubPicked = NULL;
+	int PiramidPicked = NULL;
 	
 private:
 

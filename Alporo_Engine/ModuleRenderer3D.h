@@ -26,6 +26,8 @@ public:
 	void OnResize(int width, int height);
 
 public:
+
+
 	ImGuiIO* io = nullptr;
 
 	Light lights[MAX_LIGHTS];

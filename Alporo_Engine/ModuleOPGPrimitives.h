@@ -25,6 +25,7 @@ struct Quad
 
 struct Triangle
 {
+    vec3 Pos;
     float v0[3] = { 0.f,0.f,0.f };
     float v1[3] = { 2.f,0.f,0.f };
     float v2[3] = { 1.f,2.f,-1.f};
@@ -48,6 +49,7 @@ public:
     void DrawPiramid(Triangle* P);
     void DrawSphere(float radius);
     void QuadKeys(Quad* Q, float dt);
+    void PiramidKeys(Triangle* Q, float dt);
 
   
     bool DrawPiramide = false;
