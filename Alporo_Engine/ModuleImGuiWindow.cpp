@@ -161,13 +161,15 @@ update_status ModuleImguiWindow::Update(float dt)
            {
                if (FullScreenEnable == true)
                {
-                   SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_FULLSCREEN);
+                   SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_FULLSCREEN_DESKTOP);
                }
 
                else
                {
                    SDL_SetWindowFullscreen(App->window->window, SDL_WINDOW_MAXIMIZED);
                }
+               
+               
            }
            //RESIZABLE WINDOWS (Si la pots escalar o no amb el cursor)
            if (ImGui::Checkbox("Resizable Windows", &ActiveResizable));
@@ -179,7 +181,8 @@ update_status ModuleImguiWindow::Update(float dt)
            {
                Resizable = SDL_FALSE;
            }
-           SDL_SetWindowResizable(App->window->window, Resizable);
+          // SDL_SetWindowResizable(App->window->window, Resizable);
+           SDL_SetWindowBordered(App->window->window, Borderless);
 
         }
 
@@ -202,9 +205,19 @@ update_status ModuleImguiWindow::Update(float dt)
     if (ImGui::Begin("Inspector")) {
         for (int i = 0; i < App->OpenGLPrimitives->NumQuads; i++)
         {
-            ImGui::BulletText("Cube %d:", i + 1 );
-            ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->v0[3]);
-            ImGui::Separator();
+            char Name[32];
+            sprintf(Name, "Cube %d", i);
+
+            if (ImGui::Selectable(Name, i == picked, 0)) {
+                picked = i;
+            }
+            if (i == picked)
+            {
+                ImGui::BulletText("Cube %d:", i + 1);
+                ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->v0[3]);
+                ImGui::Separator();
+            }
+        
         }
 
         for (int i = 0; i < App->OpenGLPrimitives->NumPiramid; i++)

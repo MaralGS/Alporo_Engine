@@ -33,11 +33,11 @@ bool ModuleOPGPrimitives::PreUpdate() {
 update_status ModuleOPGPrimitives::Update(float dt)
 {
 	//Create Quad
-	for (int i = 0; i < NumQuads; i++)
-	{
+	for (int i = 0; i < NumQuads; i++){
 		DrawQuad(Cub[i]);
-		QuadKeys(Cub[i], dt);
+		QuadKeys(Cub[App->imguiwindows->picked], dt);
 	}
+	
 
 	//Create Piramid
 	for (int i = 0; i < NumPiramid; i++)
