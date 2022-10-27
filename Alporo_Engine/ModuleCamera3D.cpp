@@ -112,7 +112,7 @@ update_status ModuleCamera3D::Update(float dt)
 			newPos.x = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.x + 4;
 			newPos.y = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.y + 2;
 			newPos.z = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.z + 3;
-			Look(newPos, { App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2 });
+			Look(newPos, { App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2}, FromReference);
 		}
 		
 		if (App->OpenGLPrimitives->PM == 2)
@@ -120,9 +120,8 @@ update_status ModuleCamera3D::Update(float dt)
 			newPos.x = App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2.x + 4;
 			newPos.y = App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2.y + 2;
 			newPos.z = App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2.z + 3;
-			Look(newPos, { App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2 });
-		}
-		
+			Look(newPos, { App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2}, FromReference);
+		}	
 	}
 
 	// Recalculate matrix -------------
