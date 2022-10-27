@@ -11,22 +11,25 @@ struct Cilindre
 
 struct Quad
 {
-    vec3 Pos2;
+    
     vec3 Pos;
-    float v0[3] = { 0.f + Pos.x, 1.f + Pos.y, 0.f + Pos.z };
-    float v1[3] = { 0.f + Pos.x, 0.f + Pos.y, 0.f + Pos.z };
-    float v2[3] = { 0.f + Pos.x, 0.f + Pos.y, 1.f + Pos.z };
-    float v3[3] = { 0.f + Pos.x, 1.f + Pos.y, 1.f + Pos.z };
-    float v4[3] = { 1.f + Pos.x, 1.f + Pos.y, 0.f + Pos.z };
-    float v5[3] = { 1.f + Pos.x, 1.f + Pos.y, 1.f + Pos.z };
-    float v6[3] = { 1.f + Pos.x, 0.f + Pos.y, 1.f + Pos.z };
-    float v7[3] = { 1.f + Pos.x, 0.f + Pos.y, 0.f + Pos.z };
+    vec3 Pos2;
+    vec3 Scale = 1;
+    float v0[3] = { 0.f, 1.f, 0.f};
+    float v1[3] = { 0.f, 0.f, 0.f};
+    float v2[3] = { 0.f, 0.f, 1.f};
+    float v3[3] = { 0.f, 1.f, 1.f};
+    float v4[3] = { 1.f, 1.f, 0.f};
+    float v5[3] = { 1.f, 1.f, 1.f};
+    float v6[3] = { 1.f, 0.f, 1.f};
+    float v7[3] = { 1.f, 0.f, 0.f};
 };
 
 struct Triangle
 {
-    vec3 Pos2;
+
     vec3 Pos;
+    vec3 Pos2;
     float v0[3] = { 0.f,0.f,0.f };
     float v1[3] = { 2.f,0.f,0.f };
     float v2[3] = { 1.f,2.f,-1.f};

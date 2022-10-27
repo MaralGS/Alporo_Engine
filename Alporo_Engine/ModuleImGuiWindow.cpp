@@ -332,7 +332,9 @@ void ModuleImguiWindow::Inspector()
         if (i == CubPicked)
         {
             ImGui::BulletText("Cube %d:", i + 1);
-            ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->Pos2.x, App->OpenGLPrimitives->Cub[i]->Pos2.y, App->OpenGLPrimitives->Cub[i]->Pos2.z);
+            ImGui::BulletText("Position:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->Pos2.x, App->OpenGLPrimitives->Cub[i]->Pos2.y, App->OpenGLPrimitives->Cub[i]->Pos2.z);
+            ImGui::SameLine();
+            ImGui::BulletText("Scale:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->Scale.x, App->OpenGLPrimitives->Cub[i]->Scale.y, App->OpenGLPrimitives->Cub[i]->Scale.z);
             ImGui::Separator();
         }
 
