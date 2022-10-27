@@ -53,13 +53,15 @@ public:
 
   
     bool DrawPiramide = false;
-
+  
     Cilindre CilindreStats;
     std::vector<Quad*> Cub;
     std::vector<Triangle*> Piramid;
 
     int NumQuads=0;
     int NumPiramid=0;
+    int PM = 0;
+
 private:
     //Quad posant el vertex a cada lloc
    /* float Quad[108] = {0.f,1.f,0.f, //X Cara1 

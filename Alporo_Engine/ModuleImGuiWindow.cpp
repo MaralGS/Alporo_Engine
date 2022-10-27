@@ -326,6 +326,7 @@ void ModuleImguiWindow::Inspector()
         if (ImGui::Selectable(Name, i == CubPicked, 0)) {
             CubPicked = i;
             PiramidPicked = NULL;
+            App->OpenGLPrimitives->PM = 1;
 
         }
         if (i == CubPicked)
@@ -345,6 +346,7 @@ void ModuleImguiWindow::Inspector()
         if (ImGui::Selectable(Name, i == PiramidPicked, 0)) {
             PiramidPicked = i;
             CubPicked = NULL;
+            App->OpenGLPrimitives->PM = 2;
         }
         if (i == PiramidPicked)
         {
