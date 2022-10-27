@@ -11,7 +11,7 @@ struct Cilindre
 
 struct Quad
 {
-
+    vec3 Pos2;
     vec3 Pos;
     float v0[3] = { 0.f + Pos.x, 1.f + Pos.y, 0.f + Pos.z };
     float v1[3] = { 0.f + Pos.x, 0.f + Pos.y, 0.f + Pos.z };
@@ -25,6 +25,7 @@ struct Quad
 
 struct Triangle
 {
+    vec3 Pos2;
     vec3 Pos;
     float v0[3] = { 0.f,0.f,0.f };
     float v1[3] = { 2.f,0.f,0.f };

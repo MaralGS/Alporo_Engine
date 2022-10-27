@@ -332,7 +332,7 @@ void ModuleImguiWindow::Inspector()
         if (i == CubPicked)
         {
             ImGui::BulletText("Cube %d:", i + 1);
-            ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->v0[3]);
+            ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->Pos2.x, App->OpenGLPrimitives->Cub[i]->Pos2.y, App->OpenGLPrimitives->Cub[i]->Pos2.z);
             ImGui::Separator();
         }
 
@@ -351,7 +351,7 @@ void ModuleImguiWindow::Inspector()
         if (i == PiramidPicked)
         {
             ImGui::BulletText("Piramid  %d:", i + 1);
-            ImGui::BulletText("X: %.2f\nY: %.2d\nZ: %.2d", App->OpenGLPrimitives->Piramid[i]->v0[3]);
+            ImGui::BulletText("X: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Piramid[i]->Pos2.x, App->OpenGLPrimitives->Piramid[i]->Pos2.y, App->OpenGLPrimitives->Piramid[i]->Pos2.z);
             ImGui::Separator();
         }
     }

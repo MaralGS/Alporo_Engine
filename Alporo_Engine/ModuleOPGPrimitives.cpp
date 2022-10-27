@@ -237,31 +237,37 @@ void ModuleOPGPrimitives::QuadKeys(Quad* Q, float dt)
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
 			Q->Pos.x = (Q->Pos.x + 0.1) * (5.0f * dt);
+			Q->Pos2.x = Q->Pos2.x + Q->Pos.x;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
 		{
 			Q->Pos.x = (Q->Pos.x - 0.1) * (5.0f * dt);
+			Q->Pos2.x = Q->Pos2.x + Q->Pos.x;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
 			Q->Pos.y = (Q->Pos.y + 0.1) * (5.0f * dt);
+			Q->Pos2.y = Q->Pos2.y + Q->Pos.y;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			Q->Pos.y = (Q->Pos.y - 0.1) * (5.0f * dt);
+			Q->Pos2.y = Q->Pos2.y + Q->Pos.y;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
 		{
 			Q->Pos.z = (Q->Pos.z + 0.1) * (5.0f * dt);
+			Q->Pos2.z = Q->Pos2.z + Q->Pos.z;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT)
 		{
 			Q->Pos.z = (Q->Pos.z - 0.1) * (5.0f * dt);
+			Q->Pos2.z = Q->Pos2.z + Q->Pos.z;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP || App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
@@ -327,31 +333,37 @@ void ModuleOPGPrimitives::PiramidKeys(Triangle* Q, float dt)
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		{
 			Q->Pos.x = (Q->Pos.x + 0.1) * (5.0f * dt);
+			Q->Pos2.x = Q->Pos2.x + Q->Pos.x;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
 		{
 			Q->Pos.x = (Q->Pos.x - 0.1) * (5.0f * dt);
+			Q->Pos2.x = Q->Pos2.x + Q->Pos.x;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
 			Q->Pos.y = (Q->Pos.y + 0.1) * (5.0f * dt);
+			Q->Pos2.y = Q->Pos2.y + Q->Pos.y;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			Q->Pos.y = (Q->Pos.y - 0.1) * (5.0f * dt);
+			Q->Pos2.y = Q->Pos2.y + Q->Pos.y;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
 		{
 			Q->Pos.z = (Q->Pos.z + 0.1) * (5.0f * dt);
+			Q->Pos2.z = Q->Pos2.z + Q->Pos.z;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT)
 		{
 			Q->Pos.z = (Q->Pos.z - 0.1) * (5.0f * dt);
+			Q->Pos2.z = Q->Pos2.z + Q->Pos.z;
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP || App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
