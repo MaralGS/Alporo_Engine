@@ -11,7 +11,7 @@ struct Cilindre
 
 struct Quad
 {
-
+    vec3 Pos2;
     vec3 Pos;
     float v0[3] = { 0.f + Pos.x, 1.f + Pos.y, 0.f + Pos.z };
     float v1[3] = { 0.f + Pos.x, 0.f + Pos.y, 0.f + Pos.z };
@@ -25,6 +25,7 @@ struct Quad
 
 struct Triangle
 {
+    vec3 Pos2;
     vec3 Pos;
     float v0[3] = { 0.f,0.f,0.f };
     float v1[3] = { 2.f,0.f,0.f };
@@ -53,13 +54,15 @@ public:
 
   
     bool DrawPiramide = false;
-
+  
     Cilindre CilindreStats;
     std::vector<Quad*> Cub;
     std::vector<Triangle*> Piramid;
 
     int NumQuads=0;
     int NumPiramid=0;
+    int PM = 0;
+
 private:
     //Quad posant el vertex a cada lloc
    /* float Quad[108] = {0.f,1.f,0.f, //X Cara1 

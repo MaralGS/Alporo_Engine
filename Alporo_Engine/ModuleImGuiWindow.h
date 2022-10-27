@@ -24,6 +24,7 @@ public:
 	bool ActiveDemoWindows = true;
 	bool openConsole = true;
 
+
 	bool AboutTxt = false;
 	bool FullScreenEnable = false;
 	SDL_bool Resizable = SDL_FALSE;

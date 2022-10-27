@@ -46,13 +46,6 @@ update_status ModuleCamera3D::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 		speed = 10.0f * dt;
 
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
-		Position.x = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos.x;
-		newPos.y = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos.y;
-		newPos.z = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos.z;
-		//Look(newPos, { App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.x, App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.y, App->OpenGLPrimitives->Cub[App->imguiwindows->picked]->Pos.z });
-	}
-
 	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) newPos -= Z * speed;
@@ -111,6 +104,24 @@ update_status ModuleCamera3D::Update(float dt)
 		}
 
 		Position = Reference + Z * length(Position);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && App->OpenGLPrimitives->PM != 0) {
+		if (App->OpenGLPrimitives->PM == 1)
+		{
+			newPos.x = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.x + 4;
+			newPos.y = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.y + 2;
+			newPos.z = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.z + 3;
+			Look(newPos, { App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2}, FromReference);
+		}
+		
+		if (App->OpenGLPrimitives->PM == 2)
+		{
+			newPos.x = App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2.x + 4;
+			newPos.y = App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2.y + 2;
+			newPos.z = App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2.z + 3;
+			Look(newPos, { App->OpenGLPrimitives->Piramid[App->imguiwindows->CubPicked]->Pos2}, FromReference);
+		}	
 	}
 
 	// Recalculate matrix -------------
