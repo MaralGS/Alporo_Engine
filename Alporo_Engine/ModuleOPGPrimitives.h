@@ -2,6 +2,8 @@
 #include "Module.h"
 #include "Globals.h"
 
+#include <map>
+
 struct Cilindre
 {
     bool DrawCilindre = false;
@@ -62,6 +64,7 @@ public:
     Cilindre CilindreStats;
     std::vector<Quad*> Cub;
     std::vector<Triangle*> Piramid;
+    
 
     int NumQuads=0;
     int NumPiramid=0;

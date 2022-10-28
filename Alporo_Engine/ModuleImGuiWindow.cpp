@@ -177,7 +177,6 @@ update_status ModuleImguiWindow::Update(float dt)
     if (ImGui::Begin("Inspector")) {
         Inspector();
     }
-
     ImGui::End();
     return UPDATE_CONTINUE;
 }
