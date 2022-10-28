@@ -43,7 +43,7 @@ update_status ModuleImguiWindow::Update(float dt)
             {
                 ActiveDemoWindows = !ActiveDemoWindows;
             }
-            if (ImGui::RadioButton(" Console  ", openConsole))
+            if (ImGui::MenuItem("Console "))
             {
                 openConsole = !openConsole;
             }

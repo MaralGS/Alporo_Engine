@@ -8,40 +8,24 @@
 using namespace std;
 
 
-struct DebugLogs
+struct DebugConsole
 {
-	DebugLogs(string st, string f, LogType ty) : st(st), repts(1), type(ty), file(f) {};
-
-	string st;
+	DebugConsole(string msg, string f, LogType ty) : msg(msg), type(ty), file(f) {};
+	string msg;
 	string file;
-	int repts;
 	LogType type;
 };
 
-class Logs
+class Console
 {
 public:
 
 	static void PrintDebug();
-	static void DebugLog(string format, string file, LogType type = LogType::LOGS);
-	static void UnCollapseDebug();
+	static void DebugConsole(string format, string file, LogType type);
 
 
 private:
 
-	static vector<DebugLogs> logs;
-	static vector<DebugLogs> logsCopy;
-
-	static float colorEdit[3];
-
-	static int countWarn;
-	static int countSyst;
-	static int countDebug;
-
-	static bool isCollapsed;
-	static bool showPath;
-
-	static bool warnignDebug;
-	static bool systemDebug;
-	static bool msgDebug;
+	static vector<struct DebugConsole> logs;
+	static vector<struct DebugConsole> logsCopy;
 };
