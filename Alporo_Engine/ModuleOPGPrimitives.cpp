@@ -275,17 +275,17 @@ void ModuleOPGPrimitives::QuadKeys(Quad* Q, float dt)
 						Q->Pos2.z = Q->Pos2.z + Q->Pos.z;
 					}
 
-					if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP || App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+					if (App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_Q) != KEY_REPEAT)
 					{
 						Q->Pos.x = 0;
 					}
 
-					if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
+					if (App->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
 					{
 						Q->Pos.y = 0;
 					}
 
-					if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_UP || App->input->GetKey(SDL_SCANCODE_X) == KEY_UP)
+					if (App->input->GetKey(SDL_SCANCODE_Z) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_X) != KEY_REPEAT)
 					{
 						Q->Pos.z = 0;
 					}
@@ -367,17 +367,17 @@ void ModuleOPGPrimitives::QuadKeys(Quad* Q, float dt)
 				Q->Scale.z = Q->Scale.z + Q->Pos.z;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP || App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+			if (App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_Q) != KEY_REPEAT)
 			{
 				Q->Pos.x = 0;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
+			if (App->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
 			{
 				Q->Pos.y = 0;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_UP || App->input->GetKey(SDL_SCANCODE_X) == KEY_UP)
+			if (App->input->GetKey(SDL_SCANCODE_Z) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_X) != KEY_REPEAT)
 			{
 				Q->Pos.z = 0;
 			}
@@ -455,17 +455,17 @@ void ModuleOPGPrimitives::PiramidKeys(Triangle* Q, float dt)
 				Q->Pos2.z = Q->Pos2.z + Q->Pos.z;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP || App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+			if (App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_Q) != KEY_REPEAT)
 			{
 				Q->Pos.x = 0;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
+			if (App->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
 			{
 				Q->Pos.y = 0;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_UP || App->input->GetKey(SDL_SCANCODE_X) == KEY_UP)
+			if (App->input->GetKey(SDL_SCANCODE_Z) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_X) != KEY_REPEAT)
 			{
 				Q->Pos.z = 0;
 			}
@@ -537,17 +537,17 @@ void ModuleOPGPrimitives::PiramidKeys(Triangle* Q, float dt)
 					Q->Scale.z = Q->Scale.z + Q->Pos.z;
 				}
 
-				if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP || App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+				if (App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_Q) != KEY_REPEAT)
 				{
 					Q->Pos.x = 0;
 				}
 
-				if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
+				if (App->input->GetKey(SDL_SCANCODE_A) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
 				{
 					Q->Pos.y = 0;
 				}
 
-				if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_UP || App->input->GetKey(SDL_SCANCODE_X) == KEY_UP)
+				if (App->input->GetKey(SDL_SCANCODE_Z) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_X) != KEY_REPEAT)
 				{
 					Q->Pos.z = 0;
 				}

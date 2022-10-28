@@ -1,8 +1,11 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "GameObject.h"
 
 #include <map>
+
+
 
 struct Cilindre
 {
@@ -64,7 +67,8 @@ public:
     Cilindre CilindreStats;
     std::vector<Quad*> Cub;
     std::vector<Triangle*> Piramid;
-    
+
+
 
     int NumQuads=0;
     int NumPiramid=0;
