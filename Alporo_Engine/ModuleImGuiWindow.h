@@ -55,6 +55,8 @@ public:
 	
 private:
 
+	SDL_version compiled;
+	SDL_version linked;
 
 
 	std::vector<float> FPS;

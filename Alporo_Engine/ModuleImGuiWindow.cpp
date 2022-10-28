@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleImGuiWindow.h"
 #include "imgui.h"
+#include "IL.h"
+
 #include<vector>
 
 
@@ -152,17 +154,22 @@ update_status ModuleImguiWindow::Update(float dt)
         }
 
         //Hardware Detection
+
+        SDL_VERSION(&compiled);
+        SDL_GetVersion(&linked);
         if (ImGui::CollapsingHeader("Hardware"))
         {
-            ImGui::BulletText("SDL Version: 2.0.4");
+            ImGui::BulletText("Compiled SDL Version: %u.%u.%u", compiled.major, compiled.minor, compiled.patch);
+            ImGui::BulletText("Linked SDL Version: %u.%u.%u", linked.major, linked.minor, linked.patch);
+            ImGui::Separator();
+            ImGui::BulletText("Imgui Version: %s\nImgui Version Num: %d", IMGUI_VERSION, IMGUI_VERSION_NUM);
+            ImGui::Separator();
+            ImGui::BulletText("OPGL Version:\n%s", glGetString(GL_VERSION));
+            ImGui::Separator();
+            ImGui::BulletText("DevIL Version: %d", IL_VERSION);
             ImGui::Separator();
             ImGui::BulletText("CPUs: %d (Cache %dKb)", SDL_GetCPUCount(),SDL_GetCPUCacheLineSize());
             ImGui::BulletText("System RAM: %dGb", SDL_GetSystemRAM()/1000);
-            ImGui::Separator();
-            //ImGui::BulletText("System RAM: %dGb", SDL_GetGPU()/1000);
-
-
-           // ImGui::TextColored(CPU); ;
         }
 
     }
@@ -170,7 +177,6 @@ update_status ModuleImguiWindow::Update(float dt)
     if (ImGui::Begin("Inspector")) {
         Inspector();
     }
-
     ImGui::End();
     return UPDATE_CONTINUE;
 }
@@ -310,10 +316,11 @@ void ModuleImguiWindow::GeneratePrimitives()
 
         }
 
-        if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
 
         ImGui::EndMenu();
     }
+
+    if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
 }
 
 void ModuleImguiWindow::Inspector()
