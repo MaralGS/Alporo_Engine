@@ -49,12 +49,6 @@
     <Filter Include="External_Libraries\Assimp">
       <UniqueIdentifier>{963e72c1-7e9b-47af-8ac0-6f945667904d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="External_Libraries\Devil">
-      <UniqueIdentifier>{265266ef-8cc2-408a-81b7-d5c776549c40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="External_Libraries\Devil\Include">
-      <UniqueIdentifier>{cbedb60d-0e13-4cc3-85a7-042fe99a8563}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Objects">
       <UniqueIdentifier>{f41537a8-cc1f-4212-a58b-d4f76a9dba00}</UniqueIdentifier>
     </Filter>
@@ -431,30 +425,6 @@
     </ClInclude>
     <ClInclude Include="Assimp\include\cexport.h">
       <Filter>External_Libraries\Assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="DevIL\include\devil_internal_exports.h">
-      <Filter>External_Libraries\Devil\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DevIL\include\il.h">
-      <Filter>External_Libraries\Devil\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DevIL\include\il_wrap.h">
-      <Filter>External_Libraries\Devil\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DevIL\include\ilu.h">
-      <Filter>External_Libraries\Devil\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DevIL\include\ilu_region.h">
-      <Filter>External_Libraries\Devil\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DevIL\include\ilut.h">
-      <Filter>External_Libraries\Devil\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DevIL\include\ilut_config.h">
-      <Filter>External_Libraries\Devil\Include</Filter>
-    </ClInclude>
-    <ClInclude Include="DevIL\include\devil_cpp_wrapper.hpp">
-      <Filter>External_Libraries\Devil\Include</Filter>
     </ClInclude>
     <ClInclude Include="ModuleTexture.h">
       <Filter>Sources\Modules</Filter>
