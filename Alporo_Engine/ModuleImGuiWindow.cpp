@@ -170,11 +170,6 @@ update_status ModuleImguiWindow::Update(float dt)
             ImGui::Separator();
             ImGui::BulletText("CPUs: %d (Cache %dKb)", SDL_GetCPUCount(),SDL_GetCPUCacheLineSize());
             ImGui::BulletText("System RAM: %dGb", SDL_GetSystemRAM()/1000);
-            ImGui::Separator();
-            //ImGui::BulletText("System RAM: %dGb", SDL_GetGPU()/1000);
-
-
-           // ImGui::TextColored(CPU); ;
         }
 
     }
