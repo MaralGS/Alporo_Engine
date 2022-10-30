@@ -34,6 +34,11 @@ update_status ModuleImguiWindow::PreUpdate(float dt) {
 
 update_status ModuleImguiWindow::Update(float dt)
 {
+    ImGuiWindowFlags window_flags = 2;
+   
+   window_flags |= ImGuiWindowFlags_NoMove;
+   window_flags |= ImGuiWindowFlags_NoResize;
+
    // ImGui::ShowDemoWindow();
     if (ImGui::BeginMainMenuBar())
     {
@@ -62,14 +67,35 @@ update_status ModuleImguiWindow::Update(float dt)
                 SDL_OpenURL("https://github.com/MaralGS/Alporo_Engine/issues");
             }
 
-            if (ImGui::MenuItem("About"))
+            if (ImGui::RadioButton("About", AboutTxt))
             {
                 AboutTxt = !AboutTxt;
             }
-
             if (AboutTxt == true)
             {
-                ImGui::BulletText("Alporo_Engine");
+                if (ImGui::Begin("About", false, window_flags))
+                {
+
+                    ImGui::Text("Alporo_Engine vA 1.0A\n\nBy Pol Maresch & Alex Garcia");
+
+                    ImGui::Text("3rd Party Libraries Used:");
+                    ImGui::BulletText("SDL: Version 2.0.4");
+                    ImGui::BulletText("ImGui: Version 1.84 WIP");
+                    ImGui::BulletText("OpenGl: Version 4.6.0");
+                    ImGui::BulletText("DevIL: Version 180");
+                    ImGui::BulletText("MathGeoLib: Version 1.15");
+                    ImGui::BulletText("Glew: Version 7.0");
+
+                    ImGui::Text("License: MIT LicenseMIT License");
+                    ImGui::Text("Copyright(c) 2022 MaralGS");
+                    ImGui::Text("Permission is hereby granted, free of charge,\nto anyperson obtaining a copy of this software and\nassociated documentation files(the 'Software'),\nto deal to use, copy, modify, merge, publish,\ndistribute, sublicense, and /or sell copies of the\nSoftware, and to permit persons to whom the Software\nis furnished to do so, subject to the following\nconditions:");
+                    ImGui::Text("\n");
+                    ImGui::Text("The above copyright notice and this permissio\nnotice shall be included in all copies or\nsubstantial portions of the Software.");
+                    ImGui::Text("\n");
+                    ImGui::Text("THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY\nOF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT\nLIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS\nBE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,\nWHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,\nARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.");
+                }
+                ImGui::End();
+                
             }
 
             ImGui::EndMenu();
