@@ -76,7 +76,7 @@ update_status ModuleImguiWindow::Update(float dt)
                 if (ImGui::Begin("About", false, window_flags))
                 {
 
-                    ImGui::Text("Alporo_Engine vA 1.0A\n\nBy Pol Maresch & Alex Garcia");
+                    ImGui::Text("Alporo_Engine vA 0.1\n\nBy Pol Maresch & Alex Garcia");
 
                     ImGui::Text("3rd Party Libraries Used:");
                     ImGui::BulletText("SDL: Version 2.0.4");
