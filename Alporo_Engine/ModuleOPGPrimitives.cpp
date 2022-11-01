@@ -53,7 +53,16 @@ update_status ModuleOPGPrimitives::Update(float dt)
 		
 	}
 
-	
+	//Create Plane
+	for (int i = 0; i < NumPlanes; i++)
+	{
+		DrawPlane(Plane[i]);
+		if (PM == 3)
+		{
+			PlaneKeys(Plane[App->imguiwindows->PlanePicked], dt);
+		}
+
+	}
 	
 	if (CilindreStats.DrawCilindre == true)
 	{
@@ -225,6 +234,26 @@ void ModuleOPGPrimitives::DrawPiramid(Triangle* P)
 	glEnd();
 }
 
+void ModuleOPGPrimitives::DrawPlane(Planes* Pl)
+{
+	if (App->imguiwindows->Wireframe == true) {
+		//Wireframe Mode
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glLineWidth(2);
+	}
+
+	glBegin(GL_TRIANGLES);  // draw a triangle
+
+	glVertex3fv(Pl->v4);    //Base
+	glVertex3fv(Pl->v3);
+	glVertex3fv(Pl->v1);
+
+	glVertex3fv(Pl->v4);
+	glVertex3fv(Pl->v1);
+	glVertex3fv(Pl->v0);
+
+	glEnd();
+}
 void ModuleOPGPrimitives::DrawSphere(float radius)
 {
 
@@ -573,3 +602,145 @@ void ModuleOPGPrimitives::PiramidKeys(Triangle* Q, float dt)
 	}
 }
 
+void ModuleOPGPrimitives::PlaneKeys(Planes* Pl, float dt)
+{
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) != KEY_REPEAT && PM == 3)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_LALT) != KEY_REPEAT)
+		{
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			{
+				Pl->Pos.x = (Pl->Pos.x + 0.1) * (5.0f * dt);
+				Pl->Pos2.x = Pl->Pos2.x + Pl->Pos.x;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
+			{
+				Pl->Pos.x = (Pl->Pos.x - 0.1) * (5.0f * dt);
+				Pl->Pos2.x = Pl->Pos2.x + Pl->Pos.x;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+			{
+				Pl->Pos.y = (Pl->Pos.y + 0.1) * (5.0f * dt);
+				Pl->Pos2.y = Pl->Pos2.y + Pl->Pos.y;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
+			{
+				Pl->Pos.y = (Pl->Pos.y - 0.1) * (5.0f * dt);
+				Pl->Pos2.y = Pl->Pos2.y + Pl->Pos.y;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
+			{
+				Pl->Pos.z = (Pl->Pos.z + 0.1) * (5.0f * dt);
+				Pl->Pos2.z = Pl->Pos2.z + Pl->Pos.z;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT)
+			{
+				Pl->Pos.z = (Pl->Pos.z - 0.1) * (5.0f * dt);
+				Pl->Pos2.z = Pl->Pos2.z + Pl->Pos.z;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP || App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+			{
+				Pl->Pos.x = 0;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP || App->input->GetKey(SDL_SCANCODE_S) == KEY_UP)
+			{
+				Pl->Pos.y = 0;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_UP || App->input->GetKey(SDL_SCANCODE_X) == KEY_UP)
+			{
+				Pl->Pos.z = 0;
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				if (i == 0)
+				{
+					Pl->v0[i] += Pl->Pos.x;
+					Pl->v1[i] += Pl->Pos.x;
+					Pl->v2[i] += Pl->Pos.x;
+					Pl->v3[i] += Pl->Pos.x;
+					Pl->v4[i] += Pl->Pos.x;
+				}
+				if (i == 1)
+				{
+					Pl->v0[i] += Pl->Pos.y;
+					Pl->v1[i] += Pl->Pos.y;
+					Pl->v2[i] += Pl->Pos.y;
+					Pl->v3[i] += Pl->Pos.y;
+					Pl->v4[i] += Pl->Pos.y;
+				}
+				if (i == 2)
+				{
+					Pl->v0[i] += Pl->Pos.z;
+					Pl->v1[i] += Pl->Pos.z;
+					Pl->v2[i] += Pl->Pos.z;
+					Pl->v3[i] += Pl->Pos.z;
+					Pl->v4[i] += Pl->Pos.z;
+				}
+			}
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT)
+		{
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			{
+				Pl->Pos.x = (Pl->Pos.x + 0.1) * (5.0f * dt);
+				Pl->Scale.x = Pl->Scale.x + Pl->Pos.x;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_REPEAT)
+			{
+				Pl->Pos.x = (Pl->Pos.x - 0.1) * (5.0f * dt);
+				Pl->Scale.x = Pl->Scale.x + Pl->Pos.x;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_X) == KEY_REPEAT)
+			{
+				Pl->Pos.z = (Pl->Pos.z + 0.1) * (5.0f * dt);
+				Pl->Scale.z = Pl->Scale.z + Pl->Pos.z;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_REPEAT)
+			{
+				Pl->Pos.z = (Pl->Pos.z - 0.1) * (5.0f * dt);
+				Pl->Scale.z = Pl->Scale.z + Pl->Pos.z;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_UP || App->input->GetKey(SDL_SCANCODE_Q) == KEY_UP)
+			{
+				Pl->Pos.x = 0;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_UP || App->input->GetKey(SDL_SCANCODE_X) == KEY_UP)
+			{
+				Pl->Pos.z = 0;
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				if (i == 0)
+				{
+					Pl->v1[i] += Pl->Pos.x;
+					Pl->v3[i] += Pl->Pos.x;
+				}
+				if (i == 1)
+				{
+					Pl->v2[i] += Pl->Pos.y;
+				}
+				if (i == 2)
+				{
+					Pl->v3[i] += Pl->Pos.z;
+					Pl->v4[i] += Pl->Pos.z;
+				}
+			}
+		}
+	}
+}

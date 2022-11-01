@@ -52,6 +52,7 @@ public:
 	int CurrentMilisecond;
 	int CubPicked = NULL;
 	int PiramidPicked = NULL;
+	int PlanePicked = NULL;
 	
 private:
 

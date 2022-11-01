@@ -40,6 +40,18 @@ struct Triangle
     float v4[3] = { 0.f, 0.f, 1.f };
 };
 
+struct Planes
+{
+    vec3 Pos;
+    vec3 Pos2;
+    vec3 Scale = 1;
+    float v0[3] = { 0.f,0.f,0.f };
+    float v1[3] = { 1.f,0.f,0.f };
+    float v2[3] = { 0.5f,1.f,0.5f };
+    float v3[3] = { 1.f, 0.f, 1.f };
+    float v4[3] = { 0.f, 0.f, 1.f };
+};
+
 class ModuleOPGPrimitives : public Module
 {
 public:
@@ -54,9 +66,11 @@ public:
     void DrawQuad(Quad* Q);
     void DrawCilind(float radius, float leght);
     void DrawPiramid(Triangle* P);
+    void DrawPlane(Planes* O);
     void DrawSphere(float radius);
     void QuadKeys(Quad* Q, float dt);
     void PiramidKeys(Triangle* Q, float dt);
+    void PlaneKeys(Planes* Pl, float dt);
 
   
     bool DrawPiramide = false;
@@ -64,10 +78,12 @@ public:
     Cilindre CilindreStats;
     std::vector<Quad*> Cub;
     std::vector<Triangle*> Piramid;
+    std::vector<Planes*> Plane;
     
 
     int NumQuads=0;
     int NumPiramid=0;
+    int NumPlanes = 0;
     int PM = 0;
 
 private:

@@ -310,7 +310,7 @@ void ModuleImguiWindow::GeneratePrimitives()
     }
 
     //generate and delete a Piramide
-    if (ImGui::BeginMenu("Piramide"))
+    if (ImGui::BeginMenu("Piramid"))
     {
         if (ImGui::Button("Generate Piramid")) {
             Triangle* Q = new Triangle();
@@ -345,7 +345,41 @@ void ModuleImguiWindow::GeneratePrimitives()
 
         ImGui::EndMenu();
     }
+    if (ImGui::BeginMenu("Plane"))
+    {
+        if (ImGui::Button("Generate Plane")) {
+            Planes* Pl = new Planes();
+            App->OpenGLPrimitives->Plane.push_back(Pl);
+            App->OpenGLPrimitives->NumPlanes++;
+        }
+        if (ImGui::Button("Delete Plane")) {
+            if (App->OpenGLPrimitives->NumPlanes >= 1)
+            {
+                if (App->OpenGLPrimitives->Plane.size() == App->OpenGLPrimitives->NumPlanes)
+                {
+                    if (PlanePicked != App->OpenGLPrimitives->NumPlanes)
+                    {
+                        for (int i = PlanePicked; i < App->OpenGLPrimitives->NumPlanes - 1; i++)
+                        {
+                            App->OpenGLPrimitives->Plane[i] = App->OpenGLPrimitives->Plane[i + 1];
 
+                        }
+                    }
+
+                    App->OpenGLPrimitives->Plane.pop_back();
+                    App->OpenGLPrimitives->NumPlanes--;
+                    if (PlanePicked != 0)
+                    {
+                        PlanePicked--;
+                    }
+                }
+            }
+
+        }
+
+
+        ImGui::EndMenu();
+    }
     if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
 }
 
@@ -359,6 +393,7 @@ void ModuleImguiWindow::Inspector()
         if (ImGui::Selectable(Name, i == CubPicked, 0)) {
             CubPicked = i;
             PiramidPicked = NULL;
+            PlanePicked = NULL;
             App->OpenGLPrimitives->PM = 1;
 
         }
@@ -381,6 +416,7 @@ void ModuleImguiWindow::Inspector()
         if (ImGui::Selectable(Name, i == PiramidPicked, 0)) {
             PiramidPicked = i;
             CubPicked = NULL;
+            PlanePicked = NULL;
             App->OpenGLPrimitives->PM = 2;
         }
         if (i == PiramidPicked)
@@ -389,6 +425,27 @@ void ModuleImguiWindow::Inspector()
             ImGui::BulletText("Position:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Piramid[i]->Pos2.x, App->OpenGLPrimitives->Piramid[i]->Pos2.y, App->OpenGLPrimitives->Piramid[i]->Pos2.z);
             ImGui::SameLine();
             ImGui::BulletText("Scale:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Piramid[i]->Scale.x, App->OpenGLPrimitives->Piramid[i]->Scale.y, App->OpenGLPrimitives->Piramid[i]->Scale.z);
+            ImGui::Separator();
+        }
+    }
+
+    for (int i = 0; i < App->OpenGLPrimitives->NumPlanes; i++)
+    {
+        char Name[32];
+        sprintf(Name, "Plane %d", i + 1);
+
+        if (ImGui::Selectable(Name, i == PlanePicked, 0)) {
+            PlanePicked = i;
+            CubPicked = NULL;
+            PiramidPicked = NULL;
+            App->OpenGLPrimitives->PM = 3;
+        }
+        if (i == PlanePicked)
+        {
+            ImGui::BulletText("Plane  %d:", i + 1);
+            ImGui::BulletText("Position:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Plane[i]->Pos2.x, App->OpenGLPrimitives->Plane[i]->Pos2.y, App->OpenGLPrimitives->Plane[i]->Pos2.z);
+            ImGui::SameLine();
+            ImGui::BulletText("Scale:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Plane[i]->Scale.x, App->OpenGLPrimitives->Plane[i]->Scale.y, App->OpenGLPrimitives->Plane[i]->Scale.z);
             ImGui::Separator();
         }
     }
