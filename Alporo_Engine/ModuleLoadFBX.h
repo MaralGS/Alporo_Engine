@@ -36,8 +36,8 @@ public:
 	//bool Init();
 	bool CleanUp();
 	bool FBX1 = true;
-	bool FBX2 = false;
-	bool FBX3 = false;
+	bool FBX2 = true;
+	bool FBX3 = true;
 private:
 	vector<MyMesh*> meshes;
 };
