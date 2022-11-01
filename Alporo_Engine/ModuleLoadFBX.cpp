@@ -12,6 +12,10 @@ ModuleLoadFBX::ModuleLoadFBX(Application* app, bool start_enabled) : Module(app,
 bool ModuleLoadFBX::Start()
 {
 	bool ret = true;
+	
+	LoadFile("Assets/BakerHouse.fbx");
+	LoadFile("Assets/NauAtreide.fbx");
+
 	return ret;
 }
 
@@ -110,10 +114,18 @@ void ModuleLoadFBX::LoadMesh(MyMesh* mesh) {
 
 update_status ModuleLoadFBX::PostUpdate(float dt)
 {
-	for (int i = 0; i < meshes.size(); i++) {
-		meshes[i]->Render();
-	}
 
+		for (int i = 0; i < meshes.size(); i++) {
+			if (i < 2 && HouseActive == true)
+			{
+				meshes[i]->Render();
+			}
+			
+			if (i >= 2 && ShipActive == true)
+			{
+				meshes[i]->Render();
+			}
+		}
 
 	return UPDATE_CONTINUE;
 }
