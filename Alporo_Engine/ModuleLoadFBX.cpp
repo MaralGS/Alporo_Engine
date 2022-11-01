@@ -14,8 +14,6 @@ bool ModuleLoadFBX::Start()
 	bool ret = true;
 	
 	LoadFile("Assets/BakerHouse.fbx");
-	LoadFile("Assets/NauAtreide.fbx");
-	LoadFile("Assets/Pistola.fbx");
 
 	return ret;
 }
@@ -118,13 +116,13 @@ update_status ModuleLoadFBX::PostUpdate(float dt)
 {
 
 		for (int i = 0; i < meshes.size(); i++) {
-			
-			if (App->imguiwindows->Wireframe == true) {
+
+		if (App->imguiwindows->Wireframe == true) {
 				//Wireframe Mode
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				glLineWidth(2);
 			}
-			if (i < 2 && FBX1 == true)
+				if (i < 2 && FBX1 == true)
 			{
 
 				meshes[i]->Render();
