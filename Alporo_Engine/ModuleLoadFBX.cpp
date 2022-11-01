@@ -15,6 +15,7 @@ bool ModuleLoadFBX::Start()
 	
 	LoadFile("Assets/BakerHouse.fbx");
 	LoadFile("Assets/NauAtreide.fbx");
+	LoadFile("Assets/Pistola.fbx");
 
 	return ret;
 }
@@ -97,6 +98,7 @@ void ModuleLoadFBX::LoadFile(string file_path)
 
 void ModuleLoadFBX::LoadMesh(MyMesh* mesh) {
 
+
 	glGenBuffers(1, (GLuint*)&(mesh->id_vertices));
 	glGenBuffers(1, (GLuint*)&(mesh->id_indices));
 
@@ -116,12 +118,24 @@ update_status ModuleLoadFBX::PostUpdate(float dt)
 {
 
 		for (int i = 0; i < meshes.size(); i++) {
-			if (i < 2 && HouseActive == true)
+			
+			if (App->imguiwindows->Wireframe == true) {
+				//Wireframe Mode
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				glLineWidth(2);
+			}
+			if (i < 2 && FBX1 == true)
+			{
+
+				meshes[i]->Render();
+			}
+			
+			if (i >= 2 && i <= 2&& FBX2 == true)
 			{
 				meshes[i]->Render();
 			}
 			
-			if (i >= 2 && ShipActive == true)
+			if (i >= 3 && FBX3 == true)
 			{
 				meshes[i]->Render();
 			}

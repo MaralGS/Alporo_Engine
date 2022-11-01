@@ -381,8 +381,9 @@ void ModuleImguiWindow::GeneratePrimitives()
         ImGui::EndMenu();
     }
    // if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
-    if (ImGui::Checkbox("Draw House", &App->LoadFbx->HouseActive));
-    if (ImGui::Checkbox("Draw Ship", &App->LoadFbx->ShipActive));
+    if (ImGui::Checkbox("Draw 1rst FBX", &App->LoadFbx->FBX1));
+    if (ImGui::Checkbox("Draw 2rst FBX", &App->LoadFbx->FBX2));
+    if (ImGui::Checkbox("Draw 3rst FBX", &App->LoadFbx->FBX3));
 
 
 }

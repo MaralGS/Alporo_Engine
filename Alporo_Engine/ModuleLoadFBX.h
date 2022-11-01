@@ -35,8 +35,9 @@ public:
 	update_status PostUpdate(float dt);
 	//bool Init();
 	bool CleanUp();
-	bool HouseActive = true;
-	bool ShipActive = false;
+	bool FBX1 = true;
+	bool FBX2 = false;
+	bool FBX3 = false;
 private:
 	vector<MyMesh*> meshes;
 };
