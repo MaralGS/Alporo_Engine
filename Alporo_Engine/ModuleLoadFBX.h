@@ -36,7 +36,7 @@ public:
 	//bool Init();
 	bool CleanUp();
 	bool HouseActive = true;
-	bool ShipActive = true;
+	bool ShipActive = false;
 private:
 	vector<MyMesh*> meshes;
 };
