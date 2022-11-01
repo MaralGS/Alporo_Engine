@@ -63,11 +63,11 @@ update_status ModuleOPGPrimitives::Update(float dt)
 		}
 
 	}
-	
+	/*
 	if (CilindreStats.DrawCilindre == true)
 	{
 		DrawCilind(CilindreStats.Radius, CilindreStats.Leght);
-	}
+	}*/
 
 	return UPDATE_CONTINUE;
 }
@@ -157,7 +157,7 @@ void ModuleOPGPrimitives::DrawQuad(Quad* Q)
 
 void ModuleOPGPrimitives::DrawCilind(float radius, float leght)
 {
-
+	/*
 	int n = 30;
 
 	// Cylinder Bottom
@@ -194,7 +194,7 @@ void ModuleOPGPrimitives::DrawCilind(float radius, float leght)
 		glVertex3f(leght * 0.5f, radius * cos(a), radius * sin(a));
 		glVertex3f(-leght * 0.5f, radius * cos(a), radius * sin(a));
 	}
-	glEnd();
+	glEnd();*/
 }
 
 void ModuleOPGPrimitives::DrawPiramid(Triangle* P)

@@ -380,7 +380,7 @@ void ModuleImguiWindow::GeneratePrimitives()
 
         ImGui::EndMenu();
     }
-    if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
+   // if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
 }
 
 void ModuleImguiWindow::Inspector()
