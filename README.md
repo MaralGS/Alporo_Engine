@@ -34,6 +34,25 @@ With Left Mouse Key:
 
 - + Left Alt (Object Selected): Rotate Camera from the object 
 
+
+With object selected:
+
+Q and W: move object on positive and negative X axis to object 
+
+A and S: move object on positive and negative Y axis to object 
+
+Z and X: move object on positive and negative Z axis to object 
+
+
+With Left alt + object selected:
+
+Q and W: Scale on positive and negative X axis to object 
+
+A and S: Scale on positive and negative Y axis to object 
+
+Z and X: Scale on positive and negative Z axis to object 
+
+
 Others keys:
 - Esc: Close Windows
 
@@ -41,7 +60,7 @@ Others keys:
 
 V0.1 Features:
 - Doking ImGui Windows
-- Create Objetcs
+- Create primitive Objetcs
 - Delete what object you want
 - Scale and Move Objetcs
 - Inspector System for all objects
@@ -50,3 +69,4 @@ V0.1 Features:
 - Console System
 - FullScreen, Resizable Windows, change Windows With and Height, Light Windows Modificator 
 - Show all FPS and Miliseconds Screen.
+- Drag And Drop FBX
