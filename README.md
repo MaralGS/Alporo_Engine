@@ -1,8 +1,8 @@
 # Alporo_Engine
 
-Alporo Engine is Videogame engine maded for for subject "Engine Development" form UPC CITM University.
+Alporo Engine is a Videogame engine created for subject "Engine Development" form UPC CITM University.
 
-Is Created by Pol Maresch and Alex Garcia.
+Created by Pol Maresch and Alex Garcia.
 
 ## Developers Githubs:
 
@@ -17,7 +17,7 @@ Alporo_Engine: https://github.com/MaralGS/Alporo_Engine.
 ## Controls:
 With Right Mouse Key:
 
--Mouse Movement: Camera Direcction 
+-Mouse Movement: Camera Direction 
 
 -W Keys: Front Camera movement.
 
@@ -37,26 +37,28 @@ With Left Mouse Key:
 
 With object selected:
 
-Q and W: move object on positive and negative X axis to object 
+Q and W: move object on positive and negative X axis.
 
-A and S: move object on positive and negative Y axis to object 
+A and S: move object on positive and negative Y axis.
 
-Z and X: move object on positive and negative Z axis to object 
+Z and X: move object on positive and negative Z axis.
 
 
 With Left alt + object selected:
 
-Q and W: Scale on positive and negative X axis to object 
+Q and W: Scale on positive and negative X axis.
 
-A and S: Scale on positive and negative Y axis to object 
+A and S: Scale on positive and negative Y axis.
 
-Z and X: Scale on positive and negative Z axis to object 
+Z and X: Scale on positive and negative Z axis.
 
 
 Others keys:
-- Esc: Close Windows
+- Esc: Close Windows.
 
-- F: Move Camera to object you selected
+- F: Move Camera to object you selected.
+
+- Drag and Drop a FBX to load it at screen.
 
 V0.1 Features:
 - Doking ImGui Windows
@@ -64,9 +66,9 @@ V0.1 Features:
 - Delete what object you want
 - Scale and Move Objetcs
 - Inspector System for all objects
-- Choose what object you what use
+- Choose what object you want to use
 - Rotate Camera from Object
 - Console System
-- FullScreen, Resizable Windows, change Windows With and Height, Light Windows Modificator 
-- Show all FPS and Miliseconds Screen.
-- Drag And Drop FBX
+- FullScreen, Resizable Windows, change Windows Width and Height, Light Windows Modificator.
+- Show all FPS and Miliseconds at screen.
+- Drag And Drop FBX.
