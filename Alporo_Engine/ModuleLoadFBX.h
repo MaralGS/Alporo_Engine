@@ -17,7 +17,7 @@ struct MyMesh {
 	uint id_vertices = 0; // unique vertex in VRAM
 	uint num_vertices = 0;
 	float* vertices = nullptr;
-
+	GameObject* OBmesh;
 	void Render();
 };
 
@@ -31,13 +31,14 @@ public:
 	void LoadFile(string file_path);
 	void LoadMesh(MyMesh* mesh);
 
-
 	update_status PostUpdate(float dt);
 	//bool Init();
 	bool CleanUp();
 	bool FBX1 = true;
 	bool FBX2 = true;
 	bool FBX3 = true;
+
 private:
 	vector<MyMesh*> meshes;
+
 };

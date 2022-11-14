@@ -205,17 +205,8 @@ update_status ModuleImguiWindow::Update(float dt)
     ImGui::End();
 
     if (ImGui::Begin("GameObjects Hierarchy")) {
-        //GameObjectTree(roots);
-        if (ImGui::BeginPopupContextWindow())
-        {
-            /*if (ImGui::Selectable("Create Object")) {
-                GameObject* parent = selected;
-               // App->scene->createObj(parent);
-
-                ImGui::CloseCurrentPopup();
-            }
-            ImGui::EndPopup();*/
-        }
+        hieraci(root);
+       
     }
     ImGui::End();
 
@@ -404,8 +395,10 @@ void ModuleImguiWindow::GeneratePrimitives()
     if (ImGui::BeginMenu("GameObject"))
     {
         if (ImGui::Button("Generate GameObject")) {
-           // App->scene->CreateGObject("new", );
+            GameObject parent = selected;
+            GameObject child = new GameObject(parent);
         }
+        ImGui::EndMenu();
     }
    // if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
     if (ImGui::Checkbox("Draw 1rst FBX", &App->LoadFbx->FBX1));
@@ -413,6 +406,19 @@ void ModuleImguiWindow::GeneratePrimitives()
     if (ImGui::Checkbox("Draw 3rst FBX", &App->LoadFbx->FBX3));
 
 
+}
+
+void ModuleImguiWindow::hieraci(GameObject* parent)
+{
+
+
+    if (!parent->child.empty())
+    {
+        for (int i = 0; i == parent->child.size(); i++)
+        {
+            hieraci(parent->child[i]);
+        }
+    }
 }
 
   /*void ModuleImguiWindow::Inspector()

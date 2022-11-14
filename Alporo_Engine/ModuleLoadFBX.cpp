@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleLoadFBX.h"
+#include "Mesh.h"
 #include "scene.h"
 #include <vector>
 
@@ -54,6 +55,7 @@ void ModuleLoadFBX::LoadFile(string file_path)
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
+		GameObject* meshGO = new GameObject(App->imguiwindows->root);
 
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			MyMesh* mesh = new MyMesh();
@@ -81,6 +83,11 @@ void ModuleLoadFBX::LoadFile(string file_path)
 					}
 				}
 				LoadMesh(mesh);
+				Meshes* component = new Meshes(meshGO);
+				mesh->OBmesh = meshGO;
+				component->mesh = mesh;
+				if (meshGO->Comp.size() == 1)
+					meshGO->Comp.push_back(component);
 			}
 			else {
 				delete mesh;

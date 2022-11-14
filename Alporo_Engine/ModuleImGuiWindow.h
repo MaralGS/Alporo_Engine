@@ -19,7 +19,7 @@ public:
 	bool CleanUp();
 	void Histogram();
 	void GeneratePrimitives();
-	//void Inspector();
+	void hieraci(GameObject* parent);
 
 	//bools
 	bool ActiveDemoWindows = true;

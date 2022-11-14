@@ -453,6 +453,9 @@
     <ClInclude Include="Transform.h">
       <Filter>Sources\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Sources\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -634,6 +637,9 @@
     </ClCompile>
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Transform.cpp">
+      <Filter>Sources\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
       <Filter>Sources\Objects</Filter>
     </ClCompile>
   </ItemGroup>
