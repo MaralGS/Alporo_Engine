@@ -2,20 +2,10 @@
 
 Component::Component(GameObject* Object)
 {
+	type = Type::None;
+	principal = Object;
 }
 
 Component::~Component()
-{
-}
-
-void Component::Update()
-{
-}
-
-void Component::Disable()
-{
-}
-
-void Component::Enable()
 {
 }

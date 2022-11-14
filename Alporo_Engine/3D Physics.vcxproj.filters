@@ -450,6 +450,9 @@
     <ClInclude Include="Console.h">
       <Filter>Sources\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Sources\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -630,6 +633,9 @@
       <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="Transform.cpp">
+      <Filter>Sources\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeoLib\include\Geometry\QuadTree.inl">

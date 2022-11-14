@@ -13,6 +13,8 @@ ModuleSceneIntro::~ModuleSceneIntro()
 // Load assets
 bool ModuleSceneIntro::Start()
 {
+	//Root = CreateGObject("root", nullptr);
+
 	LOG(LogType::LOGS,"Loading Intro assets");
 	bool ret = true;
 
@@ -28,6 +30,7 @@ bool ModuleSceneIntro::CleanUp()
 
 	return true;
 }
+
 
 // Update: draw background
 update_status ModuleSceneIntro::Update(float dt)

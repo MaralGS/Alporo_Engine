@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "GameObject.h"
 #include "imgui.h"
 
 #include <vector>
@@ -18,7 +19,7 @@ public:
 	bool CleanUp();
 	void Histogram();
 	void GeneratePrimitives();
-	void Inspector();
+	//void Inspector();
 
 	//bools
 	bool ActiveDemoWindows = true;
@@ -53,7 +54,9 @@ public:
 	int CubPicked = NULL;
 	int PiramidPicked = NULL;
 	int PlanePicked = NULL;
-	
+
+	GameObject* root = nullptr;
+	GameObject* selected = nullptr;
 private:
 
 	SDL_version compiled;

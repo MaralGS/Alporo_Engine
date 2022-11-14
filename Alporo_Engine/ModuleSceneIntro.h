@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "p2DynArray.h"
 #include "Globals.h"
+#include "GameObject.h"
 
 class ModuleSceneIntro : public Module
 {
@@ -14,4 +15,5 @@ public:
 	bool CleanUp();
 
 public:
+	GameObject* Root = nullptr;
 };

@@ -3,13 +3,20 @@
 #include<string>
 
 #include "Component.h"
+#include "imgui.h"
+
+
 class GameObject 
 {
+	public:
 	GameObject();
+	GameObject(GameObject* parent);
 	~GameObject();
-	void Update();
-	Component* CreateComponent(Component::Type type);
+
+	void CreateInspector();
 	std::string name;
-	std::vector<Component*> components;
+	GameObject* Parent;
+	std::vector<GameObject*> child;
+	std::vector<Component*> Comp;
 
 };

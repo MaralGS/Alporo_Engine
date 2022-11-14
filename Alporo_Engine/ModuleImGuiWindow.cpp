@@ -20,6 +20,9 @@ ModuleImguiWindow::~ModuleImguiWindow()
 // -----------------------------------------------------------------
 bool ModuleImguiWindow::Start()
 {
+    root = new GameObject();
+    root->name = "root";
+
 	LOG(LogType::LOGS, "Started ImGuiWindow");
 	bool ret = true;
 
@@ -200,10 +203,26 @@ update_status ModuleImguiWindow::Update(float dt)
 
     }
     ImGui::End();
-    if (ImGui::Begin("Inspector")) {
-        Inspector();
+
+    if (ImGui::Begin("GameObjects Hierarchy")) {
+        //GameObjectTree(roots);
+        if (ImGui::BeginPopupContextWindow())
+        {
+            /*if (ImGui::Selectable("Create Object")) {
+                GameObject* parent = selected;
+               // App->scene->createObj(parent);
+
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::EndPopup();*/
+        }
     }
     ImGui::End();
+
+    if (selected != nullptr)
+    {
+        selected->CreateInspector();
+    }
     return UPDATE_CONTINUE;
 }
 
@@ -345,6 +364,7 @@ void ModuleImguiWindow::GeneratePrimitives()
 
         ImGui::EndMenu();
     }
+
     if (ImGui::BeginMenu("Plane"))
     {
         if (ImGui::Button("Generate Plane")) {
@@ -380,6 +400,13 @@ void ModuleImguiWindow::GeneratePrimitives()
 
         ImGui::EndMenu();
     }
+
+    if (ImGui::BeginMenu("GameObject"))
+    {
+        if (ImGui::Button("Generate GameObject")) {
+           // App->scene->CreateGObject("new", );
+        }
+    }
    // if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
     if (ImGui::Checkbox("Draw 1rst FBX", &App->LoadFbx->FBX1));
     if (ImGui::Checkbox("Draw 2rst FBX", &App->LoadFbx->FBX2));
@@ -388,8 +415,10 @@ void ModuleImguiWindow::GeneratePrimitives()
 
 }
 
-void ModuleImguiWindow::Inspector()
+  /*void ModuleImguiWindow::Inspector()
 {
+    
+  
     for (int i = 0; i < App->OpenGLPrimitives->NumQuads; i++)
     {
         char Name[32];
@@ -454,4 +483,4 @@ void ModuleImguiWindow::Inspector()
             ImGui::Separator();
         }
     }
-}
+}*/

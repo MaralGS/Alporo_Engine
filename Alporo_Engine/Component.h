@@ -2,20 +2,22 @@
 
 class GameObject;
 
+enum class Type
+{
+	None,
+	Transform,
+	MeshRenderer,
+	Rescale,
+};
+
 class Component
 {
 public:
-	enum class Type
-	{
-		None,
-		Transform,
-		MeshRenderer,
-		Rescale,
-	};
+
 	Component(GameObject* Object);
 	~Component();
-	virtual void Enable();
-	virtual void Update();
-	virtual void Disable();
 	bool active;
+	Type type;
+	GameObject* principal;
+	
 };
