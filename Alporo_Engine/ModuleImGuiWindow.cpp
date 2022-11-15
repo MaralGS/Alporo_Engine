@@ -411,14 +411,32 @@ void ModuleImguiWindow::GeneratePrimitives()
 void ModuleImguiWindow::hieraci(GameObject* parent)
 {
 
+   ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen;
 
-    if (!parent->child.empty())
-    {
-        for (int i = 0; i == parent->child.size(); i++)
-        {
-            hieraci(parent->child[i]);
-        }
-    }
+   if (parent == selected)
+   {
+       treeF |= ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
+   }
+
+   bool openTree = ImGui::TreeNodeEx(parent, treeF, parent->name.c_str());
+
+   if (openTree)
+   {
+       if (!parent->child.empty())
+       {
+           for (int i = 0; i < parent->child.size(); i++)
+           {
+               hieraci(parent->child[i]);
+           }
+       }
+
+       else
+       {
+           treeF |= ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+       }
+       ImGui::TreePop();
+   }
+
 }
 
   /*void ModuleImguiWindow::Inspector()

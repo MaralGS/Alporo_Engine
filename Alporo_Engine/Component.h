@@ -21,3 +21,4 @@ public:
 	GameObject* principal;
 	
 };
+

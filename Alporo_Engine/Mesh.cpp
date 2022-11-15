@@ -13,5 +13,7 @@ Meshes::Meshes(GameObject* Principal) : Component(Principal)
 
 Meshes::~Meshes()
 {
+	principal = nullptr;
+	mesh = nullptr;
 }
 
