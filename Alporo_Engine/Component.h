@@ -16,9 +16,11 @@ public:
 
 	Component(GameObject* Object);
 	~Component();
+
+	virtual void Inspector();
 	bool active;
 	Type type;
-	GameObject* principal;
-	
+	GameObject* principal = nullptr;
+
 };
 

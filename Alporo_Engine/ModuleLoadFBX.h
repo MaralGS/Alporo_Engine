@@ -28,7 +28,7 @@ public:
 	ModuleLoadFBX(Application* app, bool start_enabled = true);
 
 	bool Start();
-	void LoadFile(string file_path);
+	GameObject* LoadFile(string file_path);
 	void LoadMesh(MyMesh* mesh);
 
 	update_status PostUpdate(float dt);
@@ -37,6 +37,7 @@ public:
 	bool FBX1 = true;
 	bool FBX2 = true;
 	bool FBX3 = true;
+	GameObject* MeshObject = nullptr;
 
 private:
 	vector<MyMesh*> meshes;

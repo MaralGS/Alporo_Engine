@@ -14,7 +14,7 @@ bool ModuleLoadFBX::Start()
 {
 	bool ret = true;
 	
-	LoadFile("Assets/BakerHouse.fbx");
+	MeshObject = LoadFile("Assets/BakerHouse.fbx");
 
 	return ret;
 }
@@ -49,13 +49,13 @@ void MyMesh::Render()
 
 }
 
-void ModuleLoadFBX::LoadFile(string file_path)
+GameObject* ModuleLoadFBX::LoadFile(string file_path)
 {
 	const aiScene* scene = aiImportFile(file_path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		GameObject* meshGO = new GameObject(App->imguiwindows->root);
+		GameObject* meshGO = new GameObject(App->imguiwindows->RootGO);
 
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			MyMesh* mesh = new MyMesh();
@@ -95,7 +95,9 @@ void ModuleLoadFBX::LoadFile(string file_path)
 		}
 
 		aiReleaseImport(scene);
+		return meshGO;
 	}
+
 }
 
 

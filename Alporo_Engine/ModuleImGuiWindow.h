@@ -55,8 +55,8 @@ public:
 	int PiramidPicked = NULL;
 	int PlanePicked = NULL;
 
-	GameObject* root = nullptr;
-	GameObject* selected = nullptr;
+	GameObject* RootGO = nullptr;
+	GameObject* Selected = nullptr;
 private:
 
 	SDL_version compiled;

@@ -9,3 +9,8 @@ Component::Component(GameObject* Object)
 Component::~Component()
 {
 }
+
+void Component::Inspector()
+{
+
+}

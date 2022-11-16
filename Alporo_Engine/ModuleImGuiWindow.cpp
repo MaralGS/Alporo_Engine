@@ -20,8 +20,8 @@ ModuleImguiWindow::~ModuleImguiWindow()
 // -----------------------------------------------------------------
 bool ModuleImguiWindow::Start()
 {
-    root = new GameObject();
-    root->name = "root";
+    RootGO = new GameObject();
+    RootGO->name = "root";
 
 	LOG(LogType::LOGS, "Started ImGuiWindow");
 	bool ret = true;
@@ -204,15 +204,16 @@ update_status ModuleImguiWindow::Update(float dt)
     }
     ImGui::End();
 
-    if (ImGui::Begin("GameObjects Hierarchy")) {
-        hieraci(root);
+    //GameObjects hieracy
+    if (ImGui::Begin("GameObjects")) {
+        hieraci(RootGO);
        
     }
     ImGui::End();
 
-    if (selected != nullptr)
+    if (Selected != nullptr)
     {
-        selected->CreateInspector();
+        Selected->CreateInspector();
     }
     return UPDATE_CONTINUE;
 }
@@ -395,8 +396,11 @@ void ModuleImguiWindow::GeneratePrimitives()
     if (ImGui::BeginMenu("GameObject"))
     {
         if (ImGui::Button("Generate GameObject")) {
-            GameObject parent = selected;
-            GameObject child = new GameObject(parent);
+            if (Selected != nullptr)
+            {
+                GameObject parent = Selected;
+                GameObject child = new GameObject(parent);
+            }
         }
         ImGui::EndMenu();
     }
@@ -410,12 +414,14 @@ void ModuleImguiWindow::GeneratePrimitives()
 
 void ModuleImguiWindow::hieraci(GameObject* parent)
 {
+    ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow;
 
-   ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen;
+   if (parent->child.size() == 0)
+       treeF |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
 
-   if (parent == selected)
+   if (parent == Selected)
    {
-       treeF |= ImGuiTreeNodeFlags_Selected | ImGuiTreeNodeFlags_OpenOnArrow;
+       treeF |= ImGuiTreeNodeFlags_Selected;
    }
 
    bool openTree = ImGui::TreeNodeEx(parent, treeF, parent->name.c_str());
@@ -428,15 +434,20 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
            {
                hieraci(parent->child[i]);
            }
+           ImGui::TreePop();
        }
 
-       else
+      else
        {
            treeF |= ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
        }
-       ImGui::TreePop();
-   }
 
+   }
+   
+   if (ImGui::IsItemHovered() && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
+   {
+       Selected = parent;
+   }
 }
 
   /*void ModuleImguiWindow::Inspector()

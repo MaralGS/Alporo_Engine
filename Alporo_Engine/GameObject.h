@@ -5,6 +5,8 @@
 #include "Component.h"
 #include "imgui.h"
 
+enum class ComponentType;
+class Transform;
 
 class GameObject 
 {
@@ -18,5 +20,5 @@ class GameObject
 	GameObject* Parent;
 	std::vector<GameObject*> child;
 	std::vector<Component*> Comp;
-
+	Transform* transform;
 };
