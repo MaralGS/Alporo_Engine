@@ -21,7 +21,7 @@ ModuleImguiWindow::~ModuleImguiWindow()
 bool ModuleImguiWindow::Start()
 {
     RootGO = new GameObject();
-    RootGO->name = "root";
+
 
 	LOG(LogType::LOGS, "Started ImGuiWindow");
 	bool ret = true;
@@ -398,9 +398,14 @@ void ModuleImguiWindow::GeneratePrimitives()
         if (ImGui::Button("Generate GameObject")) {
             if (Selected != nullptr)
             {
-                GameObject parent = Selected;
-                GameObject child = new GameObject(parent);
+                GameObject* parent = Selected;
+                GameObject* child = new GameObject(parent);
             }
+        }
+        
+        if (ImGui::Button("Delete GameObject")) {
+            delete Selected;
+            Selected = nullptr;
         }
         ImGui::EndMenu();
     }
@@ -414,6 +419,7 @@ void ModuleImguiWindow::GeneratePrimitives()
 
 void ModuleImguiWindow::hieraci(GameObject* parent)
 {
+  
     ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow;
 
    if (parent->child.size() == 0)
@@ -444,7 +450,7 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
    }
    
-   if (ImGui::IsItemHovered() && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
+   if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left))
    {
        Selected = parent;
    }

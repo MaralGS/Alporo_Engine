@@ -5,9 +5,9 @@ Meshes::Meshes() : Meshes(nullptr)
 
 }
 
-Meshes::Meshes(GameObject* MeshObject) : Component(MeshObject)
+Meshes::Meshes(GameObject* Meshobject) : Component(Meshobject)
 {
-	GObjectSelected = MeshObject;
+	GObjectSelected = Meshobject;
 	mesh = nullptr;
 	type = Type::MeshRenderer;
 }
@@ -20,6 +20,6 @@ Meshes::~Meshes()
 
 void Meshes::Inspector()
 {
-	//ImGui::Text("Number Verticles: %d", mesh->id_vertices);
+	ImGui::Text("Number Verticles: %d", mesh->id_vertices);
 }
 

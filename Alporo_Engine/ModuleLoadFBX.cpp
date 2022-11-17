@@ -36,15 +36,19 @@ MyMesh::~MyMesh() {
 void MyMesh::Render()
 {
 
+
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
+	glPushMatrix();
+	//glMultMatrixf(&OBmesh->transform);
+
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, NULL);
 
-
+	glPopMatrix();
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 }

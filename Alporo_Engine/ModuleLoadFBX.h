@@ -7,6 +7,10 @@
 
 #include <string>
 using namespace std;
+
+class GameObject;
+class Transform;
+
 struct MyMesh {
 	MyMesh();
 	~MyMesh();

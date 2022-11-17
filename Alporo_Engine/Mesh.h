@@ -7,11 +7,15 @@
 #include "ModuleLoadFBX.h"
 #include "Mesh.h"
 
+class GameObject;
+class Component;
+struct MyMesh;
+
 class Meshes : public Component
 {
 public:
 	Meshes();
-	Meshes(GameObject* MeshObject);
+	Meshes(GameObject* Meshobject);
 	~Meshes();
 
 	void Inspector();
