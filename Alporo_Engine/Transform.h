@@ -9,10 +9,10 @@ class Transform : public Component
 {
 public:
 	Transform();
-	Transform(GameObject* Principal);
+	Transform(GameObject* Transform);
 	~Transform();
 
-	void Inspector();
+	//void Inspector();
 
 	vec3 position;
 	vec3 scale;

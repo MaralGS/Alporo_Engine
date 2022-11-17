@@ -5,15 +5,21 @@ Meshes::Meshes() : Meshes(nullptr)
 
 }
 
-Meshes::Meshes(GameObject* Principal) : Component(Principal)
+Meshes::Meshes(GameObject* MeshObject) : Component(MeshObject)
 {
-	principal = Principal;
+	GObjectSelected = MeshObject;
 	mesh = nullptr;
+	type = Type::MeshRenderer;
 }
 
 Meshes::~Meshes()
 {
-	principal = nullptr;
+	GObjectSelected = nullptr;
 	mesh = nullptr;
+}
+
+void Meshes::Inspector()
+{
+	//ImGui::Text("Number Verticles: %d", mesh->id_vertices);
 }
 

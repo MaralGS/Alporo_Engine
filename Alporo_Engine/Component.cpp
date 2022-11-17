@@ -3,7 +3,7 @@
 Component::Component(GameObject* Object)
 {
 	type = Type::None;
-	principal = Object;
+	GObjectSelected = Object;
 }
 
 Component::~Component()

@@ -11,8 +11,12 @@ class Meshes : public Component
 {
 public:
 	Meshes();
-	Meshes(GameObject* Principal);
+	Meshes(GameObject* MeshObject);
 	~Meshes();
+
+	void Inspector();
 
 	MyMesh* mesh;
 };
+
+

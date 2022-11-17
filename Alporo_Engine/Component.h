@@ -20,7 +20,7 @@ public:
 	virtual void Inspector();
 	bool active;
 	Type type;
-	GameObject* principal = nullptr;
+	GameObject* GObjectSelected = nullptr;
 
 };
 

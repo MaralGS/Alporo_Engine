@@ -7,6 +7,7 @@
 
 enum class ComponentType;
 class Transform;
+class Meshes;
 
 class GameObject 
 {
@@ -21,4 +22,5 @@ class GameObject
 	std::vector<GameObject*> child;
 	std::vector<Component*> Comp;
 	Transform* transform;
+	Meshes* GOMesh;
 };

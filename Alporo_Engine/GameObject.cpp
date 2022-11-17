@@ -15,6 +15,8 @@ GameObject::GameObject(GameObject* parent)
 	Parent = parent;
 	transform = new Transform(this);
 	Comp.push_back(transform);
+
+	//GOMesh = new Meshes(this);
 	if (parent != nullptr)
 	{
 		parent->child.push_back(this);
