@@ -20,6 +20,7 @@ Meshes::~Meshes()
 
 void Meshes::Inspector()
 {
-	ImGui::Text("Number Verticles: %d", mesh->id_vertices);
+	ImGui::Text("Number Vertices: %d", mesh->num_vertices);
+	ImGui::Text("Number Indices: %d", mesh->num_indices);
 }
 

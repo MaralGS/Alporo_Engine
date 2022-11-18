@@ -44,7 +44,7 @@ void MyMesh::Render()
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
 	glPushMatrix();
-	//glMultMatrixf(&OBmesh->transform);
+	glMultMatrixf(&OBmesh->transform);
 
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, NULL);
 
@@ -123,6 +123,8 @@ void ModuleLoadFBX::LoadMesh(MyMesh* mesh) {
 	glDisableClientState(GL_VERTEX_ARRAY);
 
 	meshes.push_back(mesh);
+
+	
 }
 
 update_status ModuleLoadFBX::PostUpdate(float dt)

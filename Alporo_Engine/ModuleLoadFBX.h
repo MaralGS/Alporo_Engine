@@ -4,6 +4,7 @@
 #include "cimport.h"
 #include "scene.h"
 #include "postprocess.h"
+#include "Component.h"
 
 #include <string>
 using namespace std;

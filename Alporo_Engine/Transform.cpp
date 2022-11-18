@@ -43,11 +43,11 @@ void Transform::Inspector()
 
 void Transform::Tranformation()
 {
-	/*node->mTransformation.Decompose(Scaling, rotation, Translation);
+	node->mTransformation.Decompose(Scaling, rotation, Translation);
 
 	float3 pos(Translation.x, Translation.y, Translation.z);
 	float3 scale(Scaling.x, Scaling.y, Scaling.z);
-	Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);*/
+	Quat rot(rotation.x, rotation.y, rotation.z, rotation.w);
 
 
 }

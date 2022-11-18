@@ -50,14 +50,3 @@ void GameObject::CreateInspector()
 	ImGui::End();
 }
 
-void GameObject::DeleteGO(GameObject* P)
-{
-	for (size_t i = 0; i < child.size(); i++)
-	{
-		if (P == child[i]) {
-			delete child[i];
-
-		}
-	};
-}
-

@@ -23,9 +23,9 @@ public:
 	void Tranformation();
 
 
-	/*aiVector3D Translation, Scaling;
+	aiVector3D Translation, Scaling;
 	aiQuaternion rotation;
-	aiNode* node;*/
+	aiNode* node;
 
 
 	mat4x4 Transform_Matrix;
