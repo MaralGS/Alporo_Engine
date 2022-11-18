@@ -22,7 +22,7 @@ struct MyMesh {
 	uint id_vertices = 0; // unique vertex in VRAM
 	uint num_vertices = 0;
 	float* vertices = nullptr;
-	GameObject* OBmesh;
+	GameObject* OBmesh = nullptr;
 	void Render();
 };
 

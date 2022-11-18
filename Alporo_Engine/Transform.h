@@ -21,17 +21,20 @@ public:
 
 	void Inspector();
 	void Tranformation();
+	void MatRotX();
+	void MatRotY();
+	void MatRotZ();
 
-
-	aiVector3D Translation, Scaling;
-	aiQuaternion rotation;
-	aiNode* node;
-
-
-	mat4x4 Transform_Matrix;
-	vec3 position;
-	vec3 scale;
-	vec3 rotate;
+	mat4x4 Transform_Matrix = {
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1
+	};
+	vec3 position = { 0,0,0 };
+	vec3 FinalPosition = { 0,0,0 };
+	vec3 scale = { 1,1,1 };
+	vec3 rotate = { 0,0,0 };
 private:
 
 };

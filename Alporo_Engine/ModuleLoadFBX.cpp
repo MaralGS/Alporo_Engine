@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleLoadFBX.h"
+#include "Transform.h"
 #include "Mesh.h"
 #include "scene.h"
 #include <vector>
@@ -44,7 +45,7 @@ void MyMesh::Render()
 	glVertexPointer(3, GL_FLOAT, 0, NULL);
 
 	glPushMatrix();
-	glMultMatrixf(&OBmesh->transform);
+	glMultMatrixf(&OBmesh->transform->Transform_Matrix);
 
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, NULL);
 
