@@ -18,25 +18,23 @@ Transform::~Transform()
 
 void Transform::Inspector()
 {
-	/*ImGui::Text("position");
-	ImGui::InputFloat3("", &position);
+	ImGui::Text("position");
+	ImGui::InputFloat3("p", &position);
 	ImGui::Text("Scale:");
-	ImGui::InputFloat3("", & scale);*/
+	ImGui::InputFloat3("s",&scale);
 	ImGui::Text("Rotation:");
-	ImGui::InputFloat3("", &rotate);
+	ImGui::InputFloat3("r", &rotate);
 	Tranformation();
 }
 
 void Transform::Tranformation()
 {
 
-	Transform_Matrix.translate(scale.x, scale.y, scale.z);
+	Transform_Matrix.translate(position.x, position.y, position.z);
 
 
 	Transform_Matrix.scale(scale.x, scale.y, scale.z);
 
-
-	Transform_Matrix.rotate(90, { 0.5f,0,0 });
 
 	/*mat4x4& mat4x4::rotate(float angle, const vec3 & u)
 	{
