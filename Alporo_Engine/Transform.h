@@ -32,9 +32,9 @@ public:
 		0, 0, 0, 1
 	};
 	vec3 position = { 0,0,0 };
-	vec3 FinalPosition = { 0,0,0 };
 	vec3 scale = { 1,1,1 };
-	vec3 rotate = { 0,0,0 };
+	vec3 rotate = { 1,1,1 };
+
 private:
 
 };

@@ -91,9 +91,10 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path)
 				Meshes* component = new Meshes(meshGO);
 				mesh->OBmesh = meshGO;
 				component->mesh = mesh;
-				if (meshGO->Comp.size() == 1)
+				if (meshGO->Comp.size() == 1) {
 					meshGO->Comp.push_back(component);
-			}
+				}
+				}
 			else {
 				delete mesh;
 			}

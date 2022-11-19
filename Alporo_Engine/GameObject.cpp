@@ -13,6 +13,7 @@ GameObject::GameObject(GameObject* parent)
 {
 	name = "GameObject";
 	Parent = parent;
+
 	transform = new Transform(this);
 	Comp.push_back(transform);
 
@@ -25,7 +26,7 @@ GameObject::GameObject(GameObject* parent)
 
 GameObject::~GameObject()
 {
-	name = "hola";
+	name = nullptr;
 	Parent = nullptr;
 
 	transform = nullptr;

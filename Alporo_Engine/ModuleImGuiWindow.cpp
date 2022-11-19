@@ -398,8 +398,8 @@ void ModuleImguiWindow::GeneratePrimitives()
         if (ImGui::Button("Generate GameObject")) {
             if (Selected != nullptr)
             {
-                GameObject* parent = Selected;
-                GameObject* child = new GameObject(parent);
+                //GameObject* parent = Selected;
+                GameObject* child = new GameObject(Selected);
             }
         }
         
@@ -408,6 +408,8 @@ void ModuleImguiWindow::GeneratePrimitives()
             Selected = nullptr;
         }
         ImGui::EndMenu();
+
+
     }
    // if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
     if (ImGui::Checkbox("Draw 1rst FBX", &App->LoadFbx->FBX1));
@@ -419,7 +421,7 @@ void ModuleImguiWindow::GeneratePrimitives()
 
 void ModuleImguiWindow::hieraci(GameObject* parent)
 { 
-    ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_OpenOnArrow;
+    ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen;
 
    if (parent->child.size() == 0) {
     treeF |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
