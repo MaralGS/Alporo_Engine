@@ -60,7 +60,16 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path)
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		GameObject* meshGO = new GameObject(App->imguiwindows->RootGO);
+		GameObject* meshGO;
+		if (App->imguiwindows->Selected == nullptr)
+		{
+			meshGO = new GameObject(App->imguiwindows->RootGO);
+		}
+		
+		else if (App->imguiwindows->Selected != nullptr)
+		{
+			meshGO = new GameObject(App->imguiwindows->Selected);
+		}
 
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			MyMesh* mesh = new MyMesh();
