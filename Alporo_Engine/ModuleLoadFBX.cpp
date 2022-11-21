@@ -60,16 +60,7 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path)
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		GameObject* meshGO;
-		if (App->imguiwindows->Selected == nullptr)
-		{
-			meshGO = new GameObject(App->imguiwindows->RootGO);
-		}
-		
-		else if (App->imguiwindows->Selected != nullptr)
-		{
-			meshGO = new GameObject(App->imguiwindows->Selected);
-		}
+		GameObject* meshGO = new GameObject(App->imguiwindows->RootGO);
 
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			MyMesh* mesh = new MyMesh();
@@ -122,18 +113,22 @@ GameObject* ModuleLoadFBX::PrimitivesObjects(int Case)
 	switch (Case)
 	{
 	case 1:
-		child = new GameObject(App->imguiwindows->Selected);
+		child = new GameObject(App->imguiwindows->RootGO);
 		break;
 	case 2:
-		MeshObject = LoadFile("Assets/Primitives/Cub2.fbx");
+		MeshObject->name = "Cube";
+		MeshObject = LoadFile("Assets/Primitives/Cube.fbx");
 		break;
 	case 3:
+		MeshObject->name = "Plane";
 		MeshObject = LoadFile("Assets/Primitives/Plane.fbx");
 		break;
 	case 4:
+		MeshObject->name = "Pyramid";
 		MeshObject = LoadFile("Assets/Primitives/Pyramid.fbx");
 		break;
 	case 5:
+		MeshObject->name = "Sphere";
 		MeshObject = LoadFile("Assets/Primitives/Sphere.fbx");
 		break;
 	}

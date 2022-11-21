@@ -45,7 +45,6 @@ void GameObject::CreateInspector()
 	if (ImGui::Begin("Inspector")) {
 		for (size_t i = 0; i < Comp.size(); i++)
 		{
-			
 			Comp[i]->Inspector();
 		}
 	}

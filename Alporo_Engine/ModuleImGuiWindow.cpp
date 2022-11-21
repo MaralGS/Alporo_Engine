@@ -379,10 +379,39 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
    }
 
-   if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && parent->Parent != nullptr)
+   if (parent != RootGO)
    {
-    Selected = parent;
+       if (ImGui::BeginDragDropSource())
+       {
+           ImGui::SetDragDropPayload("GameObject", parent, sizeof(GameObject*));
+
+           Selected = parent;
+
+           ImGui::Text("Change parent to...");
+           ImGui::EndDragDropSource();
+       }
+       if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && parent->Parent != nullptr)
+       {
+           Selected = parent;
+       }
    }
+
+   /*if (ImGui::BeginDragDropTarget())
+   {
+       if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("_GAMEOBJECT"))
+       {
+
+           GameObject* dropGO = static_cast<GameObject*>(payload->Data);
+           //memcpy(dropGO, payload->Data, payload->DataSize);
+
+           dropTarget->ChangeParent(node);
+           LOG(LogType::L_NORMAL, "%s", dropTarget->name.c_str());
+           dropTarget = nullptr;
+       }
+       ImGui::EndDragDropTarget();
+   }*/
+
+
    
 }
 
