@@ -287,115 +287,11 @@ void ModuleImguiWindow::Histogram()
 
 void ModuleImguiWindow::GeneratePrimitives()
 {
-    if (ImGui::BeginMenu("Cube"))
-    {
-        if (ImGui::Button("Generate Cube")) {
-            Quad* Q = new Quad();
-            App->OpenGLPrimitives->Cub.push_back(Q);
-            App->OpenGLPrimitives->NumQuads++;
-        }
-        if (ImGui::Button("Delete Cube")) {
-            if (App->OpenGLPrimitives->NumQuads >= 1)
-            {
-                if (App->OpenGLPrimitives->Cub.size() == App->OpenGLPrimitives->NumQuads)
-                {
-                    if (CubPicked != App->OpenGLPrimitives->NumQuads)
-                    {
-                        for (int i = CubPicked; i < App->OpenGLPrimitives->NumQuads - 1; i++)
-                        {
-                            App->OpenGLPrimitives->Cub[i] = App->OpenGLPrimitives->Cub[i + 1];
 
-                        }
-                    }
-
-                    App->OpenGLPrimitives->Cub.pop_back();
-                    App->OpenGLPrimitives->NumQuads--;
-                    if (CubPicked != 0)
-                    {
-                        CubPicked--;
-                    }
-                }
-            }
-        }
-        ImGui::EndMenu();
-    }
-
-    //generate and delete a Piramide
-    if (ImGui::BeginMenu("Piramid"))
-    {
-        if (ImGui::Button("Generate Piramid")) {
-            Triangle* Q = new Triangle();
-            App->OpenGLPrimitives->Piramid.push_back(Q);
-            App->OpenGLPrimitives->NumPiramid++;
-        }
-        if (ImGui::Button("Delete Piramid")) {
-            if (App->OpenGLPrimitives->NumPiramid >= 1)
-            {
-                if (App->OpenGLPrimitives->Piramid.size() == App->OpenGLPrimitives->NumPiramid)
-                {
-                    if (PiramidPicked != App->OpenGLPrimitives->NumPiramid)
-                    {
-                        for (int i = PiramidPicked; i < App->OpenGLPrimitives->NumPiramid - 1; i++)
-                        {
-                            App->OpenGLPrimitives->Piramid[i] = App->OpenGLPrimitives->Piramid[i + 1];
-
-                        }
-                    }
-
-                    App->OpenGLPrimitives->Piramid.pop_back();
-                    App->OpenGLPrimitives->NumPiramid--;
-                    if (PiramidPicked != 0)
-                    {
-                        PiramidPicked--;
-                    }
-                }
-            }
-
-        }
-
-
-        ImGui::EndMenu();
-    }
-
-    if (ImGui::BeginMenu("Plane"))
-    {
-        if (ImGui::Button("Generate Plane")) {
-            Planes* Pl = new Planes();
-            App->OpenGLPrimitives->Plane.push_back(Pl);
-            App->OpenGLPrimitives->NumPlanes++;
-        }
-        if (ImGui::Button("Delete Plane")) {
-            if (App->OpenGLPrimitives->NumPlanes >= 1)
-            {
-                if (App->OpenGLPrimitives->Plane.size() == App->OpenGLPrimitives->NumPlanes)
-                {
-                    if (PlanePicked != App->OpenGLPrimitives->NumPlanes)
-                    {
-                        for (int i = PlanePicked; i < App->OpenGLPrimitives->NumPlanes - 1; i++)
-                        {
-                            App->OpenGLPrimitives->Plane[i] = App->OpenGLPrimitives->Plane[i + 1];
-
-                        }
-                    }
-
-                    App->OpenGLPrimitives->Plane.pop_back();
-                    App->OpenGLPrimitives->NumPlanes--;
-                    if (PlanePicked != 0)
-                    {
-                        PlanePicked--;
-                    }
-                }
-            }
-
-        }
-
-
-        ImGui::EndMenu();
-    }
 
     if (ImGui::BeginMenu("GameObject"))
     {
-        if (ImGui::Button("Generate GameObject")) {
+        if (ImGui::Button("Generate Empty GameObject")) {
             if (Selected != nullptr)
             {
                 //GameObject* parent = Selected;
@@ -403,6 +299,27 @@ void ModuleImguiWindow::GeneratePrimitives()
             }
         }
         
+
+        if (ImGui::Button("Generate Cube")) {
+
+        }
+        ImGui::EndMenu();
+    
+
+        if (ImGui::Button("Generate Piramid")) {
+
+        }
+        ImGui::EndMenu();
+        
+
+
+        if (ImGui::Button("Generate Plane")) {
+
+        }
+
+        ImGui::EndMenu();
+        
+
         if (ImGui::Button("Delete GameObject")) {
             delete Selected;
             Selected = nullptr;

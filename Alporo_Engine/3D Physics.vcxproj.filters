@@ -327,9 +327,6 @@
     <ClInclude Include="Glew\include\wglew.h">
       <Filter>External_Libraries\Glew</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleOPGPrimitives.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Assimp\include\cfileio.h">
       <Filter>External_Libraries\Assimp</Filter>
     </ClInclude>
@@ -619,9 +616,6 @@
     </ClCompile>
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp">
       <Filter>External_Libraries\MathGeoLib\Include\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleOPGPrimitives.cpp">
-      <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleTexture.cpp">
       <Filter>Sources\Modules</Filter>

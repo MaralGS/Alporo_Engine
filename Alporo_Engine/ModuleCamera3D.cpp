@@ -112,21 +112,7 @@ update_status ModuleCamera3D::Update(float dt)
 		int dy = -App->input->GetMouseYMotion();
 		vec3 NRef;
 		float Sensitivity = 0.25f;
-		if (App->OpenGLPrimitives->PM == 1) {
-			NRef.x = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.x;
-			NRef.y = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.y;
-			NRef.z = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.z;
-		}
-		if (App->OpenGLPrimitives->PM == 2) {
-			NRef.x = App->OpenGLPrimitives->Piramid[App->imguiwindows->PiramidPicked]->Pos2.x + 1.5;
-			NRef.y = App->OpenGLPrimitives->Piramid[App->imguiwindows->PiramidPicked]->Pos2.y + 0.5;
-			NRef.z = App->OpenGLPrimitives->Piramid[App->imguiwindows->PiramidPicked]->Pos2.z + 1.5;
-		}
-		if (App->OpenGLPrimitives->PM == 2) {
-			NRef.x = App->OpenGLPrimitives->Plane[App->imguiwindows->PlanePicked]->Pos2.x + 1.5;
-			NRef.y = App->OpenGLPrimitives->Plane[App->imguiwindows->PlanePicked]->Pos2.y + 0.5;
-			NRef.z = App->OpenGLPrimitives->Plane[App->imguiwindows->PlanePicked]->Pos2.z + 1.5;
-		}
+	
 		if(dx != 0)
 		{
 			float DeltaX = (float)dx * Sensitivity;
@@ -149,18 +135,11 @@ update_status ModuleCamera3D::Update(float dt)
 				Y = cross(Z, X);
 			}
 		}
-		if (App->OpenGLPrimitives->PM == 1) {
-			Position = NRef + Z *(4 + App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2);
-		}
-		if (App->OpenGLPrimitives->PM == 2) {
-			Position = NRef + Z * (4 + App->OpenGLPrimitives->Piramid[App->imguiwindows->PiramidPicked]->Pos2);
-		}
-		if (App->OpenGLPrimitives->PM == 3) {
-			Position = NRef + Z * (4 + App->OpenGLPrimitives->Plane[App->imguiwindows->PlanePicked]->Pos2);
-		}
+		//Position = NRef + Z * (4 + App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2);
+
 	}
 		
-		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && App->OpenGLPrimitives->PM != 0) {
+		/*if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && App->OpenGLPrimitives->PM != 0) {
 		if (App->OpenGLPrimitives->PM == 1)
 		{
 			newPos.x = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.x + 4;
@@ -169,21 +148,8 @@ update_status ModuleCamera3D::Update(float dt)
 			Look(newPos, { App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2 });
 		}
 		
-		if (App->OpenGLPrimitives->PM == 2)
-		{
-			newPos.x = App->OpenGLPrimitives->Piramid[App->imguiwindows->PiramidPicked]->Pos2.x + 4;
-			newPos.y = App->OpenGLPrimitives->Piramid[App->imguiwindows->PiramidPicked]->Pos2.y + 2;
-			newPos.z = App->OpenGLPrimitives->Piramid[App->imguiwindows->PiramidPicked]->Pos2.z + 3;
-			Look(newPos, { App->OpenGLPrimitives->Piramid[App->imguiwindows->PiramidPicked]->Pos2 });
-		}	
-		if (App->OpenGLPrimitives->PM == 3)
-		{
-			newPos.x = App->OpenGLPrimitives->Plane[App->imguiwindows->PlanePicked]->Pos2.x + 4;
-			newPos.y = App->OpenGLPrimitives->Plane[App->imguiwindows->PlanePicked]->Pos2.y + 2;
-			newPos.z = App->OpenGLPrimitives->Plane[App->imguiwindows->PlanePicked]->Pos2.z + 3;
-			Look(newPos, { App->OpenGLPrimitives->Plane[App->imguiwindows->PlanePicked]->Pos2 });
-		}
-	}
+		
+	}*/
 
 	
 
