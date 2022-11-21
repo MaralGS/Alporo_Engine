@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Transform.h"
+#include<vector>
 
 GameObject::GameObject()
 {
@@ -49,5 +50,12 @@ void GameObject::CreateInspector()
 		}
 	}
 	ImGui::End();
+}
+
+void GameObject::DeleteGO(GameObject* P)
+{
+	child.erase(std::find(child.begin(), child.end(), P));
+	Parent = P;
+	Parent->child.push_back(this);
 }
 

@@ -387,7 +387,7 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
            Selected = parent;
 
-           ImGui::Text("Change parent to...");
+           ImGui::Text("Moving Object");
            ImGui::EndDragDropSource();
        }
        if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && parent->Parent != nullptr)
@@ -396,7 +396,7 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
        }
    }
 
-   /*if (ImGui::BeginDragDropTarget())
+   if (ImGui::BeginDragDropTarget())
    {
        if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("_GAMEOBJECT"))
        {
@@ -404,12 +404,12 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
            GameObject* dropGO = static_cast<GameObject*>(payload->Data);
            //memcpy(dropGO, payload->Data, payload->DataSize);
 
-           dropTarget->ChangeParent(node);
-           LOG(LogType::L_NORMAL, "%s", dropTarget->name.c_str());
-           dropTarget = nullptr;
+           Selected->DeleteGO(parent);
+           //LOG(LogType::L_NORMAL, "%s", dropTarget->name.c_str());
+           Selected = nullptr;
        }
        ImGui::EndDragDropTarget();
-   }*/
+   }
 
 
    
