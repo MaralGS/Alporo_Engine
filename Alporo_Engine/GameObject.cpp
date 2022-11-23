@@ -28,7 +28,7 @@ GameObject::GameObject(GameObject* parent)
 GameObject::~GameObject()
 {
 	name = nullptr;
-	Parent = nullptr;
+//	Parent = nullptr;
 
 	transform = nullptr;
 
@@ -37,6 +37,13 @@ GameObject::~GameObject()
 		delete child[i];
 		child[i] = nullptr;
 	}
+	
+	for  (size_t i = 0; i < Comp.size(); i++)
+	{
+		delete Comp[i];
+		Comp[i] = nullptr;
+	}
+	child.clear();
 	Comp.clear();
 	
 }
