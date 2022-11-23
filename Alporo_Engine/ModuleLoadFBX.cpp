@@ -117,7 +117,7 @@ GameObject* ModuleLoadFBX::PrimitivesObjects(int Case)
 		break;
 	case 2:
 		MeshObject->name = "Cube";
-		MeshObject = LoadFile("Assets/Primitives/Cube.fbx");
+		MeshObject = LoadFile("Assets/Primitives/cube2.fbx");
 		break;
 	case 3:
 		MeshObject->name = "Plane";
@@ -130,6 +130,10 @@ GameObject* ModuleLoadFBX::PrimitivesObjects(int Case)
 	case 5:
 		MeshObject->name = "Sphere";
 		MeshObject = LoadFile("Assets/Primitives/Sphere.fbx");
+		break;
+	case 6:
+		MeshObject->name = "Cylinder";
+		MeshObject = LoadFile("Assets/Primitives/Cylinder.fbx");
 		break;
 	}
 	return nullptr;

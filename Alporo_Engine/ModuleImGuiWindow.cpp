@@ -331,6 +331,13 @@ void ModuleImguiWindow::GeneratePrimitives()
                 App->LoadFbx->PrimitivesObjects(primitive);
             }
         }
+        if (ImGui::Button("Generate Cylinder")) {
+            if (Selected != nullptr)
+            {
+                primitive = 6;
+                App->LoadFbx->PrimitivesObjects(primitive);
+            }
+        }
 
         if (ImGui::Button("Delete GameObject")) {
             delete Selected;
