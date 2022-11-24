@@ -26,6 +26,7 @@ GameObject::GameObject(GameObject* parent)
 
 GameObject::~GameObject()
 {
+	
 	name = nullptr;
 	Parent = nullptr;
 
