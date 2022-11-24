@@ -155,6 +155,7 @@ update_status ModuleLoadFBX::PostUpdate(float dt)
 				meshes[i]->Render();
 			}
 		}
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	return UPDATE_CONTINUE;
 }
