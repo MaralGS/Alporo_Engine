@@ -35,5 +35,4 @@ void Transform::Tranformation()
 
 	Transform_Matrix.scale(scale.x, scale.y, scale.z);
 
-
 }

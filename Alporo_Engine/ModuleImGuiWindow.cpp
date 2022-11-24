@@ -207,7 +207,6 @@ update_status ModuleImguiWindow::Update(float dt)
     //GameObjects hieracy
     if (ImGui::Begin("GameObjects")) {
         hieraci(RootGO);
-       
     }
     ImGui::End();
 
@@ -292,56 +291,37 @@ void ModuleImguiWindow::GeneratePrimitives()
     if (ImGui::BeginMenu("GameObject"))
     {
         if (ImGui::Button("Generate Empty GameObject")) {
-            if (Selected != nullptr)
-            {
-                primitive = 1;
-                App->LoadFbx->PrimitivesObjects(primitive);
-            }
+            primitive = 1;
+            App->LoadFbx->PrimitivesObjects(primitive);
         }
 
         if (ImGui::Button("Generate Cube")) {
-            if (Selected != nullptr)
-            {
-                primitive = 2;
-                App->LoadFbx->PrimitivesObjects(primitive);
-            }
+            primitive = 2;
+            App->LoadFbx->PrimitivesObjects(primitive);
         }
 
         if (ImGui::Button("Generate Plane")) {
-            if (Selected != nullptr)
-            {
-                primitive = 3;
-                App->LoadFbx->PrimitivesObjects(primitive);
-            }
+            primitive = 3;
+            App->LoadFbx->PrimitivesObjects(primitive);
         }
 
 
         if (ImGui::Button("Generate Pyramid")) {
-            if (Selected != nullptr)
-            {
-                primitive = 4;
-                App->LoadFbx->PrimitivesObjects(primitive);
-            }
+            primitive = 4;
+            App->LoadFbx->PrimitivesObjects(primitive);
         }
 
         if (ImGui::Button("Generate Sphere")) {
-            if (Selected != nullptr)
-            {
-                primitive = 5;
-                App->LoadFbx->PrimitivesObjects(primitive);
-            }
+            primitive = 5;
+            App->LoadFbx->PrimitivesObjects(primitive);
         }
-        if (ImGui::Button("Generate Cylinder")) {
-            if (Selected != nullptr)
-            {
-                primitive = 6;
-                App->LoadFbx->PrimitivesObjects(primitive);
-            }
+        if (ImGui::Button("Generate Cylinder")) {        
+            primitive = 6;
+            App->LoadFbx->PrimitivesObjects(primitive);
         }
 
         if (ImGui::Button("Delete GameObject")) {
-            delete Selected;
-            Selected = nullptr;
+            Selected->~GameObject();
         }
 
         ImGui::EndMenu();

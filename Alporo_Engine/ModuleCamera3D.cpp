@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleCamera3D.h"
+#include "Transform.h"
 
 
 ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -135,21 +136,18 @@ update_status ModuleCamera3D::Update(float dt)
 				Y = cross(Z, X);
 			}
 		}
-		//Position = NRef + Z * (4 + App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2);
 
 	}
 		
-		/*if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN && App->OpenGLPrimitives->PM != 0) {
-		if (App->OpenGLPrimitives->PM == 1)
-		{
-			newPos.x = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.x + 4;
-			newPos.y = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.y + 2;
-			newPos.z = App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2.z + 3;
-			Look(newPos, { App->OpenGLPrimitives->Cub[App->imguiwindows->CubPicked]->Pos2 });
+		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN ) {
+			if (App->imguiwindows->Selected != nullptr)
+			{
+				newPos.x = App->imguiwindows->Selected->transform->position.x;
+				newPos.y = App->imguiwindows->Selected->transform->position.y + 7;
+				newPos.z = App->imguiwindows->Selected->transform->position.z + 4;
+				Look(newPos, { App->imguiwindows->Selected->transform->position});
+			}
 		}
-		
-		
-	}*/
 
 	
 

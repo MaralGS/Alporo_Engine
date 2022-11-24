@@ -27,23 +27,23 @@ GameObject::GameObject(GameObject* parent)
 
 GameObject::~GameObject()
 {
-	name = nullptr;
-//	Parent = nullptr;
-
-	transform = nullptr;
-
-	for  (size_t i = 0; i < child.size(); i++)
+	if (Parent != nullptr)
 	{
-		delete child[i];
-		child[i] = nullptr;
+		for  (size_t i = 0; i < child.size(); i++)
+		{
+			delete child[i];
+			child[i] = nullptr;
+		}
 	}
 	
+	//transform = nullptr;
+	child.clear();
 	for  (size_t i = 0; i < Comp.size(); i++)
 	{
 		delete Comp[i];
 		Comp[i] = nullptr;
 	}
-	child.clear();
+
 	Comp.clear();
 	
 }
@@ -61,6 +61,7 @@ void GameObject::CreateInspector()
 
 void GameObject::DeleteGO(GameObject* P)
 {
+
 	child.erase(std::find(child.begin(), child.end(), P));
 	Parent = P;
 	Parent->child.push_back(this);
