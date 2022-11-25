@@ -7,7 +7,6 @@ enum class Type
 	None,
 	Transform,
 	MeshRenderer,
-	Rescale,
 };
 
 class Component

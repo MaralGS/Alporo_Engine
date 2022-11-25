@@ -10,7 +10,6 @@
 #include "ModuleCamera3D.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleImGuiWindow.h"
-#include "ModuleOPGPrimitives.h"
 #include "ModuleTexture.h"
 #include "ModuleLoadFBX.h"
 #include "imgui.h"
@@ -24,7 +23,6 @@ public:
 	ModuleCamera3D* camera;
 	ModuleSceneIntro* scene;
 	ModuleImguiWindow* imguiwindows;
-	ModuleOPGPrimitives* OpenGLPrimitives;
 	ModuleLoadFBX* LoadFbx;
 	ModuleTexture* MTextures;
 

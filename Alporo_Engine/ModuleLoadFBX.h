@@ -34,6 +34,7 @@ public:
 
 	bool Start();
 	GameObject* LoadFile(string file_path);
+	GameObject* PrimitivesObjects(int Case);
 	void LoadMesh(MyMesh* mesh);
 
 	update_status PostUpdate(float dt);
@@ -43,7 +44,6 @@ public:
 	bool FBX2 = true;
 	bool FBX3 = true;
 	GameObject* MeshObject = nullptr;
-
 private:
 	vector<MyMesh*> meshes;
 

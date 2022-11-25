@@ -106,6 +106,39 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path)
 
 }
 
+GameObject* ModuleLoadFBX::PrimitivesObjects(int Case)
+{
+	//draw Primitives
+	GameObject* child;
+	switch (Case)
+	{
+	case 1:
+		child = new GameObject(App->imguiwindows->RootGO);
+		break;
+	case 2:
+		MeshObject->name = "Cube";
+		MeshObject = LoadFile("Assets/Primitives/cube2.fbx");
+		break;
+	case 3:
+		MeshObject->name = "Plane";
+		MeshObject = LoadFile("Assets/Primitives/Plane.fbx");
+		break;
+	case 4:
+		MeshObject->name = "Pyramid";
+		MeshObject = LoadFile("Assets/Primitives/Pyramid.fbx");
+		break;
+	case 5:
+		MeshObject->name = "Sphere";
+		MeshObject = LoadFile("Assets/Primitives/Sphere.fbx");
+		break;
+	case 6:
+		MeshObject->name = "Cylinder";
+		MeshObject = LoadFile("Assets/Primitives/Cylinder.fbx");
+		break;
+	}
+	return nullptr;
+}
+
 
 
 
