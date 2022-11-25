@@ -143,9 +143,9 @@ update_status ModuleCamera3D::Update(float dt)
 			if (App->imguiwindows->Selected != nullptr)
 			{
 				newPos.x = App->imguiwindows->Selected->transform->position.x;
-				newPos.y = App->imguiwindows->Selected->transform->position.y + 7;
-				newPos.z = App->imguiwindows->Selected->transform->position.z + 4;
-				Look(newPos, { App->imguiwindows->Selected->transform->position});
+				newPos.y = App->imguiwindows->Selected->transform->position.y;
+				newPos.z = App->imguiwindows->Selected->transform->position.z;
+				LookAt(newPos);
 			}
 		}
 
