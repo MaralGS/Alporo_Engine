@@ -7,7 +7,7 @@ class GameObject;
 
 struct Camera {
 	vec3 X, Y, Z, Position, Reference;
-	
+	GameObject* SecCamera;
 };
 
 class ModuleCamera3D : public Module
@@ -33,7 +33,7 @@ private:
 public:
 	Camera Cam;
 	bool CreateGameCamera = true;
-	GameObject* SeconCamera;
+	GameObject* SecondCamera;
 private:
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;

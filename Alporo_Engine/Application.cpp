@@ -18,10 +18,11 @@ Application::Application()
 
 	// Main Modules
 	AddModule(window);
+	AddModule(imguiwindows);
 	AddModule(camera);
 	AddModule(input);
 	AddModule(scene);
-	AddModule(imguiwindows);
+
 	AddModule(LoadFbx);
 	AddModule(MTextures);
 

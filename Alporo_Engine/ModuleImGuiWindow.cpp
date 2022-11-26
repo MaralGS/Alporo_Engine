@@ -305,7 +305,6 @@ void ModuleImguiWindow::GeneratePrimitives()
             App->LoadFbx->PrimitivesObjects(primitive);
         }
 
-
         if (ImGui::Button("Generate Pyramid")) {
             primitive = 4;
             App->LoadFbx->PrimitivesObjects(primitive);
