@@ -3,7 +3,6 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "ModuleLoadFBX.h"
-#include "Mesh.h"
 
 class GameObject;
 class Component;

@@ -337,6 +337,7 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 { 
     ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen;
 
+ 
    if (parent->child.size() == 0) {
     treeF |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
    }
