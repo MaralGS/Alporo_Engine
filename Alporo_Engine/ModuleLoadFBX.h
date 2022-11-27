@@ -5,6 +5,7 @@
 #include "scene.h"
 #include "postprocess.h"
 #include "Component.h"
+#include "MathGeoLib.h"
 
 
 #include <string>

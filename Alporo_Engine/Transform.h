@@ -21,9 +21,6 @@ public:
 
 	void Inspector();
 	void Tranformation();
-	void MatRotX();
-	void MatRotY();
-	void MatRotZ();
 
 	mat4x4 Transform_Matrix = {
 		1, 0, 0, 0,

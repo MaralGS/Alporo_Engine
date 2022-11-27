@@ -18,6 +18,13 @@ Meshes::~Meshes()
 	mesh = nullptr;
 }
 
+
+void Meshes::Update()
+{
+	
+}
+
+
 void Meshes::Inspector()
 {
 	ImGui::Text("Number Vertices: %d", mesh->num_vertices);
