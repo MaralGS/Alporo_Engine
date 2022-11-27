@@ -16,7 +16,7 @@ bool ModuleLoadFBX::Start()
 	bool ret = true;
 	
 	MeshObject = LoadFile("Assets/BakerHouse.fbx");
-
+	
 	return ret;
 }
 

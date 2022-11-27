@@ -10,18 +10,25 @@ Meshes::Meshes(GameObject* Meshobject) : Component(Meshobject)
 	GObjectSelected = Meshobject;
 	mesh = nullptr;
 	type = Type::MeshRenderer;
+
 }
 
 Meshes::~Meshes()
 {
 	GObjectSelected = nullptr;
 	mesh = nullptr;
+
 }
 
 
 void Meshes::Update()
 {
-	
+	// Generate global OBB
+	mesh->GObbox = mesh->GAbbox;
+	//mesh->GObbox.Transform(GObjectSelected->transform->Transform_Matrix);
+	// Generate global AABB
+	mesh->GAbbox.SetNegativeInfinity();
+	mesh->GAbbox.Enclose(mesh->GObbox);
 }
 
 
