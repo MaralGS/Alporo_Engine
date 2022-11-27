@@ -6,6 +6,7 @@
 #include "postprocess.h"
 #include "Component.h"
 
+
 #include <string>
 using namespace std;
 
@@ -23,6 +24,7 @@ struct MyMesh {
 	uint num_vertices = 0;
 	float* vertices = nullptr;
 	GameObject* OBmesh = nullptr;
+
 	void Render();
 };
 
