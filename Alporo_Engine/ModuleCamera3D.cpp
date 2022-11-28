@@ -10,12 +10,12 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 {
 	CalculateViewMatrix();
 
-	Cam.X = float3(1.0f, 0.0f, 0.0f);
-	Cam.Y = float3(0.0f, 1.0f, 0.0f);
-	Cam.Z = float3(0.0f, 0.0f, 1.0f);
+	Cam.X = vec3(1.0f, 0.0f, 0.0f);
+	Cam.Y = vec3(0.0f, 1.0f, 0.0f);
+	Cam.Z = vec3(0.0f, 0.0f, 1.0f);
 
-	Cam.Position = float3(0.0f, 0.0f, 5.0f);
-	Cam.Reference = float3(0.0f, 0.0f, 0.0f);
+	Cam.Position = vec3(0.0f, 0.0f, 5.0f);
+	Cam.Reference = vec3(0.0f, 0.0f, 0.0f);
 
 }
 
@@ -48,7 +48,7 @@ update_status ModuleCamera3D::Update(float dt)
 	// Implement a debug camera with keys and mouse
 	// Now we can vecmake this movememnt frame rate independant!
 
-	float3 newPos(0, 0, 0);
+		vec3 newPos(0, 0, 0);
 		float speed = 5.0f * dt;
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			speed = 10.0f * dt;
@@ -94,9 +94,9 @@ update_status ModuleCamera3D::Update(float dt)
 			{
 				float DeltaX = (float)dx * Sensitivity;
 
-				Cam.X = rotate(Cam.X, DeltaX, float3(0.0f, 1.0f, 0.0f));
-				Cam.Y = rotate(Cam.Y, DeltaX, float3(0.0f, 1.0f, 0.0f));
-				Cam.Z = rotate(Cam.Z, DeltaX, float3(0.0f, 1.0f, 0.0f));
+				Cam.X = rotate(Cam.X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				Cam.Y = rotate(Cam.Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
+				Cam.Z = rotate(Cam.Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
 			}
 
 			if (dy != 0)
@@ -108,7 +108,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 				if (Cam.Y.y < 0.0f)
 				{
-					Cam.Z = float3(0.0f, Cam.Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+					Cam.Z = vec3(0.0f, Cam.Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
 					Cam.Y = cross(Cam.Z, Cam.X);
 				}
 			}
@@ -141,7 +141,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 				if (Cam.Y.y < 0.0f)
 				{
-					Cam.Z = float3(0.0f, Cam.Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
+					Cam.Z = vec3(0.0f, Cam.Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
 					Cam.Y = cross(Cam.Z, Cam.X);
 				}
 			}
@@ -174,13 +174,13 @@ update_status ModuleCamera3D::Update(float dt)
 }
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::Look(const float3&Position, const float3 &Reference, bool RotateAroundReference)
+void ModuleCamera3D::Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference)
 {
 	this->Cam.Position = Position;
 	this->Cam.Reference = Reference;
 
 	Cam.Z = normalize(Position - Reference);
-	Cam.X = normalize(cross(float3(0.0f, 1.0f, 0.0f), Cam.Z));
+	Cam.X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Cam.Z));
 	Cam.Y = cross(Cam.Z, Cam.X);
 
 	if(!RotateAroundReference)
@@ -193,12 +193,12 @@ void ModuleCamera3D::Look(const float3&Position, const float3 &Reference, bool R
 }
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::LookAt( const float3 &Spot)
+void ModuleCamera3D::LookAt( const vec3 &Spot)
 {
 	Cam.Reference = Spot;
 
 	Cam.Z = normalize(Cam.Position - Cam.Reference);
-	Cam.X = normalize(cross(float3(0.0f, 1.0f, 0.0f), Cam.Z));
+	Cam.X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Cam.Z));
 	Cam.Y = cross(Cam.Z, Cam.X);
 
 	CalculateViewMatrix();
@@ -206,7 +206,7 @@ void ModuleCamera3D::LookAt( const float3 &Spot)
 
 
 // -----------------------------------------------------------------
-void ModuleCamera3D::Move(const float3&Movement)
+void ModuleCamera3D::Move(const vec3 &Movement)
 {
 	Cam.Position += Movement;
 	Cam.Reference += Movement;
@@ -238,6 +238,6 @@ GameObject* ModuleCamera3D::CameraGameObject()
 // -----------------------------------------------------------------
 void ModuleCamera3D::CalculateViewMatrix()
 {
-	ViewMatrix = float4x4(Cam.X.x, Cam.Y.x, Cam.Z.x, 0.0f, Cam.X.y, Cam.Y.y, Cam.Z.y, 0.0f, Cam.X.z, Cam.Y.z, Cam.Z.z, 0.0f, -dot(Cam.X, Cam.Position), -dot(Cam.Y, Cam.Position), -dot(Cam.Z, Cam.Position), 1.0f);
+	ViewMatrix = mat4x4(Cam.X.x, Cam.Y.x, Cam.Z.x, 0.0f, Cam.X.y, Cam.Y.y, Cam.Z.y, 0.0f, Cam.X.z, Cam.Y.z, Cam.Z.z, 0.0f, -dot(Cam.X, Cam.Position), -dot(Cam.Y, Cam.Position), -dot(Cam.Z, Cam.Position), 1.0f);
 	ViewMatrixInverse = inverse(ViewMatrix);
 }
