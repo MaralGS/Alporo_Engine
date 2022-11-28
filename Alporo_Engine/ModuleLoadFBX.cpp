@@ -15,7 +15,7 @@ bool ModuleLoadFBX::Start()
 {
 	bool ret = true;
 	
-	MeshObject = LoadFile("Assets/BakerHouse.fbx");
+	MeshObject = LoadFile("Assets/BakerHouse.fbx", "BakerHouse");
 	
 	return ret;
 }
@@ -47,6 +47,15 @@ void MyMesh::Render()
 	glPushMatrix();
 	glMultMatrixf(&OBmesh->transform->Transform_Matrix);
 
+	if (!OBmesh->child.empty())
+	{
+		for (int i = 0; i < OBmesh->child.size(); i++)
+		{
+			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->transform->position.x + OBmesh->Parent->transform->position.x, OBmesh->transform->position.y + OBmesh->Parent->transform->position.y, OBmesh->transform->position.z + OBmesh->Parent->transform->position.z);
+			//OBmesh->child[i]->transform->Transform_Matrix.scale(scale.x + GObjectSelected->Parent->transform->scale.x, scale.y + GObjectSelected->Parent->transform->scale.y, scale.z + GObjectSelected->Parent->transform->scale.z);
+		}
+	}
+
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, NULL);
 
 	glPopMatrix();
@@ -54,13 +63,24 @@ void MyMesh::Render()
 
 }
 
-GameObject* ModuleLoadFBX::LoadFile(string file_path)
+GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 {
 	const aiScene* scene = aiImportFile(file_path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		GameObject* meshGO = new GameObject(App->imguiwindows->RootGO);
+		GameObject* meshGO;
+		if (App->imguiwindows->Selected == nullptr)
+		{
+			meshGO = new GameObject(App->imguiwindows->RootGO);
+			meshGO->name = nameGO;
+		}
+
+		else if (App->imguiwindows->Selected != nullptr)
+		{
+			meshGO = new GameObject(App->imguiwindows->Selected);
+			meshGO->name = nameGO;
+		}
 
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			MyMesh* mesh = new MyMesh();
@@ -113,27 +133,30 @@ GameObject* ModuleLoadFBX::PrimitivesObjects(int Case)
 	switch (Case)
 	{
 	case 1:
-		child = new GameObject(App->imguiwindows->RootGO);
+		if (App->imguiwindows->Selected == nullptr)
+		{
+			child = new GameObject(App->imguiwindows->RootGO);
+		}
+
+		else if (App->imguiwindows->Selected != nullptr)
+		{
+			child = new GameObject(App->imguiwindows->Selected);
+		}
 		break;
 	case 2:
-		MeshObject->name = "Cube";
-		MeshObject = LoadFile("Assets/Primitives/cube2.fbx");
+		MeshObject = LoadFile("Assets/Primitives/cube2.fbx", "Cube");
 		break;
 	case 3:
-		MeshObject->name = "Plane";
-		MeshObject = LoadFile("Assets/Primitives/Plane.fbx");
+		MeshObject = LoadFile("Assets/Primitives/Plane.fbx", "Plane");
 		break;
 	case 4:
-		MeshObject->name = "Pyramid";
-		MeshObject = LoadFile("Assets/Primitives/Pyramid.fbx");
+		MeshObject = LoadFile("Assets/Primitives/Pyramid.fbx", "Pyramid");
 		break;
 	case 5:
-		MeshObject->name = "Sphere";
-		MeshObject = LoadFile("Assets/Primitives/Sphere.fbx");
+		MeshObject = LoadFile("Assets/Primitives/Sphere.fbx", "Sphere");
 		break;
 	case 6:
-		MeshObject->name = "Cylinder";
-		MeshObject = LoadFile("Assets/Primitives/Cylinder.fbx");
+		MeshObject = LoadFile("Assets/Primitives/Cylinder.fbx", "Cylinder");
 		break;
 	}
 	return nullptr;

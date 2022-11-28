@@ -63,6 +63,7 @@ void GameObject::CreateInspector()
 void GameObject::MoveGameObject(GameObject* P)
 {
 	P->child.erase(std::find(child.begin(), child.end(), Parent));
+
 	Parent = P;
 	Parent->child.push_back(P);
 }

@@ -38,7 +38,7 @@ public:
 	ModuleLoadFBX(Application* app, bool start_enabled = true);
 
 	bool Start();
-	GameObject* LoadFile(string file_path);
+	GameObject* LoadFile(string file_path, string nameGO);
 	GameObject* PrimitivesObjects(int Case);
 	void LoadMesh(MyMesh* mesh);
 
