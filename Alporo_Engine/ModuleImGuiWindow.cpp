@@ -219,6 +219,14 @@ update_status ModuleImguiWindow::Update(float dt)
     {
         Selected->CreateInspector();
     }
+    
+    if (App->camera->GameCamera)
+    {
+        App->camera->GameCamera->CameraGameObject();
+    }
+
+
+
     return UPDATE_CONTINUE;
 }
 

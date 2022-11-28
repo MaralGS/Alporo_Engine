@@ -27,10 +27,10 @@ bool ModuleCamera3D::Start()
 {
 	LOG(LogType::LOGS, "Setting up the camera");
 	bool ret = true;
-	//CameraGameObject();
+
+	//creating GameCamera
 	SecondCamera = CameraGameObject();
-	//glMultMatrixf(&SeconCamera->transform->Transform_Matrix);
-	//glPopMatrix();
+
 	return ret;
 }
 
@@ -224,6 +224,14 @@ GameObject* ModuleCamera3D::CameraGameObject()
 {
 	GameCamera = new GameObject(App->imguiwindows->RootGO);
 	GameCamera->name = "Game Camera";
+
+	Camera* Scamera = new Camera();
+	CObject* component = new CObject(GameCamera);
+	Cam.SecCamera = GameCamera;
+	component->NewCamera = Scamera;
+	if (GameCamera->Comp.size() == 1) {
+		GameCamera->Comp.push_back(component);
+	}
 	return nullptr;
 }
 

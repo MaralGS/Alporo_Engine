@@ -12,6 +12,7 @@ Component::~Component()
 
 void Component::Update()
 {
+
 }
 
 void Component::Inspector()

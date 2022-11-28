@@ -8,6 +8,7 @@
 enum class ComponentType;
 class Transform;
 class Meshes;
+class CObject;
 
 class GameObject 
 {
@@ -19,10 +20,12 @@ class GameObject
 	void CreateInspector();
 
 	void MoveGameObject(GameObject* P);
+
+	void CameraGameObject();
 	std::string name;
 	GameObject* Parent;
 	std::vector<GameObject*> child;
 	std::vector<Component*> Comp;
-	Transform* transform;
-	Meshes* GOMesh;
+	Transform* transform = nullptr;
+	Meshes* GOMesh = nullptr;
 };

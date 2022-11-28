@@ -68,3 +68,14 @@ void GameObject::MoveGameObject(GameObject* P)
 	Parent->child.push_back(P);
 }
 
+void GameObject::CameraGameObject()
+{
+	if (ImGui::Begin("Game")) {
+		for (size_t i = 0; i < Comp.size(); i++)
+		{
+			Comp[i]->Update();
+		}
+	}
+	ImGui::End();
+}
+
