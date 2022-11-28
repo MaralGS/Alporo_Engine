@@ -47,6 +47,15 @@ void MyMesh::Render()
 	glPushMatrix();
 	glMultMatrixf(&OBmesh->transform->Transform_Matrix);
 
+	if (!OBmesh->child.empty())
+	{
+		for (int i = 0; i < OBmesh->child.size(); i++)
+		{
+			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->transform->position.x + OBmesh->Parent->transform->position.x, OBmesh->transform->position.y + OBmesh->Parent->transform->position.y, OBmesh->transform->position.z + OBmesh->Parent->transform->position.z);
+			//OBmesh->child[i]->transform->Transform_Matrix.scale(scale.x + GObjectSelected->Parent->transform->scale.x, scale.y + GObjectSelected->Parent->transform->scale.y, scale.z + GObjectSelected->Parent->transform->scale.z);
+		}
+	}
+
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, NULL);
 
 	glPopMatrix();
