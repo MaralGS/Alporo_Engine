@@ -16,11 +16,14 @@ public:
 	~CObject();
 
 	void Update();
+	void CalculateVMatrix();
 
-	void Inspector();
 
 	Camera* NewCamera = nullptr;
 	GameObject* GMCamera = nullptr;
+	mat4x4 VMatrix, VMatrixInverse;
+private:
+
 };
 
 
