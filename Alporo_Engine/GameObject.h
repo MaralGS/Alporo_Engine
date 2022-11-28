@@ -18,7 +18,7 @@ class GameObject
 
 	void CreateInspector();
 
-	void DeleteGO(GameObject* P);
+	void MoveGameObject(GameObject* P);
 	std::string name;
 	GameObject* Parent;
 	std::vector<GameObject*> child;

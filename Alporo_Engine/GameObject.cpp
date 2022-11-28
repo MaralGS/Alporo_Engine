@@ -60,11 +60,10 @@ void GameObject::CreateInspector()
 	ImGui::End();
 }
 
-void GameObject::DeleteGO(GameObject* P)
+void GameObject::MoveGameObject(GameObject* P)
 {
-
-	child.erase(std::find(child.begin(), child.end(), P));
+	P->child.erase(std::find(child.begin(), child.end(), Parent));
 	Parent = P;
-	Parent->child.push_back(this);
+	Parent->child.push_back(P);
 }
 
