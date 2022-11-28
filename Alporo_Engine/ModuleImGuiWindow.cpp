@@ -210,6 +210,11 @@ update_status ModuleImguiWindow::Update(float dt)
     }
     ImGui::End();
 
+    if (!App->input->GetMouseButton(SDL_BUTTON_LEFT))
+    {
+        CreatedOnce = true;
+    }
+
     if (Selected != nullptr)
     {
         Selected->CreateInspector();
@@ -377,8 +382,9 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
            ImGui::Text("Moving Object");
            ImGui::EndDragDropSource();
        }
-       if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && parent->Parent != nullptr)
+       if (ImGui::IsItemHovered() && App->input->GetMouseButton(SDL_BUTTON_LEFT) && CreatedOnce == true)
        {
+           CreatedOnce = false;
            Selected = parent;
        }
    }
@@ -398,7 +404,10 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
        ImGui::EndDragDropTarget();
    }
 
-
+   if (App->input->GetMouseButton(SDL_BUTTON_RIGHT))
+   {
+       Selected = nullptr;
+   }
    
 }
 

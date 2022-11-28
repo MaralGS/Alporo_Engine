@@ -37,6 +37,7 @@ public:
 	bool CullFace = true;
 	bool Lighting = true;
 	bool ColorMaterial = true;
+	bool CreatedOnce = true;
 	//const char fps_log[60];
 	//const char ms_log[60];
 	//float

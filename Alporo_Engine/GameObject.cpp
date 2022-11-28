@@ -62,7 +62,6 @@ void GameObject::CreateInspector()
 
 void GameObject::DeleteGO(GameObject* P)
 {
-
 	child.erase(std::find(child.begin(), child.end(), P));
 	Parent = P;
 	Parent->child.push_back(this);
