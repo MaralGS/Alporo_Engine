@@ -51,7 +51,7 @@ void MyMesh::Render()
 	{
 		for (int i = 0; i < OBmesh->child.size(); i++)
 		{
-			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->transform->position.x + OBmesh->Parent->transform->position.x, OBmesh->transform->position.y + OBmesh->Parent->transform->position.y, OBmesh->transform->position.z + OBmesh->Parent->transform->position.z);
+			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->child[i]->transform->position.x + OBmesh->child[i]->Parent->transform->position.x, OBmesh->child[i]->transform->position.y + OBmesh->child[i]->Parent->transform->position.y, OBmesh->child[i]->transform->position.z + OBmesh->child[i]->Parent->transform->position.z);
 			//OBmesh->child[i]->transform->Transform_Matrix.scale(scale.x + GObjectSelected->Parent->transform->scale.x, scale.y + GObjectSelected->Parent->transform->scale.y, scale.z + GObjectSelected->Parent->transform->scale.z);
 		}
 	}

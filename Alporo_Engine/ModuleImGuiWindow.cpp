@@ -403,10 +403,13 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
         }
         ImGui::EndDragDropTarget();
     }
+
+    if (App->input->GetMouseButton(SDL_BUTTON_RIGHT))
+    {
+        Selected = nullptr;
+    }
+
 }
 
-   if (App->input->GetMouseButton(SDL_BUTTON_RIGHT))
-   {
-       Selected = nullptr;
-   }
+
    
