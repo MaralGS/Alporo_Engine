@@ -1,22 +1,48 @@
 #pragma once
 #include "Module.h"
-#include "Globals.h"
 
-#include <string>
-using namespace std;
+class MeshImporter;
+class TextureImporter;
+class LibraryFolder;
 
+struct SceneProperties;
 
-class MoudleCFF : public Module
+struct FileSystemProperties
 {
 public:
+	FileSystemProperties();
 
-	bool Start();
-	const char* MeshSave(MyMesh* mesh);
-	void MeshLoad(const char* path);
-	update_status PostUpdate(float dt);
-	//bool Init();
-	bool CleanUp();
+	static FileSystemProperties* Instance();
 
+	static void Delete();
+
+public:
+	LibraryFolder* rootFolder;
 private:
-
+	static FileSystemProperties* instance;
 };
+
+class ModuleFileSystem : public Module
+{
+public:
+	ModuleFileSystem(Application* app, bool start_enabled = true);
+	~ModuleFileSystem();
+
+	bool Init() override;
+	bool Start() override;
+
+	bool CleanUp() override;
+
+	update_status PreUpdate();
+	update_status Update();
+	update_status PostUpdate();
+
+
+public:
+	FileSystemProperties* fsProps = nullptr;
+	SceneProperties* sProps = nullptr;
+
+	MeshImporter* meshImp = nullptr;
+	TextureImporter* textImp = nullptr;
+};
+

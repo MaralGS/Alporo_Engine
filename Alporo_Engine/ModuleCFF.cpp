@@ -39,25 +39,7 @@ const char* MoudleCFF::MeshSave(MyMesh* mesh)
 	return fileBuffer;
 }
 
-void MoudleCFF::MeshLoad(const char* path)
-{
-	char* Buffer = nullptr;
-	char* cursor = Buffer;
-	MyMesh* resource;
-	// amount of indices / vertices / colors / normals / texture_coords
-	uint ranges[5];
-	uint bytes = sizeof(ranges);
-	memcpy(ranges, cursor, bytes);
-	cursor += bytes;
-	mesh->num_indices = ranges[0];
-	mesh->num_vertices = ranges[1];
-	// Load indices
-	bytes = sizeof(uint) * resource->num_indices;
-	resource->indices = new uint[resource->num_indices];
-	memcpy(resource->indices, cursor, bytes);
-	cursor += bytes;
-	
-}
+
 
 update_status MoudleCFF::PostUpdate(float dt)
 {
