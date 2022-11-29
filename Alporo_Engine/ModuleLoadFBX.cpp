@@ -53,6 +53,7 @@ void MyMesh::Render()
 		{
 			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->child[i]->transform->position.x + OBmesh->child[i]->Parent->transform->position.x, OBmesh->child[i]->transform->position.y + OBmesh->child[i]->Parent->transform->position.y, OBmesh->child[i]->transform->position.z + OBmesh->child[i]->Parent->transform->position.z);
 			//OBmesh->child[i]->transform->Transform_Matrix.scale(scale.x + GObjectSelected->Parent->transform->scale.x, scale.y + GObjectSelected->Parent->transform->scale.y, scale.z + GObjectSelected->Parent->transform->scale.z);
+			//OBmesh->child[i]->transform->Transform_Matrix[0] = OBmesh->child[i]->Parent->transform->Transform_Matrix[0] = cos(rotate.z) * cos(rotate.x);
 		}
 	}
 
