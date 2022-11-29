@@ -38,4 +38,8 @@ public:
 	unsigned int bufferCam;
 	unsigned int frameBuffer;
 	unsigned int bufferObj;
+
+	unsigned int bufferCam2;
+	unsigned int frameBuffer2;
+	unsigned int bufferObj2;
 };

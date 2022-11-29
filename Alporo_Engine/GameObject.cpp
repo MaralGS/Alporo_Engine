@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "Mesh.h"
 #include "Transform.h"
 #include<vector>
 
@@ -27,6 +28,7 @@ GameObject::GameObject(GameObject* parent)
 
 GameObject::~GameObject()
 {
+
 
 	if (Parent != nullptr)
 	{
@@ -70,12 +72,10 @@ void GameObject::MoveGameObject(GameObject* P)
 
 void GameObject::CameraGameObject()
 {
-	if (ImGui::Begin("Game")) {
 		for (size_t i = 0; i < Comp.size(); i++)
 		{
 			Comp[i]->Update();
 		}
-	}
-	ImGui::End();
+
 }
 

@@ -31,6 +31,6 @@ void CObject::Update()
 
 void CObject::CalculateVMatrix()
 {
-	VMatrix = mat4x4(NewCamera->X.x, NewCamera->X.x, NewCamera->X.x, 0.0f, NewCamera->X.y, NewCamera->X.y, NewCamera->X.y, 0.0f, NewCamera->X.z, NewCamera->X.z, NewCamera->X.z, 0.0f, -dot(NewCamera->X, NewCamera->Position), -dot(NewCamera->Y, NewCamera->Position), -dot(NewCamera->Z, NewCamera->Position), 1.0f);
-	VMatrixInverse = inverse(VMatrix);
+	//VMatrix = mat4x4(NewCamera->X.x, NewCamera->X.x, NewCamera->X.x, 0.0f, NewCamera->X.y, NewCamera->X.y, NewCamera->X.y, 0.0f, NewCamera->X.z, NewCamera->X.z, NewCamera->X.z, 0.0f, -dot(NewCamera->X, NewCamera->Position), -dot(NewCamera->Y, NewCamera->Position), -dot(NewCamera->Z, NewCamera->Position), 1.0f);
+	//VMatrixInverse = inverse(VMatrix);
 }
