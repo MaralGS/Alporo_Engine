@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "ModuleLoadFBX.h"
+#include "Transform.h"
 
 class GameObject;
 class Component;
@@ -15,6 +16,7 @@ public:
 	Meshes(GameObject* Meshobject);
 	~Meshes();
 
+	void Update();
 	void Inspector();
 
 	MyMesh* mesh;

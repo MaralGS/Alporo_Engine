@@ -5,6 +5,8 @@
 #include "scene.h"
 #include "postprocess.h"
 #include "Component.h"
+#include "MathGeoLib.h"
+
 
 #include <string>
 using namespace std;
@@ -23,6 +25,9 @@ struct MyMesh {
 	uint num_vertices = 0;
 	float* vertices = nullptr;
 	GameObject* OBmesh = nullptr;
+	AABB GAbbox;
+	OBB GObbox;
+
 	void Render();
 };
 
@@ -33,7 +38,7 @@ public:
 	ModuleLoadFBX(Application* app, bool start_enabled = true);
 
 	bool Start();
-	GameObject* LoadFile(string file_path);
+	GameObject* LoadFile(string file_path, string nameGO);
 	GameObject* PrimitivesObjects(int Case);
 	void LoadMesh(MyMesh* mesh);
 

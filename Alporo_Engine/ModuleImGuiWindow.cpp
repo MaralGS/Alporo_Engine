@@ -210,6 +210,11 @@ update_status ModuleImguiWindow::Update(float dt)
     }
     ImGui::End();
 
+    if (!App->input->GetMouseButton(SDL_BUTTON_LEFT))
+    {
+        CreatedOnce = true;
+    }
+
     if (Selected != nullptr)
     {
         Selected->CreateInspector();
@@ -333,72 +338,78 @@ void ModuleImguiWindow::GeneratePrimitives()
 }
 
 void ModuleImguiWindow::hieraci(GameObject* parent)
-{ 
+{
     ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen;
 
- 
-   if (parent->child.size() == 0) {
-    treeF |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
-   }
 
-   if (parent == Selected)
-   {
-       treeF |= ImGuiTreeNodeFlags_Selected;
-   }
-   bool openTree = ImGui::TreeNodeEx(parent, treeF, parent->name.c_str());
+    if (parent->child.size() == 0) {
+        treeF |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
+    }
+
+    if (parent == Selected)
+    {
+        treeF |= ImGuiTreeNodeFlags_Selected;
+    }
+    bool openTree = ImGui::TreeNodeEx(parent, treeF, parent->name.c_str());
 
 
-   if (openTree)
-   {
-       if (!parent->child.empty())
-       {
-           for (int i = 0; i < parent->child.size(); i++)
-           {
-               hieraci(parent->child[i]);
-           }
-           ImGui::TreePop();
-       }
+    if (openTree)
+    {
+        if (!parent->child.empty())
+        {
+            for (int i = 0; i < parent->child.size(); i++)
+            {
+                hieraci(parent->child[i]);
+            }
+            ImGui::TreePop();
+        }
 
-      else
-       {
-           treeF |= ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
-       }
+        else
+        {
+            treeF |= ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+        }
 
-   }
+    }
 
-   if (parent != RootGO)
-   {
-       if (ImGui::BeginDragDropSource())
-       {
-           ImGui::SetDragDropPayload("GameObject", parent, sizeof(GameObject*));
+    if (parent != RootGO)
+    {
+        if (ImGui::BeginDragDropSource())
+        {
+            ImGui::SetDragDropPayload("GameObject", parent, sizeof(GameObject*));
 
-           Selected = parent;
+            Selected = parent;
+
 
            ImGui::Text("Moving Object");
            ImGui::EndDragDropSource();
        }
-       if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && parent->Parent != nullptr)
+       if (ImGui::IsItemHovered() && App->input->GetMouseButton(SDL_BUTTON_LEFT) && CreatedOnce == true)
        {
+           CreatedOnce = false;
            Selected = parent;
        }
    }
 
-   if (ImGui::BeginDragDropTarget())
-   {
-       if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("_GAMEOBJECT"))
-       {
 
-           GameObject* dropGO = static_cast<GameObject*>(payload->Data);
-           //memcpy(dropGO, payload->Data, payload->DataSize);
+    if (ImGui::BeginDragDropTarget())
+    {
+        if (const ImGuiPayload* load = ImGui::AcceptDragDropPayload("GameObject"))
+        {
+            GameObject* MovingGo = static_cast<GameObject*>(load->Data);
 
-           Selected->DeleteGO(parent);
-           //LOG(LogType::L_NORMAL, "%s", dropTarget->name.c_str());
-           Selected = nullptr;
-       }
-       ImGui::EndDragDropTarget();
-   }
+            Selected->MoveGameObject(parent);
+            //LOG(LogType::L_NORMAL, "%s", dropTarget->name.c_str());
+            Selected = nullptr;
+        }
+        ImGui::EndDragDropTarget();
+    }
+
+    if (App->input->GetMouseButton(SDL_BUTTON_RIGHT))
+    {
+        Selected = nullptr;
+    }
+
+}
 
 
    
-}
-

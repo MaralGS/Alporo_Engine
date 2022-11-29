@@ -16,7 +16,7 @@ public:
 
 	Component(GameObject* Object);
 	~Component();
-
+	virtual void Update();
 	virtual void Inspector();
 	bool active;
 	Type type;

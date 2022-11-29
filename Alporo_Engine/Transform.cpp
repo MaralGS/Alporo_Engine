@@ -30,6 +30,7 @@ void Transform::Inspector()
 void Transform::Tranformation()
 {
 
+
 	Transform_Matrix.translate(position.x, position.y, position.z);
 
 

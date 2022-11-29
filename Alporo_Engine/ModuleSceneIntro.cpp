@@ -35,7 +35,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update(float dt)
 {
-	Plane p(0, 1, 0, 0);
+	Grid p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
 
