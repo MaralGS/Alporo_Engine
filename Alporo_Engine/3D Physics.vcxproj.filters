@@ -55,6 +55,9 @@
     <Filter Include="Sources\Objects\Components">
       <UniqueIdentifier>{7664877e-8b0a-4472-8bf5-8801182bf1a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Files">
+      <UniqueIdentifier>{b05c059a-2e49-4ecc-8c5c-91956e14bf0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -459,6 +462,12 @@
     <ClInclude Include="CameraObject.h">
       <Filter>Sources\Objects\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleCFF.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadMesh.h">
+      <Filter>Sources\Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -644,6 +653,12 @@
     </ClCompile>
     <ClCompile Include="CameraObject.cpp">
       <Filter>Sources\Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCFF.cpp">
+      <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadMesh.cpp">
+      <Filter>Sources\Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

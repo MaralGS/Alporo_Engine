@@ -136,6 +136,7 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="LoadMesh.h" />
     <ClInclude Include="MathGeoLib\include\Algorithm\Random\LCG.h" />
     <ClInclude Include="MathGeoLib\include\Geometry\AABB.h" />
     <ClInclude Include="MathGeoLib\include\Geometry\AABB2D.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModuleCamera3D.h" />
+    <ClInclude Include="ModuleCFF.h" />
     <ClInclude Include="ModuleImGuiWindow.h" />
     <ClInclude Include="ModuleLoadFBX.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
@@ -233,6 +235,7 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LoadMesh.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MathGeoLib\include\Algorithm\Random\LCG.cpp" />
@@ -269,6 +272,7 @@
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
+    <ClCompile Include="ModuleCFF.cpp" />
     <ClCompile Include="ModuleImGuiWindow.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleLoadFBX.cpp" />
