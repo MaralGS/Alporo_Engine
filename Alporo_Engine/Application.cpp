@@ -8,7 +8,6 @@ Application::Application()
 	camera = new ModuleCamera3D(this);
 	scene = new ModuleSceneIntro(this);
 	imguiwindows = new ModuleImguiWindow(this);
-	OpenGLPrimitives = new ModuleOPGPrimitives(this);
 	LoadFbx = new ModuleLoadFBX(this);
 	MTextures = new ModuleTexture(this);
 
@@ -19,11 +18,11 @@ Application::Application()
 
 	// Main Modules
 	AddModule(window);
+	AddModule(imguiwindows);
 	AddModule(camera);
 	AddModule(input);
 	AddModule(scene);
-	AddModule(imguiwindows);
-	AddModule(OpenGLPrimitives);
+
 	AddModule(LoadFbx);
 	AddModule(MTextures);
 

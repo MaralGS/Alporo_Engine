@@ -2,10 +2,8 @@
 #include "Globals.h"
 #include "Component.h"
 #include "GameObject.h"
-#include "glmath.h"
-#include "imgui.h"
 #include "ModuleLoadFBX.h"
-#include "Mesh.h"
+#include "Transform.h"
 
 class GameObject;
 class Component;
@@ -18,6 +16,7 @@ public:
 	Meshes(GameObject* Meshobject);
 	~Meshes();
 
+	void Update();
 	void Inspector();
 
 	MyMesh* mesh;

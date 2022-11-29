@@ -15,8 +15,8 @@ bool ModuleLoadFBX::Start()
 {
 	bool ret = true;
 	
-	MeshObject = LoadFile("Assets/BakerHouse.fbx");
-
+	MeshObject = LoadFile("Assets/BakerHouse.fbx", "BakerHouse");
+	
 	return ret;
 }
 
@@ -47,6 +47,27 @@ void MyMesh::Render()
 	glPushMatrix();
 	glMultMatrixf(&OBmesh->transform->Transform_Matrix);
 
+	if (!OBmesh->child.empty())
+	{
+		for (int i = 0; i < OBmesh->child.size(); i++)
+		{
+			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->child[i]->transform->position.x + OBmesh->transform->position.x, OBmesh->child[i]->transform->position.y + OBmesh->transform->position.y, OBmesh->child[i]->transform->position.z + OBmesh->transform->position.z);
+
+			OBmesh->child[i]->transform->Transform_Matrix[0] = ((cos(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) * (OBmesh->child[i]->transform->scale.x * OBmesh->child[i]->transform->scale.x)) + ((cos(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) * (OBmesh->transform->scale.x * OBmesh->transform->scale.x));
+			OBmesh->child[i]->transform->Transform_Matrix[4] = (cos(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) + (cos(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x));
+			OBmesh->child[i]->transform->Transform_Matrix[8] = -sin(OBmesh->child[i]->transform->rotate.z) + -sin(OBmesh->transform->rotate.z);
+
+			OBmesh->child[i]->transform->Transform_Matrix[1] = ((sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) - (cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.x))) + ((sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) - (cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[5] = (((sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->child[i]->transform->rotate.x)) + (cos(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.x))) * (OBmesh->child[i]->transform->scale.y * OBmesh->child[i]->transform->scale.y)) + (((sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) + (cos(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.x))) * (OBmesh->transform->scale.y * OBmesh->transform->scale.y));
+			OBmesh->child[i]->transform->Transform_Matrix[9] = (sin(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.z)) + (sin(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.z));
+
+
+			OBmesh->child[i]->transform->Transform_Matrix[2] = ((cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) + (sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.x))) + ((cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) + (sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[6] = ((cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->child[i]->transform->rotate.x)) - (sin(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.x))) + ((cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) - (sin(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[10] = ((cos(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.z)) * (OBmesh->child[i]->transform->scale.z * OBmesh->child[i]->transform->scale.z)) + ((cos(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.z)) * (OBmesh->transform->scale.z * OBmesh->transform->scale.z));
+		}
+	}
+
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, NULL);
 
 	glPopMatrix();
@@ -54,13 +75,24 @@ void MyMesh::Render()
 
 }
 
-GameObject* ModuleLoadFBX::LoadFile(string file_path)
+GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 {
 	const aiScene* scene = aiImportFile(file_path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene != nullptr && scene->HasMeshes())
 	{
-		GameObject* meshGO = new GameObject(App->imguiwindows->RootGO);
+		GameObject* meshGO;
+		if (App->imguiwindows->Selected == nullptr)
+		{
+			meshGO = new GameObject(App->imguiwindows->RootGO);
+			meshGO->name = nameGO;
+		}
+
+		else if (App->imguiwindows->Selected != nullptr)
+		{
+			meshGO = new GameObject(App->imguiwindows->Selected);
+			meshGO->name = nameGO;
+		}
 
 		for (int i = 0; i < scene->mNumMeshes; i++) {
 			MyMesh* mesh = new MyMesh();
@@ -104,6 +136,42 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path)
 		return meshGO;
 	}
 
+}
+
+GameObject* ModuleLoadFBX::PrimitivesObjects(int Case)
+{
+	//draw Primitives
+	GameObject* child;
+	switch (Case)
+	{
+	case 1:
+		if (App->imguiwindows->Selected == nullptr)
+		{
+			child = new GameObject(App->imguiwindows->RootGO);
+		}
+
+		else if (App->imguiwindows->Selected != nullptr)
+		{
+			child = new GameObject(App->imguiwindows->Selected);
+		}
+		break;
+	case 2:
+		MeshObject = LoadFile("Assets/Primitives/cube2.fbx", "Cube");
+		break;
+	case 3:
+		MeshObject = LoadFile("Assets/Primitives/Plane.fbx", "Plane");
+		break;
+	case 4:
+		MeshObject = LoadFile("Assets/Primitives/Pyramid.fbx", "Pyramid");
+		break;
+	case 5:
+		MeshObject = LoadFile("Assets/Primitives/Sphere.fbx", "Sphere");
+		break;
+	case 6:
+		MeshObject = LoadFile("Assets/Primitives/Cylinder.fbx", "Cylinder");
+		break;
+	}
+	return nullptr;
 }
 
 

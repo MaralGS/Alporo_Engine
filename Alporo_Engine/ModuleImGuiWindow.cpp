@@ -207,9 +207,13 @@ update_status ModuleImguiWindow::Update(float dt)
     //GameObjects hieracy
     if (ImGui::Begin("GameObjects")) {
         hieraci(RootGO);
-       
     }
     ImGui::End();
+
+    if (!App->input->GetMouseButton(SDL_BUTTON_LEFT))
+    {
+        CreatedOnce = true;
+    }
 
     if (Selected != nullptr)
     {
@@ -287,244 +291,125 @@ void ModuleImguiWindow::Histogram()
 
 void ModuleImguiWindow::GeneratePrimitives()
 {
-    if (ImGui::BeginMenu("Cube"))
-    {
-        if (ImGui::Button("Generate Cube")) {
-            Quad* Q = new Quad();
-            App->OpenGLPrimitives->Cub.push_back(Q);
-            App->OpenGLPrimitives->NumQuads++;
-        }
-        if (ImGui::Button("Delete Cube")) {
-            if (App->OpenGLPrimitives->NumQuads >= 1)
-            {
-                if (App->OpenGLPrimitives->Cub.size() == App->OpenGLPrimitives->NumQuads)
-                {
-                    if (CubPicked != App->OpenGLPrimitives->NumQuads)
-                    {
-                        for (int i = CubPicked; i < App->OpenGLPrimitives->NumQuads - 1; i++)
-                        {
-                            App->OpenGLPrimitives->Cub[i] = App->OpenGLPrimitives->Cub[i + 1];
-
-                        }
-                    }
-
-                    App->OpenGLPrimitives->Cub.pop_back();
-                    App->OpenGLPrimitives->NumQuads--;
-                    if (CubPicked != 0)
-                    {
-                        CubPicked--;
-                    }
-                }
-            }
-        }
-        ImGui::EndMenu();
-    }
-
-    //generate and delete a Piramide
-    if (ImGui::BeginMenu("Piramid"))
-    {
-        if (ImGui::Button("Generate Piramid")) {
-            Triangle* Q = new Triangle();
-            App->OpenGLPrimitives->Piramid.push_back(Q);
-            App->OpenGLPrimitives->NumPiramid++;
-        }
-        if (ImGui::Button("Delete Piramid")) {
-            if (App->OpenGLPrimitives->NumPiramid >= 1)
-            {
-                if (App->OpenGLPrimitives->Piramid.size() == App->OpenGLPrimitives->NumPiramid)
-                {
-                    if (PiramidPicked != App->OpenGLPrimitives->NumPiramid)
-                    {
-                        for (int i = PiramidPicked; i < App->OpenGLPrimitives->NumPiramid - 1; i++)
-                        {
-                            App->OpenGLPrimitives->Piramid[i] = App->OpenGLPrimitives->Piramid[i + 1];
-
-                        }
-                    }
-
-                    App->OpenGLPrimitives->Piramid.pop_back();
-                    App->OpenGLPrimitives->NumPiramid--;
-                    if (PiramidPicked != 0)
-                    {
-                        PiramidPicked--;
-                    }
-                }
-            }
-
-        }
-
-
-        ImGui::EndMenu();
-    }
-
-    if (ImGui::BeginMenu("Plane"))
-    {
-        if (ImGui::Button("Generate Plane")) {
-            Planes* Pl = new Planes();
-            App->OpenGLPrimitives->Plane.push_back(Pl);
-            App->OpenGLPrimitives->NumPlanes++;
-        }
-        if (ImGui::Button("Delete Plane")) {
-            if (App->OpenGLPrimitives->NumPlanes >= 1)
-            {
-                if (App->OpenGLPrimitives->Plane.size() == App->OpenGLPrimitives->NumPlanes)
-                {
-                    if (PlanePicked != App->OpenGLPrimitives->NumPlanes)
-                    {
-                        for (int i = PlanePicked; i < App->OpenGLPrimitives->NumPlanes - 1; i++)
-                        {
-                            App->OpenGLPrimitives->Plane[i] = App->OpenGLPrimitives->Plane[i + 1];
-
-                        }
-                    }
-
-                    App->OpenGLPrimitives->Plane.pop_back();
-                    App->OpenGLPrimitives->NumPlanes--;
-                    if (PlanePicked != 0)
-                    {
-                        PlanePicked--;
-                    }
-                }
-            }
-
-        }
-
-
-        ImGui::EndMenu();
-    }
+   int primitive;
 
     if (ImGui::BeginMenu("GameObject"))
     {
-        if (ImGui::Button("Generate GameObject")) {
-            if (Selected != nullptr)
-            {
-                //GameObject* parent = Selected;
-                GameObject* child = new GameObject(Selected);
-            }
+        if (ImGui::Button("Generate Empty GameObject")) {
+            primitive = 1;
+            App->LoadFbx->PrimitivesObjects(primitive);
         }
-        
+
+        if (ImGui::Button("Generate Cube")) {
+            primitive = 2;
+            App->LoadFbx->PrimitivesObjects(primitive);
+        }
+
+        if (ImGui::Button("Generate Plane")) {
+            primitive = 3;
+            App->LoadFbx->PrimitivesObjects(primitive);
+        }
+
+        if (ImGui::Button("Generate Pyramid")) {
+            primitive = 4;
+            App->LoadFbx->PrimitivesObjects(primitive);
+        }
+
+        if (ImGui::Button("Generate Sphere")) {
+            primitive = 5;
+            App->LoadFbx->PrimitivesObjects(primitive);
+        }
+        if (ImGui::Button("Generate Cylinder")) {        
+            primitive = 6;
+            App->LoadFbx->PrimitivesObjects(primitive);
+        }
+
         if (ImGui::Button("Delete GameObject")) {
-            delete Selected;
-            Selected = nullptr;
+            Selected->~GameObject();
         }
+
         ImGui::EndMenu();
-
-
     }
    // if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
     if (ImGui::Checkbox("Draw 1rst FBX", &App->LoadFbx->FBX1));
     if (ImGui::Checkbox("Draw 2rst FBX", &App->LoadFbx->FBX2));
     if (ImGui::Checkbox("Draw 3rst FBX", &App->LoadFbx->FBX3));
 
-
 }
 
 void ModuleImguiWindow::hieraci(GameObject* parent)
-{ 
+{
     ImGuiTreeNodeFlags treeF = ImGuiTreeNodeFlags_DefaultOpen;
 
-   if (parent->child.size() == 0) {
-    treeF |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
-   }
 
-   if (parent == Selected)
-   {
-       treeF |= ImGuiTreeNodeFlags_Selected;
-   }
-   bool openTree = ImGui::TreeNodeEx(parent, treeF, parent->name.c_str());
+    if (parent->child.size() == 0) {
+        treeF |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
+    }
+
+    if (parent == Selected)
+    {
+        treeF |= ImGuiTreeNodeFlags_Selected;
+    }
+    bool openTree = ImGui::TreeNodeEx(parent, treeF, parent->name.c_str());
 
 
-   if (openTree)
-   {
-       if (!parent->child.empty())
-       {
-           for (int i = 0; i < parent->child.size(); i++)
-           {
-               hieraci(parent->child[i]);
-           }
-           ImGui::TreePop();
+    if (openTree)
+    {
+        if (!parent->child.empty())
+        {
+            for (int i = 0; i < parent->child.size(); i++)
+            {
+                hieraci(parent->child[i]);
+            }
+            ImGui::TreePop();
+        }
+
+        else
+        {
+            treeF |= ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+        }
+
+    }
+
+    if (parent != RootGO)
+    {
+        if (ImGui::BeginDragDropSource())
+        {
+            ImGui::SetDragDropPayload("GameObject", parent, sizeof(GameObject*));
+
+            Selected = parent;
+
+
+           ImGui::Text("Moving Object");
+           ImGui::EndDragDropSource();
        }
-
-      else
+       if (ImGui::IsItemHovered() && App->input->GetMouseButton(SDL_BUTTON_LEFT) && CreatedOnce == true)
        {
-           treeF |= ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_Leaf;
+           CreatedOnce = false;
+           Selected = parent;
        }
-
    }
 
-   if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left) && parent->Parent != nullptr)
-   {
-    Selected = parent;
-   }
-   
+
+    if (ImGui::BeginDragDropTarget())
+    {
+        if (const ImGuiPayload* load = ImGui::AcceptDragDropPayload("GameObject"))
+        {
+            GameObject* MovingGo = static_cast<GameObject*>(load->Data);
+
+            Selected->MoveGameObject(parent);
+            //LOG(LogType::L_NORMAL, "%s", dropTarget->name.c_str());
+            Selected = nullptr;
+        }
+        ImGui::EndDragDropTarget();
+    }
+
+    if (App->input->GetMouseButton(SDL_BUTTON_RIGHT))
+    {
+        Selected = nullptr;
+    }
+
 }
 
-  /*void ModuleImguiWindow::Inspector()
-{
-    
-  
-    for (int i = 0; i < App->OpenGLPrimitives->NumQuads; i++)
-    {
-        char Name[32];
-        sprintf(Name, "Cube %d", i + 1);
 
-        if (ImGui::Selectable(Name, i == CubPicked, 0)) {
-            CubPicked = i;
-            PiramidPicked = NULL;
-            PlanePicked = NULL;
-            App->OpenGLPrimitives->PM = 1;
-
-        }
-        if (i == CubPicked)
-        {
-            ImGui::BulletText("Cube %d:", i + 1);
-            ImGui::BulletText("Position:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->Pos2.x, App->OpenGLPrimitives->Cub[i]->Pos2.y, App->OpenGLPrimitives->Cub[i]->Pos2.z);
-            ImGui::SameLine();
-            ImGui::BulletText("Scale:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Cub[i]->Scale.x, App->OpenGLPrimitives->Cub[i]->Scale.y, App->OpenGLPrimitives->Cub[i]->Scale.z);
-            ImGui::Separator();
-        }
-
-    }
-
-    for (int i = 0; i < App->OpenGLPrimitives->NumPiramid; i++)
-    {
-        char Name[32];
-        sprintf(Name, "Piramid %d", i + 1);
-
-        if (ImGui::Selectable(Name, i == PiramidPicked, 0)) {
-            PiramidPicked = i;
-            CubPicked = NULL;
-            PlanePicked = NULL;
-            App->OpenGLPrimitives->PM = 2;
-        }
-        if (i == PiramidPicked)
-        {
-            ImGui::BulletText("Piramid  %d:", i + 1);
-            ImGui::BulletText("Position:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Piramid[i]->Pos2.x, App->OpenGLPrimitives->Piramid[i]->Pos2.y, App->OpenGLPrimitives->Piramid[i]->Pos2.z);
-            ImGui::SameLine();
-            ImGui::BulletText("Scale:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Piramid[i]->Scale.x, App->OpenGLPrimitives->Piramid[i]->Scale.y, App->OpenGLPrimitives->Piramid[i]->Scale.z);
-            ImGui::Separator();
-        }
-    }
-
-    for (int i = 0; i < App->OpenGLPrimitives->NumPlanes; i++)
-    {
-        char Name[32];
-        sprintf(Name, "Plane %d", i + 1);
-
-        if (ImGui::Selectable(Name, i == PlanePicked, 0)) {
-            PlanePicked = i;
-            CubPicked = NULL;
-            PiramidPicked = NULL;
-            App->OpenGLPrimitives->PM = 3;
-        }
-        if (i == PlanePicked)
-        {
-            ImGui::BulletText("Plane  %d:", i + 1);
-            ImGui::BulletText("Position:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Plane[i]->Pos2.x, App->OpenGLPrimitives->Plane[i]->Pos2.y, App->OpenGLPrimitives->Plane[i]->Pos2.z);
-            ImGui::SameLine();
-            ImGui::BulletText("Scale:\nX: %.2f\nY: %.2f\nZ: %.2f", App->OpenGLPrimitives->Plane[i]->Scale.x, App->OpenGLPrimitives->Plane[i]->Scale.y, App->OpenGLPrimitives->Plane[i]->Scale.z);
-            ImGui::Separator();
-        }
-    }
-}*/
+   

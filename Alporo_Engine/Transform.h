@@ -21,9 +21,6 @@ public:
 
 	void Inspector();
 	void Tranformation();
-	void MatRotX();
-	void MatRotY();
-	void MatRotZ();
 
 	mat4x4 Transform_Matrix = {
 		1, 0, 0, 0,
@@ -33,7 +30,8 @@ public:
 	};
 	vec3 position = { 0,0,0 };
 	vec3 scale = { 1,1,1 };
-	vec3 rotate = { 1,1,1 };
+	vec3 rotate = {0,0,0};
+	float angle = 180;
 
 private:
 

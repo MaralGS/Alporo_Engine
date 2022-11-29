@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Transform.h"
+#include<vector>
 
 GameObject::GameObject()
 {
@@ -26,17 +27,24 @@ GameObject::GameObject(GameObject* parent)
 
 GameObject::~GameObject()
 {
-	
-	name = nullptr;
-	Parent = nullptr;
 
-	transform = nullptr;
-
-	for  (size_t i = 0; i < child.size(); i++)
+	if (Parent != nullptr)
 	{
-		delete child[i];
-		child[i] = nullptr;
+		for  (size_t i = 0; i < child.size(); i++)
+		{
+			delete child[i];
+			child[i] = nullptr;
+		}
 	}
+	
+	//transform = nullptr;
+	child.clear();
+	for  (size_t i = 0; i < Comp.size(); i++)
+	{
+		delete Comp[i];
+		Comp[i] = nullptr;
+	}
+
 	Comp.clear();
 	
 }
@@ -50,5 +58,13 @@ void GameObject::CreateInspector()
 		}
 	}
 	ImGui::End();
+}
+
+void GameObject::MoveGameObject(GameObject* P)
+{
+	P->child.erase(std::find(child.begin(), child.end(), Parent));
+
+	Parent = P;
+	Parent->child.push_back(P);
 }
 

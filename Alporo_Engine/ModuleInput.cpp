@@ -122,7 +122,7 @@ update_status ModuleInput::PreUpdate(float dt)
 			mouse_z = e.wheel.y;
 			break;
 			case SDL_DROPFILE:
-			App->LoadFbx->LoadFile(e.drop.file);
+			App->LoadFbx->LoadFile(e.drop.file, "");
 			SDL_ShowSimpleMessageBox(
 				SDL_MESSAGEBOX_INFORMATION,
 				"File dropped on window",
