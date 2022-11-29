@@ -51,9 +51,20 @@ void MyMesh::Render()
 	{
 		for (int i = 0; i < OBmesh->child.size(); i++)
 		{
-			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->child[i]->transform->position.x + OBmesh->child[i]->Parent->transform->position.x, OBmesh->child[i]->transform->position.y + OBmesh->child[i]->Parent->transform->position.y, OBmesh->child[i]->transform->position.z + OBmesh->child[i]->Parent->transform->position.z);
-			//OBmesh->child[i]->transform->Transform_Matrix.scale(scale.x + GObjectSelected->Parent->transform->scale.x, scale.y + GObjectSelected->Parent->transform->scale.y, scale.z + GObjectSelected->Parent->transform->scale.z);
-			//OBmesh->child[i]->transform->Transform_Matrix[0] = OBmesh->child[i]->Parent->transform->Transform_Matrix[0] = cos(rotate.z) * cos(rotate.x);
+			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->child[i]->transform->position.x + OBmesh->transform->position.x, OBmesh->child[i]->transform->position.y + OBmesh->transform->position.y, OBmesh->child[i]->transform->position.z + OBmesh->transform->position.z);
+
+			OBmesh->child[i]->transform->Transform_Matrix[0] = ((cos(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) * (OBmesh->child[i]->transform->scale.x * OBmesh->child[i]->transform->scale.x)) + ((cos(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) * (OBmesh->transform->scale.x * OBmesh->transform->scale.x));
+			OBmesh->child[i]->transform->Transform_Matrix[4] = (cos(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) + (cos(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x));
+			OBmesh->child[i]->transform->Transform_Matrix[8] = -sin(OBmesh->child[i]->transform->rotate.z) + -sin(OBmesh->transform->rotate.z);
+
+			OBmesh->child[i]->transform->Transform_Matrix[1] = ((sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) - (cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.x))) + ((sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) - (cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[5] = (((sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->child[i]->transform->rotate.x)) + (cos(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.x))) * (OBmesh->child[i]->transform->scale.y * OBmesh->child[i]->transform->scale.y)) + (((sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) + (cos(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.x))) * (OBmesh->transform->scale.y * OBmesh->transform->scale.y));
+			OBmesh->child[i]->transform->Transform_Matrix[9] = (sin(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.z)) + (sin(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.z));
+
+
+			OBmesh->child[i]->transform->Transform_Matrix[2] = ((cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) + (sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.x))) + ((cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) + (sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[6] = ((cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->child[i]->transform->rotate.x)) - (sin(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.x))) + ((cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) - (sin(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[10] = ((cos(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.z)) * (OBmesh->child[i]->transform->scale.z * OBmesh->child[i]->transform->scale.z)) + ((cos(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.z)) * (OBmesh->transform->scale.z * OBmesh->transform->scale.z));
 		}
 	}
 
