@@ -11,8 +11,8 @@ class MoudleCFF : public Module
 public:
 
 	bool Start();
-	void MeshSave(MyMesh* mesh);
-	void MeshLoad(MyMesh* mesh);
+	const char* MeshSave(MyMesh* mesh);
+	void MeshLoad(const char* path);
 	update_status PostUpdate(float dt);
 	//bool Init();
 	bool CleanUp();
