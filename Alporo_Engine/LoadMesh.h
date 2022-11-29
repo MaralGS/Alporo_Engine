@@ -20,7 +20,7 @@ public:
 	void CleanUp();
 
 public:
-	static GameObject* ImportMesh(std::string filePath, GameObject* parent = nullptr, bool dragAndDrop = false);
+	 void ImportMesh(std::string filePath, GameObject* parent = nullptr, GameObject* root = nullptr);
 
 	static Meshe LoadMesh(std::string filePath);
 private:

@@ -9,44 +9,104 @@
 
 #pragma comment (lib, "Assimp/libx86/assimp.lib")
 
-bool MoudleCFF::Start()
+FileSystemProperties::FileSystemProperties()
 {
-	return false;
+
 }
 
-const char* MoudleCFF::MeshSave(MyMesh* mesh)
+FileSystemProperties* FileSystemProperties::Instance()
 {
-	mesh->num_indices;
-	uint ranges[2] = { mesh->num_indices, mesh->num_vertices };
-	uint size = sizeof(ranges) + sizeof(uint) * mesh->num_indices + sizeof(float) * mesh->num_vertices * 3;
-	char* fileBuffer = new char[size]; 
-	char* cursor = fileBuffer;
-	uint bytes = sizeof(ranges); 
+	if (instance == nullptr) instance = new FileSystemProperties();
 
-	memcpy(cursor, ranges, bytes);
-	cursor += bytes;
+	return instance;
+}
 
-	// Store indices
-	bytes = sizeof(uint) * mesh->num_indices;
-	memcpy(cursor, mesh->indices, bytes);
-	cursor += bytes;
-
-	// Store vertices
-	bytes = sizeof(float) * mesh->num_vertices;
-	memcpy(cursor, mesh->vertices, bytes);
-	cursor += bytes;
-
-	return fileBuffer;
+void FileSystemProperties::Delete()
+{
+	if (instance != nullptr)
+	{
+		//RELEASE(instance);
+	}
 }
 
 
+FileSystemProperties* FileSystemProperties::instance = nullptr;
+#pragma endregion File System Properties singleton struct
 
-update_status MoudleCFF::PostUpdate(float dt)
+ModuleFileSystem::ModuleFileSystem(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	return update_status();
+
 }
 
-bool MoudleCFF::CleanUp()
+ModuleFileSystem::~ModuleFileSystem()
 {
-	return false;
+
 }
+
+bool ModuleFileSystem::Init()
+{
+	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
+
+
+
+	meshImp = new MeshImporter();
+	textImp = new TextureImporter();
+
+	fsProps = FileSystemProperties::Instance();
+	sProps = SceneProperties::Instance();
+
+	fsProps->rootFolder = new LibraryFolder("Library", "Library", nullptr);
+	LibraryManager::Init(*fsProps->rootFolder);
+
+	return true;
+}
+
+bool ModuleFileSystem::Start()
+{
+	bool ret = true;
+
+
+	meshImp->Init();
+
+	return ret;
+}
+
+bool ModuleFileSystem::CleanUp()
+{
+	bool ret = true;
+	/*
+	LibraryManager::CleanUp();
+
+	meshImp->CleanUp();
+
+	if (fsProps->rootFolder != nullptr) RELEASE(fsProps->rootFolder);
+	RELEASE(fsProps);
+
+	RELEASE(meshImp);
+	RELEASE(textImp);
+	*/
+	return ret;
+}
+
+update_status ModuleFileSystem::PreUpdate()
+{
+
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleFileSystem::Update()
+{
+
+
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleFileSystem::PostUpdate()
+{
+
+
+	return UPDATE_CONTINUE;
+}
+
+
+
