@@ -27,7 +27,6 @@ MyMesh::MyMesh() : id_indices(0), id_vertices(0)
 MyMesh::~MyMesh() {
 	delete[] vertices;
 	delete[] indices;
-	delete OBmesh;
 	vertices = nullptr;
 	indices = nullptr;
 	glDeleteBuffers(1, &id_vertices);
@@ -83,21 +82,21 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 		if (App->imguiwindows->Selected == nullptr)
 		{
 			meshGO = new GameObject(App->imguiwindows->RootGO);
-			/*if (nameGO == "")
+			if (nameGO == "")
 			{
-				nameGO = "imported FBX";
-			}*/
+				nameGO = file_path;
+			}
 			meshGO->name = nameGO;
 		}
 
 		else if (App->imguiwindows->Selected != nullptr)
 		{
 			meshGO = new GameObject(App->imguiwindows->Selected);
-			meshGO->name = nameGO;
-			/*if (nameGO == "")
+			if (nameGO == "")
 			{
-				nameGO = "imported FBX";
-			}*/
+				nameGO = file_path;
+			}
+			meshGO->name = nameGO;
 		}
 
 		for (int i = 0; i < scene->mNumMeshes; i++) {
