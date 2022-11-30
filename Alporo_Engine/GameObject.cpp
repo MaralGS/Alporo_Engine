@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Transform.h"
+#include "Mesh.h"
 #include<vector>
 
 GameObject::GameObject()
@@ -44,7 +45,6 @@ GameObject::~GameObject()
 		delete Comp[i];
 		Comp[i] = nullptr;
 	}
-
 	Comp.clear();
 	
 }
@@ -61,7 +61,10 @@ void GameObject::CreateInspector()
 		for (size_t i = 0; i < Comp.size(); i++)
 		{
 			Comp[i]->Inspector();
+			if (ImGui::Checkbox("Visible Object", &Comp[i+1]->GObjectSelected->GOMesh->mesh->IsVisible));
 		}
+
+
 	}
 	ImGui::End();
 }

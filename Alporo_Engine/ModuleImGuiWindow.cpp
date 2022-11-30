@@ -331,10 +331,6 @@ void ModuleImguiWindow::GeneratePrimitives()
 
         ImGui::EndMenu();
     }
-   // if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
-    if (ImGui::Checkbox("Draw 1rst FBX", &App->LoadFbx->FBX1));
-    if (ImGui::Checkbox("Draw 2rst FBX", &App->LoadFbx->FBX2));
-    if (ImGui::Checkbox("Draw 3rst FBX", &App->LoadFbx->FBX3));
 
 }
 
@@ -406,9 +402,7 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
             for (int i = SGo; i < Selected->Parent->child.size() - 1; i++)
             {
-
                 Selected->Parent->child[i] = Selected->Parent->child[i + 1];
-
             }
             Selected->Parent = parent;
 

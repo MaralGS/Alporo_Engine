@@ -206,29 +206,12 @@ void ModuleLoadFBX::LoadMesh(MyMesh* mesh) {
 update_status ModuleLoadFBX::PostUpdate(float dt)
 {
 
-		for (int i = 0; i < meshes.size(); i++) {
-
-		if (App->imguiwindows->Wireframe == true) {
-				//Wireframe Mode
-				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-				glLineWidth(2);
-			}
-				if (i < 2 && FBX1 == true)
-			{
-
-				meshes[i]->Render();
-			}
-			
-			if (i >= 2 && i <= 2&& FBX2 == true)
-			{
-				meshes[i]->Render();
-			}
-			
-			if (i >= 3 && FBX3 == true)
-			{
-				meshes[i]->Render();
-			}
+	for (int i = 0; i < meshes.size(); i++) {
+		if (meshes[i]->IsVisible == false)
+		{
+			meshes[i]->Render();
 		}
+	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	return UPDATE_CONTINUE;
