@@ -63,6 +63,7 @@ update_status ModuleCamera3D::Update(float dt)
 				if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) newPos -= Cam.X * speed;
 				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += Cam.X * speed;
 			}
+			SetCamera = true;
 		}
 
 
@@ -224,7 +225,7 @@ GameObject* ModuleCamera3D::CameraGameObject()
 {
 	GameCamera = new GameObject(App->imguiwindows->RootGO);
 	GameCamera->name = "Game Camera";
-
+	/*
 	Camera* Scamera = new Camera();
 	CObject* component = new CObject(GameCamera);
 	Cam.SecCamera = GameCamera;
@@ -232,6 +233,7 @@ GameObject* ModuleCamera3D::CameraGameObject()
 	if (GameCamera->Comp.size() == 1) {
 		GameCamera->Comp.push_back(component);
 	}
+	*/
 	return nullptr;
 }
 

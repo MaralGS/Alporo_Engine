@@ -12,6 +12,8 @@
 
 #define MAX_LIGHTS 8
 
+class CObject;
+
 class ModuleRenderer3D : public Module
 {
 public:
@@ -24,6 +26,8 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
+
+	void GetCameraView(CObject* camera);
 
 public:
 

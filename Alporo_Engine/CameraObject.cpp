@@ -77,3 +77,7 @@ float* CObject::GetViewMatrix()
 
 	return nullptr;
 }
+
+void __unnamed_class_0276_1::Update()
+{
+}

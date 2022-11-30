@@ -28,8 +28,11 @@ public:
 	void Move(const vec3& Movement);
 	float* GetViewMatrix();
 
+	unsigned int BufferCam;
+	unsigned int BufferFrame;
 private:
 
+	
 };
 
 

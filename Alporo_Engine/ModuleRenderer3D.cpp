@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleLoadFBX.h"
+#include "CameraObject.h"
+#include "ModuleCamera3D.h"
 #include "Console.h"
 #include "ModuleImGuiWindow.h"
 #include "Glew/include/glew.h"
@@ -275,7 +277,22 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	if (App->imguiwindows->openConsole)
 		Console::PrintDebug();
 
+	if(App->camera->SetCamera == true)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+		//Bind buffer
+		Camera* Scamera = new Camera();
+		CObject* component = new CObject(App->camera->GameCamera);
+		App->camera->Cam.SecCamera = App->camera->GameCamera;
+		component->NewCamera = Scamera;
+		if (App->camera->GameCamera->Comp.size() == 1) {
+			App->camera->GameCamera->Comp.push_back(component);
+		}
+
+		GetCameraView(component);
+
+	}
 	// Rendering
 	ImGui::Render();
 	glViewport(0, 0, (int)io->DisplaySize.x, (int)io->DisplaySize.y);
@@ -316,4 +333,15 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+void ModuleRenderer3D::GetCameraView(CObject* camera)
+{
+	glMatrixMode(GL_PROJECTION);
+
+	glMatrixMode(GL_MODELVIEW);
+	
+	glBindFramebuffer(GL_FRAMEBUFFER, camera->BufferFrame);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 }

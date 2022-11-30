@@ -26,6 +26,7 @@ public:
 	float* GetViewMatrix();
 	GameObject* CameraGameObject();
 	GameObject* GameCamera;
+	bool SetCamera = false;
 private:
 
 	void CalculateViewMatrix();
