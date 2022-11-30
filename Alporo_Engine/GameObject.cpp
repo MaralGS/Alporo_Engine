@@ -51,11 +51,12 @@ GameObject::~GameObject()
 
 void GameObject::CreateInspector()
 {
+
 	if (ImGui::Begin("Inspector")) {
-		/*ImGui::InputText("Name", name, IM_ARRAYSIZE(string), ImGuiInputTextFlags_EnterReturnsTrue);
+		ImGui::InputText("GO Name", Title, IM_ARRAYSIZE(Title), ImGuiInputTextFlags_EnterReturnsTrue);
 
 		if (ImGui::IsKeyDown(ImGuiKey_Enter))
-			name = string;*/
+			name = Title;
 
 		for (size_t i = 0; i < Comp.size(); i++)
 		{

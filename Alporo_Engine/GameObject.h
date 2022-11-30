@@ -25,4 +25,5 @@ class GameObject
 	std::vector<Component*> Comp;
 	Transform* transform;
 	Meshes* GOMesh;
+	char Title[150] = "";
 };
