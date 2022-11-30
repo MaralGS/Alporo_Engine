@@ -84,7 +84,7 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 			meshGO = new GameObject(App->imguiwindows->RootGO);
 			if (nameGO == "")
 			{
-				nameGO = file_path;
+				nameGO = file_path.c_str();
 			}
 			meshGO->name = nameGO;
 		}
@@ -94,7 +94,7 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 			meshGO = new GameObject(App->imguiwindows->Selected);
 			if (nameGO == "")
 			{
-				nameGO = file_path;
+				nameGO = file_path.c_str();
 			}
 			meshGO->name = nameGO;
 		}
