@@ -27,6 +27,7 @@ MyMesh::MyMesh() : id_indices(0), id_vertices(0)
 MyMesh::~MyMesh() {
 	delete[] vertices;
 	delete[] indices;
+	delete OBmesh;
 	vertices = nullptr;
 	indices = nullptr;
 	glDeleteBuffers(1, &id_vertices);
@@ -36,8 +37,6 @@ MyMesh::~MyMesh() {
 }
 void MyMesh::Render()
 {
-
-
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
 
@@ -78,13 +77,16 @@ void MyMesh::Render()
 GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 {
 	const aiScene* scene = aiImportFile(file_path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
-
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		GameObject* meshGO;
 		if (App->imguiwindows->Selected == nullptr)
 		{
 			meshGO = new GameObject(App->imguiwindows->RootGO);
+			/*if (nameGO == "")
+			{
+				nameGO = "imported FBX";
+			}*/
 			meshGO->name = nameGO;
 		}
 
@@ -92,6 +94,10 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 		{
 			meshGO = new GameObject(App->imguiwindows->Selected);
 			meshGO->name = nameGO;
+			/*if (nameGO == "")
+			{
+				nameGO = "imported FBX";
+			}*/
 		}
 
 		for (int i = 0; i < scene->mNumMeshes; i++) {
@@ -121,6 +127,7 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 				}
 				LoadMesh(mesh);
 				Meshes* component = new Meshes(meshGO);
+	
 				mesh->OBmesh = meshGO;
 				component->mesh = mesh;
 				if (meshGO->Comp.size() == 1) {
