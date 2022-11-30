@@ -380,7 +380,6 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
             Selected = parent;
 
-
            ImGui::Text("Moving Object");
            ImGui::EndDragDropSource();
        }
@@ -389,17 +388,33 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
            CreatedOnce = false;
            Selected = parent;
        }
+
    }
 
-
-    if (ImGui::BeginDragDropTarget())
+    if (ImGui::BeginDragDropTarget() && Selected != nullptr)
     {
-        if (const ImGuiPayload* load = ImGui::AcceptDragDropPayload("GameObject"))
+        int SGo;
+        if (ImGui::AcceptDragDropPayload("GameObject"))
         {
-            GameObject* MovingGo = static_cast<GameObject*>(load->Data);
+            for (int i = 0; i < Selected->Parent->child.size(); i++) {
+                if (Selected == Selected->Parent->child[i]) {
+                    SGo = i;
+                }
+            }
 
-            Selected->MoveGameObject(parent);
-            //LOG(LogType::L_NORMAL, "%s", dropTarget->name.c_str());
+            parent->child.push_back(Selected);
+
+            for (int i = SGo; i < Selected->Parent->child.size() - 1; i++)
+            {
+
+                Selected->Parent->child[i] = Selected->Parent->child[i + 1];
+
+            }
+            Selected->Parent = parent;
+
+            parent->Parent->child.pop_back();
+
+        
             Selected = nullptr;
         }
         ImGui::EndDragDropTarget();
@@ -412,5 +427,3 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
 }
 
-
-   

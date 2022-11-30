@@ -19,6 +19,7 @@ class GameObject
 	void CreateInspector();
 
 	void MoveGameObject(GameObject* P);
+	void MoveChild(GameObject* Chld);
 	std::string name;
 	GameObject* Parent;
 	std::vector<GameObject*> child;
