@@ -198,6 +198,7 @@
     <ClInclude Include="MathGeoLib\include\Time\Clock.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="ModuleAssets.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleImGuiWindow.h" />
     <ClInclude Include="ModuleLoadFBX.h" />
@@ -268,6 +269,7 @@
     <ClCompile Include="MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="ModuleAssets.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleImGuiWindow.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
