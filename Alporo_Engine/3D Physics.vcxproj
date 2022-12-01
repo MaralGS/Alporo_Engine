@@ -49,14 +49,14 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)MathGeoLib\include;$(SolutionDir)ImGui;$(SolutionDir)Glew\include;$(SolutionDir)Assimp\include;$(SolutionDir)DevIL\include;$(SolutionDir)SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\documentos\GitHub\Motor_CITM\Alporo_Engine\PhysFS\include;$(SolutionDir)MathGeoLib\include;$(SolutionDir)ImGui;$(SolutionDir)Glew\include;$(SolutionDir)Assimp\include;$(SolutionDir)DevIL\include;$(SolutionDir)SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalLibraryDirectories>$(SolutionDir)DevIL\libx86;$(SolutionDir)MathGeoLib\libx86\Debug;$(SolutionDir)Glew\libx86;$(SolutionDir)Assimp\libx86;$(SolutionDir)SDL\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\documentos\GitHub\Motor_CITM\Alporo_Engine\PhysFS\libx86;$(SolutionDir)DevIL\libx86;$(SolutionDir)MathGeoLib\libx86\Debug;$(SolutionDir)Glew\libx86;$(SolutionDir)Assimp\libx86;$(SolutionDir)SDL\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -198,6 +198,7 @@
     <ClInclude Include="MathGeoLib\include\Time\Clock.h" />
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="ModuleAssets.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleImGuiWindow.h" />
     <ClInclude Include="ModuleLoadFBX.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2DynArray.h" />
     <ClInclude Include="p2Point.h" />
+    <ClInclude Include="PhysFS\include\physfs.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="SDL\include\begin_code.h" />
     <ClInclude Include="SDL\include\SDL_vulkan.h" />
@@ -268,6 +270,7 @@
     <ClCompile Include="MathGeoLib\include\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="ModuleAssets.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleImGuiWindow.cpp" />
     <ClCompile Include="ModuleInput.cpp" />

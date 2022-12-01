@@ -10,6 +10,7 @@ Application::Application()
 	imguiwindows = new ModuleImguiWindow(this);
 	LoadFbx = new ModuleLoadFBX(this);
 	MTextures = new ModuleTexture(this);
+	MAssets = new ModuleAssets(this);
 
 
 	// The order of calls is very important!
@@ -22,6 +23,7 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(scene);
+	AddModule(MAssets);
 
 	AddModule(LoadFbx);
 	AddModule(MTextures);
