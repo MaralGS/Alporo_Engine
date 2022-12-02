@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
+#include "CameraObject.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -59,7 +60,11 @@ update_status ModuleSceneIntro::Update(float dt)
 		// Get the size of the child (i.e. the whole draw size of the windows).
 		ImVec2 wsize = ImGui::GetWindowSize();
 		// Because I use the texture from OpenGL, I need to invert the V from the UV.
-		ImGui::Image((ImTextureID)App->renderer3D->bufferCam, wsize, ImVec2(0, 1), ImVec2(1, 0));
+		if (App->imguiwindows->Selected != App->imguiwindows->RootGO && App->imguiwindows->Selected != nullptr && App->imguiwindows->Selected == App->camera->SecondCamera)
+		{
+			ImGui::Image((ImTextureID)App->imguiwindows->Selected->CamGOGame->SecCameraGO->cameraBuffer2, wsize, ImVec2(0, 1), ImVec2(1, 0));
+
+		}
 		ImGui::EndChild();
 	}
 	ImGui::End();

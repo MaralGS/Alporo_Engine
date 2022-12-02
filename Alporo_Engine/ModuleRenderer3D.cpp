@@ -220,10 +220,18 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	ImGui::End();
 
-	glBindFramebuffer(GL_FRAMEBUFFER, bufferCam);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-
+	if (App->imguiwindows->CreatedOnce == false) {
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(App->imguiwindows->Selected->CamGOGame->SecCameraGO->GetViewMatrix());
+		glBindFramebuffer(GL_FRAMEBUFFER, App->imguiwindows->Selected->CamGOGame->SecCameraGO->frameBuffer2);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	}
+	else {
+		glBindFramebuffer(GL_FRAMEBUFFER, bufferCam);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -281,7 +289,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-		//Bind buffer
+		/*//Bind buffer
 		Camera* Scamera = new Camera();
 		CObject* component = new CObject(App->camera->GameCamera);
 		App->camera->Cam.SecCamera = App->camera->GameCamera;
@@ -290,7 +298,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 			App->camera->GameCamera->Comp.push_back(component);
 		}
 
-		GetCameraView(component);
+		GetCameraView(component);*/
 
 	}
 	// Rendering
@@ -335,13 +343,3 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glLoadIdentity();
 }
 
-void ModuleRenderer3D::GetCameraView(CObject* camera)
-{
-	glMatrixMode(GL_PROJECTION);
-
-	glMatrixMode(GL_MODELVIEW);
-	
-	glBindFramebuffer(GL_FRAMEBUFFER, camera->BufferFrame);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-}

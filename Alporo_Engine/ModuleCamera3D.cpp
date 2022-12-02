@@ -163,12 +163,12 @@ update_status ModuleCamera3D::Update(float dt)
 
 		// Recalculate matrix -------------
 		CalculateViewMatrix();
-		if (App->imguiwindows->Selected == GameCamera)
+		/*if (App->imguiwindows->Selected == GameCamera)
 		{
 			Cam.Position.x = GameCamera->transform->position.x;
 			Cam.Position.y = GameCamera->transform->position.y;
 			Cam.Position.z = GameCamera->transform->position.z;
-		}
+		}*/
 	
 
 	return UPDATE_CONTINUE;

@@ -9,6 +9,7 @@ enum class ComponentType;
 class Transform;
 class Meshes;
 class CObject;
+class Camera;
 
 class GameObject 
 {
@@ -28,4 +29,5 @@ class GameObject
 	std::vector<Component*> Comp;
 	Transform* transform = nullptr;
 	Meshes* GOMesh = nullptr;
+	CObject* CamGOGame;
 };

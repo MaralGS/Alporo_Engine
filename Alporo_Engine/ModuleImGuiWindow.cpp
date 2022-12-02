@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "imgui.h"
 #include "IL.h"
+#include "CameraObject.h"
 
 #include<vector>
 
@@ -396,7 +397,16 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
        {
            CreatedOnce = false;
            Selected = parent;
+           if (Selected != RootGO) {
+               Selected->CamGOGame->SecCameraGO = new SecondGameCamera();
+                Selected->CamGOGame->SecCameraGO->Position.x +=  Selected->transform->position.x;
+                Selected->CamGOGame->SecCameraGO->Position.y +=  Selected->transform->position.y;
+                Selected->CamGOGame->SecCameraGO->Position.z +=  Selected->transform->position.z;
+           }
+
        }
+
+
    }
 
 

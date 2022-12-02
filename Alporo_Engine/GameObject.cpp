@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "Mesh.h"
 #include "Transform.h"
+#include "CameraObject.h"
 #include<vector>
 
 GameObject::GameObject()
@@ -16,8 +17,11 @@ GameObject::GameObject(GameObject* parent)
 	name = "GameObject";
 	Parent = parent;
 
+	CamGOGame = new CObject(this);
+
 	transform = new Transform(this);
 	Comp.push_back(transform);
+	Comp.push_back(CamGOGame);
 
 	//GOMesh = new Meshes(this);
 	if (parent != nullptr)
