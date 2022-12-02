@@ -36,5 +36,6 @@ void Meshes::Inspector()
 {
 	ImGui::Text("Number Vertices: %d", mesh->num_vertices);
 	ImGui::Text("Number Indices: %d", mesh->num_indices);
+	//ImGui::Checkbox("Visible Object", &mesh->IsVisible);
 }
 

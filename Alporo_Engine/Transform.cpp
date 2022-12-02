@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include "Mesh.h"
 
 Transform::Transform() : Component(nullptr)
 {
@@ -18,6 +19,7 @@ Transform::~Transform()
 
 void Transform::Inspector()
 {
+	//ImGui::InputText("name:", &GObjectSelected->GOMesh->mesh->OBmesh->name);
 	ImGui::Text("position");
 	ImGui::InputFloat3("p", &position);
 	ImGui::Text("Scale:");

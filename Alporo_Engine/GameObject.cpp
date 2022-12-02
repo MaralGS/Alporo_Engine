@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Transform.h"
+#include "Mesh.h"
 #include<vector>
 
 GameObject::GameObject()
@@ -44,27 +45,40 @@ GameObject::~GameObject()
 		delete Comp[i];
 		Comp[i] = nullptr;
 	}
-
 	Comp.clear();
 	
 }
 
 void GameObject::CreateInspector()
 {
+
 	if (ImGui::Begin("Inspector")) {
+		ImGui::InputText("GO Name", Title, IM_ARRAYSIZE(Title), ImGuiInputTextFlags_EnterReturnsTrue);
+
+		if (ImGui::IsKeyDown(ImGuiKey_Enter))
+			name = Title;
+
 		for (size_t i = 0; i < Comp.size(); i++)
 		{
 			Comp[i]->Inspector();
+			if (ImGui::Checkbox("Visible Object", &Comp[i+1]->GObjectSelected->GOMesh->mesh->IsVisible));
 		}
+
+
 	}
 	ImGui::End();
 }
 
 void GameObject::MoveGameObject(GameObject* P)
 {
-	P->child.erase(std::find(child.begin(), child.end(), Parent));
+	Parent->MoveChild(this);
 
 	Parent = P;
 	Parent->child.push_back(P);
+}
+
+void GameObject::MoveChild(GameObject* Chld)
+{
+	child.erase(std::find(child.begin(), child.end(), Chld));
 }
 

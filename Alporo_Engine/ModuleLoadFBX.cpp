@@ -36,8 +36,6 @@ MyMesh::~MyMesh() {
 }
 void MyMesh::Render()
 {
-
-
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
 
@@ -78,19 +76,26 @@ void MyMesh::Render()
 GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 {
 	const aiScene* scene = aiImportFile(file_path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
-
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		GameObject* meshGO;
 		if (App->imguiwindows->Selected == nullptr)
 		{
 			meshGO = new GameObject(App->imguiwindows->RootGO);
+			if (nameGO == "")
+			{
+				nameGO = file_path.c_str();
+			}
 			meshGO->name = nameGO;
 		}
 
 		else if (App->imguiwindows->Selected != nullptr)
 		{
 			meshGO = new GameObject(App->imguiwindows->Selected);
+			if (nameGO == "")
+			{
+				nameGO = file_path.c_str();
+			}
 			meshGO->name = nameGO;
 		}
 
@@ -121,6 +126,7 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 				}
 				LoadMesh(mesh);
 				Meshes* component = new Meshes(meshGO);
+	
 				mesh->OBmesh = meshGO;
 				component->mesh = mesh;
 				if (meshGO->Comp.size() == 1) {
@@ -200,29 +206,12 @@ void ModuleLoadFBX::LoadMesh(MyMesh* mesh) {
 update_status ModuleLoadFBX::PostUpdate(float dt)
 {
 
-		for (int i = 0; i < meshes.size(); i++) {
-
-		if (App->imguiwindows->Wireframe == true) {
-				//Wireframe Mode
-				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-				glLineWidth(2);
-			}
-				if (i < 2 && FBX1 == true)
-			{
-
-				meshes[i]->Render();
-			}
-			
-			if (i >= 2 && i <= 2&& FBX2 == true)
-			{
-				meshes[i]->Render();
-			}
-			
-			if (i >= 3 && FBX3 == true)
-			{
-				meshes[i]->Render();
-			}
+	for (int i = 0; i < meshes.size(); i++) {
+		if (meshes[i]->IsVisible == false)
+		{
+			meshes[i]->Render();
 		}
+	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	return UPDATE_CONTINUE;

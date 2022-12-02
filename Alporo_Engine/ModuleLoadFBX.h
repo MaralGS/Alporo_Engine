@@ -27,7 +27,7 @@ struct MyMesh {
 	GameObject* OBmesh = nullptr;
 	AABB GAbbox;
 	OBB GObbox;
-
+	bool IsVisible = false;
 	void Render();
 };
 
@@ -45,9 +45,6 @@ public:
 	update_status PostUpdate(float dt);
 	//bool Init();
 	bool CleanUp();
-	bool FBX1 = true;
-	bool FBX2 = true;
-	bool FBX3 = true;
 	GameObject* MeshObject = nullptr;
 private:
 	vector<MyMesh*> meshes;

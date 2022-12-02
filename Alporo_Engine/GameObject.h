@@ -19,10 +19,12 @@ class GameObject
 	void CreateInspector();
 
 	void MoveGameObject(GameObject* P);
+	void MoveChild(GameObject* Chld);
 	std::string name;
 	GameObject* Parent;
 	std::vector<GameObject*> child;
 	std::vector<Component*> Comp;
 	Transform* transform;
 	Meshes* GOMesh;
+	char Title[150] = "";
 };
