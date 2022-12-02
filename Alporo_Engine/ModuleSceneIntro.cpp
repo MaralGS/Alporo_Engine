@@ -60,10 +60,9 @@ update_status ModuleSceneIntro::Update(float dt)
 		// Get the size of the child (i.e. the whole draw size of the windows).
 		ImVec2 wsize = ImGui::GetWindowSize();
 		// Because I use the texture from OpenGL, I need to invert the V from the UV.
-		if (App->imguiwindows->Selected != App->imguiwindows->RootGO && App->imguiwindows->Selected != nullptr && App->imguiwindows->Selected == App->camera->SecondCamera)
+		if (App->imguiwindows->Selected != App->imguiwindows->RootGO && App->imguiwindows->Selected != nullptr)
 		{
 			ImGui::Image((ImTextureID)App->imguiwindows->Selected->CamGOGame->SecCameraGO->cameraBuffer2, wsize, ImVec2(0, 1), ImVec2(1, 0));
-
 		}
 		ImGui::EndChild();
 	}
