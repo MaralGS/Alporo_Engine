@@ -52,6 +52,9 @@
     <Filter Include="Sources\Objects">
       <UniqueIdentifier>{f41537a8-cc1f-4212-a58b-d4f76a9dba00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Objects\Components">
+      <UniqueIdentifier>{7664877e-8b0a-4472-8bf5-8801182bf1a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -324,9 +327,6 @@
     <ClInclude Include="Glew\include\wglew.h">
       <Filter>External_Libraries\Glew</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleOPGPrimitives.h">
-      <Filter>Sources\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Assimp\include\cfileio.h">
       <Filter>External_Libraries\Assimp</Filter>
     </ClInclude>
@@ -441,14 +441,23 @@
     <ClInclude Include="ModuleLoadFBX.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Sources\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Sources\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Console.h">
       <Filter>Sources\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Sources\Objects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Sources\Objects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Sources\Objects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObject.h">
+      <Filter>Sources\Objects\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -611,17 +620,11 @@
     <ClCompile Include="MathGeoLib\include\Time\Clock.cpp">
       <Filter>External_Libraries\MathGeoLib\Include\Time</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleOPGPrimitives.cpp">
-      <Filter>Sources\Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleTexture.cpp">
       <Filter>Sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleLoadFBX.cpp">
       <Filter>Sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Sources\Objects</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Sources\Objects</Filter>
@@ -630,6 +633,18 @@
       <Filter>Sources\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="Component.cpp">
+      <Filter>Sources\Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Sources\Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Sources\Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObject.cpp">
+      <Filter>Sources\Objects\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeoLib\include\Geometry\QuadTree.inl">

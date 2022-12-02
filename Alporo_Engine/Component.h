@@ -2,20 +2,25 @@
 
 class GameObject;
 
+enum class Type
+{
+	None,
+	Transform,
+	MeshRenderer,
+	CamObject,
+};
+
 class Component
 {
 public:
-	enum class Type
-	{
-		None,
-		Transform,
-		MeshRenderer,
-		Rescale,
-	};
+
 	Component(GameObject* Object);
 	~Component();
-	virtual void Enable();
 	virtual void Update();
-	virtual void Disable();
+	virtual void Inspector();
 	bool active;
+	Type type;
+	GameObject* GObjectSelected = nullptr;
+
 };
+

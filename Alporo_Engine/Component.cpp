@@ -2,6 +2,8 @@
 
 Component::Component(GameObject* Object)
 {
+	type = Type::None;
+	GObjectSelected = Object;
 }
 
 Component::~Component()
@@ -12,10 +14,7 @@ void Component::Update()
 {
 }
 
-void Component::Disable()
+void Component::Inspector()
 {
-}
 
-void Component::Enable()
-{
 }

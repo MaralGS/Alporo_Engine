@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
 			LOG(LogType::LOGS, "-------------- Application Init --------------");
 			if (App->Init() == false)
 			{
-				LOG(LogType::LOGS, "Application Init exits with ERROR");
+				LOG(LogType::ERRORS, "Application Init exits with ERROR");
 				state = MAIN_EXIT;
 			}
 			else
@@ -58,7 +58,7 @@ int main(int argc, char ** argv)
 
 			if (update_return == UPDATE_ERROR)
 			{
-				LOG(LogType::LOGS, "Application Update exits with ERROR");
+				LOG(LogType::ERRORS, "Application Update exits with ERROR");
 				state = MAIN_EXIT;
 			}
 
@@ -72,7 +72,7 @@ int main(int argc, char ** argv)
 			LOG(LogType::LOGS, "-------------- Application CleanUp --------------");
 			if (App->CleanUp() == false)
 			{
-				LOG(LogType::LOGS, "Application CleanUp exits with ERROR");
+				LOG(LogType::ERRORS, "Application CleanUp exits with ERROR");
 			}
 			else
 				main_return = EXIT_SUCCESS;

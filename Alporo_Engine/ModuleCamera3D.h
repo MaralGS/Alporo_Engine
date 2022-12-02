@@ -3,6 +3,13 @@
 #include "Globals.h"
 #include "glmath.h"
 
+class GameObject;
+
+struct Camera {
+	vec3 X, Y, Z, Position, Reference;
+	GameObject* SecCamera;
+};
+
 class ModuleCamera3D : public Module
 {
 public:
@@ -17,15 +24,16 @@ public:
 	void LookAt(const vec3 &Spot);
 	void Move(const vec3 &Movement);
 	float* GetViewMatrix();
-
+	GameObject* CameraGameObject();
+	GameObject* GameCamera;
 private:
 
 	void CalculateViewMatrix();
 
 public:
-	
-	vec3 X, Y, Z, Position, Reference;
-	
+	Camera Cam;
+	bool CreateGameCamera = true;
+	GameObject* SecondCamera;
 private:
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;

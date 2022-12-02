@@ -1,22 +1,30 @@
 #pragma once
 #include<vector>
 #include<string>
-#include<map>
 
 #include "Component.h"
-#include "Globals.h"
+#include "imgui.h"
+
+enum class ComponentType;
+class Transform;
+class Meshes;
+
 class GameObject 
 {
+	public:
 	GameObject();
+	GameObject(GameObject* parent);
 	~GameObject();
-	void Update();
-	Component* CreateComponent(Component::Type type);
+
+	void CreateInspector();
+
+	void MoveGameObject(GameObject* P);
+	void MoveChild(GameObject* Chld);
 	std::string name;
-	std::vector<Component*> components;
-
-	GameObject* rootNodeGO = nullptr;
-
-	std::map <uint, GameObject*> GObject;
-	std::map <uint, GameObject*>* GObjectChild;
-
+	GameObject* Parent;
+	std::vector<GameObject*> child;
+	std::vector<Component*> Comp;
+	Transform* transform;
+	Meshes* GOMesh;
+	char Title[150] = "";
 };
