@@ -39,7 +39,7 @@ public:
 	unsigned int frameBuffer2;
 	unsigned int bufferObj2;
 
-	Camera* NewCamera = nullptr;
+	Camera* NewCamera;
 };
 
 

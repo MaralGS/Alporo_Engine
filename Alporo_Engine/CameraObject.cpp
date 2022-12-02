@@ -7,14 +7,6 @@ CObject::CObject()
 {
 
 	CreateCamBuffer();
-}
-
-CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
-{
-	GObjectSelected = GOCamera;
-	type = Type::CamObject;
-
-	CalculateViewMatrices();
 
 	X = vec3(1.0f, 0.0f, 0.0f);
 	Y = vec3(0.0f, 1.0f, 0.0f);
@@ -22,6 +14,18 @@ CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
 
 	Position = vec3(0.0f, 0.0f, 5.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
+
+}
+
+CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
+{
+	GObjectSelected = GOCamera;
+	type = Type::CamObject;
+
+
+	//aixo es el k fallava joder
+	//CalculateViewMatrices();
+
 
 
 }
@@ -47,6 +51,7 @@ void CObject::Update()
 	int hola = 0;
 	// Recalculate matrix -------------
 	CalculateViewMatrices();
+
 }
 
 bool CObject::CleanUp()
