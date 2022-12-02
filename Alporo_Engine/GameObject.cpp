@@ -68,7 +68,7 @@ void GameObject::CreateInspector()
 		for (size_t i = 0; i < Comp.size(); i++)
 		{
 			Comp[i]->Inspector();
-			if (ImGui::Checkbox("Visible Object", &Comp[i+1]->GObjectSelected->GOMesh->mesh->IsVisible));
+			//if (ImGui::Checkbox("Visible Object", &Comp[i+1]->GObjectSelected->GOMesh->mesh->IsVisible));
 		}
 
 
@@ -76,13 +76,7 @@ void GameObject::CreateInspector()
 	ImGui::End();
 }
 
-void GameObject::MoveGameObject(GameObject* P)
-{
-	Parent->MoveChild(this);
 
-	Parent = P;
-	Parent->child.push_back(P);
-}
 
 void GameObject::CameraGameObject()
 {
@@ -92,9 +86,19 @@ void GameObject::CameraGameObject()
 		}
 
 }
+
+/*
+void GameObject::MoveGameObject(GameObject* P)
+{
+	Parent->MoveChild(this);
+
+	Parent = P;
+	Parent->child.push_back(P);
+}
+
 void GameObject::MoveChild(GameObject* Chld)
 {
 	child.erase(std::find(child.begin(), child.end(), Chld));
 
-}
+}*/
 
