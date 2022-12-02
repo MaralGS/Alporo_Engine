@@ -225,15 +225,9 @@ GameObject* ModuleCamera3D::CameraGameObject()
 {
 	GameCamera = new GameObject(App->imguiwindows->RootGO);
 	GameCamera->name = "Game Camera";
-	/*
-	Camera* Scamera = new Camera();
-	CObject* component = new CObject(GameCamera);
-	Cam.SecCamera = GameCamera;
-	component->NewCamera = Scamera;
-	if (GameCamera->Comp.size() == 1) {
-		GameCamera->Comp.push_back(component);
-	}
-	*/
+	
+
+	
 	return nullptr;
 }
 

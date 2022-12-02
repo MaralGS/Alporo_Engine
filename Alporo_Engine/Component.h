@@ -14,6 +14,7 @@ class Component
 {
 public:
 
+	Component();
 	Component(GameObject* Object);
 	~Component();
 	virtual void Update();

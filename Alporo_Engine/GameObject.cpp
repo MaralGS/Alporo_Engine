@@ -17,7 +17,7 @@ GameObject::GameObject(GameObject* parent)
 	name = "GameObject";
 	Parent = parent;
 
-	CamGOGame = new CObject(this);
+	CamGOGame = new CObject();
 
 	transform = new Transform(this);
 	Comp.push_back(transform);

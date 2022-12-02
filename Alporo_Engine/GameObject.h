@@ -30,4 +30,6 @@ class GameObject
 	Transform* transform = nullptr;
 	Meshes* GOMesh = nullptr;
 	CObject* CamGOGame;
+
+
 };

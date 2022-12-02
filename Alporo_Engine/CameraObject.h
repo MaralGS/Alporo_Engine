@@ -16,12 +16,11 @@ public:
 	CObject();
 	CObject(GameObject* GOCamera);
 	bool Start();
-	update_status Update(float dt);
+	void Update();
 	bool CleanUp();
 	bool freeMovement = true;
 	void Look(const vec3& Position, const vec3& Reference, bool RotateAroundReference = false);
-	void LookAt(const vec3& Spot);
-	void Move(const vec3& Movement);
+	void CreateCamBuffer();
 	float* GetViewMatrix();
 	~CObject();
 
@@ -40,7 +39,7 @@ public:
 	unsigned int frameBuffer2;
 	unsigned int bufferObj2;
 
-	//CObject* NewCamera = nullptr;
+	Camera* NewCamera = nullptr;
 };
 
 
