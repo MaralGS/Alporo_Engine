@@ -36,8 +36,6 @@ MyMesh::~MyMesh() {
 }
 void MyMesh::Render()
 {
-
-
 	glBindBuffer(GL_ARRAY_BUFFER, id_vertices);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_indices);
 
@@ -51,8 +49,20 @@ void MyMesh::Render()
 	{
 		for (int i = 0; i < OBmesh->child.size(); i++)
 		{
-			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->child[i]->transform->position.x + OBmesh->child[i]->Parent->transform->position.x, OBmesh->child[i]->transform->position.y + OBmesh->child[i]->Parent->transform->position.y, OBmesh->child[i]->transform->position.z + OBmesh->child[i]->Parent->transform->position.z);
-			OBmesh->child[i]->transform->Transform_Matrix.scale(OBmesh->child[i]->transform->scale.x + OBmesh->child[i]->Parent->transform->scale.x, OBmesh->child[i]->transform->scale.y + OBmesh->child[i]->Parent->transform->scale.y, OBmesh->child[i]->transform->scale.z + OBmesh->child[i]->Parent->transform->scale.z);
+			OBmesh->child[i]->transform->Transform_Matrix.translate(OBmesh->child[i]->transform->position.x + OBmesh->transform->position.x, OBmesh->child[i]->transform->position.y + OBmesh->transform->position.y, OBmesh->child[i]->transform->position.z + OBmesh->transform->position.z);
+
+			OBmesh->child[i]->transform->Transform_Matrix[0] = ((cos(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) * (OBmesh->child[i]->transform->scale.x * OBmesh->child[i]->transform->scale.x)) + ((cos(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) * (OBmesh->transform->scale.x * OBmesh->transform->scale.x));
+			OBmesh->child[i]->transform->Transform_Matrix[4] = (cos(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) + (cos(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x));
+			OBmesh->child[i]->transform->Transform_Matrix[8] = -sin(OBmesh->child[i]->transform->rotate.z) + -sin(OBmesh->transform->rotate.z);
+
+			OBmesh->child[i]->transform->Transform_Matrix[1] = ((sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) - (cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.x))) + ((sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) - (cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[5] = (((sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->child[i]->transform->rotate.x)) + (cos(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.x))) * (OBmesh->child[i]->transform->scale.y * OBmesh->child[i]->transform->scale.y)) + (((sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) + (cos(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.x))) * (OBmesh->transform->scale.y * OBmesh->transform->scale.y));
+			OBmesh->child[i]->transform->Transform_Matrix[9] = (sin(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.z)) + (sin(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.z));
+
+
+			OBmesh->child[i]->transform->Transform_Matrix[2] = ((cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * cos(OBmesh->child[i]->transform->rotate.x)) + (sin(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.x))) + ((cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * cos(OBmesh->transform->rotate.x)) + (sin(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[6] = ((cos(OBmesh->child[i]->transform->rotate.y) * sin(OBmesh->child[i]->transform->rotate.z) * sin(OBmesh->child[i]->transform->rotate.x)) - (sin(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.x))) + ((cos(OBmesh->transform->rotate.y) * sin(OBmesh->transform->rotate.z) * sin(OBmesh->transform->rotate.x)) - (sin(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.x)));
+			OBmesh->child[i]->transform->Transform_Matrix[10] = ((cos(OBmesh->child[i]->transform->rotate.y) * cos(OBmesh->child[i]->transform->rotate.z)) * (OBmesh->child[i]->transform->scale.z * OBmesh->child[i]->transform->scale.z)) + ((cos(OBmesh->transform->rotate.y) * cos(OBmesh->transform->rotate.z)) * (OBmesh->transform->scale.z * OBmesh->transform->scale.z));
 		}
 	}
 
@@ -66,19 +76,26 @@ void MyMesh::Render()
 GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 {
 	const aiScene* scene = aiImportFile(file_path.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
-
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		GameObject* meshGO;
 		if (App->imguiwindows->Selected == nullptr)
 		{
 			meshGO = new GameObject(App->imguiwindows->RootGO);
+			if (nameGO == "")
+			{
+				nameGO = file_path.c_str();
+			}
 			meshGO->name = nameGO;
 		}
 
 		else if (App->imguiwindows->Selected != nullptr)
 		{
 			meshGO = new GameObject(App->imguiwindows->Selected);
+			if (nameGO == "")
+			{
+				nameGO = file_path.c_str();
+			}
 			meshGO->name = nameGO;
 		}
 
@@ -109,6 +126,7 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 				}
 				LoadMesh(mesh);
 				Meshes* component = new Meshes(meshGO);
+	
 				mesh->OBmesh = meshGO;
 				component->mesh = mesh;
 				if (meshGO->Comp.size() == 1) {
@@ -188,29 +206,12 @@ void ModuleLoadFBX::LoadMesh(MyMesh* mesh) {
 update_status ModuleLoadFBX::PostUpdate(float dt)
 {
 
-		for (int i = 0; i < meshes.size(); i++) {
-
-		if (App->imguiwindows->Wireframe == true) {
-				//Wireframe Mode
-				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-				glLineWidth(2);
-			}
-				if (i < 2 && FBX1 == true)
-			{
-
-				meshes[i]->Render();
-			}
-			
-			if (i >= 2 && i <= 2&& FBX2 == true)
-			{
-				meshes[i]->Render();
-			}
-			
-			if (i >= 3 && FBX3 == true)
-			{
-				meshes[i]->Render();
-			}
+	for (int i = 0; i < meshes.size(); i++) {
+		if (meshes[i]->IsVisible == false)
+		{
+			meshes[i]->Render();
 		}
+	}
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	return UPDATE_CONTINUE;

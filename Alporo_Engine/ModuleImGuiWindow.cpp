@@ -340,10 +340,6 @@ void ModuleImguiWindow::GeneratePrimitives()
 
         ImGui::EndMenu();
     }
-   // if (ImGui::Checkbox("Draw Cilindre", &App->OpenGLPrimitives->CilindreStats.DrawCilindre));
-    if (ImGui::Checkbox("Draw 1rst FBX", &App->LoadFbx->FBX1));
-    if (ImGui::Checkbox("Draw 2rst FBX", &App->LoadFbx->FBX2));
-    if (ImGui::Checkbox("Draw 3rst FBX", &App->LoadFbx->FBX3));
 
 }
 
@@ -389,7 +385,6 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
             Selected = parent;
 
-
            ImGui::Text("Moving Object");
            ImGui::EndDragDropSource();
        }
@@ -400,18 +395,30 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
        }
 
-
    }
 
-
-    if (ImGui::BeginDragDropTarget())
+    if (ImGui::BeginDragDropTarget() && Selected != nullptr)
     {
-        if (const ImGuiPayload* load = ImGui::AcceptDragDropPayload("GameObject"))
+        int SGo;
+        if (ImGui::AcceptDragDropPayload("GameObject"))
         {
-            GameObject* MovingGo = static_cast<GameObject*>(load->Data);
+            for (int i = 0; i < Selected->Parent->child.size(); i++) {
+                if (Selected == Selected->Parent->child[i]) {
+                    SGo = i;
+                }
+            }
 
-            Selected->MoveGameObject(parent);
-            //LOG(LogType::L_NORMAL, "%s", dropTarget->name.c_str());
+            parent->child.push_back(Selected);
+
+            for (int i = SGo; i < Selected->Parent->child.size() - 1; i++)
+            {
+                Selected->Parent->child[i] = Selected->Parent->child[i + 1];
+            }
+            Selected->Parent = parent;
+
+            parent->Parent->child.pop_back();
+
+        
             Selected = nullptr;
         }
         ImGui::EndDragDropTarget();
@@ -424,5 +431,3 @@ void ModuleImguiWindow::hieraci(GameObject* parent)
 
 }
 
-
-   

@@ -27,9 +27,10 @@ class GameObject
 	GameObject* Parent;
 	std::vector<GameObject*> child;
 	std::vector<Component*> Comp;
+
 	Transform* transform = nullptr;
 	Meshes* GOMesh = nullptr;
 	CObject* CamGOGame;
-
+	char Title[150] = "";
 
 };
