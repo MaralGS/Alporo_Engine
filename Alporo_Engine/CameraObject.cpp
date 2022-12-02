@@ -3,25 +3,9 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL_events.h"
 
-CObject::CObject() :CObject(nullptr)
+CObject::CObject() : CObject(nullptr)
 {
 
-}
-
-CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
-{
-	GObjectSelected = GOCamera;
-	type = Type::CamObject;
-	SecondGameCamera* GameCamera = new SecondGameCamera();
-}
-
-CObject::~CObject()
-{
-
-}
-
-SecondGameCamera::SecondGameCamera()
-{
 	CalculateViewMatrices();
 
 	X = vec3(1.0f, 0.0f, 0.0f);
@@ -52,20 +36,20 @@ SecondGameCamera::SecondGameCamera()
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
 }
 
-SecondGameCamera::~SecondGameCamera()
+CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
 {
+	GObjectSelected = GOCamera;
+	type = Type::CamObject;
 }
 
-bool SecondGameCamera::Start()
+CObject::~CObject()
 {
-	return false;
+
 }
 
-update_status SecondGameCamera::Update(float dt)
+update_status CObject::Update(float dt)
 {
 
 	// Implement a debug camera with keys and mouse
@@ -75,147 +59,8 @@ update_status SecondGameCamera::Update(float dt)
 
 	float speed = 3.0f * dt;
 
-	if (ImGui::IsKeyPressed(ImGuiKey_LeftShift)) {
-		speed *= 2;
-	}
-
-	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		if (event.type == SDL_MOUSEWHEEL)
-		{
-			if (event.wheel.y > 0) // scroll up
-			{
-				// Put code for handling "scroll up" here!
-			}
-			else if (event.wheel.y < 0) // scroll down
-			{
-				// Put code for handling "scroll down" here!
-			}
-		}
-	}
-	if (ImGui::IsKeyPressed(ImGuiKey_U)) newPos.y += speed;
-	if (ImGui::IsKeyPressed(ImGuiKey_J)) newPos.y -= speed;
-
-	if (ImGui::IsMouseClicked(ImGuiMouseButton_Right)) {
-		if (ImGui::IsKeyPressed(ImGuiKey_W)) {
-			freeMovement = true;
-			newPos -= Z * speed;
-		}
-		if (ImGui::IsKeyPressed(ImGuiKey_S)) {
-			freeMovement = true;
-			newPos += Z * speed;
-		}
-
-
-		if (ImGui::IsKeyPressed(ImGuiKey_A)) {
-			freeMovement = true;
-			newPos -= X * speed;
-		}
-		if (ImGui::IsKeyPressed(ImGuiKey_D)) {
-			freeMovement = true;
-			newPos += X * speed;
-		}
-	}
-
-	if (ImGui::GetMouseCursor >= 0) {
-		newPos -= Z * zoomSensitivity;
-	}
-	if (ImGui::GetMouseCursor <= 0) {
-		newPos += Z * zoomSensitivity;
-	}
-
-	if (ImGui::IsMouseClicked(ImGuiMouseButton_Middle) && !ImGui::IsKeyPressed(ImGuiKey_LeftAlt))
-	{
-		int dx = -ImGui::GetMousePos().x;
-		int dy = -ImGui::GetMousePos().y;
-
-		float Sensitivity = 0.25f;
-
-
-		if (dx != 0)
-		{
-			float DeltaX = (float)dx * Sensitivity;
-
-			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-		}
-
-		if (dy != 0)
-		{
-			float DeltaY = (float)dy * Sensitivity;
-
-			Y = rotate(Y, DeltaY, X);
-			Z = rotate(Z, DeltaY, X);
-
-			if (Y.y < 0.0f)
-			{
-				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-				Y = cross(Z, X);
-			}
-		}
-
-		Position = Reference + Z * 4;
-		freeMovement = true;
-	}
-
+	
 	Position = newPos;
-
-	if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) && ImGui::IsKeyPressed(ImGuiKey_LeftAlt))
-	{
-		int dx = -ImGui::GetMousePos().x;
-		int dy = -ImGui::GetMousePos().y;
-
-		float Sensitivity = 0.25f;
-
-		newRef.x = 0;
-		newRef.y = 0;
-		newRef.z = 0;
-
-		if (dx != 0)
-		{
-			float DeltaX = (float)dx * Sensitivity;
-
-			X = rotate(X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Y = rotate(Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			Z = rotate(Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-		}
-
-		if (dy != 0)
-		{
-			float DeltaY = (float)dy * Sensitivity;
-
-			Y = rotate(Y, DeltaY, X);
-			Z = rotate(Z, DeltaY, X);
-
-			if (Y.y < 0.0f)
-			{
-				Z = vec3(0.0f, Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-				Y = cross(Z, X);
-			}
-		}
-
-
-		Position = newRef + Z * (6);
-
-
-		freeMovement = false;
-	}
-
-	if (freeMovement == false) {
-		Look(Position, newRef);
-	}
-	if (ImGui::IsKeyPressed(ImGuiKey_F)) {
-
-		newRef.x = 1;
-		newRef.y = 2;
-		newRef.z = 4;
-		Look(newPos, { 0,0,0 });
-		freeMovement = true;
-
-
-	}
 
 	// Recalculate matrix -------------
 	CalculateViewMatrices();
@@ -223,12 +68,12 @@ update_status SecondGameCamera::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
-bool SecondGameCamera::CleanUp()
+bool CObject::CleanUp()
 {
 	return false;
 }
 
-void SecondGameCamera::Look(const vec3& Position, const vec3& Reference, bool RotateAroundReference)
+void CObject::Look(const vec3& Position, const vec3& Reference, bool RotateAroundReference)
 {
 
 	this->Position = Position;
@@ -248,31 +93,12 @@ void SecondGameCamera::Look(const vec3& Position, const vec3& Reference, bool Ro
 
 }
 
-void SecondGameCamera::LookAt(const vec3& Spot)
-{
-	Reference = Spot;
-
-	Z = normalize(Position - Reference);
-	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
-	Y = cross(Z, X);
-
-	CalculateViewMatrices();
-}
-
-void SecondGameCamera::Move(const vec3& Movement)
-{
-	Position += Movement;
-	Reference += Movement;
-
-	CalculateViewMatrices();
-}
-
-float* SecondGameCamera::GetViewMatrix()
+float* CObject::GetViewMatrix()
 {
 	return &ViewMatrix;
 }
 
-void SecondGameCamera::CalculateViewMatrices()
+void CObject::CalculateViewMatrices()
 {
 
 	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);

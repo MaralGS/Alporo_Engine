@@ -62,7 +62,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		// Because I use the texture from OpenGL, I need to invert the V from the UV.
 		if (App->imguiwindows->Selected != App->imguiwindows->RootGO && App->imguiwindows->Selected != nullptr)
 		{
-			ImGui::Image((ImTextureID)App->imguiwindows->Selected->CamGOGame->SecCameraGO->cameraBuffer2, wsize, ImVec2(0, 1), ImVec2(1, 0));
+			//ImGui::Image((ImTextureID)App->imguiwindows->Selected->CamGOGame->SecCameraGO->cameraBuffer2, wsize, ImVec2(0, 1), ImVec2(1, 0));
 		}
 		ImGui::EndChild();
 	}

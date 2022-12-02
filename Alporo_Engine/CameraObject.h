@@ -10,15 +10,11 @@
 class GameObject;
 class Component;
 
-
-struct SecondGameCamera {
+class CObject : public Component {
 public:
 
-	SecondGameCamera();
-	~SecondGameCamera();
-	vec3 newPos = { 0, 2, 4 };
-	vec3 newRef = { 0, 2, 4 };
-
+	CObject();
+	CObject(GameObject* GOCamera);
 	bool Start();
 	update_status Update(float dt);
 	bool CleanUp();
@@ -27,9 +23,10 @@ public:
 	void LookAt(const vec3& Spot);
 	void Move(const vec3& Movement);
 	float* GetViewMatrix();
-	float zoomSensitivity = 5.0f;
+	~CObject();
 
-public:
+	vec3 newPos = { 0, 2, 4 };
+	vec3 newRef = { 0, 2, 4 };
 
 	void CalculateViewMatrices();
 
@@ -42,17 +39,7 @@ public:
 	unsigned int cameraBuffer2;
 	unsigned int frameBuffer2;
 	unsigned int bufferObj2;
-};
 
-
-class CObject : public Component {
-public:
-
-	CObject();
-	CObject(GameObject* GOCamera);
-
-	~CObject();
-	SecondGameCamera* SecCameraGO;
 	//CObject* NewCamera = nullptr;
 };
 
