@@ -285,7 +285,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		Console::PrintDebug();
 
 
-	/*CObject* component = new CObject(App->camera->GameCamera);
+	CObject* component = new CObject(App->camera->GameCamera);
 	Camera* Scamera = new Camera();
 	Scamera->SecCamera = App->camera->GameCamera;
 	App->camera->Cam.SecCamera = App->camera->GameCamera;
@@ -295,7 +295,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	}
 
 	
-		Camera* Scamera = new Camera();
+		/*Camera* Scamera = new Camera();
 		CObject* component = new CObject(App->camera->GameCamera);
 		App->camera->Cam.SecCamera = App->camera->GameCamera;
 		component->NewCamera = Scamera;

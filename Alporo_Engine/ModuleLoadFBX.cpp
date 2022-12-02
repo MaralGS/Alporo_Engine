@@ -129,7 +129,7 @@ GameObject* ModuleLoadFBX::LoadFile(string file_path, string nameGO)
 	
 				mesh->OBmesh = meshGO;
 				component->mesh = mesh;
-				if (meshGO->Comp.size() == 1) {
+				if (meshGO->Comp.size() > 1) {
 					meshGO->Comp.push_back(component);
 				}
 				}

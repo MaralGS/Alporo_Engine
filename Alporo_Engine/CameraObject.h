@@ -24,7 +24,7 @@ public:
 	float* GetViewMatrix();
 	~CObject();
 
-	vec3 newPos = { 0, 2, 4 };
+	vec3 newPos = { 0, 0, 0 };
 	vec3 newRef = { 0, 2, 4 };
 
 	void CalculateViewMatrices();

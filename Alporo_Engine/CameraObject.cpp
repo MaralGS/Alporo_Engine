@@ -61,7 +61,7 @@ void CObject::Look(const vec3& Position, const vec3& Reference, bool RotateAroun
 	this->Reference = Reference;
 
 	Z = normalize(Position - Reference);
-	X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Z));
+	X = normalize(cross(vec3(0.0f, .0f, 0.0f), Z));
 	Y = cross(Z, X);
 
 	if (!RotateAroundReference)
