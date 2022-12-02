@@ -47,7 +47,10 @@ update_status ModuleCamera3D::Update(float dt)
 {
 	// Implement a debug camera with keys and mouse
 	// Now we can vecmake this movememnt frame rate independant!
-
+	if (App->imguiwindows->Selected != App->imguiwindows->RootGO && App->imguiwindows->Selected != nullptr)
+	{
+		App->imguiwindows->Selected->CamGOGame->SecCameraGO->Update(0);
+	}
 		vec3 newPos(0, 0, 0);
 		float speed = 5.0f * dt;
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
