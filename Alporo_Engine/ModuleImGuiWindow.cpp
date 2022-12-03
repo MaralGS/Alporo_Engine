@@ -222,10 +222,7 @@ update_status ModuleImguiWindow::Update(float dt)
         Selected->CreateInspector();
     }
     
-    if (Selected == App->camera->GameCamera)
-    {
-        App->camera->GameCamera->CameraGameObject(Selected);
-    }
+  
 
 
 

@@ -9,7 +9,6 @@ enum class ComponentType;
 class Transform;
 class Meshes;
 class CObject;
-class Camera;
 
 class GameObject 
 {

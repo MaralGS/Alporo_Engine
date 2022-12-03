@@ -33,9 +33,9 @@ public:
 	Frustum CamFrust;
 	float4x4 ViewMatrix, ViewMatrixproj;
 
-	unsigned int cameraBuffer2;
-	unsigned int frameBuffer2;
-	unsigned int bufferObj2;
+	unsigned int bufferCam;
+	unsigned int frameBuffer;
+	unsigned int bufferObj;
 };
 
 

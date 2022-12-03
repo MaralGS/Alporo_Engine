@@ -26,9 +26,9 @@ bool CObject::Start()
 
 CObject::~CObject()
 {
-	glDeleteFramebuffers(1, &cameraBuffer2);
-	glDeleteFramebuffers(1, &frameBuffer2);
-	glDeleteFramebuffers(1, &bufferObj2);
+	glDeleteFramebuffers(1, &bufferCam);
+	glDeleteFramebuffers(1, &frameBuffer);
+	glDeleteFramebuffers(1, &bufferObj);
 }
 
 bool CObject::CleanUp()
@@ -38,24 +38,24 @@ bool CObject::CleanUp()
 
 void CObject::CreateCamBuffer()
 {
-	glGenFramebuffers(1, &frameBuffer2);
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer2);
+	glGenFramebuffers(1, &frameBuffer);
+	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 
-	glGenTextures(1, &cameraBuffer2);
-	glBindTexture(GL_TEXTURE_2D, cameraBuffer2);
+	glGenTextures(1, &bufferCam);
+	glBindTexture(GL_TEXTURE_2D, bufferCam);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, cameraBuffer2, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, bufferCam, 0);
 
-	glGenRenderbuffers(1, &bufferObj2);
-	glBindRenderbuffer(GL_RENDERBUFFER, bufferObj2);
+	glGenRenderbuffers(1, &bufferObj);
+	glBindRenderbuffer(GL_RENDERBUFFER, bufferObj);
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCREEN_WIDTH, SCREEN_HEIGHT);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, bufferObj2);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, bufferObj);
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -97,12 +97,14 @@ void CObject::Move(const float3& Movement)
 float* CObject::GetViewMatrix()
 {
 	ViewMatrix = CamFrust.ViewMatrix();
-	return ViewMatrix.Transposed().ptr();
+	ViewMatrix.Transpose();
+	return ViewMatrix.ptr();
 }
 
 float* CObject::CalculateProjMatix()
 {
 	ViewMatrixproj = CamFrust.ProjectionMatrix();
-	return ViewMatrixproj.Transposed().ptr();
+	ViewMatrixproj.Transposed();
+	return ViewMatrixproj.ptr();
 }
 

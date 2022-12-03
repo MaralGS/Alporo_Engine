@@ -15,13 +15,9 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
-	void LookAt(const vec3 &Spot);
-	void Move(const vec3 &Movement);
-	
+
 	GameObject* CameraGameObject();
-	GameObject* GameCamera;
-	bool SetCamera = false;
+	//GameObject* GameCamera;
 	//float* GetViewMatrix();
 private:
 
@@ -29,8 +25,9 @@ private:
 
 public:
 	bool CreateGameCamera = true;
-	GameObject* SecondCamera;
+	//GameObject* SecondCamera;
 	CObject* Mcamera;
+
 private:
 
 	//mat4x4 ViewMatrix, ViewMatrixInverse;

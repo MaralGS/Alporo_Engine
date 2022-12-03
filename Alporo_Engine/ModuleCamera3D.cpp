@@ -18,7 +18,8 @@ bool ModuleCamera3D::Start()
 	bool ret = true;
 
 	//creating GameCamera
-	SecondCamera = CameraGameObject();
+	//SecondCamera = CameraGameObject();
+	Mcamera = new CObject();
 	Mcamera->CamFrust.pos = float3(0.0f, 0.0f, 5.0f);
 	return ret;
 }
@@ -40,8 +41,7 @@ update_status ModuleCamera3D::Update(float dt)
 		float speed = 5.0f * dt;
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			speed = 10.0f * dt;
-		if (App->imguiwindows->Selected != GameCamera)
-		{
+		
 			if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 			{
 				if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Mcamera->CamFrust.pos += Mcamera->CamFrust.front * speed;
@@ -50,8 +50,7 @@ update_status ModuleCamera3D::Update(float dt)
 				if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) Mcamera->CamFrust.pos += Mcamera->CamFrust.WorldRight() * speed;
 				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)Mcamera->CamFrust.pos -= Mcamera->CamFrust.WorldRight() * speed;
 			}
-			SetCamera = true;
-		}
+
 
 
 		if (App->input->GetMouseZ() >= 0)
@@ -144,8 +143,8 @@ update_status ModuleCamera3D::Update(float dt)
 
 GameObject* ModuleCamera3D::CameraGameObject()
 {
-	GameCamera = new GameObject(App->imguiwindows->RootGO);
-	GameCamera->name = "Game Camera";
+	//GameCamera = new GameObject(App->imguiwindows->RootGO);
+	//GameCamera->name = "Game Camera";
 	
 	return nullptr;
 }
