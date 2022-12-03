@@ -18,22 +18,20 @@ public:
 	bool Start();
 	void GameCameraMovement(GameObject* SecCamera);
 	bool CleanUp();
-	bool freeMovement = true;
-	void Look(const vec3& Position, const vec3& Reference, bool RotateAroundReference = false);
 	void CreateCamBuffer();
 	float* GetViewMatrix();
 	~CObject();
 
-	vec3 newPos = { 0, 0, 0 };
-	vec3 newRef = { 0, 2, 4 };
+	float3 newPos = { 0, 0, 0 };
+	float3 newRef = { 0, 2, 4 };
 
 	void CalculateViewMatrices();
 
 public:
 
-	vec3 X, Y, Z, Position, Reference;
+	float3 X, Y, Z, Position, Reference;
 
-	mat4x4 ViewMatrix, ViewMatrixInverse;
+	float4x4 ViewMatrix, ViewMatrixInverse;
 
 	unsigned int cameraBuffer2;
 	unsigned int frameBuffer2;

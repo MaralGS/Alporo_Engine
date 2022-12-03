@@ -24,11 +24,12 @@ Meshes::~Meshes()
 void Meshes::Update()
 {
 	// Generate global OBB
-	mesh->GObbox = mesh->GAbbox;
-	//mesh->GObbox.Transform(GObjectSelected->transform->Transform_Matrix);
-	// Generate global AABB
-	mesh->GAbbox.SetNegativeInfinity();
-	mesh->GAbbox.Enclose(mesh->GObbox);
+	mesh->obb = mesh->Gbbox;
+	mesh->obb.Transform(GObjectSelected->transform->Transform_Matrix);
+	
+	//Generate global AABB
+	mesh->Laabb.SetNegativeInfinity();
+	mesh->Laabb.Enclose(mesh->obb);
 }
 
 

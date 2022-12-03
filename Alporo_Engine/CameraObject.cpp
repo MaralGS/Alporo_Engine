@@ -8,12 +8,12 @@ CObject::CObject()
 
 	CreateCamBuffer();
 
-	X = vec3(1.0f, 0.0f, 0.0f);
-	Y = vec3(0.0f, 1.0f, 0.0f);
-	Z = vec3(0.0f, 0.0f, 1.0f);
+	X = float3(1.0f, 0.0f, 0.0f);
+	Y = float3(0.0f, 1.0f, 0.0f);
+	Z = float3(0.0f, 0.0f, 1.0f);
 
-	Position = vec3(0.0f, 0.0f, 5.0f);
-	Reference = vec3(0.0f, 0.0f, 0.0f);
+	Position = float3(0.0f, 0.0f, 5.0f);
+	Reference = float3(0.0f, 0.0f, 0.0f);
 
 }
 
@@ -47,9 +47,7 @@ void CObject::GameCameraMovement(GameObject* SecCamera)
 {
 
 	
-	//Position.x = SecCamera->transform->position.x;
-	//Position.y = SecCamera->transform->position.y;
-	//Position.z = SecCamera->transform->position.z;
+	
 	newPos = SecCamera->transform->position;
 	Position = newPos;
 	int hola = 0;
@@ -61,26 +59,6 @@ void CObject::GameCameraMovement(GameObject* SecCamera)
 bool CObject::CleanUp()
 {
 	return false;
-}
-
-void CObject::Look(const vec3& Position, const vec3& Reference, bool RotateAroundReference)
-{
-
-	this->Position = Position;
-	this->Reference = Reference;
-
-	Z = normalize(Position - Reference);
-	X = normalize(cross(vec3(0.0f, .0f, 0.0f), Z));
-	Y = cross(Z, X);
-
-	if (!RotateAroundReference)
-	{
-		this->Reference = this->Position;
-		this->Position += Z * 0.05f;
-	}
-
-	CalculateViewMatrices();
-
 }
 
 void CObject::CreateCamBuffer()
@@ -110,13 +88,13 @@ void CObject::CreateCamBuffer()
 
 float* CObject::GetViewMatrix()
 {
-	return &ViewMatrix;
+	return 0;//&ViewMatrix;
 }
 
 void CObject::CalculateViewMatrices()
 {
 
-	ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
-	ViewMatrixInverse = inverse(ViewMatrix);
+	//ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
+	//ViewMatrixInverse = inverse(ViewMatrix);
 
 }
