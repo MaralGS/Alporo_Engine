@@ -16,7 +16,6 @@ public:
 	CObject();
 	CObject(GameObject* GOCamera);
 	bool Start();
-	void GameCameraMovement(GameObject* SecCamera);
 	bool CleanUp();
 	void CreateCamBuffer();
 	float* GetViewMatrix();
@@ -25,19 +24,18 @@ public:
 	float3 newPos = { 0, 0, 0 };
 	float3 newRef = { 0, 2, 4 };
 
-	void CalculateViewMatrices();
+	float* CalculateProjMatix();
+	void LookAt(const float3& Spot);
+	void Move(const float3& Movement);
 
 public:
 
-	float3 X, Y, Z, Position, Reference;
-
-	float4x4 ViewMatrix, ViewMatrixInverse;
+	Frustum CamFrust;
+	float4x4 ViewMatrix, ViewMatrixproj;
 
 	unsigned int cameraBuffer2;
 	unsigned int frameBuffer2;
 	unsigned int bufferObj2;
-
-	Camera* NewCamera;
 };
 
 

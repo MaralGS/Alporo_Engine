@@ -7,13 +7,8 @@ CObject::CObject()
 {
 
 	CreateCamBuffer();
-
-	X = float3(1.0f, 0.0f, 0.0f);
-	Y = float3(0.0f, 1.0f, 0.0f);
-	Z = float3(0.0f, 0.0f, 1.0f);
-
-	Position = float3(0.0f, 0.0f, 5.0f);
-	Reference = float3(0.0f, 0.0f, 0.0f);
+	CamFrust.pos = float3(0.0f, 0.0f, 5.0f);
+	//CamFrust.referenceReference = float3(0.0f, 0.0f, 0.0f);
 
 }
 
@@ -21,13 +16,6 @@ CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
 {
 	GObjectSelected = GOCamera;
 	type = Type::CamObject;
-
-
-	//aixo es el k fallava joder
-	//CalculateViewMatrices();
-
-
-
 }
 
 bool CObject::Start()
@@ -41,19 +29,6 @@ CObject::~CObject()
 	glDeleteFramebuffers(1, &cameraBuffer2);
 	glDeleteFramebuffers(1, &frameBuffer2);
 	glDeleteFramebuffers(1, &bufferObj2);
-}
-
-void CObject::GameCameraMovement(GameObject* SecCamera)
-{
-
-	
-	
-	newPos = SecCamera->transform->position;
-	Position = newPos;
-	int hola = 0;
-	// Recalculate matrix -------------
-	CalculateViewMatrices();
-
 }
 
 bool CObject::CleanUp()
@@ -86,15 +61,48 @@ void CObject::CreateCamBuffer()
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+// -----------------------------------------------------------------
+/*void ModuleCamera3D::Look(const vec3& Position, const vec3& Reference, bool RotateAroundReference)
+{
+	this->Cam.Position = Position;
+	this->Cam.Reference = Reference;
+
+	Cam.Z = normalize(Position - Reference);
+	Cam.X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Cam.Z));
+	Cam.Y = cross(Cam.Z, Cam.X);
+
+	if (!RotateAroundReference)
+	{
+		this->Cam.Reference = this->Cam.Position;
+		this->Cam.Position += Cam.Z * 0.05f;
+	}
+
+	CalculateViewMatrix();
+}*/
+
+// -----------------------------------------------------------------
+void CObject::LookAt(const float3& Spot)
+{
+	CamFrust.front = (Spot - CamFrust.pos).Normalized();
+	float3 pos = float3(0, 1, 0).Cross(CamFrust.front).Normalized();
+	CamFrust.up = CamFrust.front.Cross(pos);
+}
+
+// -----------------------------------------------------------------
+void CObject::Move(const float3& Movement)
+{
+	CamFrust.pos += Movement;
+}
+
 float* CObject::GetViewMatrix()
 {
-	return 0;//&ViewMatrix;
+	ViewMatrix = CamFrust.ViewMatrix();
+	return ViewMatrix.Transposed().ptr();
 }
 
-void CObject::CalculateViewMatrices()
+float* CObject::CalculateProjMatix()
 {
-
-	//ViewMatrix = mat4x4(X.x, Y.x, Z.x, 0.0f, X.y, Y.y, Z.y, 0.0f, X.z, Y.z, Z.z, 0.0f, -dot(X, Position), -dot(Y, Position), -dot(Z, Position), 1.0f);
-	//ViewMatrixInverse = inverse(ViewMatrix);
-
+	ViewMatrixproj = CamFrust.ProjectionMatrix();
+	return ViewMatrixproj.Transposed().ptr();
 }
+

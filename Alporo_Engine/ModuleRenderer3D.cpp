@@ -184,11 +184,14 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(App->camera->Mcamera->CalculateProjMatix());
+
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->GetViewMatrix());
+	glLoadMatrixf(App->camera->Mcamera->GetViewMatrix());
 
 	// light 0 on cam pos
-	lights[0].SetPos(App->camera->Cam.Position.x, App->camera->Cam.Position.y, App->camera->Cam.Position.z);
+	lights[0].SetPos(App->camera->Mcamera->CamFrust.pos.x, App->camera->Mcamera->CamFrust.pos.y, App->camera->Mcamera->CamFrust.pos.z);
 
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
@@ -221,7 +224,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	if (App->imguiwindows->CreatedOnce == false) {
 		glMatrixMode(GL_MODELVIEW);
-		//glLoadMatrixf(App->imguiwindows->Selected->CamGOGame->GetViewMatrix());
+		glLoadMatrixf(App->imguiwindows->Selected->CamGOGame->GetViewMatrix());
 		glBindFramebuffer(GL_FRAMEBUFFER, App->imguiwindows->Selected->CamGOGame->frameBuffer2);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
