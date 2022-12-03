@@ -1,4 +1,4 @@
-/* Copyright 2011 Jukka Jylänki
+/* Copyright 2011 Jukka Jylï¿½nki
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
    limitations under the License. */
 
 /** @file MathBuildConfig.h
-	@author Jukka Jylänki
+	@author Jukka Jylï¿½nki
 	@brief Specifies all build flags for the library. */
 #pragma once
 
@@ -75,7 +75,7 @@
 // If MATH_ENABLE_INSECURE_OPTIMIZATIONS, several security checks (unsafe index out of bounds accesses etc.) are disabled.
 // Use this for absolutely fastest performance on MathGeoLib, but only if you know your code is 100% well-formed and uses
 // MathGeoLib bug-free.
-// #define MATH_ENABLE_INSECURE_OPTIMIZATIONS
+//#define MATH_ENABLE_INSECURE_OPTIMIZATIONS
 
 #endif
 
@@ -123,7 +123,7 @@
 #endif
 
 // Uncomment to specify the SIMD instruction set level in use.
-#define MATH_AVX
+//#define MATH_AVX
 //#define MATH_SSE41
 //#define MATH_SSE3
 //#define MATH_SSE2
