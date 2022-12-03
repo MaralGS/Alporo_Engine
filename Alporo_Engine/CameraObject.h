@@ -16,7 +16,7 @@ public:
 	CObject();
 	CObject(GameObject* GOCamera);
 	bool Start();
-	void Update();
+	void GameCameraMovement(GameObject* SecCamera);
 	bool CleanUp();
 	bool freeMovement = true;
 	void Look(const vec3& Position, const vec3& Reference, bool RotateAroundReference = false);

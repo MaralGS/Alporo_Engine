@@ -19,6 +19,8 @@ public:
 	~Component();
 	virtual void Update();
 
+	virtual void GameCameraMovement(GameObject* CamObject);
+
 	virtual void Inspector();
 	bool active;
 	Type type;

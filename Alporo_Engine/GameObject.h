@@ -22,7 +22,7 @@ class GameObject
 
 	void MoveGameObject(GameObject* P);
 
-	void CameraGameObject();
+	void CameraGameObject(GameObject* SecCamera);
 	std::string name;
 	GameObject* Parent;
 	std::vector<GameObject*> child;

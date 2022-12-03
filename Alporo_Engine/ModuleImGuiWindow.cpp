@@ -224,7 +224,7 @@ update_status ModuleImguiWindow::Update(float dt)
     
     if (Selected == App->camera->GameCamera)
     {
-        App->camera->GameCamera->CameraGameObject();
+        App->camera->GameCamera->CameraGameObject(Selected);
     }
 
 

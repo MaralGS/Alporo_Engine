@@ -20,6 +20,12 @@ void Component::Update()
 
 }
 
+void Component::GameCameraMovement(GameObject* CamObject)
+{
+	type = Type::None;
+	GObjectSelected = CamObject;
+}
+
 void Component::Inspector()
 {
 

@@ -78,11 +78,11 @@ void GameObject::CreateInspector()
 
 
 
-void GameObject::CameraGameObject()
+void GameObject::CameraGameObject(GameObject* SecCamera)
 {
 		for (size_t i = 0; i < Comp.size(); i++)
 		{
-			Comp[i]->Update();
+			Comp[i]->GameCameraMovement(this);
 		}
 
 }

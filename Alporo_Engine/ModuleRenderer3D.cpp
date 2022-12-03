@@ -285,14 +285,14 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		Console::PrintDebug();
 
 
-	CObject* component = new CObject(App->camera->GameCamera);
+	/*CObject* component = new CObject(App->camera->GameCamera);
 	Camera* Scamera = new Camera();
 	Scamera->SecCamera = App->camera->GameCamera;
 	App->camera->Cam.SecCamera = App->camera->GameCamera;
 	component->NewCamera = Scamera;
 	if (App->camera->GameCamera->Comp.size() > 1) {
 		App->camera->GameCamera->Comp.push_back(component);
-	}
+	}*/
 
 	
 		/*Camera* Scamera = new Camera();

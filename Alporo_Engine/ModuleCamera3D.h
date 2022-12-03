@@ -7,7 +7,6 @@ class GameObject;
 
 struct Camera {
 	vec3 X, Y, Z, Position, Reference;
-	GameObject* SecCamera;
 };
 
 class ModuleCamera3D : public Module

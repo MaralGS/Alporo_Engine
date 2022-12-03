@@ -43,10 +43,14 @@ CObject::~CObject()
 	glDeleteFramebuffers(1, &bufferObj2);
 }
 
-void CObject::Update()
+void CObject::GameCameraMovement(GameObject* SecCamera)
 {
 
-
+	
+	//Position.x = SecCamera->transform->position.x;
+	//Position.y = SecCamera->transform->position.y;
+	//Position.z = SecCamera->transform->position.z;
+	newPos = SecCamera->transform->position;
 	Position = newPos;
 	int hola = 0;
 	// Recalculate matrix -------------
