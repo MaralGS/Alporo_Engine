@@ -31,9 +31,6 @@ void Transform::Inspector()
 
 void Transform::Tranformation()
 {
-	//Transform_Matrix.translate(position.x, position.y, position.z);
-
-
 	//rotation
 	Transform_Matrix[0][0] = (cos(rotate.z) * cos(rotate.x)) * (scale.x * scale.x) ;
 	Transform_Matrix[3][0] = cos(rotate.z) * sin(rotate.x);
@@ -50,18 +47,4 @@ void Transform::Tranformation()
 	Transform_Matrix[2][1] = (cos(rotate.y) * sin(rotate.z) * sin(rotate.x)) - (sin(rotate.y) * cos(rotate.x));
 	Transform_Matrix[2][2] = (cos(rotate.y) * cos(rotate.z)) * (scale.z * scale.z);
 	Transform_Matrix[3][2] = position.z;
-	
-	//Transform_Matrix[0] = (cos(rotate.z) * cos(rotate.x)) * (scale.x * scale.x) ;
-	//
-	//Transform_Matrix[4] = cos(rotate.z) * sin(rotate.x);
-	//Transform_Matrix[8] = -sin(rotate.z);
-	//
-	//Transform_Matrix[1] = (sin(rotate.y) * sin(rotate.z) * cos(rotate.x)) - (cos(rotate.y) * sin(rotate.x));
-	//Transform_Matrix[5] = ((sin(rotate.y) * sin(rotate.z) * sin(rotate.x)) + (cos(rotate.y) * cos(rotate.x))) * (scale.y * scale.y);
-	//Transform_Matrix[9] = sin(rotate.y) * cos(rotate.z);
-	//
-	//
-	//Transform_Matrix[2] = (cos(rotate.y) * sin(rotate.z) * cos(rotate.x)) + (sin(rotate.y) * sin(rotate.x));
-	//Transform_Matrix[6] = (cos(rotate.y) * sin(rotate.z) * sin(rotate.x)) - (sin(rotate.y) * cos(rotate.x));
-	//Transform_Matrix[10] = (cos(rotate.y) * cos(rotate.z)) * (scale.z * scale.z);
 }
