@@ -223,11 +223,7 @@ float* ModuleCamera3D::GetViewMatrix()
 
 GameObject* ModuleCamera3D::CameraGameObject()
 {
-	GameCamera = new GameObject(App->imguiwindows->RootGO);
-	GameCamera->name = "Game Camera";
-	
-
-	
+	GameCamera = App->LoadFbx->LoadFile("Assets/Primitives/cube2.fbx", "CameraObject");
 	return nullptr;
 }
 
