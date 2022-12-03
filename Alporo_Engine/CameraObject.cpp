@@ -104,7 +104,7 @@ float* CObject::GetViewMatrix()
 float* CObject::CalculateProjMatix()
 {
 	ViewMatrixproj = CamFrust.ProjectionMatrix();
-	ViewMatrixproj.Transposed();
+	ViewMatrixproj.Transpose();
 	return ViewMatrixproj.ptr();
 }
 

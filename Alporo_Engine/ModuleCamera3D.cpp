@@ -20,7 +20,7 @@ bool ModuleCamera3D::Start()
 	//creating GameCamera
 	//SecondCamera = CameraGameObject();
 	Mcamera = new CObject();
-	Mcamera->CamFrust.pos = float3(0.0f, 0.0f, 5.0f);
+	Mcamera->CamFrust.pos = float3(0.0f, 2.0f, -10.0f);
 	return ret;
 }
 
@@ -47,8 +47,8 @@ update_status ModuleCamera3D::Update(float dt)
 				if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Mcamera->CamFrust.pos += Mcamera->CamFrust.front * speed;
 				if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) Mcamera->CamFrust.pos -= Mcamera->CamFrust.front * speed;
 																				
-				if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) Mcamera->CamFrust.pos += Mcamera->CamFrust.WorldRight() * speed;
-				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)Mcamera->CamFrust.pos -= Mcamera->CamFrust.WorldRight() * speed;
+				if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) Mcamera->CamFrust.pos -= Mcamera->CamFrust.WorldRight() * speed;
+				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)Mcamera->CamFrust.pos += Mcamera->CamFrust.WorldRight() * speed;
 			}
 
 

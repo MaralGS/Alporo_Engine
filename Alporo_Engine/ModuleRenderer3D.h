@@ -26,6 +26,7 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
+	void CamBBind(CObject* Cam);
 public:
 
 
@@ -35,6 +36,7 @@ public:
 	SDL_GLContext context;
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
-
+	CObject* MRcamera;
+	
 
 };
