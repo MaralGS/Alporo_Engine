@@ -107,6 +107,10 @@ update_status ModuleCamera3D::Update(float dt)
 			}
 		}
 
+		if (App->imguiwindows->Selected == GameCamera)
+		{
+			Ccamera->CamFrust.pos = GameCamera->transform->position;
+		}
 
 	return UPDATE_CONTINUE;
 }
@@ -119,8 +123,6 @@ GameObject* ModuleCamera3D::CameraGameObject()
 	CObject* CompCam = new CObject(GameCamera);
 	Ccamera = CompCam;
 	GameCamera->Comp.push_back(CompCam);
-	GameCamera->transform->position = float3(0, 2, -10);
-	GameCamera->transform->Tranformation();
 	
 	return nullptr;
 }
