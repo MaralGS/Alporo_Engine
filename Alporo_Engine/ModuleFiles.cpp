@@ -5,54 +5,6 @@
 
 #include <cstdio>
 
-FileInfo::FileInfo(string path)
-{
-	this->path = path;
-	this->name = path.substr(path.find_last_of("/") + 1);
-	this->folder = (path.find(".") == -1);
-
-	if (!folder) {
-		this->extension = path.substr(path.find_last_of("."));
-	}
-	else {
-		this->extension = "";
-	}
-}
-
-void ModuleFiles::GetDirectoryInfo(const char* dir)
-{
-	dirInfo.clear();
-
-	char** docs = PHYSFS_enumerateFiles(dir);
-
-	//First add folders
-	for (int i = 0; docs[i] != NULL; i++) {
-		string d = dir;
-		d.append("/").append(docs[i]);
-
-		FileInfo f(d);
-		if (f.folder) dirInfo.push_back(f);
-	}
-
-	//Next add files
-	for (int i = 0; docs[i] != NULL; i++) {
-		string d = dir;
-		d.append("/").append(docs[i]);
-
-		FileInfo f(d);
-		if (!f.folder) dirInfo.push_back(f);
-	}
-
-	PHYSFS_freeList(docs);
-}
-
-void ModuleFiles::SetCurrentPath(const char* path)
-{
-	currentPath = path;
-	PHYSFS_setWriteDir(path);
-	GetDirectoryInfo(path);
-}
-
 ModuleFiles::ModuleFiles(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	PHYSFS_init(nullptr);
@@ -108,31 +60,17 @@ update_status ModuleFiles::Update(float dt)
 
 		PrintAssets();
 
-		if (fileMenu)
+		if (DeleteOption)
 		{
-			ImGui::Begin("FileMenu", 0, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
-
-			ImGui::Separator();
+			ImGui::Begin("FileMenu", 0, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 
 			if (ImGui::MenuItem("Delete"))
 			{
 				RemoveFile(FileInfo(fileSelected));
 				Refresh = true;
-				fileMenu = false;
+				DeleteOption = false;
 				fileSelected = "";
 			}
-
-			ImGui::Separator();
-
-			if (ImGui::MenuItem("Rename"))
-			{
-				pathToRename = fileSelected;
-				Refresh = true;
-				fileMenu = false;
-			}
-
-			ImGui::Separator();
-
 			ImGui::End();
 		}
 
@@ -174,7 +112,7 @@ void ModuleFiles::PrintAssets()
 				//Enter folder
 				if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_::ImGuiMouseButton_Left))
 				{
-					fileMenu = false;
+					DeleteOption = false;
 
 					if (file.folder)
 						SetCurrentPath(file.path.c_str());
@@ -182,13 +120,13 @@ void ModuleFiles::PrintAssets()
 				//Select folder
 				else if (ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left))
 				{
-					fileMenu = false;
+					DeleteOption = false;
 					fileSelected = file.path;
 				}
 				else if (ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Right))
 				{
 					fileSelected = file.path;
-					fileMenu = true;
+					DeleteOption = true;
 					ImGui::SetNextWindowPos(ImGui::GetMousePos());
 				}
 			}
@@ -206,22 +144,6 @@ void ModuleFiles::PrintAssets()
 			else
 				strncpy(buffer, file.name.substr(0, file.name.find_last_of(".")).c_str(), sizeof(buffer) - 1);
 
-			if (ImGui::InputText("###rename", buffer, sizeof(buffer), ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_AutoSelectAll))
-			{
-				//Delete extension given
-				string renamedDoc = buffer;
-				renamedDoc = renamedDoc.substr(0, renamedDoc.find_first_of("."));
-				//Set real file extension
-				renamedDoc.append(file.extension);
-
-				string newpath = currentPath;
-				newpath.append("/").append(renamedDoc);
-
-				rename(file.path.c_str(), newpath.c_str());
-
-				pathToRename = "";
-				Refresh = true;
-			}
 		}
 
 		ImGui::Separator();
@@ -291,9 +213,56 @@ void ModuleFiles::RemoveFile(FileInfo file)
 		}
 	}
 
-	//si 1a carpeta te dins una fitxer/carpeta, delete nomes el primer element que troba
 
 	string writedir = file.path.substr(0, file.path.find_last_of("/"));
 	PHYSFS_setWriteDir(writedir.c_str());
 	PHYSFS_delete(file.name.c_str());
+}
+
+void ModuleFiles::GetDirectoryInfo(const char* dir)
+{
+	dirInfo.clear();
+
+	char** docs = PHYSFS_enumerateFiles(dir);
+
+	//First add folders
+	for (int i = 0; docs[i] != NULL; i++) {
+		string d = dir;
+		d.append("/").append(docs[i]);
+
+		FileInfo f(d);
+		if (f.folder) dirInfo.push_back(f);
+	}
+
+	//Next add files
+	for (int i = 0; docs[i] != NULL; i++) {
+		string d = dir;
+		d.append("/").append(docs[i]);
+
+		FileInfo f(d);
+		if (!f.folder) dirInfo.push_back(f);
+	}
+
+	PHYSFS_freeList(docs);
+}
+
+void ModuleFiles::SetCurrentPath(const char* path)
+{
+	currentPath = path;
+	PHYSFS_setWriteDir(path);
+	GetDirectoryInfo(path);
+}
+
+FileInfo::FileInfo(string path)
+{
+	this->path = path;
+	this->name = path.substr(path.find_last_of("/") + 1);
+	this->folder = (path.find(".") == -1);
+
+	if (!folder) {
+		this->extension = path.substr(path.find_last_of("."));
+	}
+	else {
+		this->extension = "";
+	}
 }

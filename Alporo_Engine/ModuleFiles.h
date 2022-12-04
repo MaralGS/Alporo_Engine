@@ -49,7 +49,7 @@ private:
 	string pathToRename;
 	string fileSelected;
 
-	bool fileMenu = false;
+	bool DeleteOption = false;
 
 	uint folderTexture;
 	uint pngTexture;
