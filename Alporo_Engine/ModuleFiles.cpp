@@ -1,6 +1,6 @@
 #include "Application.h"
-#include "AssetsWindow.h"
-#include "HeaderMenu.h"
+#include "ModuleFiles.h"
+#include "ModuleImGuiWindow.h"
 #include "PhysFS/include/physfs.h"
 
 #include <cstdio>
@@ -19,7 +19,7 @@ FileInfo::FileInfo(string path)
 	}
 }
 
-void AssetsWindows::GetDirectoryInfo(const char* dir)
+void ModuleFiles::GetDirectoryInfo(const char* dir)
 {
 	dirInfo.clear();
 
@@ -46,14 +46,14 @@ void AssetsWindows::GetDirectoryInfo(const char* dir)
 	PHYSFS_freeList(docs);
 }
 
-void AssetsWindows::SetCurrentPath(const char* path)
+void ModuleFiles::SetCurrentPath(const char* path)
 {
 	currentPath = path;
 	PHYSFS_setWriteDir(path);
 	GetDirectoryInfo(path);
 }
 
-AssetsWindows::AssetsWindows(Application* app, bool start_enabled) : Module(app, start_enabled)
+ModuleFiles::ModuleFiles(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	PHYSFS_init(nullptr);
 	PHYSFS_mount(".", nullptr, 1);
@@ -61,65 +61,44 @@ AssetsWindows::AssetsWindows(Application* app, bool start_enabled) : Module(app,
 	SetCurrentPath("Assets");
 
 	pathToRename = "";
-	folderTexture = 0;
-	fbxTexture = 0;
-	pngTexture = 0;
-	elseTexture = 0;
-	refreshFolder = false;
+	Refresh = false;
 }
 
-AssetsWindows::~AssetsWindows()
+ModuleFiles::~ModuleFiles()
 {
 	PHYSFS_deinit();
 }
 
-bool AssetsWindows::Init()
+bool ModuleFiles::Init()
 {
 
 	return true;
 }
 
-bool AssetsWindows::Start()
+bool ModuleFiles::Start()
 {
 	bool ret = true;
-
-	folderTexture = App->textures->LoadTexture("Resources/Icons/folder_icon.png");
-	fbxTexture = App->textures->LoadTexture("Resources/Icons/fbx_icon.png");
-	pngTexture = App->textures->LoadTexture("Resources/Icons/png_icon.png");
-	elseTexture = App->textures->LoadTexture("Resources/Icons/else_icon.png");
 
 	GetDirectoryInfo(currentPath.c_str());
 
 	return ret;
 }
 
-bool AssetsWindows::CleanUp()
+bool ModuleFiles::CleanUp()
 {
-	App->textures->DestroyTexture(folderTexture);
-	App->textures->DestroyTexture(fbxTexture);
-	App->textures->DestroyTexture(pngTexture);
-	App->textures->DestroyTexture(elseTexture);
 
 	return true;
 }
 
-update_status AssetsWindows::PreUpdate(float dt)
+update_status ModuleFiles::PreUpdate(float dt)
 {
-	update_status ret = UPDATE_CONTINUE;
-
-	return ret;
+	return UPDATE_CONTINUE;
 }
 
-update_status AssetsWindows::Update(float dt)
+update_status ModuleFiles::Update(float dt)
 {
-	update_status ret = UPDATE_CONTINUE;
-
-	if (HMenu::openAssets)
-	{
-		HMenu::ThemeStyleWind();
-		HMenu::ThemeStylePopUp();
-
-		ImGui::Begin("Assets", 0, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse);
+	
+		ImGui::Begin("Assets", 0, ImGuiWindowFlags_MenuBar);
 
 		if (ImGui::BeginMenuBar())
 		{
@@ -131,14 +110,14 @@ update_status AssetsWindows::Update(float dt)
 
 		if (fileMenu)
 		{
-			ImGui::Begin("FileMenu", 0, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
+			ImGui::Begin("FileMenu", 0, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
 
 			ImGui::Separator();
 
 			if (ImGui::MenuItem("Delete"))
 			{
 				RemoveFile(FileInfo(fileSelected));
-				refreshFolder = true;
+				Refresh = true;
 				fileMenu = false;
 				fileSelected = "";
 			}
@@ -148,7 +127,7 @@ update_status AssetsWindows::Update(float dt)
 			if (ImGui::MenuItem("Rename"))
 			{
 				pathToRename = fileSelected;
-				refreshFolder = true;
+				Refresh = true;
 				fileMenu = false;
 			}
 
@@ -161,25 +140,21 @@ update_status AssetsWindows::Update(float dt)
 		{
 			RemoveFile(FileInfo(fileSelected));
 			fileSelected = "";
-			refreshFolder = true;
+			Refresh = true;
 		}
 
 		ImGui::End();
 
-		ImGui::PopStyleColor(4);
-	}
 
-	return ret;
+	return UPDATE_CONTINUE;
 }
 
-update_status AssetsWindows::PostUpdate(float dt)
+update_status ModuleFiles::PostUpdate(float dt)
 {
-	update_status ret = UPDATE_CONTINUE;
-
-	return ret;
+	return UPDATE_CONTINUE;
 }
 
-void AssetsWindows::PrintAssets()
+void ModuleFiles::PrintAssets()
 {
 	for (int i = 0; i < dirInfo.size(); i++)
 	{
@@ -190,21 +165,6 @@ void AssetsWindows::PrintAssets()
 		if (file.path == fileSelected)
 			treeNodeFlags |= ImGuiTreeNodeFlags_Selected;
 
-		if (file.folder) {
-			ImGui::Image((ImTextureID)folderTexture, ImVec2(15, 15));
-			ImGui::SameLine();
-		}
-		else
-		{
-			if (file.extension == ".png" || file.extension == ".PNG")
-				ImGui::Image((ImTextureID)pngTexture, ImVec2(15, 15));
-			else if (file.extension == ".fbx" || file.extension == ".FBX")
-				ImGui::Image((ImTextureID)fbxTexture, ImVec2(15, 15));
-			else
-				ImGui::Image((ImTextureID)elseTexture, ImVec2(15, 15));
-
-			ImGui::SameLine();
-		}
 
 		if (pathToRename != file.path)
 		{
@@ -260,7 +220,7 @@ void AssetsWindows::PrintAssets()
 				rename(file.path.c_str(), newpath.c_str());
 
 				pathToRename = "";
-				refreshFolder = true;
+				Refresh = true;
 			}
 		}
 
@@ -269,18 +229,17 @@ void AssetsWindows::PrintAssets()
 
 	if (ImGui::Button("Create Folder"))
 	{
-		CreateFolder(NEW_FOLDER_PATH);
-		refreshFolder = true;
+		PHYSFS_mkdir("Folder");
+		Refresh = true;
 	}
-
-	//Refresh path if changes are made
-	if (refreshFolder) {
+	
+	if (Refresh) {
 		GetDirectoryInfo(currentPath.c_str());
-		refreshFolder = false;
+		Refresh = false;
 	}
 }
 
-void AssetsWindows::PrintAssetsMenu()
+void ModuleFiles::PrintAssetsMenu()
 {
 	string pa = currentPath;
 
@@ -310,12 +269,8 @@ void AssetsWindows::PrintAssetsMenu()
 
 }
 
-void AssetsWindows::CreateFolder(const char* dir)
-{
-	PHYSFS_mkdir(dir);
-}
 
-void AssetsWindows::RemoveFile(FileInfo file)
+void ModuleFiles::RemoveFile(FileInfo file)
 {
 	//File
 	if (!file.folder) {

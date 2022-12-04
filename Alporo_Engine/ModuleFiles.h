@@ -3,9 +3,8 @@
 #include "Globals.h"
 #include "imgui.h"
 
-#pragma comment( lib, "External_Libraries/PhysFS/libx86/physfs.lib" )
+#pragma comment( lib, "PhysFS/libx86/physfs.lib" )
 
-#define NEW_FOLDER_PATH "New_Folder"
 
 struct FileInfo {
 	FileInfo(string path);
@@ -15,12 +14,12 @@ struct FileInfo {
 	string extension;
 };
 
-class AssetsWindows : public Module
+class ModuleFiles : public Module
 {
 public:
 
-	AssetsWindows(Application* app, bool start_enabled = true);
-	~AssetsWindows();
+	ModuleFiles(Application* app, bool start_enabled = true);
+	~ModuleFiles();
 
 	bool Init();
 	bool Start();
@@ -42,7 +41,7 @@ private:
 	//Change dirInfo variable
 	void GetDirectoryInfo(const char* dir);
 
-	bool refreshFolder;
+	bool Refresh;
 
 	string currentPath;
 	vector<FileInfo> dirInfo;

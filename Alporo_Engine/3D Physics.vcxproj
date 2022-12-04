@@ -68,7 +68,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL\include;$(SolutionDir)ImGui;$(SolutionDir)Glew\include;$(SolutionDir)Assimp\include;$(SolutionDir)DevIL\include;$(SolutionDir)MathGeoLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDL\include;$(SolutionDir)ImGui;$(SolutionDir)Glew\include;$(SolutionDir)Assimp\include;$(SolutionDir)DevIL\include;$(SolutionDir)PhysFS\include;$(SolutionDir)MathGeoLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -76,7 +76,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>$(SolutionDir)DevIL\libx86;$(SolutionDir)MathGeoLib\libx86\Debug;$(SolutionDir)Glew\libx86;$(SolutionDir)SDL\libx86;$(SolutionDir)Assimp\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)DevIL\libx86;$(SolutionDir)MathGeoLib\libx86\Debug;$(SolutionDir)Glew\libx86;$(SolutionDir)SDL\libx86;$(SolutionDir)Assimp\libx86;$(SolutionDir)PhysFS\libx86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>

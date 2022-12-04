@@ -10,7 +10,7 @@ Application::Application()
 	imguiwindows = new ModuleImguiWindow(this);
 	LoadFbx = new ModuleLoadFBX(this);
 	MTextures = new ModuleTexture(this);
-
+	Files = new ModuleFiles(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -22,6 +22,7 @@ Application::Application()
 	AddModule(camera);
 	AddModule(input);
 	AddModule(scene);
+	AddModule(Files);
 
 	AddModule(LoadFbx);
 	AddModule(MTextures);
