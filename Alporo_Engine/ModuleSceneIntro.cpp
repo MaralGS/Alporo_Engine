@@ -39,14 +39,44 @@ update_status ModuleSceneIntro::Update(float dt)
 	Grid p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
-	if (play == true) 
+
+	if (play == true)
 	{
-		timer +=  dt;
+		timer += dt;
 	}
-	if (stop == true) 
+	if (stop == true)
 	{
 		timer = 0;
 	}
+
+	if (ImGui::Begin("Game", 0, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar)) {
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::Button("STOP")) {
+				ImGui::SetWindowFocus("GameWindow");
+				stop = true;
+				play = false;
+			}
+			ImGui::Separator();
+			if (ImGui::Button("PAUSE")) {
+				play = false;
+			}
+			ImGui::Separator();
+			ImGui::Text("%.00f", timer);
+			ImGui::EndMenuBar();
+		}
+		// Using a Child allow to fill all the space of the window.
+		// It also alows customization
+		ImGui::BeginChild("GameRender");
+		// Get the size of the child (i.e. the whole draw size of the windows).
+		ImVec2 wsize = ImGui::GetWindowSize();
+		// Because I use the texture from OpenGL, I need to invert the V from the UV.
+
+		ImGui::Image((ImTextureID)App->camera->Ccamera->bufferCam, wsize, ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::EndChild();
+	}
+	ImGui::End();
+
 	ImGui::Begin("GameWindow", 0, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar);
 	if (ImGui::BeginMenuBar())
 	{
@@ -81,34 +111,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		ImGui::EndChild();
 		ImGui::End();
 
-	if (ImGui::Begin("Game", 0, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoTitleBar)) {
-		if (ImGui::BeginMenuBar())
-		{
-			if (ImGui::Button("STOP")) {
-				ImGui::SetWindowFocus("GameWindow");
-				stop = true;
-				play = false;
-			}
-			ImGui::Separator();
-			if (ImGui::Button("PAUSE")) {
-				play = false;
-			}
-			ImGui::Separator();
-			ImGui::Text("%.00f", timer);
-			ImGui::EndMenuBar();
-		}
-		// Using a Child allow to fill all the space of the window.
-		// It also alows customization
-		ImGui::BeginChild("GameRender");
-		// Get the size of the child (i.e. the whole draw size of the windows).
-		ImVec2 wsize = ImGui::GetWindowSize();
-		// Because I use the texture from OpenGL, I need to invert the V from the UV.
 	
-		ImGui::Image((ImTextureID)App->camera->Ccamera->bufferCam, wsize, ImVec2(0, 1), ImVec2(1, 0));
-		ImGui::EndChild();
-	}
-	ImGui::End();
-
 	return UPDATE_CONTINUE;
 }
 

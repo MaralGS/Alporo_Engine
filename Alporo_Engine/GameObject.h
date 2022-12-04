@@ -30,6 +30,6 @@ class GameObject
 	Transform* transform = nullptr;
 	Meshes* GOMesh = nullptr;
 	CObject* CamGOGame;
-	char Title[150] = "";
+	char Title[150] = "Write Text";
 
 };

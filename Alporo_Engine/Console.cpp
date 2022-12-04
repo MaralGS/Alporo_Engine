@@ -14,7 +14,6 @@ void Console::PrintDebug()
 
 	if (ImGui::BeginMenuBar())
 	{
-		ImGui::Separator();
 
 		if (ImGui::Button("Clear"))
 		{

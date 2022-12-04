@@ -55,6 +55,14 @@ update_status ModuleFiles::Update(float dt)
 		if (ImGui::BeginMenuBar())
 		{
 			PrintPathBar();
+			ImGui::Separator();
+
+			if (ImGui::Button("Create Folder"))
+			{
+				PHYSFS_mkdir("New Folder");
+				Reload = true;
+			}
+	
 			ImGui::EndMenuBar();
 		}
 
@@ -154,11 +162,6 @@ void ModuleFiles::PrintFiles()
 		ImGui::Separator();
 	}
 
-	if (ImGui::Button("Create Folder"))
-	{
-		PHYSFS_mkdir("Folder");
-		Reload = true;
-	}
 	
 
 }
