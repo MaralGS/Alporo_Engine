@@ -117,8 +117,7 @@ update_status ModuleCamera3D::Update(float dt)
 
 GameObject* ModuleCamera3D::CameraGameObject()
 {
-	//GameCamera = new GameObject(App->imguiwindows->RootGO);
-	//GameCamera->name = "Game Camera";
+
 	GameCamera = App->LoadFbx->LoadFile("Assets/Primitives/cube2.fbx", "GameCamera");
 
 	CObject* CompCam = new CObject(GameCamera);
