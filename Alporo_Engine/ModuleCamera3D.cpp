@@ -20,7 +20,7 @@ bool ModuleCamera3D::Start()
 	//creating GameCamera
 
 	Mcamera = new CObject();
-	Mcamera->CamFrust.pos = float3(0, 2, -10);
+	Mcamera->CamFrust.pos = float3(0, 1, -8);
 	CameraGameObject();
 	return ret;
 }
@@ -117,12 +117,13 @@ update_status ModuleCamera3D::Update(float dt)
 
 GameObject* ModuleCamera3D::CameraGameObject()
 {
-	GameCamera = new GameObject(App->imguiwindows->RootGO);
-	GameCamera->name = "Game Camera";
+	//GameCamera = new GameObject(App->imguiwindows->RootGO);
+	//GameCamera->name = "Game Camera";
+	GameCamera = App->LoadFbx->LoadFile("Assets/Primitives/cube2.fbx", "GameCamera");
 
 	CObject* CompCam = new CObject(GameCamera);
 	Ccamera = CompCam;
 	GameCamera->Comp.push_back(CompCam);
-	
+	GameCamera->transform->position = float3(0, 1, -5);
 	return nullptr;
 }
