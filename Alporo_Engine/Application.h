@@ -12,6 +12,7 @@
 #include "ModuleImGuiWindow.h"
 #include "ModuleTexture.h"
 #include "ModuleLoadFBX.h"
+#include "ModuleFiles.h"
 #include "imgui.h"
 
 class Application
@@ -25,6 +26,7 @@ public:
 	ModuleImguiWindow* imguiwindows;
 	ModuleLoadFBX* LoadFbx;
 	ModuleTexture* MTextures;
+	ModuleFiles* Files;
 
 	
 private:

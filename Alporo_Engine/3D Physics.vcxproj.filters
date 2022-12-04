@@ -459,6 +459,9 @@
     <ClInclude Include="CameraObject.h">
       <Filter>Sources\Objects\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFiles.h">
+      <Filter>Sources\Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleCamera3D.cpp">
@@ -644,6 +647,9 @@
     </ClCompile>
     <ClCompile Include="CameraObject.cpp">
       <Filter>Sources\Objects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFiles.cpp">
+      <Filter>Sources\Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
