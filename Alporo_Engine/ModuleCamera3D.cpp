@@ -103,8 +103,8 @@ update_status ModuleCamera3D::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
 			if (App->imguiwindows->Selected != nullptr)
 			{
-				Mcamera->CamFrust.pos = App->imguiwindows->Selected->transform->position;
-				Mcamera->LookAt(Mcamera->CamFrust.pos);
+				Mcamera->CamFrust.pos = float3(App->imguiwindows->Selected->transform->position.x, App->imguiwindows->Selected->transform->position.y + 2, App->imguiwindows->Selected->transform->position.z - 5);
+				Mcamera->LookAt(App->imguiwindows->Selected->transform->position);
 			}
 		}
 	}
