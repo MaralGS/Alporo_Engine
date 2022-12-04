@@ -13,7 +13,7 @@ public:
 	bool Start();
 	update_status Update(float dt);
 	bool CleanUp();
-
+	ImVec2 WindowSize;
 public:
 	GameObject* Root = nullptr;
 };

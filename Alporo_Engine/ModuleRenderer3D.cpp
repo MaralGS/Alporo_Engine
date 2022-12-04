@@ -147,34 +147,7 @@ bool ModuleRenderer3D::Init()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, context);
 	ImGui_ImplOpenGL3_Init("#version 130");
 
-	glGenFramebuffers(1, &frameBuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-
-	glGenTextures(1, &bufferCam);
-	glBindTexture(GL_TEXTURE_2D, bufferCam);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	/*
-	float color[4] = { 0.1,0.1,0.1,0 };
-	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, color);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	*/
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glBindTexture(GL_TEXTURE_2D, 0);
 	
-
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, bufferCam, 0);
-
-	glGenRenderbuffers(1, &bufferObj);
-	glBindRenderbuffer(GL_RENDERBUFFER, bufferObj);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCREEN_WIDTH, SCREEN_HEIGHT);
-	glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, bufferObj);
-
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 	return ret;
 }
 
@@ -184,11 +157,12 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(App->camera->GetViewMatrix());
-
+	CamBBind(App->camera->Mcamera);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	
 	// light 0 on cam pos
-	lights[0].SetPos(App->camera->Cam.Position.x, App->camera->Cam.Position.y, App->camera->Cam.Position.z);
+	//lights[0].SetPos(App->camera->Mcamera->CamFrust.pos.x, App->camera->Mcamera->CamFrust.pos.y, App->camera->Mcamera->CamFrust.pos.z);
 
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
@@ -219,18 +193,22 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	ImGui::End();
 
-	if (App->imguiwindows->CreatedOnce == false) {
-		glMatrixMode(GL_MODELVIEW);
-		glLoadMatrixf(App->imguiwindows->Selected->CamGOGame->GetViewMatrix());
-		glBindFramebuffer(GL_FRAMEBUFFER, App->imguiwindows->Selected->CamGOGame->frameBuffer2);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	}
-	else {
-		glBindFramebuffer(GL_FRAMEBUFFER, bufferCam);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	}
+	//if (App->camera->Ccamera != nullptr) {
+	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//	glLoadIdentity();
+	//
+	//	glMatrixMode(GL_PROJECTION);
+	//	glLoadMatrixf(App->camera->Ccamera->CalculateProjMatix());
+	//
+	//	
+	//	glMatrixMode(GL_MODELVIEW);
+	//	glLoadMatrixf(App->camera->Ccamera->CalculateProjMatix());
+	//	
+	//	glBindFramebuffer(GL_FRAMEBUFFER, App->camera->Ccamera->frameBuffer);
+	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	//}
+
 
 	return UPDATE_CONTINUE;
 }
@@ -285,24 +263,6 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		Console::PrintDebug();
 
 
-	/*CObject* component = new CObject(App->camera->GameCamera);
-	Camera* Scamera = new Camera();
-	Scamera->SecCamera = App->camera->GameCamera;
-	App->camera->Cam.SecCamera = App->camera->GameCamera;
-	component->NewCamera = Scamera;
-	if (App->camera->GameCamera->Comp.size() > 1) {
-		App->camera->GameCamera->Comp.push_back(component);
-	}*/
-
-	
-		/*Camera* Scamera = new Camera();
-		CObject* component = new CObject(App->camera->GameCamera);
-		App->camera->Cam.SecCamera = App->camera->GameCamera;
-		component->NewCamera = Scamera;
-		if (App->camera->GameCamera->Comp.size() == 1) {
-			App->camera->GameCamera->Comp.push_back(component);
-		}*/
-
 	// Rendering
 	ImGui::Render();
 	glViewport(0, 0, (int)io->DisplaySize.x, (int)io->DisplaySize.y);
@@ -324,9 +284,9 @@ bool ModuleRenderer3D::CleanUp()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
-	glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
 	SDL_GL_DeleteContext(context);
-	glDeleteFramebuffers(1, &frameBuffer);
+	//glDeleteFramebuffers(1, &App->camera->Mcamera->frameBuffer);
 
 	return true;
 }
@@ -338,10 +298,24 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	ProjectionMatrix = perspective(60.0f, (float)width / (float)height, 0.125f, 512.0f);
+	ProjectionMatrix = perspective(60, (float)width / (float)height, 0.125f, 512.0f);
 	glLoadMatrixf(&ProjectionMatrix);
+	//glLoadMatrixf(App->camera->Mcamera->CamFrust.ProjectionMatrix().Transposed().ptr());
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
+
+void ModuleRenderer3D::CamBBind(CObject* Cam)
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(Cam->CalculateProjMatix());
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(Cam->GetViewMatrix());
+
+	glBindFramebuffer(GL_FRAMEBUFFER, Cam->frameBuffer);
+
+
+}

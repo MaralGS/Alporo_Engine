@@ -5,10 +5,6 @@
 
 class GameObject;
 
-struct Camera {
-	vec3 X, Y, Z, Position, Reference;
-};
-
 class ModuleCamera3D : public Module
 {
 public:
@@ -19,23 +15,23 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
-	void Look(const vec3 &Position, const vec3 &Reference, bool RotateAroundReference = false);
-	void LookAt(const vec3 &Spot);
-	void Move(const vec3 &Movement);
-	float* GetViewMatrix();
+
 	GameObject* CameraGameObject();
 	GameObject* GameCamera;
-	bool SetCamera = false;
+	GameObject* SecondCamera;
+	//float* GetViewMatrix();
 private:
 
-	void CalculateViewMatrix();
+	//void CalculateViewMatrix();
 
 public:
-	Camera Cam;
 	bool CreateGameCamera = true;
-	GameObject* SecondCamera;
+
+	CObject* Mcamera;
+	CObject* Ccamera;
+
 private:
 
-	mat4x4 ViewMatrix, ViewMatrixInverse;
+	//mat4x4 ViewMatrix, ViewMatrixInverse;
 	bool FromReference = true;
 };
