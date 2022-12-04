@@ -11,6 +11,7 @@ Transform::Transform(GameObject* Transform) : Component(Transform)
 	GObjectSelected = Transform;
 
 	type = Type::Transform;
+	Transform_Matrix = float4x4::identity;
 }
 
 Transform::~Transform()
@@ -31,20 +32,23 @@ void Transform::Inspector()
 
 void Transform::Tranformation()
 {
+	float X = rotate.x * DEGTORAD;
+	float Y = rotate.y * DEGTORAD;
+	float Z = rotate.z * DEGTORAD;
+
 	//rotation
-	Transform_Matrix[0][0] = (cos(rotate.z) * cos(rotate.x)) * (scale.x * scale.x) ;
-	Transform_Matrix[3][0] = cos(rotate.z) * sin(rotate.x);
-	Transform_Matrix[0][2] = -sin(rotate.z);
+	Transform_Matrix[0][0] = (cos(Z) * cos(Y)) * (scale.x);// *scale.x);
+	Transform_Matrix[0][1] = cos(Z) * sin(Y);
+	Transform_Matrix[0][2] = -sin(Z);
 	Transform_Matrix[3][0] = position.x;
 
-	Transform_Matrix[1][0] = (sin(rotate.y) * sin(rotate.z) * cos(rotate.x)) - (cos(rotate.y) * sin(rotate.x));
-	Transform_Matrix[1][1] = ((sin(rotate.y) * sin(rotate.z) * sin(rotate.x)) + (cos(rotate.y) * cos(rotate.x))) * (scale.y * scale.y);
-	Transform_Matrix[1][2] = sin(rotate.y) * cos(rotate.z);
+	Transform_Matrix[1][0] =  (-cos(X) * sin(Z)) + ((sin(Y) * sin(Z) * cos(X)));
+	Transform_Matrix[1][1] = ((sin(Y) * sin(Z) * sin(X)) + (cos(X) * cos(Z))) * (scale.y);// * scale.y);
+	Transform_Matrix[1][2] = sin(Y) * cos(X);
 	Transform_Matrix[3][1] = position.y;
 
-
-	Transform_Matrix[2][0] = (cos(rotate.y) * sin(rotate.z) * cos(rotate.x)) + (sin(rotate.y) * sin(rotate.x));
-	Transform_Matrix[2][1] = (cos(rotate.y) * sin(rotate.z) * sin(rotate.x)) - (sin(rotate.y) * cos(rotate.x));
-	Transform_Matrix[2][2] = (cos(rotate.y) * cos(rotate.z)) * (scale.z * scale.z);
+	Transform_Matrix[2][0] = (cos(Z) * sin(Y) * cos(X)) + (sin(Z) * sin(X));
+	Transform_Matrix[2][1] = (cos(X) * sin(Z) * sin(Y)) + (-sin(X) * cos(Z));
+	Transform_Matrix[2][2] = (cos(X) * cos(Y)) * (scale.z);// *scale.z);
 	Transform_Matrix[3][2] = position.z;
 }

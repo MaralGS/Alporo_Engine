@@ -20,7 +20,7 @@ bool ModuleCamera3D::Start()
 	//creating GameCamera
 	//SecondCamera = CameraGameObject();
 	Mcamera = new CObject();
-	Mcamera->CamFrust.pos = float3(0.0f, 2.0f, -10.0f);
+	Mcamera->CamFrust.pos = float3(0, 2, -10);
 	return ret;
 }
 
@@ -78,9 +78,8 @@ update_status ModuleCamera3D::Update(float dt)
 			{
 				float DeltaX = (float)dx * Sensitivity;
 
-				
 				Quat X = Quat::identity;
-				X.SetFromAxisAngle(float3(0.0f, 1.0f, 0.0f), DeltaX);
+				X.SetFromAxisAngle(float3(0.0f, 1.0f, 0.0f), DeltaX * DEGTORAD);
 
 			}
 
@@ -88,7 +87,7 @@ update_status ModuleCamera3D::Update(float dt)
 			{
 				float DeltaY = (float)dy * Sensitivity;
 				Quat Y = Quat::identity;
-				Y.SetFromAxisAngle(float3(1.0f, 0.0f, 0.0f), DeltaY);
+				Y.SetFromAxisAngle(float3(1.0f, 0.0f, 0.0f), DeltaY * DEGTORAD);
 
 			}
 

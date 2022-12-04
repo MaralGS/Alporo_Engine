@@ -19,7 +19,6 @@ GameObject::GameObject(GameObject* parent)
 	name = "GameObject";
 	Parent = parent;
 
-	CamGOGame = new CObject();
 	CamGOGame = new CObject(this);
 
 	transform = new Transform(this);

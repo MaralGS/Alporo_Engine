@@ -147,34 +147,7 @@ bool ModuleRenderer3D::Init()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, context);
 	ImGui_ImplOpenGL3_Init("#version 130");
 
-	//glGenFramebuffers(1, &frameBuffer);
-	//glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-	//
-	//glGenTextures(1, &bufferCam);
-	//glBindTexture(GL_TEXTURE_2D, bufferCam);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	///*
-	//float color[4] = { 0.1,0.1,0.1,0 };
-	//glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, color);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	//*/
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glBindTexture(GL_TEXTURE_2D, 0);
-	//
-	//
-	//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, bufferCam, 0);
-	//
-	//glGenRenderbuffers(1, &bufferObj);
-	//glBindRenderbuffer(GL_RENDERBUFFER, bufferObj);
-	//glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, SCREEN_WIDTH, SCREEN_HEIGHT);
-	//glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	//
-	//glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, bufferObj);
-	//
-	//if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-	//glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
+	
 	return ret;
 }
 
@@ -336,13 +309,13 @@ void ModuleRenderer3D::OnResize(int width, int height)
 
 void ModuleRenderer3D::CamBBind(CObject* Cam)
 {
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadMatrixf(Cam->CalculateProjMatix());
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(Cam->CalculateProjMatix());
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(Cam->GetViewMatrix());
 
 	glBindFramebuffer(GL_FRAMEBUFFER, Cam->frameBuffer);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
 }

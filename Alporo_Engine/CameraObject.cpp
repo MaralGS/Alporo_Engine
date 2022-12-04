@@ -6,6 +6,7 @@
 CObject::CObject()
 {
 
+	SetCam();
 	CreateCamBuffer();
 	CamFrust.pos = float3(0.0f, 0.0f, 5.0f);
 	//CamFrust.referenceReference = float3(0.0f, 0.0f, 0.0f);
@@ -16,6 +17,7 @@ CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
 {
 	GObjectSelected = GOCamera;
 	type = Type::CamObject;
+	SetCam();
 }
 
 bool CObject::Start()
@@ -45,7 +47,12 @@ void CObject::CreateCamBuffer()
 	glBindTexture(GL_TEXTURE_2D, bufferCam);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
+	float color[4] = { 0.1,0.1,0.1,0 };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, color);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, bufferCam, 0);
@@ -58,27 +65,26 @@ void CObject::CreateCamBuffer()
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, bufferObj);
 
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		LOG(LogType::ERRORS,"ERROR::FRAMEBUFFER:: Framebuffer is not complete!");
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 }
 
-// -----------------------------------------------------------------
-/*void ModuleCamera3D::Look(const vec3& Position, const vec3& Reference, bool RotateAroundReference)
+void CObject::SetCam()
 {
-	this->Cam.Position = Position;
-	this->Cam.Reference = Reference;
+	int FOV = 60;
+	CamFrust.type = FrustumType::PerspectiveFrustum;
+	CamFrust.nearPlaneDistance = 0.1f;
+	CamFrust.farPlaneDistance = 500.f;
+	CamFrust.front = float3::unitZ;
+	CamFrust.up = float3::unitY;
 
-	Cam.Z = normalize(Position - Reference);
-	Cam.X = normalize(cross(vec3(0.0f, 1.0f, 0.0f), Cam.Z));
-	Cam.Y = cross(Cam.Z, Cam.X);
+	CamFrust.verticalFov = FOV * DEGTORAD;
+	CamFrust.horizontalFov = 2.0f * atanf(tanf(CamFrust.verticalFov / 2.0f) * 1.7f);
 
-	if (!RotateAroundReference)
-	{
-		this->Cam.Reference = this->Cam.Position;
-		this->Cam.Position += Cam.Z * 0.05f;
-	}
-
-	CalculateViewMatrix();
-}*/
+	CamFrust.pos = float3(0, 0, 0);
+}
 
 // -----------------------------------------------------------------
 void CObject::LookAt(const float3& Spot)

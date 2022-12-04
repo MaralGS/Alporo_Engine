@@ -18,6 +18,7 @@ public:
 	bool Start();
 	bool CleanUp();
 	void CreateCamBuffer();
+	void SetCam();
 	float* GetViewMatrix();
 	~CObject();
 
