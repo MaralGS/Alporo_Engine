@@ -154,12 +154,15 @@ bool ModuleRenderer3D::Init()
 // PreUpdate: clear buffer
 update_status ModuleRenderer3D::PreUpdate(float dt)
 {
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 
 	CamBBind(App->camera->Mcamera);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+
 	
 	// light 0 on cam pos
 	//lights[0].SetPos(App->camera->Mcamera->CamFrust.pos.x, App->camera->Mcamera->CamFrust.pos.y, App->camera->Mcamera->CamFrust.pos.z);
@@ -193,23 +196,21 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	ImGui::End();
 
-	//if (App->camera->Ccamera != nullptr) {
-	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//	glLoadIdentity();
-	//
-	//	glMatrixMode(GL_PROJECTION);
-	//	glLoadMatrixf(App->camera->Ccamera->CalculateProjMatix());
-	//
-	//	
-	//	glMatrixMode(GL_MODELVIEW);
-	//	glLoadMatrixf(App->camera->Ccamera->CalculateProjMatix());
-	//	
-	//	glBindFramebuffer(GL_FRAMEBUFFER, App->camera->Ccamera->frameBuffer);
-	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	//	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	//}
+	if (App->imguiwindows->Selected == App->camera->GameCamera) {
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glLoadIdentity();
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadMatrixf(App->camera->Ccamera->CalculateProjMatix());
 
 
+		glMatrixMode(GL_MODELVIEW);
+		glLoadMatrixf(App->camera->Ccamera->GetViewMatrix());
+
+		glBindFramebuffer(GL_FRAMEBUFFER, App->camera->Ccamera->frameBuffer);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -263,6 +264,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 		Console::PrintDebug();
 
 
+	
 	// Rendering
 	ImGui::Render();
 	glViewport(0, 0, (int)io->DisplaySize.x, (int)io->DisplaySize.y);
