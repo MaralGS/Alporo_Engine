@@ -18,9 +18,10 @@ bool ModuleCamera3D::Start()
 	bool ret = true;
 
 	//creating GameCamera
-	SecondCamera = CameraGameObject();
+
 	Mcamera = new CObject();
 	Mcamera->CamFrust.pos = float3(0, 2, -10);
+	CameraGameObject();
 	return ret;
 }
 
@@ -42,13 +43,14 @@ update_status ModuleCamera3D::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			speed = 10.0f * dt;
 		
-	
-				if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Mcamera->CamFrust.pos += Mcamera->CamFrust.front * speed;
-				if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) Mcamera->CamFrust.pos -= Mcamera->CamFrust.front * speed;
-																				
-				if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) Mcamera->CamFrust.pos -= Mcamera->CamFrust.WorldRight() * speed;
-				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)Mcamera->CamFrust.pos += Mcamera->CamFrust.WorldRight() * speed;
-			
+		if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
+		{
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Mcamera->CamFrust.pos += Mcamera->CamFrust.front * speed;
+			if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) Mcamera->CamFrust.pos -= Mcamera->CamFrust.front * speed;
+
+			if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) Mcamera->CamFrust.pos -= Mcamera->CamFrust.WorldRight() * speed;
+			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)Mcamera->CamFrust.pos += Mcamera->CamFrust.WorldRight() * speed;
+		}
 
 
 
@@ -96,37 +98,6 @@ update_status ModuleCamera3D::Update(float dt)
 			Mcamera->CamFrust.SetWorldMatrix(matrix.Float3x4Part());
 		}
 
-		/*if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
-		{
-			int dx = -App->input->GetMouseXMotion();
-			int dy = -App->input->GetMouseYMotion();
-			vec3 NRef;
-			float Sensitivity = 0.25f;
-
-			if (dx != 0)
-			{
-				float DeltaX = (float)dx * Sensitivity;
-
-				Cam.X = rotate(Cam.X, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-				Cam.Y = rotate(Cam.Y, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-				Cam.Z = rotate(Cam.Z, DeltaX, vec3(0.0f, 1.0f, 0.0f));
-			}
-
-			if (dy != 0)
-			{
-				float DeltaY = (float)dy * Sensitivity;
-
-				Cam.Y = rotate(Cam.Y, DeltaY, Cam.X);
-				Cam.Z = rotate(Cam.Z, DeltaY, Cam.X);
-
-				if (Cam.Y.y < 0.0f)
-				{
-					Cam.Z = vec3(0.0f, Cam.Z.y > 0.0f ? 1.0f : -1.0f, 0.0f);
-					Cam.Y = cross(Cam.Z, Cam.X);
-				}
-			}
-
-		}*/
 
 		if (App->input->GetKey(SDL_SCANCODE_F) == KEY_DOWN) {
 			if (App->imguiwindows->Selected != nullptr)
@@ -149,7 +120,7 @@ GameObject* ModuleCamera3D::CameraGameObject()
 	Ccamera = CompCam;
 	GameCamera->Comp.push_back(CompCam);
 	GameCamera->transform->position = float3(0, 2, -10);
-	GameCamera->transform->Transform_Matrix;
+	GameCamera->transform->Tranformation();
 	
 	return nullptr;
 }

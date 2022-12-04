@@ -1,7 +1,7 @@
 #include "Transform.h"
 #include "Mesh.h"
 
-Transform::Transform() 
+Transform::Transform() : Component(nullptr)
 {
 
 }
@@ -51,4 +51,9 @@ void Transform::Tranformation()
 	Transform_Matrix[2][1] = (cos(X) * sin(Z) * sin(Y)) + (-sin(X) * cos(Z));
 	Transform_Matrix[2][2] = (cos(X) * cos(Y)) * (scale.z);// *scale.z);
 	Transform_Matrix[3][2] = position.z;
+	
+	Transform_Matrix[0][3] = 0;
+	Transform_Matrix[1][3] = 0;
+	Transform_Matrix[2][3] = 0;
+	Transform_Matrix[3][3] = 1;
 }

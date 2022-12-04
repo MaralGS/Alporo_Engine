@@ -3,14 +3,11 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL_events.h"
 
-CObject::CObject()
+CObject::CObject() : Component(nullptr)
 {
-
 	SetCam();
 	CreateCamBuffer();
 	CamFrust.pos = float3(0.0f, 0.0f, 5.0f);
-	//CamFrust.referenceReference = float3(0.0f, 0.0f, 0.0f);
-
 }
 
 CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
@@ -18,6 +15,8 @@ CObject::CObject(GameObject* GOCamera) : Component(GOCamera)
 	GObjectSelected = GOCamera;
 	type = Type::CamObject;
 	SetCam();
+	CreateCamBuffer();
+	CamFrust.pos = float3(0.0f, 0.0f, 5.0f);
 }
 
 bool CObject::Start()

@@ -18,7 +18,6 @@ public:
 
 	GameObject* CameraGameObject();
 	GameObject* GameCamera;
-	GameObject* SecondCamera;
 	//float* GetViewMatrix();
 private:
 

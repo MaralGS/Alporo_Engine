@@ -1,10 +1,5 @@
 #include "Component.h"
 
-Component::Component()
-{
-	int hola = 0;
-}
-
 Component::Component(GameObject* Object)
 {
 	type = Type::None;
