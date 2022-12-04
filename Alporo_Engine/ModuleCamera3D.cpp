@@ -18,7 +18,7 @@ bool ModuleCamera3D::Start()
 	bool ret = true;
 
 	//creating GameCamera
-	//SecondCamera = CameraGameObject();
+	SecondCamera = CameraGameObject();
 	Mcamera = new CObject();
 	Mcamera->CamFrust.pos = float3(0, 2, -10);
 	return ret;
@@ -42,14 +42,13 @@ update_status ModuleCamera3D::Update(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			speed = 10.0f * dt;
 		
-			if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
-			{
+	
 				if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) Mcamera->CamFrust.pos += Mcamera->CamFrust.front * speed;
 				if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) Mcamera->CamFrust.pos -= Mcamera->CamFrust.front * speed;
 																				
 				if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) Mcamera->CamFrust.pos -= Mcamera->CamFrust.WorldRight() * speed;
 				if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)Mcamera->CamFrust.pos += Mcamera->CamFrust.WorldRight() * speed;
-			}
+			
 
 
 
@@ -81,6 +80,7 @@ update_status ModuleCamera3D::Update(float dt)
 				Quat X = Quat::identity;
 				X.SetFromAxisAngle(float3(0.0f, 1.0f, 0.0f), DeltaX * DEGTORAD);
 
+				reference = X * reference;
 			}
 
 			if (dy != 0)
@@ -88,7 +88,7 @@ update_status ModuleCamera3D::Update(float dt)
 				float DeltaY = (float)dy * Sensitivity;
 				Quat Y = Quat::identity;
 				Y.SetFromAxisAngle(float3(1.0f, 0.0f, 0.0f), DeltaY * DEGTORAD);
-
+				reference = reference * Y;
 			}
 
 			float4x4 matrix = Mcamera->CamFrust.WorldMatrix();
@@ -142,8 +142,14 @@ update_status ModuleCamera3D::Update(float dt)
 
 GameObject* ModuleCamera3D::CameraGameObject()
 {
-	//GameCamera = new GameObject(App->imguiwindows->RootGO);
-	//GameCamera->name = "Game Camera";
+	GameCamera = new GameObject(App->imguiwindows->RootGO);
+	GameCamera->name = "Game Camera";
+
+	CObject* CompCam = new CObject(GameCamera);
+	Ccamera = CompCam;
+	GameCamera->Comp.push_back(CompCam);
+	GameCamera->transform->position = float3(0, 2, -10);
+	GameCamera->transform->Transform_Matrix;
 	
 	return nullptr;
 }

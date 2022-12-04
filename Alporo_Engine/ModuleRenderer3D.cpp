@@ -193,18 +193,18 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	ImGui::End();
 
-	//if (App->imguiwindows->CreatedOnce == false) {
+	//if (App->camera->Ccamera != nullptr) {
 	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//	glLoadIdentity();
 	//
 	//	glMatrixMode(GL_PROJECTION);
-	//	glLoadMatrixf(App->camera->Mcamera->CalculateProjMatix());
+	//	glLoadMatrixf(App->camera->Ccamera->CalculateProjMatix());
 	//
 	//	
 	//	glMatrixMode(GL_MODELVIEW);
-	//	glLoadMatrixf(App->camera->Mcamera->CalculateProjMatix());
+	//	glLoadMatrixf(App->camera->Ccamera->CalculateProjMatix());
 	//	
-	//	glBindFramebuffer(GL_FRAMEBUFFER, App->imguiwindows->Selected->CamGOGame->frameBuffer);
+	//	glBindFramebuffer(GL_FRAMEBUFFER, App->camera->Ccamera->frameBuffer);
 	//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	//}

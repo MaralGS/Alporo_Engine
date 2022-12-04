@@ -17,7 +17,8 @@ public:
 
 
 	GameObject* CameraGameObject();
-	//GameObject* GameCamera;
+	GameObject* GameCamera;
+	GameObject* SecondCamera;
 	//float* GetViewMatrix();
 private:
 
@@ -25,8 +26,9 @@ private:
 
 public:
 	bool CreateGameCamera = true;
-	//GameObject* SecondCamera;
+
 	CObject* Mcamera;
+	CObject* Ccamera;
 
 private:
 
