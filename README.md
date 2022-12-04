@@ -28,31 +28,6 @@ With Right Mouse Key:
 -D Keys: Back Camera movement.
 
 
-With Left Mouse Key:
-
--Use all selectable ImGui windows.
-
-- + Left Alt (Object Selected): Rotate Camera from the object 
-
-
-With object selected:
-
-Q and W: move object on positive and negative X axis.
-
-A and S: move object on positive and negative Y axis.
-
-Z and X: move object on positive and negative Z axis.
-
-
-With Left alt + object selected:
-
-Q and W: Scale on positive and negative X axis.
-
-A and S: Scale on positive and negative Y axis.
-
-Z and X: Scale on positive and negative Z axis.
-
-
 Others keys:
 - Esc: Close Windows.
 
@@ -72,3 +47,12 @@ V0.1 Features:
 - FullScreen, Resizable Windows, change Windows Width and Height, Light Windows Modificator.
 - Show all FPS and Miliseconds at screen.
 - Drag And Drop FBX.
+
+V0.2 Features:
+- Hierarchy, can create parents and childrens (and delete them).
+- Create GameObjects, translate, rotate and scale them.
+- The childs transform with the parents too.
+- Play, Stop and Pause option.
+- Resource managment (Only can see the assets and delate them too, you can create folders and delete them too).
+- Game viewport and scene viewport.
+- Camera Component as a gameObject added.
