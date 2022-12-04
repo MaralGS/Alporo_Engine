@@ -16,4 +16,8 @@ public:
 	ImVec2 WindowSize;
 public:
 	GameObject* Root = nullptr;
+	bool play;
+	bool stop;
+	bool pause;
+	float timer = 0;
 };
