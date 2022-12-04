@@ -14,9 +14,9 @@ ModuleLoadFBX::ModuleLoadFBX(Application* app, bool start_enabled) : Module(app,
 bool ModuleLoadFBX::Start()
 {
 	bool ret = true;
-	
-	MeshObject = LoadFile("Assets/BakerHouse.fbx", "BakerHouse");
-	
+
+	MeshObject = LoadFile("Assets/Street/street2.FBX", "Street");
+	MeshObject->transform->rotate = float3(0,-90,0);
 	return ret;
 }
 

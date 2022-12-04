@@ -20,7 +20,7 @@ bool ModuleCamera3D::Start()
 	//creating GameCamera
 
 	Mcamera = new CObject();
-	Mcamera->CamFrust.pos = float3(0, 1, -8);
+	Mcamera->CamFrust.pos = float3(0, 1, -30);
 	CameraGameObject();
 	return ret;
 }
