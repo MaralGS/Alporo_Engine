@@ -209,6 +209,11 @@ update_status ModuleLoadFBX::PostUpdate(float dt)
 {
 
 	for (int i = 0; i < meshes.size(); i++) {
+		if (App->imguiwindows->Wireframe == true) {
+			//Wireframe Mode
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glLineWidth(2);
+		}
 		if (meshes[i]->IsVisible == false)
 		{
 			meshes[i]->Render();
