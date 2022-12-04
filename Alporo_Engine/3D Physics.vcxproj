@@ -68,7 +68,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL\include;$(SolutionDir)ImGui;$(SolutionDir)Glew\include;$(SolutionDir)Assimp\include;$(SolutionDir)DevIL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDL\include;$(SolutionDir)ImGui;$(SolutionDir)Glew\include;$(SolutionDir)Assimp\include;$(SolutionDir)DevIL\include;$(SolutionDir)MathGeoLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

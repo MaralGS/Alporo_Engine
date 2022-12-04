@@ -19,8 +19,8 @@ bool ModuleSceneIntro::Start()
 	LOG(LogType::LOGS,"Loading Intro assets");
 	bool ret = true;
 
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
+	//App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
+	//App->camera->LookAt(vec3(0, 0, 0));
 	return ret;
 }
 
@@ -48,7 +48,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		// Get the size of the child (i.e. the whole draw size of the windows).
 		ImVec2 wsize = ImGui::GetWindowSize();
 		// Because I use the texture from OpenGL, I need to invert the V from the UV.
-		ImGui::Image((ImTextureID)App->renderer3D->bufferCam, wsize, ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image((ImTextureID)App->camera->Mcamera->bufferCam, wsize, ImVec2(0, 1), ImVec2(1, 0));
 		ImGui::EndChild();
 	}
 	ImGui::End();
@@ -62,7 +62,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		// Because I use the texture from OpenGL, I need to invert the V from the UV.
 		if (App->imguiwindows->Selected == App->camera->GameCamera)
 		{
-			ImGui::Image((ImTextureID)App->imguiwindows->Selected->CamGOGame->cameraBuffer2, wsize, ImVec2(0, 1), ImVec2(1, 0));
+			ImGui::Image((ImTextureID)App->camera->Mcamera->bufferCam, wsize, ImVec2(0, 1), ImVec2(1, 0));
 		}
 		ImGui::EndChild();
 	}

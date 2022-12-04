@@ -25,8 +25,9 @@ struct MyMesh {
 	uint num_vertices = 0;
 	float* vertices = nullptr;
 	GameObject* OBmesh = nullptr;
-	AABB GAbbox;
-	OBB GObbox;
+	AABB Gbbox;
+	AABB Laabb;
+	OBB obb;
 	bool IsVisible = false;
 	void Render();
 };
