@@ -12,8 +12,8 @@ ModuleFiles::ModuleFiles(Application* app, bool start_enabled) : Module(app, sta
 
 	SetCurrentPath("Assets");
 
-	pathToRename = "";
-	Refresh = false;
+	pathName = "";
+	Reload = false;
 }
 
 ModuleFiles::~ModuleFiles()
@@ -54,11 +54,11 @@ update_status ModuleFiles::Update(float dt)
 
 		if (ImGui::BeginMenuBar())
 		{
-			PrintAssetsMenu();
+			PrintPathBar();
 			ImGui::EndMenuBar();
 		}
 
-		PrintAssets();
+		PrintFiles();
 
 		if (DeleteOption)
 		{
@@ -66,23 +66,28 @@ update_status ModuleFiles::Update(float dt)
 
 			if (ImGui::MenuItem("Delete"))
 			{
-				RemoveFile(FileInfo(fileSelected));
-				Refresh = true;
+				RemoveFile(FileInfo(fileName));
+				Reload = true;
 				DeleteOption = false;
-				fileSelected = "";
+				fileName = "";
 			}
 			ImGui::End();
 		}
 
 		if (App->input->GetKey(SDL_SCANCODE_DELETE) && ImGui::IsWindowHovered())
 		{
-			RemoveFile(FileInfo(fileSelected));
-			fileSelected = "";
-			Refresh = true;
+			RemoveFile(FileInfo(fileName));
+			fileName = "";
+			Reload = true;
 		}
 
 		ImGui::End();
 
+
+		if (Reload) {
+			GetDirectoryInfo(currentPath.c_str());
+			Reload = false;
+		}
 
 	return UPDATE_CONTINUE;
 }
@@ -92,21 +97,21 @@ update_status ModuleFiles::PostUpdate(float dt)
 	return UPDATE_CONTINUE;
 }
 
-void ModuleFiles::PrintAssets()
+void ModuleFiles::PrintFiles()
 {
-	for (int i = 0; i < dirInfo.size(); i++)
+	for (int i = 0; i < directionFiles.size(); i++)
 	{
-		FileInfo file = dirInfo[i];
+		FileInfo file = directionFiles[i];
 
 		ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_FramePadding;
 
-		if (file.path == fileSelected)
+		if (file.path == fileName)
 			treeNodeFlags |= ImGuiTreeNodeFlags_Selected;
 
 
-		if (pathToRename != file.path)
+		if (pathName != file.path)
 		{
-			bool y = ImGui::TreeNodeEx((void*)(intptr_t)&file, treeNodeFlags, file.name.c_str());
+			bool treepop = ImGui::TreeNodeEx((void*)(intptr_t)&file, treeNodeFlags, file.name.c_str());
 			if (ImGui::IsItemHovered())
 			{
 				//Enter folder
@@ -121,17 +126,17 @@ void ModuleFiles::PrintAssets()
 				else if (ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Left))
 				{
 					DeleteOption = false;
-					fileSelected = file.path;
+					fileName = file.path;
 				}
 				else if (ImGui::IsMouseClicked(ImGuiMouseButton_::ImGuiMouseButton_Right))
 				{
-					fileSelected = file.path;
+					fileName = file.path;
 					DeleteOption = true;
 					ImGui::SetNextWindowPos(ImGui::GetMousePos());
 				}
 			}
 
-			if (y)
+			if (treepop)
 			{
 				ImGui::TreePop();
 			}
@@ -152,41 +157,36 @@ void ModuleFiles::PrintAssets()
 	if (ImGui::Button("Create Folder"))
 	{
 		PHYSFS_mkdir("Folder");
-		Refresh = true;
+		Reload = true;
 	}
 	
-	if (Refresh) {
-		GetDirectoryInfo(currentPath.c_str());
-		Refresh = false;
-	}
+
 }
 
-void ModuleFiles::PrintAssetsMenu()
+void ModuleFiles::PrintPathBar()
 {
-	string pa = currentPath;
+	string auxpath = currentPath;
 
-	while (pa.size() != 0)
+	while (auxpath.size() != 0)
 	{
-		int pos = pa.find_first_of("/");
+		int pos = auxpath.find_first_of("/");
 
 		if (pos == -1) {
-			ImGui::Text(pa.c_str());
+			ImGui::Text(auxpath.c_str());
 			break;
 		}
 
-		if (ImGui::Button(pa.substr(0, pos).c_str()))
+		if (ImGui::Button(auxpath.substr(0, pos).c_str()))
 		{
-			// end = folder inside (ex: street)
-			string end = pa.substr(0, pa.find_first_of("/"));
+			string end = auxpath.substr(0, auxpath.find_first_of("/"));
 
-			// pathName = full path (ex: Assets/street)
 			SetCurrentPath(currentPath.substr(0, currentPath.find(end) + end.size()).c_str());
 			break;
 		}
 
-		ImGui::Text("->");
+		ImGui::Text("/");
 
-		pa = pa.substr(pos + 1);
+		auxpath = auxpath.substr(pos + 1);
 	}
 
 }
@@ -201,15 +201,15 @@ void ModuleFiles::RemoveFile(FileInfo file)
 	}
 
 	//Folder
-	char** i = PHYSFS_enumerateFiles(file.path.c_str());
+	char** docs = PHYSFS_enumerateFiles(file.path.c_str());
 
 	//Recursive deleting
-	if (i[0] != NULL) {
-		for (int j = 0; i[j] != NULL; j++) {
+	if (docs[0] != NULL) {
+		for (int i = 0; docs[i] != NULL; i++) {
 			string auxpath = file.path;
-			FileInfo f(auxpath.append("/").append(i[j]).c_str());
+			FileInfo file(auxpath.append("/").append(docs[i]).c_str());
 			PHYSFS_setWriteDir(file.path.c_str());
-			RemoveFile(f);
+			RemoveFile(file);
 		}
 	}
 
@@ -221,29 +221,27 @@ void ModuleFiles::RemoveFile(FileInfo file)
 
 void ModuleFiles::GetDirectoryInfo(const char* dir)
 {
-	dirInfo.clear();
+	directionFiles.clear();
 
 	char** docs = PHYSFS_enumerateFiles(dir);
 
-	//First add folders
+	//Folders
 	for (int i = 0; docs[i] != NULL; i++) {
-		string d = dir;
-		d.append("/").append(docs[i]);
+		string direction = dir;
+		direction.append("/").append(docs[i]);
 
-		FileInfo f(d);
-		if (f.folder) dirInfo.push_back(f);
+		FileInfo file(direction);
+		if (file.folder) directionFiles.push_back(file);
 	}
 
-	//Next add files
+	//Files
 	for (int i = 0; docs[i] != NULL; i++) {
-		string d = dir;
-		d.append("/").append(docs[i]);
-
-		FileInfo f(d);
-		if (!f.folder) dirInfo.push_back(f);
+		string direction = dir;
+		direction.append("/").append(docs[i]);
+	
+		FileInfo file(direction);
+		if (!file.folder) directionFiles.push_back(file);
 	}
-
-	PHYSFS_freeList(docs);
 }
 
 void ModuleFiles::SetCurrentPath(const char* path)
@@ -258,11 +256,4 @@ FileInfo::FileInfo(string path)
 	this->path = path;
 	this->name = path.substr(path.find_last_of("/") + 1);
 	this->folder = (path.find(".") == -1);
-
-	if (!folder) {
-		this->extension = path.substr(path.find_last_of("."));
-	}
-	else {
-		this->extension = "";
-	}
 }

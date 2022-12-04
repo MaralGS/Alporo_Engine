@@ -11,7 +11,6 @@ struct FileInfo {
 	string path;
 	string name;
 	bool folder;
-	string extension;
 };
 
 class ModuleFiles : public Module
@@ -28,31 +27,26 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	void CreateFolder(const char* dir);
 	void RemoveFile(FileInfo file);
 
 	void SetCurrentPath(const char* path);
 
 private:
 
-	void PrintAssets();
-	void PrintAssetsMenu();
+	void PrintFiles();
+	void PrintPathBar();
 
-	//Change dirInfo variable
+	//Change FilesDir variable
 	void GetDirectoryInfo(const char* dir);
 
-	bool Refresh;
+	bool Reload;
 
 	string currentPath;
-	vector<FileInfo> dirInfo;
+	vector<FileInfo> directionFiles;
 
-	string pathToRename;
-	string fileSelected;
+	string pathName;
+	string fileName;
 
 	bool DeleteOption = false;
-
-	uint folderTexture;
-	uint pngTexture;
-	uint fbxTexture;
-	uint elseTexture;
+	bool CreateFolderBool = false;
 };
