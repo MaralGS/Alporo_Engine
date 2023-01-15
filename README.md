@@ -1,3 +1,4 @@
+theme: jekyll-theme-midnight
 # Alporo_Engine
 
 Alporo Engine is a Videogame engine created for subject "Engine Development" form UPC CITM University.
